@@ -49,6 +49,37 @@ button:focus-visible { outline: 2px solid var(--fm-primary); outline-offset: 2px
   --fm-coral-faint:     rgba(232,115,106,0.09);
 }
 
+/* Light mode — body.light overrides the warm-parchment :root defaults with a
+   true white-paper look that works in daylight. */
+body.light {
+  --fm-bg-deep:         #FFFFFF;
+  --fm-bg-card:         #F5F5F7;
+  --fm-bg-input:        #EBEBED;
+  --fm-border:          #D2D2D7;
+  --fm-primary:         #C44900;
+  --fm-primary-hov:     #d95200;
+  --fm-primary-bg:      #FFF0E8;
+  --fm-secondary:       #1B7A4A;
+  --fm-secondary-bg:    #E3F5EC;
+  --fm-coral:           #D44339;
+  --fm-text:            #1D1D1F;
+  --fm-text-muted:      rgba(29,29,31,0.52);
+  --fm-text-dim:        rgba(29,29,31,0.28);
+  --fm-white:           #FFFFFF;
+  --fm-primary-soft:    rgba(196,73,0,0.10);
+  --fm-primary-glow:    rgba(196,73,0,0.25);
+  --fm-secondary-faint: rgba(27,122,74,0.12);
+  --fm-coral-faint:     rgba(212,67,57,0.08);
+}
+
+/* Large-text mode — bumps up base sizes across the board. */
+body.large-text {
+  font-size: 18px;
+}
+body.large-text .fm-page-title  { font-size: 36px; }
+body.large-text .fm-page-subtitle { font-size: 17px; }
+body.large-text .fm-choices button { font-size: 19px; }
+
 body.dark {
   --fm-bg-deep:         #1A2832;
   --fm-bg-card:         #243238;

@@ -85,7 +85,7 @@ export default function PracticeTab() {
         <div className="fm-runner-body">
           <div className="fm-runner-content">
             <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 20, textAlign: 'center' }}>
-              {isHe ? 'תרגול' : 'Practice'} {cat && `· ${isHe ? cat.titleHe : cat.titleEn}`}
+              {isHe ? 'תרגול חופשי' : 'Free Practice'} {cat && `· ${isHe ? cat.titleHe : cat.titleEn}`}
             </div>
 
             <QuestionCard
@@ -115,7 +115,7 @@ export default function PracticeTab() {
   return (
     <div className="fm-page">
       <div className="fm-page-header" style={{ textAlign: isHe ? 'right' : 'left' }}>
-        <div className="fm-page-eyebrow">{isHe ? 'תרגול' : 'Practice'}</div>
+        <div className="fm-page-eyebrow">{isHe ? 'תרגול חופשי' : 'Free Practice'}</div>
         <h1 className="fm-page-title">{isHe ? 'תרגל בלי לחץ' : 'Practice without pressure'}</h1>
         <p className="fm-page-subtitle">
           {isHe

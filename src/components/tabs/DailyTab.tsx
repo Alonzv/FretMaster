@@ -5,6 +5,8 @@ import { CATEGORIES, getCategory } from '../../lib/challenges/categories'
 import QuestionCard from '../challenges/QuestionCard'
 import FeedbackPanel from '../challenges/FeedbackPanel'
 import SessionSummary from '../challenges/SessionSummary'
+import TheoryIntro from '../challenges/TheoryIntro'
+import { CATEGORY_THEORY } from '../../lib/challenges/categoryTheory'
 import type { AnsweredQuestion } from '../challenges/ChallengeRunner'
 import { scoreSession } from '../../lib/challenges/engine'
 
@@ -21,6 +23,7 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
+  const [showTheory, setShowTheory] = useState(false)
   const [started, setStarted] = useState(false)
   const [idx, setIdx] = useState(0)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
@@ -37,6 +40,11 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
   }, [started])
 
   const handleStart = () => {
+    setShowTheory(true)
+  }
+
+  const handleTheoryDone = () => {
+    setShowTheory(false)
     setStarted(true)
     setIdx(0)
     setSelectedIndex(null)
@@ -69,6 +77,12 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
     setIdx(i => i + 1)
     setSelectedIndex(null)
     setRevealed(false)
+  }
+
+  // ── Theory intro ────────────────────────────────────────────────────────
+  if (showTheory) {
+    const entry = CATEGORY_THEORY['_daily']!
+    return <TheoryIntro entry={entry} isHe={isHe} onStart={handleTheoryDone} />
   }
 
   // ── Summary ──────────────────────────────────────────────────────────────
@@ -119,7 +133,7 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
         <div className="fm-runner-body">
           <div className="fm-runner-content">
             <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 20, textAlign: 'center' }}>
-              {isHe ? 'סשן יומי' : 'Daily session'}
+              {isHe ? 'אתגר היומי' : 'Daily challenge'}
             </div>
 
             <QuestionCard
@@ -159,10 +173,10 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
       maxWidth: 520,
     }}>
       <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
-        {isHe ? 'סשן יומי' : 'Daily'}
+        {isHe ? 'אתגר היומי' : 'Daily Challenge'}
       </div>
       <h1 style={{ fontSize: 34, fontWeight: 800, color: 'var(--fm-text)', margin: '0 0 14px', letterSpacing: '-0.5px' }}>
-        {isHe ? 'תרגול יומי מעורב' : 'Your daily mix'}
+        {isHe ? 'מוכן לאתגר?' : 'Ready for today\'s challenge?'}
       </h1>
       <p style={{ fontSize: 15, color: 'var(--fm-text-muted)', lineHeight: 1.6, margin: '0 0 36px', maxWidth: 420 }}>
         {isHe

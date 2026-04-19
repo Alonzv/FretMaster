@@ -9,9 +9,12 @@ import DailyTab    from './components/tabs/DailyTab'
 import PracticeTab from './components/tabs/PracticeTab'
 import ProfileScreen from './components/ProfileScreen'
 import Sidebar       from './components/Sidebar'
+import AppIntro, { hasSeenIntro } from './components/AppIntro'
 import type { User } from '@supabase/supabase-js'
 import type { CategoryId, CategoryProgress, SessionResult } from './lib/challenges/types'
 import { loadAllProgress, applySessionResult } from './lib/challenges/progress'
+import { loadSettings, saveSettings, applySettings } from './lib/settings'
+import type { AppSettings } from './lib/settings'
 
 export type ActiveTab = 'home' | 'daily' | 'practice'
 
@@ -31,9 +34,25 @@ export default function App() {
   const [checking, setChecking] = useState(true)
   const [activeTab, setActiveTab] = useState<ActiveTab>('home')
   const [showProfile, setShowProfile] = useState(false)
-  const [sidebarOpen, setSidebarOpen] = useState(false) // mobile
+  const [showIntro, setShowIntro] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [progress, setProgress] = useState<Record<CategoryId, CategoryProgress>>(() => loadAllProgress())
+  const [settings, setSettings] = useState<AppSettings>(() => loadSettings())
   const isRTL = i18n.language === 'he'
+
+  // Apply theme + font-size to <body> on mount and whenever settings change.
+  useEffect(() => {
+    applySettings(settings)
+  }, [settings])
+
+  const updateSettings = useCallback((patch: Partial<AppSettings>) => {
+    setSettings(prev => {
+      const next = { ...prev, ...patch }
+      saveSettings(next)
+      applySettings(next)
+      return next
+    })
+  }, [])
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -57,11 +76,9 @@ export default function App() {
       if (data.lang) i18n.changeLanguage(data.lang)
     }
     setChecking(false)
+    // Show intro on first login
+    if (!hasSeenIntro()) setShowIntro(true)
   }
-
-  useEffect(() => {
-    document.body.classList.add('dark')
-  }, [])
 
   const handleOnboardComplete = (data: OnboardingData) => {
     i18n.changeLanguage(data.lang)
@@ -87,6 +104,11 @@ export default function App() {
 
   return (
     <div className="fm-layout" dir={isRTL ? 'rtl' : 'ltr'}>
+      {/* First-launch intro overlay */}
+      {showIntro && (
+        <AppIntro isHe={isRTL} onDone={() => setShowIntro(false)} />
+      )}
+
       {/* Mobile top bar */}
       <header className="fm-topbar">
         <button
@@ -109,13 +131,15 @@ export default function App() {
           aria-label="Profile"
           style={{
             width: 36, height: 36, borderRadius: '50%',
-            background: 'var(--fm-primary)', color: 'white',
-            fontSize: 13, fontWeight: 700,
+            background: settings.avatar ? 'transparent' : 'var(--fm-primary)',
+            color: 'white', fontSize: 13, fontWeight: 700,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer',
+            cursor: 'pointer', overflow: 'hidden',
+            backgroundImage: settings.avatar ? `url(${settings.avatar})` : undefined,
+            backgroundSize: 'cover', backgroundPosition: 'center',
           }}
         >
-          {profileName.slice(0, 1).toUpperCase()}
+          {!settings.avatar && profileName.slice(0, 1).toUpperCase()}
         </button>
       </header>
 
@@ -125,12 +149,12 @@ export default function App() {
         onOpenProfile={() => setShowProfile(true)}
         user={user}
         profileName={profileName}
+        avatar={settings.avatar}
         isRTL={isRTL}
         mobileOpen={sidebarOpen}
         onMobileClose={() => setSidebarOpen(false)}
       />
 
-      {/* Sidebar spacer (desktop only) */}
       <div className="fm-sidebar-space" />
 
       <main className="fm-main">
@@ -140,7 +164,14 @@ export default function App() {
       </main>
 
       {showProfile && user && (
-        <ProfileScreen user={user} profile={profile} progress={progress} onClose={() => setShowProfile(false)} />
+        <ProfileScreen
+          user={user}
+          profile={profile}
+          progress={progress}
+          settings={settings}
+          onSettingsChange={updateSettings}
+          onClose={() => setShowProfile(false)}
+        />
       )}
     </div>
   )

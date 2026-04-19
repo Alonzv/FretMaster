@@ -4,30 +4,54 @@ import { CATEGORIES } from '../../lib/challenges/categories'
 import type { CategoryId, Difficulty, SessionResult, CategoryProgress } from '../../lib/challenges/types'
 import DifficultyPicker from '../challenges/DifficultyPicker'
 import ChallengeRunner from '../challenges/ChallengeRunner'
+import TheoryIntro from '../challenges/TheoryIntro'
+import { CATEGORY_THEORY } from '../../lib/challenges/categoryTheory'
 
 interface Props {
   progress: Record<CategoryId, CategoryProgress>
   onSessionComplete: (result: SessionResult) => void
 }
 
-// The app's home screen — showcases every category the app offers, grouped by phase.
-// Tap a category to pick a difficulty and start a session.
+type Flow =
+  | { stage: 'browse' }
+  | { stage: 'difficulty'; categoryId: CategoryId }
+  | { stage: 'theory'; categoryId: CategoryId; difficulty: Difficulty }
+  | { stage: 'session'; categoryId: CategoryId; difficulty: Difficulty }
+
+// The app home screen — showcases every category. Tap → difficulty → theory intro → session.
 export default function HomeTab({ progress, onSessionComplete }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
-  const [pickerFor, setPickerFor] = useState<CategoryId | null>(null)
-  const [activeSession, setActiveSession] = useState<{ id: CategoryId; difficulty: Difficulty } | null>(null)
+  const [flow, setFlow] = useState<Flow>({ stage: 'browse' })
 
-  if (activeSession) {
+  // Full-screen session runner
+  if (flow.stage === 'session') {
     return (
       <ChallengeRunner
-        categoryId={activeSession.id}
-        difficulty={activeSession.difficulty}
-        onExit={() => setActiveSession(null)}
-        onComplete={onSessionComplete}
+        categoryId={flow.categoryId}
+        difficulty={flow.difficulty}
+        onExit={() => setFlow({ stage: 'browse' })}
+        onComplete={result => { onSessionComplete(result); setFlow({ stage: 'browse' }) }}
       />
     )
+  }
+
+  // Theory intro before starting
+  if (flow.stage === 'theory') {
+    const entry = CATEGORY_THEORY[flow.categoryId]
+    if (entry) {
+      return (
+        <TheoryIntro
+          entry={entry}
+          isHe={isHe}
+          onStart={() => setFlow({ stage: 'session', categoryId: flow.categoryId, difficulty: flow.difficulty })}
+        />
+      )
+    }
+    // No theory for this category — skip straight to session
+    setFlow({ stage: 'session', categoryId: flow.categoryId, difficulty: flow.difficulty })
+    return null
   }
 
   const phase1 = CATEGORIES.filter(c => c.phase === 1)
@@ -54,7 +78,7 @@ export default function HomeTab({ progress, onSessionComplete }: Props) {
         title={isHe ? 'תאוריה' : 'Theory'}
         categories={phase1}
         progress={progress}
-        onOpen={id => setPickerFor(id)}
+        onOpen={id => setFlow({ stage: 'difficulty', categoryId: id })}
         isHe={isHe}
       />
 
@@ -74,13 +98,10 @@ export default function HomeTab({ progress, onSessionComplete }: Props) {
         isHe={isHe}
       />
 
-      {pickerFor && (
+      {flow.stage === 'difficulty' && (
         <DifficultyPicker
-          onPick={d => {
-            setActiveSession({ id: pickerFor, difficulty: d })
-            setPickerFor(null)
-          }}
-          onCancel={() => setPickerFor(null)}
+          onPick={d => setFlow({ stage: 'theory', categoryId: flow.categoryId, difficulty: d })}
+          onCancel={() => setFlow({ stage: 'browse' })}
           isHe={isHe}
         />
       )}

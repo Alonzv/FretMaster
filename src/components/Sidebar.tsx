@@ -8,18 +8,19 @@ interface Props {
   onOpenProfile: () => void
   user: User
   profileName: string
+  avatar: string
   isRTL: boolean
   mobileOpen: boolean
   onMobileClose: () => void
 }
 
 const NAV_ITEMS: { id: ActiveTab; labelHe: string; labelEn: string; icon: string }[] = [
-  { id: 'home',     labelHe: 'בית',        labelEn: 'Home',     icon: 'M12 3 2 12h3v8h6v-6h2v6h6v-8h3z' },
-  { id: 'daily',    labelHe: 'סשן יומי',    labelEn: 'Daily',    icon: 'M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7z' },
-  { id: 'practice', labelHe: 'תרגול',       labelEn: 'Practice', icon: 'M8 5v14l11-7z' },
+  { id: 'home',     labelHe: 'בית',           labelEn: 'Home',           icon: 'M12 3 2 12h3v8h6v-6h2v6h6v-8h3z' },
+  { id: 'daily',    labelHe: 'אתגר היומי',     labelEn: 'Daily Challenge', icon: 'M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7z' },
+  { id: 'practice', labelHe: 'תרגול חופשי',   labelEn: 'Free Practice',   icon: 'M8 5v14l11-7z' },
 ]
 
-export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, profileName, isRTL, mobileOpen, onMobileClose }: Props) {
+export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, profileName, avatar, isRTL, mobileOpen, onMobileClose }: Props) {
   const side = isRTL ? 'right' : 'left'
   const initials = profileName.slice(0, 2).toUpperCase()
 
@@ -112,12 +113,14 @@ export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, p
           >
             <div style={{
               width: 32, height: 32, borderRadius: '50%',
-              background: 'var(--fm-primary)',
+              background: avatar ? 'transparent' : 'var(--fm-primary)',
               color: 'white', fontWeight: 700, fontSize: 12,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              flexShrink: 0,
+              flexShrink: 0, overflow: 'hidden',
+              backgroundImage: avatar ? `url(${avatar})` : undefined,
+              backgroundSize: 'cover', backgroundPosition: 'center',
             }}>
-              {initials}
+              {!avatar && initials}
             </div>
             <div style={{ flex: 1, overflow: 'hidden', textAlign: isRTL ? 'right' : 'left' }}>
               <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--fm-text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
