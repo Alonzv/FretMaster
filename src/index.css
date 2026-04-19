@@ -57,41 +57,19 @@ body.dark {
   --fm-coral-faint:     rgba(232,115,106,0.12);
 }
 
-.fm-app {
-  max-width: 480px;
-  margin: 0 auto;
+/* Main layout with sidebar */
+.fm-layout {
+  display: flex;
   min-height: 100vh;
-  padding-bottom: 70px;
 }
 
-/* Bottom tab bar */
-.fm-tabs {
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: var(--fm-bg-card);
-  border-top: 1px solid var(--fm-border);
-  padding-bottom: env(safe-area-inset-bottom);
-  z-index: 50;
-}
+.fm-sidebar-space { width: 220px; flex-shrink: 0; }
 
-.fm-tab {
+.fm-main {
   flex: 1;
-  min-height: 56px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  font-size: 10px;
-  font-family: inherit;
-  color: var(--fm-text-muted);
-  transition: color 0.15s;
+  min-height: 100vh;
+  overflow-y: auto;
 }
-.fm-tab.active { color: var(--fm-primary); }
-.fm-tab:hover { color: var(--fm-primary-hov); }
 
 /* Onboarding */
 .fm-onboard {

@@ -1,65 +1,65 @@
 import { useTranslation } from 'react-i18next'
 
 const EXERCISES = [
-  { id: 'progressions', emoji: '🎵', labelHe: 'פרוגרסיות אקורדים', labelEn: 'Chord Progressions', color: 'var(--fm-primary-bg)', border: 'var(--fm-primary)' },
-  { id: 'ear', emoji: '👂', labelHe: 'אימון אוזן', labelEn: 'Ear Training', color: 'var(--fm-secondary-bg)', border: 'var(--fm-secondary)' },
-  { id: 'improv', emoji: '🎸', labelHe: 'אלתור', labelEn: 'Improvisation', color: 'var(--fm-coral-faint)', border: 'var(--fm-coral)' },
-  { id: 'technique', emoji: '🖐️', labelHe: 'טכניקה', labelEn: 'Technique', color: 'var(--fm-primary-soft)', border: 'var(--fm-primary)' },
-  { id: 'metronome', emoji: '🥁', labelHe: 'מטרונום', labelEn: 'Metronome', color: 'var(--fm-bg-input)', border: 'var(--fm-border)' },
+  { id: 'progressions', labelHe: 'פרוגרסיות אקורדים', labelEn: 'Chord Progressions',  color: 'var(--fm-primary-bg)',    border: 'var(--fm-primary)'   },
+  { id: 'ear',          labelHe: 'אימון אוזן',          labelEn: 'Ear Training',          color: 'var(--fm-secondary-bg)', border: 'var(--fm-secondary)' },
+  { id: 'improv',       labelHe: 'אלתור',               labelEn: 'Improvisation',         color: 'var(--fm-bg-card)',       border: 'var(--fm-border)'    },
+  { id: 'technique',    labelHe: 'טכניקה',              labelEn: 'Technique',             color: 'var(--fm-bg-card)',       border: 'var(--fm-border)'    },
+  { id: 'metronome',    labelHe: 'מטרונום',             labelEn: 'Metronome',             color: 'var(--fm-bg-card)',       border: 'var(--fm-border)'    },
 ]
 
 export default function PracticeTab() {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
   return (
-    <div style={{ padding: '20px 16px' }}>
-      <h1 style={{ fontSize: 22, fontWeight: 700, color: 'var(--fm-text)', marginBottom: 6 }}>
-        {t('practice.title')}
-      </h1>
-      <p style={{ color: 'var(--fm-text-muted)', fontSize: 14, marginBottom: 24 }}>
-        {isHe ? 'תרגולים שאפשר לעשות בכל זמן' : 'Exercises you can do anytime'}
-      </p>
+    <div style={{ padding: '40px 48px', maxWidth: 760 }}>
+      <div style={{ marginBottom: 32 }}>
+        <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8 }}>
+          {isHe ? 'תרגולים חופשיים' : 'Free Exercises'}
+        </div>
+        <h1 style={{ fontSize: 28, fontWeight: 800, color: 'var(--fm-text)', margin: 0, letterSpacing: '-0.5px' }}>
+          {isHe ? 'אימון' : 'Practice'}
+        </h1>
+      </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 32 }}>
         {EXERCISES.map(ex => (
           <button
             key={ex.id}
-            className="fm-card"
             style={{
+              padding: '24px 20px',
+              borderRadius: 12,
+              border: `1.5px solid ${ex.border}`,
               background: ex.color,
-              borderColor: ex.border,
               cursor: 'pointer',
-              textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 8,
-              padding: 20,
+              textAlign: isHe ? 'right' : 'left',
               transition: 'filter 0.15s',
             }}
             onMouseEnter={e => (e.currentTarget.style.filter = 'brightness(0.95)')}
             onMouseLeave={e => (e.currentTarget.style.filter = '')}
           >
-            <span style={{ fontSize: 32 }}>{ex.emoji}</span>
-            <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--fm-text)' }}>
+            <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--fm-text)', marginBottom: 4 }}>
               {isHe ? ex.labelHe : ex.labelEn}
-            </span>
+            </div>
+            <div style={{ fontSize: 13, color: 'var(--fm-text-muted)' }}>
+              {isHe ? 'לחץ להתחיל' : 'Click to start'}
+            </div>
           </button>
         ))}
       </div>
 
-      {/* Daily streak */}
-      <div className="fm-card" style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
-        <span style={{ fontSize: 32 }}>🔥</span>
+      {/* Streak */}
+      <div className="fm-card" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--fm-text)' }}>
-            {isHe ? '0 ימים רצופים' : '0 day streak'}
+            {isHe ? 'רצף יומי' : 'Daily Streak'}
           </div>
-          <div style={{ fontSize: 13, color: 'var(--fm-text-muted)' }}>
-            {isHe ? 'תרגל היום כדי להתחיל!' : 'Practice today to start!'}
+          <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 3 }}>
+            {isHe ? 'תרגל היום כדי להתחיל את הרצף' : 'Practice today to start your streak'}
           </div>
         </div>
+        <div style={{ fontSize: 28, fontWeight: 800, color: 'var(--fm-primary)' }}>0</div>
       </div>
     </div>
   )

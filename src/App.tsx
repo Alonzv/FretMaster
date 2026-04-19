@@ -9,13 +9,24 @@ import JourneyTab from './components/tabs/JourneyTab'
 import PracticeTab from './components/tabs/PracticeTab'
 import TheoryTab from './components/tabs/TheoryTab'
 import ProfileScreen from './components/ProfileScreen'
+import Sidebar from './components/Sidebar'
 import type { User } from '@supabase/supabase-js'
 
 type ActiveTab = 'learning' | 'journey' | 'practice' | 'theory'
 
+interface UserProfile {
+  name: string
+  level: string
+  lang: string
+  styles: string[]
+  goals: string[]
+  daily_time: string
+}
+
 export default function App() {
   const { i18n } = useTranslation()
   const [user, setUser] = useState<User | null>(null)
+  const [profile, setProfile] = useState<UserProfile | null>(null)
   const [checking, setChecking] = useState(true)
   const [activeTab, setActiveTab] = useState<ActiveTab>('learning')
   const [showProfile, setShowProfile] = useState(false)
@@ -23,14 +34,27 @@ export default function App() {
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
-      setUser(data.session?.user ?? null)
-      setChecking(false)
+      const u = data.session?.user ?? null
+      setUser(u)
+      if (u) loadProfile(u.id)
+      else setChecking(false)
     })
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
-      setUser(session?.user ?? null)
+      const u = session?.user ?? null
+      setUser(u)
+      if (u) loadProfile(u.id)
     })
     return () => subscription.unsubscribe()
   }, [])
+
+  const loadProfile = async (userId: string) => {
+    const { data } = await supabase.from('profiles').select('*').eq('id', userId).single()
+    if (data) {
+      setProfile(data)
+      if (data.lang) i18n.changeLanguage(data.lang)
+    }
+    setChecking(false)
+  }
 
   useEffect(() => {
     document.body.classList.add('dark')
@@ -43,7 +67,7 @@ export default function App() {
   if (checking) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: 'var(--fm-bg-deep)' }}>
-        <span style={{ fontSize: 48 }}>🎸</span>
+        <div style={{ fontSize: 32, fontWeight: 800, color: 'var(--fm-primary)' }}>FretMaster</div>
       </div>
     )
   }
@@ -52,63 +76,32 @@ export default function App() {
     return <OnboardingFlow onComplete={handleOnboardComplete} />
   }
 
-  const isHe = i18n.language === 'he'
-
-  const TABS: { id: ActiveTab; emoji: string; label: string }[] = [
-    { id: 'learning', emoji: '📖', label: isHe ? 'למידה' : 'Learn' },
-    { id: 'journey', emoji: '🗺️', label: isHe ? 'המסע' : 'Journey' },
-    { id: 'practice', emoji: '🎸', label: isHe ? 'אימון' : 'Practice' },
-    { id: 'theory', emoji: '🎼', label: isHe ? 'תאוריה' : 'Theory' },
-  ]
-
-  const displayName = user.user_metadata?.name || user.email?.split('@')[0] || '?'
-  const initials = displayName.slice(0, 2).toUpperCase()
+  const profileName = profile?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'
 
   return (
-    <div className="fm-app" dir={isRTL ? 'rtl' : 'ltr'}>
-      {/* Top header */}
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '12px 16px',
-        background: 'var(--fm-bg-card)',
-        borderBottom: '1px solid var(--fm-border)',
-        position: 'sticky', top: 0, zIndex: 40,
-      }}>
-        <span style={{ fontSize: 18, fontWeight: 700, color: 'var(--fm-primary)' }}>🎸 FretMaster</span>
-        <button
-          onClick={() => setShowProfile(true)}
-          style={{
-            width: 36, height: 36, borderRadius: '50%',
-            background: 'var(--fm-primary)',
-            color: 'var(--fm-white)',
-            fontWeight: 700, fontSize: 13,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}
-        >
-          {initials}
-        </button>
-      </div>
+    <div className="fm-layout" dir={isRTL ? 'rtl' : 'ltr'}>
+      <Sidebar
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        onOpenProfile={() => setShowProfile(true)}
+        user={user}
+        profileName={profileName}
+        isRTL={isRTL}
+      />
 
-      {activeTab === 'learning' && <LearningTab onGoToJourney={() => setActiveTab('journey')} />}
-      {activeTab === 'journey' && <JourneyTab />}
-      {activeTab === 'practice' && <PracticeTab />}
-      {activeTab === 'theory' && <TheoryTab />}
+      {/* Sidebar spacer */}
+      <div className="fm-sidebar-space" />
 
-      <nav className="fm-tabs">
-        {TABS.map(tb => (
-          <button
-            key={tb.id}
-            className={`fm-tab${activeTab === tb.id ? ' active' : ''}`}
-            onClick={() => setActiveTab(tb.id)}
-          >
-            <span style={{ fontSize: 20 }}>{tb.emoji}</span>
-            <span>{tb.label}</span>
-          </button>
-        ))}
-      </nav>
+      {/* Main content */}
+      <main className="fm-main">
+        {activeTab === 'learning'  && <LearningTab onGoToJourney={() => setActiveTab('journey')} userLevel={profile?.level || 'beginner'} />}
+        {activeTab === 'journey'   && <JourneyTab />}
+        {activeTab === 'practice'  && <PracticeTab />}
+        {activeTab === 'theory'    && <TheoryTab />}
+      </main>
 
-      {showProfile && (
-        <ProfileScreen user={user} onClose={() => setShowProfile(false)} />
+      {showProfile && user && (
+        <ProfileScreen user={user} profile={profile} onClose={() => setShowProfile(false)} />
       )}
     </div>
   )
