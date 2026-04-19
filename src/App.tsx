@@ -8,6 +8,7 @@ import LearningTab from './components/tabs/LearningTab'
 import JourneyTab from './components/tabs/JourneyTab'
 import PracticeTab from './components/tabs/PracticeTab'
 import TheoryTab from './components/tabs/TheoryTab'
+import ProfileScreen from './components/ProfileScreen'
 import type { User } from '@supabase/supabase-js'
 
 type ActiveTab = 'learning' | 'journey' | 'practice' | 'theory'
@@ -17,6 +18,7 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null)
   const [checking, setChecking] = useState(true)
   const [activeTab, setActiveTab] = useState<ActiveTab>('learning')
+  const [showProfile, setShowProfile] = useState(false)
   const isRTL = i18n.language === 'he'
 
   useEffect(() => {
@@ -59,8 +61,34 @@ export default function App() {
     { id: 'theory', emoji: '🎼', label: isHe ? 'תאוריה' : 'Theory' },
   ]
 
+  const displayName = user.user_metadata?.name || user.email?.split('@')[0] || '?'
+  const initials = displayName.slice(0, 2).toUpperCase()
+
   return (
     <div className="fm-app" dir={isRTL ? 'rtl' : 'ltr'}>
+      {/* Top header */}
+      <div style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        padding: '12px 16px',
+        background: 'var(--fm-bg-card)',
+        borderBottom: '1px solid var(--fm-border)',
+        position: 'sticky', top: 0, zIndex: 40,
+      }}>
+        <span style={{ fontSize: 18, fontWeight: 700, color: 'var(--fm-primary)' }}>🎸 FretMaster</span>
+        <button
+          onClick={() => setShowProfile(true)}
+          style={{
+            width: 36, height: 36, borderRadius: '50%',
+            background: 'var(--fm-primary)',
+            color: 'var(--fm-white)',
+            fontWeight: 700, fontSize: 13,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          {initials}
+        </button>
+      </div>
+
       {activeTab === 'learning' && <LearningTab onGoToJourney={() => setActiveTab('journey')} />}
       {activeTab === 'journey' && <JourneyTab />}
       {activeTab === 'practice' && <PracticeTab />}
@@ -78,6 +106,10 @@ export default function App() {
           </button>
         ))}
       </nav>
+
+      {showProfile && (
+        <ProfileScreen user={user} onClose={() => setShowProfile(false)} />
+      )}
     </div>
   )
 }
