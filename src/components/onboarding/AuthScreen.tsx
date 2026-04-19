@@ -107,6 +107,51 @@ export default function AuthScreen({ onboardingData, onComplete }: Props) {
           {loading ? t('auth.loading') : (mode === 'signup' ? t('auth.signUp') : t('auth.signIn'))}
         </button>
 
+        {/* Divider */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '4px 0' }}>
+          <div style={{ flex: 1, height: 1, background: 'var(--fm-border)' }} />
+          <span style={{ color: 'var(--fm-text-dim)', fontSize: 13 }}>{isRTL ? 'או' : 'or'}</span>
+          <div style={{ flex: 1, height: 1, background: 'var(--fm-border)' }} />
+        </div>
+
+        {/* Social buttons */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {[
+            { provider: 'google' as const, label: 'Google', icon: '🔵' },
+            { provider: 'apple' as const, label: 'Apple', icon: '🍎' },
+            { provider: 'facebook' as const, label: 'Facebook', icon: '📘' },
+            { provider: 'twitter' as const, label: 'X (Twitter)', icon: '🐦' },
+          ].map(({ provider, label, icon }) => (
+            <button
+              key={provider}
+              onClick={() => supabase.auth.signInWithOAuth({
+                provider,
+                options: { redirectTo: window.location.origin },
+              })}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 10,
+                padding: '12px 16px',
+                borderRadius: 10,
+                border: '1.5px solid var(--fm-border)',
+                background: 'var(--fm-bg-input)',
+                color: 'var(--fm-text)',
+                fontSize: 15,
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'filter 0.15s',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.filter = 'brightness(0.93)')}
+              onMouseLeave={e => (e.currentTarget.style.filter = '')}
+            >
+              <span>{icon}</span>
+              <span>{isRTL ? `המשך עם ${label}` : `Continue with ${label}`}</span>
+            </button>
+          ))}
+        </div>
+
         <button
           className="fm-btn-ghost"
           onClick={() => setMode(m => m === 'signup' ? 'signin' : 'signup')}
