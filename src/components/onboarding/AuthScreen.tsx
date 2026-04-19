@@ -22,13 +22,13 @@ export default function AuthScreen({ onboardingData, onComplete }: Props) {
     setError('')
     try {
       if (mode === 'signup') {
-        const { error: err } = await supabase.auth.signUp({ email, password })
+        const { data, error: err } = await supabase.auth.signUp({ email, password })
         if (err) throw err
-        // Save profile after signup
-        const { data: { user } } = await supabase.auth.getUser()
-        if (user) {
+        // Save profile — best effort, don't block auth if table missing yet
+        const userId = data.user?.id
+        if (userId) {
           await supabase.from('profiles').upsert({
-            id: user.id,
+            id: userId,
             name: onboardingData.name,
             lang: onboardingData.lang,
             level: onboardingData.level,
