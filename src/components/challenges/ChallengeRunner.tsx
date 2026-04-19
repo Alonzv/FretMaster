@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import type { CategoryId, Difficulty, SessionResult } from '../../lib/challenges/types'
+import type { CategoryId, Difficulty, Question, SessionResult } from '../../lib/challenges/types'
 import { buildSession, scoreSession, SESSION_LENGTH } from '../../lib/challenges/engine'
 import { getCategory } from '../../lib/challenges/categories'
 import QuestionCard from './QuestionCard'
@@ -14,8 +14,15 @@ interface Props {
   onComplete: (result: SessionResult) => void
 }
 
-// Runs a full challenge session end-to-end: renders questions, collects answers,
-// shows feedback after each, and a summary at the end.
+// A record of one question plus what the user answered — powers the end-of-session review.
+export interface AnsweredQuestion {
+  question: Question
+  chosenIndex: number
+  correct: boolean
+}
+
+// Runs a full challenge session: renders questions, captures answers instantly on click,
+// flashes feedback, then shows the summary at the end.
 export default function ChallengeRunner({ categoryId, difficulty, onExit, onComplete }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
@@ -27,29 +34,31 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
   const [idx, setIdx] = useState(0)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [revealed, setRevealed] = useState(false)
-  const [answers, setAnswers] = useState<boolean[]>([])
+  const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
   const [done, setDone] = useState<SessionResult | null>(null)
 
   if (!category) return null
 
-  // End-of-session summary.
   if (done) {
-    return <SessionSummary result={done} category={category} onExit={onExit} isHe={isHe} />
+    return <SessionSummary result={done} category={category} answers={answers} onExit={onExit} isHe={isHe} />
   }
 
   const current = questions[idx]
   const isLast = idx === questions.length - 1
 
-  const handleSubmit = () => {
-    if (selectedIndex === null) return
-    const correct = selectedIndex === current.correctIndex
-    setAnswers(prev => [...prev, correct])
+  // Instant-reveal: the moment the user picks a choice, we lock + score.
+  const handleSelect = (chosenIndex: number) => {
+    if (revealed) return
+    const correct = chosenIndex === current.correctIndex
+    setSelectedIndex(chosenIndex)
     setRevealed(true)
+    setAnswers(prev => [...prev, { question: current, chosenIndex, correct }])
   }
 
   const handleNext = () => {
     if (isLast) {
-      const result = scoreSession(categoryId, difficulty, answers, startedAt)
+      const bools = answers.map(a => a.correct)
+      const result = scoreSession(categoryId, difficulty, bools, startedAt)
       setDone(result)
       onComplete(result)
       return
@@ -63,7 +72,6 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
 
   return (
     <div className="fm-runner">
-      {/* Top bar */}
       <div className="fm-runner-top">
         <button
           onClick={onExit}
@@ -94,7 +102,6 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
         </div>
       </div>
 
-      {/* Main content */}
       <div className="fm-runner-body">
         <div className="fm-runner-content">
           <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 20, textAlign: 'center' }}>
@@ -105,30 +112,9 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
             question={current}
             selectedIndex={selectedIndex}
             revealed={revealed}
-            onSelect={setSelectedIndex}
+            onSelect={handleSelect}
             isHe={isHe}
           />
-
-          {!revealed && (
-            <button
-              onClick={handleSubmit}
-              disabled={selectedIndex === null}
-              style={{
-                marginTop: 28,
-                width: '100%',
-                padding: '14px 20px',
-                borderRadius: 12,
-                background: selectedIndex === null ? 'var(--fm-bg-input)' : 'var(--fm-primary)',
-                color: selectedIndex === null ? 'var(--fm-text-muted)' : 'white',
-                fontSize: 15,
-                fontWeight: 700,
-                cursor: selectedIndex === null ? 'not-allowed' : 'pointer',
-                transition: 'all 0.15s',
-              }}
-            >
-              {isHe ? 'בדוק' : 'Check'}
-            </button>
-          )}
 
           {revealed && (
             <FeedbackPanel

@@ -5,17 +5,17 @@ export type Difficulty = 'easy' | 'medium' | 'hard'
 // Keep them stable — they are used as keys in the Supabase progress table.
 export type CategoryId =
   | 'fretboard'
+  | 'note_reading'
   | 'intervals_theory'
   | 'circle_of_fifths'
+  | 'chord_construction'
+  | 'scale_construction'
+  | 'chords_in_key'
   // Phase 2 (ear training)
   | 'intervals_ear'
   | 'chord_quality'
   | 'chord_progressions'
   | 'scale_id'
-  // Phase 1 theory (additional)
-  | 'chords_in_key'
-  | 'chord_construction'
-  | 'scale_construction'
   // Phase 3 (Pitchy.js)
   | 'play_interval'
   | 'find_note_fretboard'
@@ -53,13 +53,20 @@ export interface Question {
   theory: Bilingual
 }
 
-export interface QuestionVisual {
-  kind: 'fret'
-  // Guitar string, 1 = high E (thin), 6 = low E (thick).
-  string: 1 | 2 | 3 | 4 | 5 | 6
-  // Fret 0 means open string.
-  fret: number
-}
+export type QuestionVisual =
+  | {
+      kind: 'fret'
+      // Guitar string, 1 = high e (thin), 6 = low E (thick).
+      string: 1 | 2 | 3 | 4 | 5 | 6
+      // Fret 0 means open string.
+      fret: number
+    }
+  | {
+      kind: 'staff'
+      // Staff step: 0 = middle C, +1 per white-key step upward.
+      staffStep: number
+      accidental?: '' | '#' | 'b'
+    }
 
 export interface QuestionAudio {
   kind: 'notes' | 'chord' | 'progression'

@@ -16,8 +16,8 @@ const DIFF_CONFIG: Record<Difficulty, { strings: number[]; minFret: number; maxF
   hard:   { strings: [1, 2, 3, 4, 5, 6],   minFret: 0, maxFret: 12 },
 }
 
-const STRING_NAMES_HE = ['', 'ראשון (E גבוה)', 'שני (B)', 'שלישי (G)', 'רביעי (D)', 'חמישי (A)', 'שישי (E נמוך)']
-const STRING_NAMES_EN = ['', '1st (high E)',    '2nd (B)',  '3rd (G)',   '4th (D)',    '5th (A)',    '6th (low E)']
+const STRING_NAMES_HE = ['', 'ראשון (מי גבוה)', 'שני (סי)', 'שלישי (סול)', 'רביעי (רה)', 'חמישי (לה)', 'שישי (מי בס)']
+const STRING_NAMES_EN = ['', '1st (high e)',     '2nd (B)',   '3rd (G)',      '4th (D)',     '5th (A)',    '6th (low E)']
 
 export function generateFretboardQuestion(difficulty: Difficulty): Question {
   const cfg = DIFF_CONFIG[difficulty]

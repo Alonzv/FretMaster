@@ -1,20 +1,19 @@
-import type { Difficulty, CategoryProgress } from '../../lib/challenges/types'
-import { isDifficultyUnlocked } from '../../lib/challenges/progress'
+import type { Difficulty } from '../../lib/challenges/types'
 
 interface Props {
-  progress: CategoryProgress
   onPick: (d: Difficulty) => void
   onCancel: () => void
   isHe: boolean
 }
 
 const LEVELS: { id: Difficulty; he: string; en: string; descHe: string; descEn: string }[] = [
-  { id: 'easy',   he: 'קל',    en: 'Easy',   descHe: 'נקודת פתיחה — בסיס',            descEn: 'Starting point — foundation'         },
-  { id: 'medium', he: 'בינוני', en: 'Medium', descHe: 'כל התווים, כל הסולמות',        descEn: 'Full chromatic, all keys'            },
-  { id: 'hard',   he: 'קשה',   en: 'Hard',   descHe: 'מודוסים, אקורדים מורכבים',      descEn: 'Modes, complex chords'               },
+  { id: 'easy',   he: 'קל',    en: 'Easy',   descHe: 'נקודת פתיחה — בסיס',          descEn: 'Starting point — foundation' },
+  { id: 'medium', he: 'בינוני', en: 'Medium', descHe: 'כל התווים, כל הסולמות',       descEn: 'Full chromatic, all keys'    },
+  { id: 'hard',   he: 'קשה',   en: 'Hard',   descHe: 'מודוסים, אקורדים מורכבים',    descEn: 'Modes, complex chords'       },
 ]
 
-export default function DifficultyPicker({ progress, onPick, onCancel, isHe }: Props) {
+// Difficulty selection modal. All levels are always available — no locking.
+export default function DifficultyPicker({ onPick, onCancel, isHe }: Props) {
   return (
     <div
       onClick={onCancel}
@@ -42,50 +41,40 @@ export default function DifficultyPicker({ progress, onPick, onCancel, isHe }: P
             {isHe ? 'בחר רמת קושי' : 'Pick a difficulty'}
           </div>
           <div style={{ fontSize: 13, color: 'var(--fm-text-muted)' }}>
-            {isHe ? 'רמות נפתחות לפי ביצועים' : 'Levels unlock as you progress'}
+            {isHe ? 'כל הרמות פתוחות תמיד' : 'All levels are always available'}
           </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {LEVELS.map(lv => {
-            const unlocked = isDifficultyUnlocked(progress, lv.id)
-            return (
-              <button
-                key={lv.id}
-                onClick={() => unlocked && onPick(lv.id)}
-                disabled={!unlocked}
-                style={{
-                  padding: '16px 18px',
-                  borderRadius: 14,
-                  border: `1.5px solid ${unlocked ? 'var(--fm-border)' : 'var(--fm-border)'}`,
-                  background: 'var(--fm-bg-card)',
-                  opacity: unlocked ? 1 : 0.45,
-                  cursor: unlocked ? 'pointer' : 'not-allowed',
-                  textAlign: isHe ? 'right' : 'left',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 14,
-                  transition: 'all 0.15s',
-                }}
-                onMouseEnter={e => { if (unlocked) e.currentTarget.style.borderColor = 'var(--fm-primary)' }}
-                onMouseLeave={e => { if (unlocked) e.currentTarget.style.borderColor = 'var(--fm-border)' }}
-              >
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--fm-text)' }}>
-                    {isHe ? lv.he : lv.en}
-                  </div>
-                  <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 2 }}>
-                    {unlocked ? (isHe ? lv.descHe : lv.descEn) : (isHe ? 'סגור — השג 2×3★ ברמה הקודמת' : 'Locked — earn 2×3★ at the previous level')}
-                  </div>
+          {LEVELS.map(lv => (
+            <button
+              key={lv.id}
+              onClick={() => onPick(lv.id)}
+              style={{
+                padding: '16px 18px',
+                borderRadius: 14,
+                border: '1.5px solid var(--fm-border)',
+                background: 'var(--fm-bg-card)',
+                cursor: 'pointer',
+                textAlign: isHe ? 'right' : 'left',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 14,
+                transition: 'all 0.15s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--fm-primary)' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--fm-border)' }}
+            >
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 16, fontWeight: 700, color: 'var(--fm-text)' }}>
+                  {isHe ? lv.he : lv.en}
                 </div>
-                {!unlocked && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--fm-text-muted)">
-                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
-                  </svg>
-                )}
-              </button>
-            )
-          })}
+                <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 2 }}>
+                  {isHe ? lv.descHe : lv.descEn}
+                </div>
+              </div>
+            </button>
+          ))}
         </div>
       </div>
     </div>

@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import i18n from '../i18n'
 import type { User } from '@supabase/supabase-js'
+import type { CategoryId, CategoryProgress } from '../lib/challenges/types'
+import { CATEGORIES } from '../lib/challenges/categories'
+import { totalXP } from '../lib/challenges/progress'
 
 interface UserProfile {
   name: string
@@ -15,15 +18,9 @@ interface UserProfile {
 interface Props {
   user: User
   profile: UserProfile | null
+  progress: Record<CategoryId, CategoryProgress>
   onClose: () => void
 }
-
-const PROGRESS_ITEMS = [
-  { labelHe: 'למידה',      labelEn: 'Learning',  pct: 15 },
-  { labelHe: 'המסע שלך',   labelEn: 'Journey',   pct: 8  },
-  { labelHe: 'אימון',      labelEn: 'Practice',  pct: 0  },
-  { labelHe: 'תאוריה',     labelEn: 'Theory',    pct: 0  },
-]
 
 const LEVEL_LABELS: Record<string, { he: string; en: string }> = {
   beginner:         { he: 'מתחיל',         en: 'Beginner' },
@@ -32,7 +29,7 @@ const LEVEL_LABELS: Record<string, { he: string; en: string }> = {
   advanced:         { he: 'מתקדם',          en: 'Advanced' },
 }
 
-export default function ProfileScreen({ user, profile, onClose }: Props) {
+export default function ProfileScreen({ user, profile, progress, onClose }: Props) {
   const isHe = i18n.language === 'he'
   const [lang, setLang] = useState(i18n.language)
 
@@ -45,6 +42,14 @@ export default function ProfileScreen({ user, profile, onClose }: Props) {
   const displayName = profile?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'
   const initials = displayName.slice(0, 2).toUpperCase()
   const levelInfo = LEVEL_LABELS[profile?.level || '']
+
+  // Real aggregate stats from challenge progress.
+  const xp = totalXP(progress)
+  const availableCats = CATEGORIES.filter(c => c.phase === 1 && c.generator)
+  const sessions = Object.values(progress).reduce((s, p) => s + p.sessionsPlayed, 0)
+  const totalAnswered = Object.values(progress).reduce((s, p) => s + p.totalAnswered, 0)
+  const totalCorrect  = Object.values(progress).reduce((s, p) => s + p.totalCorrect, 0)
+  const overallAccuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0
 
   return (
     <div style={{
@@ -59,6 +64,7 @@ export default function ProfileScreen({ user, profile, onClose }: Props) {
       <div
         style={{
           width: 420,
+          maxWidth: '100%',
           height: '100vh',
           background: 'var(--fm-bg-deep)',
           overflowY: 'auto',
@@ -88,7 +94,7 @@ export default function ProfileScreen({ user, profile, onClose }: Props) {
               width: 60, height: 60, borderRadius: '50%',
               background: 'var(--fm-primary)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 20, fontWeight: 700, color: 'var(--fm-white)',
+              fontSize: 20, fontWeight: 700, color: 'white',
               flexShrink: 0,
             }}>
               {initials}
@@ -102,7 +108,7 @@ export default function ProfileScreen({ user, profile, onClose }: Props) {
                   fontSize: 12, fontWeight: 600,
                   color: 'var(--fm-primary)',
                   background: 'var(--fm-primary-bg)',
-                  border: '1px solid var(--fm-primary-soft)',
+                  border: '1px solid var(--fm-primary)',
                   borderRadius: 6, padding: '2px 8px',
                 }}>
                   {isHe ? levelInfo.he : levelInfo.en}
@@ -111,55 +117,52 @@ export default function ProfileScreen({ user, profile, onClose }: Props) {
             </div>
           </div>
 
-          {/* Stats */}
+          {/* Summary stats */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
-            {[
-              { labelHe: 'אתגרים', labelEn: 'Challenges', value: '0' },
-              { labelHe: 'שיעורים', labelEn: 'Lessons',   value: '0' },
-              { labelHe: 'XP',     labelEn: 'XP',          value: '0' },
-            ].map(stat => (
-              <div key={stat.labelEn} className="fm-card" style={{ textAlign: 'center', padding: '14px 10px' }}>
-                <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--fm-primary)', marginBottom: 4 }}>
-                  {stat.value}
-                </div>
-                <div style={{ fontSize: 12, color: 'var(--fm-text-muted)' }}>
-                  {isHe ? stat.labelHe : stat.labelEn}
-                </div>
-              </div>
-            ))}
+            <StatCard label={isHe ? 'XP' : 'XP'} value={xp.toString()} highlight />
+            <StatCard label={isHe ? 'סשנים' : 'Sessions'} value={sessions.toString()} />
+            <StatCard label={isHe ? 'דיוק' : 'Accuracy'} value={`${overallAccuracy}%`} />
           </div>
 
-          {/* Progress */}
-          <div className="fm-card">
-            <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--fm-text)', marginBottom: 18, textTransform: 'uppercase', letterSpacing: 0.5 }}>
-              {isHe ? 'התקדמות' : 'Progress'}
+          {/* Per-category breakdown */}
+          <div className="fm-card" style={{ padding: 18 }}>
+            <h3 style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', margin: '0 0 14px', textTransform: 'uppercase', letterSpacing: 0.5 }}>
+              {isHe ? 'פירוט לפי קטגוריה' : 'By category'}
             </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-              {PROGRESS_ITEMS.map(item => (
-                <div key={item.labelEn}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
-                    <span style={{ fontSize: 14, color: 'var(--fm-text)' }}>
-                      {isHe ? item.labelHe : item.labelEn}
-                    </span>
-                    <span style={{ fontSize: 13, fontWeight: 700, color: item.pct > 0 ? 'var(--fm-primary)' : 'var(--fm-text-dim)' }}>
-                      {item.pct}%
-                    </span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              {availableCats.map(cat => {
+                const cp = progress[cat.id]
+                const accuracy = cp.totalAnswered > 0 ? (cp.totalCorrect / cp.totalAnswered) * 100 : 0
+                const everPlayed = cp.sessionsPlayed > 0
+
+                return (
+                  <div key={cat.id}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10, marginBottom: 6 }}>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--fm-text)' }}>
+                        {isHe ? cat.titleHe : cat.titleEn}
+                      </span>
+                      <span style={{ fontSize: 12, fontWeight: 600, color: everPlayed ? 'var(--fm-primary)' : 'var(--fm-text-muted)' }}>
+                        {everPlayed ? `${Math.round(accuracy)}%` : (isHe ? '—' : '—')}
+                      </span>
+                    </div>
+                    <div style={{ height: 5, background: 'var(--fm-bg-input)', borderRadius: 999, overflow: 'hidden' }}>
+                      <div style={{
+                        height: '100%',
+                        width: `${Math.max(accuracy, everPlayed ? 3 : 0)}%`,
+                        background: 'var(--fm-primary)',
+                        borderRadius: 999,
+                        transition: 'width 0.5s ease',
+                      }} />
+                    </div>
                   </div>
-                  <div style={{ height: 6, background: 'var(--fm-bg-input)', borderRadius: 3, overflow: 'hidden' }}>
-                    <div style={{
-                      height: '100%', width: `${item.pct}%`,
-                      background: 'var(--fm-primary)', borderRadius: 3,
-                      transition: 'width 0.5s ease',
-                    }} />
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 
           {/* Settings */}
-          <div className="fm-card">
-            <h3 style={{ fontSize: 14, fontWeight: 700, color: 'var(--fm-text)', marginBottom: 16, textTransform: 'uppercase', letterSpacing: 0.5 }}>
+          <div className="fm-card" style={{ padding: 18 }}>
+            <h3 style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', margin: '0 0 14px', textTransform: 'uppercase', letterSpacing: 0.5 }}>
               {isHe ? 'הגדרות' : 'Settings'}
             </h3>
 
@@ -203,6 +206,26 @@ export default function ProfileScreen({ user, profile, onClose }: Props) {
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function StatCard({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
+  return (
+    <div
+      className="fm-card"
+      style={{
+        textAlign: 'center', padding: '14px 10px',
+        background: highlight ? 'var(--fm-primary-bg)' : 'var(--fm-bg-card)',
+        border: `1px solid ${highlight ? 'var(--fm-primary)' : 'var(--fm-border)'}`,
+      }}
+    >
+      <div style={{ fontSize: 22, fontWeight: 800, color: highlight ? 'var(--fm-primary)' : 'var(--fm-text)', marginBottom: 4 }}>
+        {value}
+      </div>
+      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 0.5 }}>
+        {label}
       </div>
     </div>
   )

@@ -1,7 +1,10 @@
 import type { CategoryId, CategoryMeta, QuestionGenerator } from './types'
-import { generateFretboardQuestion }       from './generators/fretboard'
-import { generateIntervalTheoryQuestion }  from './generators/intervals'
-import { generateCircleOfFifthsQuestion }  from './generators/circleOfFifths'
+import { generateFretboardQuestion }         from './generators/fretboard'
+import { generateIntervalTheoryQuestion }    from './generators/intervals'
+import { generateCircleOfFifthsQuestion }    from './generators/circleOfFifths'
+import { generateNoteReadingQuestion }       from './generators/noteReading'
+import { generateChordConstructionQuestion } from './generators/chordConstruction'
+import { generateScaleConstructionQuestion } from './generators/scaleConstruction'
 
 // Every category registered in the app. Phase 2/3 entries have `generator: null` and
 // render as "coming soon" in the UI.
@@ -20,6 +23,16 @@ export const CATEGORIES: CategoryEntry[] = [
     phase: 1,
     icon: 'M3 7h18v2H3V7zm0 4h18v2H3v-2zm0 4h18v2H3v-2z',
     generator: generateFretboardQuestion,
+  },
+  {
+    id: 'note_reading',
+    titleHe: 'קריאת תווים',
+    titleEn: 'Note Reading',
+    descHe: 'זיהוי תווים על החמשה',
+    descEn: 'Read notes on the staff',
+    phase: 1,
+    icon: 'M9 3v12.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3H9z',
+    generator: generateNoteReadingQuestion,
   },
   {
     id: 'intervals_theory',
@@ -41,6 +54,26 @@ export const CATEGORIES: CategoryEntry[] = [
     icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm0-13a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3z',
     generator: generateCircleOfFifthsQuestion,
   },
+  {
+    id: 'chord_construction',
+    titleHe: 'בניית אקורדים',
+    titleEn: 'Chord Construction',
+    descHe: 'אילו תווים יש בכל אקורד',
+    descEn: 'Which notes make up each chord',
+    phase: 1,
+    icon: 'M12 2L2 12l10 10 10-10L12 2zm0 3.83L18.17 12 12 18.17 5.83 12 12 5.83z',
+    generator: generateChordConstructionQuestion,
+  },
+  {
+    id: 'scale_construction',
+    titleHe: 'בניית סולמות',
+    titleEn: 'Scale Construction',
+    descHe: 'אילו תווים יש בכל סולם',
+    descEn: 'Which notes make up each scale',
+    phase: 1,
+    icon: 'M3 3h2v18H3V3zm16 0h2v18h-2V3zM7 7h2v14H7V7zm4-4h2v18h-2V3zm4 4h2v14h-2V7z',
+    generator: generateScaleConstructionQuestion,
+  },
 
   // ── Phase 1: additional theory (not yet shipped) ────────────────────────
   {
@@ -51,26 +84,6 @@ export const CATEGORIES: CategoryEntry[] = [
     descEn: 'Which chord sits on which degree',
     phase: 1,
     icon: 'M4 4h16v4H4V4zm0 6h16v4H4v-4zm0 6h16v4H4v-4z',
-    generator: null,
-  },
-  {
-    id: 'chord_construction',
-    titleHe: 'בניית אקורדים',
-    titleEn: 'Chord Construction',
-    descHe: 'אילו תווים יש בכל אקורד',
-    descEn: 'Which notes make up each chord',
-    phase: 1,
-    icon: 'M12 2L2 12l10 10 10-10L12 2zm0 3.83L18.17 12 12 18.17 5.83 12 12 5.83z',
-    generator: null,
-  },
-  {
-    id: 'scale_construction',
-    titleHe: 'בניית סולמות',
-    titleEn: 'Scale Construction',
-    descHe: 'אילו תווים יש בכל סולם',
-    descEn: 'Which notes make up each scale',
-    phase: 1,
-    icon: 'M3 3h2v18H3V3zm16 0h2v18h-2V3zM7 7h2v14H7V7zm4-4h2v18h-2V3zm4 4h2v14h-2V7z',
     generator: null,
   },
 

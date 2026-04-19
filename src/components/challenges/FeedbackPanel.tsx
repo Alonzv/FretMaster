@@ -1,5 +1,6 @@
 import type { Question } from '../../lib/challenges/types'
 import TheoryButton from './TheoryButton'
+import TheoryText from './TheoryText'
 
 interface Props {
   question: Question
@@ -9,14 +10,15 @@ interface Props {
   isHe: boolean
 }
 
-// Slim bottom panel shown after answer submission: result + explanation + theory button + next.
+// Post-answer feedback: correct/wrong banner, explanation text with glossary tooltips,
+// optional deeper theory popover, and a Next button.
 export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, isHe }: Props) {
   const correctChoice = question.choices[question.correctIndex]
 
   return (
     <div
       style={{
-        marginTop: 28,
+        marginTop: 24,
         padding: '20px 24px',
         borderRadius: 16,
         background: wasCorrect ? 'var(--fm-secondary-bg)' : 'var(--fm-coral-faint)',
@@ -24,8 +26,8 @@ export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, is
         textAlign: isHe ? 'right' : 'left',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', marginBottom: 12 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', marginBottom: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, flex: 1, minWidth: 0 }}>
           <div
             style={{
               width: 32,
@@ -68,16 +70,16 @@ export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, is
         />
       </div>
 
-      <div style={{ fontSize: 14, color: 'var(--fm-text)', lineHeight: 1.55 }}>
-        {isHe ? question.explanation.he : question.explanation.en}
+      <div style={{ fontSize: 14, color: 'var(--fm-text)', lineHeight: 1.6 }}>
+        <TheoryText text={isHe ? question.explanation.he : question.explanation.en} isHe={isHe} />
       </div>
 
       <button
         onClick={onNext}
         style={{
-          marginTop: 16,
+          marginTop: 18,
           width: '100%',
-          padding: '12px 20px',
+          padding: '13px 20px',
           borderRadius: 12,
           background: 'var(--fm-primary)',
           color: 'white',

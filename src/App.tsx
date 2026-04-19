@@ -4,17 +4,16 @@ import './i18n'
 import { supabase } from './lib/supabase'
 import OnboardingFlow from './components/onboarding/OnboardingFlow'
 import type { OnboardingData } from './store/onboarding'
-import ChallengesTab from './components/tabs/ChallengesTab'
-import DailyTab      from './components/tabs/DailyTab'
-import FreePlayTab   from './components/tabs/FreePlayTab'
-import StatsTab      from './components/tabs/StatsTab'
+import HomeTab     from './components/tabs/HomeTab'
+import DailyTab    from './components/tabs/DailyTab'
+import PracticeTab from './components/tabs/PracticeTab'
 import ProfileScreen from './components/ProfileScreen'
 import Sidebar       from './components/Sidebar'
 import type { User } from '@supabase/supabase-js'
 import type { CategoryId, CategoryProgress, SessionResult } from './lib/challenges/types'
 import { loadAllProgress, applySessionResult } from './lib/challenges/progress'
 
-export type ActiveTab = 'challenges' | 'daily' | 'free' | 'stats'
+export type ActiveTab = 'home' | 'daily' | 'practice'
 
 interface UserProfile {
   name: string
@@ -30,7 +29,7 @@ export default function App() {
   const [user, setUser]         = useState<User | null>(null)
   const [profile, setProfile]   = useState<UserProfile | null>(null)
   const [checking, setChecking] = useState(true)
-  const [activeTab, setActiveTab] = useState<ActiveTab>('challenges')
+  const [activeTab, setActiveTab] = useState<ActiveTab>('home')
   const [showProfile, setShowProfile] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false) // mobile
   const [progress, setProgress] = useState<Record<CategoryId, CategoryProgress>>(() => loadAllProgress())
@@ -135,14 +134,13 @@ export default function App() {
       <div className="fm-sidebar-space" />
 
       <main className="fm-main">
-        {activeTab === 'challenges' && <ChallengesTab progress={progress} onSessionComplete={handleSessionComplete} />}
-        {activeTab === 'daily'      && <DailyTab      progress={progress} onSessionComplete={handleSessionComplete} />}
-        {activeTab === 'free'       && <FreePlayTab />}
-        {activeTab === 'stats'      && <StatsTab      progress={progress} />}
+        {activeTab === 'home'     && <HomeTab     progress={progress} onSessionComplete={handleSessionComplete} />}
+        {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} />}
+        {activeTab === 'practice' && <PracticeTab />}
       </main>
 
       {showProfile && user && (
-        <ProfileScreen user={user} profile={profile} onClose={() => setShowProfile(false)} />
+        <ProfileScreen user={user} profile={profile} progress={progress} onClose={() => setShowProfile(false)} />
       )}
     </div>
   )

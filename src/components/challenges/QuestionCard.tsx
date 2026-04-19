@@ -1,22 +1,30 @@
 import type { Question } from '../../lib/challenges/types'
 import FretboardVisual from './FretboardVisual'
+import StaffVisual from './StaffVisual'
+import TheoryText from './TheoryText'
 
 interface Props {
   question: Question
-  selectedIndex: number | null    // user's currently-selected answer (null = not yet)
-  revealed: boolean               // true once the user has submitted
-  onSelect: (index: number) => void
+  selectedIndex: number | null
+  revealed: boolean
+  onSelect: (index: number) => void   // fires once; runner decides when to reveal
   isHe: boolean
 }
 
-// One question rendered with its prompt, optional visual, and 4 choice buttons.
-// Layout switches from 2x2 grid on desktop to 1-column stack on narrow screens.
+// Renders a question: prompt, optional visual, and 4 answer buttons.
+// The moment the user clicks a choice, the runner reveals — so no separate submit step.
 export default function QuestionCard({ question, selectedIndex, revealed, onSelect, isHe }: Props) {
   return (
     <div>
       {question.visual?.kind === 'fret' && (
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
-          <FretboardVisual string={question.visual.string} fret={question.visual.fret} isRTL={isHe} />
+          <FretboardVisual string={question.visual.string} fret={question.visual.fret} isHe={isHe} />
+        </div>
+      )}
+
+      {question.visual?.kind === 'staff' && (
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
+          <StaffVisual staffStep={question.visual.staffStep} accidental={question.visual.accidental} />
         </div>
       )}
 
@@ -31,15 +39,15 @@ export default function QuestionCard({ question, selectedIndex, revealed, onSele
           letterSpacing: '-0.3px',
         }}
       >
-        {isHe ? question.prompt.he : question.prompt.en}
+        <TheoryText text={isHe ? question.prompt.he : question.prompt.en} isHe={isHe} />
       </div>
 
       <div className="fm-choices">
         {question.choices.map((choice, idx) => {
           const isSelected = selectedIndex === idx
-          const isCorrect = idx === question.correctIndex
-          // State-driven styling
-          let bg   = 'var(--fm-bg-card)'
+          const isCorrect  = idx === question.correctIndex
+
+          let bg     = 'var(--fm-bg-card)'
           let border = 'var(--fm-border)'
           let color  = 'var(--fm-text)'
 
@@ -76,6 +84,9 @@ export default function QuestionCard({ question, selectedIndex, revealed, onSele
                 transition: 'all 0.15s ease',
                 textAlign: 'center',
                 minHeight: 60,
+                // Use tabular-nums so sharps/flats align vertically.
+                fontVariantNumeric: 'tabular-nums',
+                fontFeatureSettings: '"tnum"',
               }}
               onMouseEnter={e => {
                 if (revealed) return

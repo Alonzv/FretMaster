@@ -14,10 +14,9 @@ interface Props {
 }
 
 const NAV_ITEMS: { id: ActiveTab; labelHe: string; labelEn: string; icon: string }[] = [
-  { id: 'challenges', labelHe: 'אתגרים',       labelEn: 'Challenges', icon: 'M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm10-9h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 11h-4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2zM9 2H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z' },
-  { id: 'daily',      labelHe: 'המסע שלך',    labelEn: 'Daily',      icon: 'M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z' },
-  { id: 'free',       labelHe: 'תרגול חופשי',  labelEn: 'Free Play',  icon: 'M8 5v14l11-7z' },
-  { id: 'stats',      labelHe: 'סטטיסטיקות',   labelEn: 'Stats',      icon: 'M3 17h2v-7H3v7zm4 0h2V7H7v10zm4 0h2v-4h-2v4zm4 0h2V4h-2v13zm4 0h2v-8h-2v8z' },
+  { id: 'home',     labelHe: 'בית',        labelEn: 'Home',     icon: 'M12 3 2 12h3v8h6v-6h2v6h6v-8h3z' },
+  { id: 'daily',    labelHe: 'סשן יומי',    labelEn: 'Daily',    icon: 'M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7z' },
+  { id: 'practice', labelHe: 'תרגול',       labelEn: 'Practice', icon: 'M8 5v14l11-7z' },
 ]
 
 export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, profileName, isRTL, mobileOpen, onMobileClose }: Props) {
@@ -55,9 +54,6 @@ export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, p
         <div style={{ padding: '28px 22px 20px' }}>
           <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--fm-primary)', letterSpacing: '-0.4px' }}>
             FretMaster
-          </div>
-          <div style={{ fontSize: 12, color: 'var(--fm-text-muted)', marginTop: 2 }}>
-            {isRTL ? 'אתגרים למוזיקאים' : 'Challenges for musicians'}
           </div>
         </div>
 

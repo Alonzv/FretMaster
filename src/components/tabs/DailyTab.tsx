@@ -1,11 +1,11 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useEffect } from 'react'
 import type { CategoryId, CategoryProgress, Difficulty, Question, SessionResult } from '../../lib/challenges/types'
 import { CATEGORIES, getCategory } from '../../lib/challenges/categories'
 import QuestionCard from '../challenges/QuestionCard'
 import FeedbackPanel from '../challenges/FeedbackPanel'
 import SessionSummary from '../challenges/SessionSummary'
+import type { AnsweredQuestion } from '../challenges/ChallengeRunner'
 import { scoreSession } from '../../lib/challenges/engine'
 
 interface Props {
@@ -15,8 +15,8 @@ interface Props {
 
 const DAILY_LENGTH = 10
 
-// A mixed daily session — draws questions from every available Phase-1 category at the
-// user's highest unlocked difficulty, weighted toward weaker areas.
+// Daily mixed session — draws 10 questions spread across every Phase-1 category,
+// weighted toward the user's weaker areas. Landing is just one centered Start button.
 export default function DailyTab({ progress, onSessionComplete }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
@@ -25,12 +25,10 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
   const [idx, setIdx] = useState(0)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [revealed, setRevealed] = useState(false)
-  const [answers, setAnswers] = useState<boolean[]>([])
+  const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
   const [done, setDone] = useState<SessionResult | null>(null)
   const [questions, setQuestions] = useState<Question[]>([])
 
-  // Available = Phase-1 categories with an actual generator.
-  const available = CATEGORIES.filter(c => c.phase === 1 && c.generator)
   const startedAt = useMemo(() => Date.now(), [started])
 
   useEffect(() => {
@@ -50,18 +48,20 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
   const current = questions[idx]
   const isLast = idx === questions.length - 1
 
-  const handleSubmit = () => {
-    if (selectedIndex === null) return
-    const correct = selectedIndex === current.correctIndex
-    setAnswers(prev => [...prev, correct])
+  // Instant-reveal on choice click.
+  const handleSelect = (chosenIndex: number) => {
+    if (revealed || !current) return
+    const correct = chosenIndex === current.correctIndex
+    setSelectedIndex(chosenIndex)
     setRevealed(true)
+    setAnswers(prev => [...prev, { question: current, chosenIndex, correct }])
   }
 
   const handleNext = () => {
+    if (!current) return
     if (isLast) {
-      // Use the primary category of the first question for progress bookkeeping; daily XP
-      // gets averaged across categories in the session summary.
-      const result = scoreSession(current.categoryId, current.difficulty, answers, startedAt)
+      const bools = answers.map(a => a.correct)
+      const result = scoreSession(current.categoryId, current.difficulty, bools, startedAt)
       setDone(result)
       onSessionComplete(result)
       return
@@ -71,11 +71,19 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
     setRevealed(false)
   }
 
-  // ── Summary state ────────────────────────────────────────────────────────
+  // ── Summary ──────────────────────────────────────────────────────────────
   if (done) {
     const cat = getCategory(done.categoryId)
     if (!cat) return null
-    return <SessionSummary result={done} category={cat} onExit={() => { setStarted(false); setDone(null) }} isHe={isHe} />
+    return (
+      <SessionSummary
+        result={done}
+        category={cat}
+        answers={answers}
+        onExit={() => { setStarted(false); setDone(null) }}
+        isHe={isHe}
+      />
+    )
   }
 
   // ── Active session ───────────────────────────────────────────────────────
@@ -118,26 +126,9 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
               question={current}
               selectedIndex={selectedIndex}
               revealed={revealed}
-              onSelect={setSelectedIndex}
+              onSelect={handleSelect}
               isHe={isHe}
             />
-
-            {!revealed && (
-              <button
-                onClick={handleSubmit}
-                disabled={selectedIndex === null}
-                style={{
-                  marginTop: 28, width: '100%', padding: '14px 20px',
-                  borderRadius: 12,
-                  background: selectedIndex === null ? 'var(--fm-bg-input)' : 'var(--fm-primary)',
-                  color: selectedIndex === null ? 'var(--fm-text-muted)' : 'white',
-                  fontSize: 15, fontWeight: 700,
-                  cursor: selectedIndex === null ? 'not-allowed' : 'pointer',
-                }}
-              >
-                {isHe ? 'בדוק' : 'Check'}
-              </button>
-            )}
 
             {revealed && (
               <FeedbackPanel
@@ -154,70 +145,65 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
     )
   }
 
-  // ── Landing (before start) ───────────────────────────────────────────────
-  const totalSessions = Object.values(progress).reduce((s, p) => s + p.sessionsPlayed, 0)
+  // ── Landing — a single centered Start button ─────────────────────────────
+  const available = CATEGORIES.filter(c => c.phase === 1 && c.generator)
 
   return (
-    <div className="fm-page">
-      <div className="fm-page-header">
-        <div className="fm-page-eyebrow">{isHe ? 'סשן יומי' : 'Daily session'}</div>
-        <h1 className="fm-page-title">{isHe ? 'המסע שלך' : 'Your journey'}</h1>
-        <p className="fm-page-subtitle">
-          {isHe ? `${DAILY_LENGTH} שאלות מעורבות מכל הקטגוריות, מותאמות לאזורים שבהם אתה חלש יותר.` : `${DAILY_LENGTH} mixed questions across every category, weighted toward what you need most.`}
-        </p>
+    <div className="fm-page" style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '70vh',
+      textAlign: 'center',
+      maxWidth: 520,
+    }}>
+      <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
+        {isHe ? 'סשן יומי' : 'Daily'}
       </div>
+      <h1 style={{ fontSize: 34, fontWeight: 800, color: 'var(--fm-text)', margin: '0 0 14px', letterSpacing: '-0.5px' }}>
+        {isHe ? 'תרגול יומי מעורב' : 'Your daily mix'}
+      </h1>
+      <p style={{ fontSize: 15, color: 'var(--fm-text-muted)', lineHeight: 1.6, margin: '0 0 36px', maxWidth: 420 }}>
+        {isHe
+          ? `${DAILY_LENGTH} שאלות מעורבות מכל הקטגוריות, מותאמות לאזורים שבהם אתה חלש יותר. בערך 5 דקות.`
+          : `${DAILY_LENGTH} mixed questions across every category, weighted toward what you need most. About 5 minutes.`}
+      </p>
 
-      <div className="fm-card" style={{ padding: 24, marginBottom: 20 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-          <div>
-            <div style={{ fontSize: 14, fontWeight: 700, color: 'var(--fm-text)' }}>
-              {isHe ? 'הסשן של היום' : 'Today\'s session'}
-            </div>
-            <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 4 }}>
-              {available.length === 0
-                ? (isHe ? 'אין עדיין קטגוריות זמינות' : 'No categories available yet')
-                : (isHe ? `${available.length} קטגוריות פעילות · ~5 דקות` : `${available.length} active categories · ~5 min`)}
-            </div>
-          </div>
-          <button
-            onClick={handleStart}
-            disabled={available.length === 0}
-            style={{
-              padding: '12px 24px', borderRadius: 12,
-              background: 'var(--fm-primary)', color: 'white',
-              fontSize: 15, fontWeight: 700, cursor: 'pointer',
-              opacity: available.length === 0 ? 0.5 : 1,
-            }}
-          >
-            {isHe ? 'התחל' : 'Start'}
-          </button>
-        </div>
-      </div>
-
-      <div className="fm-card" style={{ padding: 20 }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 8 }}>
-          {isHe ? 'התקדמות כוללת' : 'Total progress'}
-        </div>
-        <div style={{ fontSize: 32, fontWeight: 800, color: 'var(--fm-primary)' }}>
-          {totalSessions}
-          <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--fm-text-muted)', marginInlineStart: 8 }}>
-            {isHe ? 'סשנים הושלמו' : 'sessions completed'}
-          </span>
-        </div>
-      </div>
+      <button
+        onClick={handleStart}
+        disabled={available.length === 0}
+        style={{
+          padding: '16px 44px',
+          borderRadius: 999,
+          background: 'var(--fm-primary)',
+          color: 'white',
+          fontSize: 16,
+          fontWeight: 700,
+          cursor: available.length === 0 ? 'not-allowed' : 'pointer',
+          opacity: available.length === 0 ? 0.5 : 1,
+          transition: 'filter 0.15s, transform 0.1s',
+          boxShadow: '0 6px 20px rgba(0, 0, 0, 0.15)',
+        }}
+        onMouseEnter={e => (e.currentTarget.style.filter = 'brightness(1.1)')}
+        onMouseLeave={e => (e.currentTarget.style.filter = '')}
+      >
+        {isHe ? 'התחל' : 'Start'}
+      </button>
     </div>
   )
 }
 
-// Build a mixed session: sample N questions spread across categories, weighted so the
-// user sees more of their weaker categories (lower bestAccuracy → higher weight).
+// Weighted mix: categories with lower best-accuracy get more questions.
 function buildMixedSession(progress: Record<CategoryId, CategoryProgress>, length: number): Question[] {
   const available = CATEGORIES.filter(c => c.phase === 1 && c.generator)
   if (available.length === 0) return []
 
-  // Weight = 1 + (1 - accuracy). Fresh categories (accuracy=0) get weight 2.
   const weights = available.map(c => 1 + (1 - progress[c.id].bestAccuracy))
   const totalWeight = weights.reduce((s, w) => s + w, 0)
+
+  // Rotate difficulty per-question so the mix isn't monotone — all levels are unlocked.
+  const diffs: Difficulty[] = ['easy', 'medium', 'hard']
 
   const questions: Question[] = []
   for (let i = 0; i < length; i++) {
@@ -228,8 +214,7 @@ function buildMixedSession(progress: Record<CategoryId, CategoryProgress>, lengt
       if (r <= 0) { pick = available[j]; break }
     }
     if (!pick.generator) continue
-    // Use the highest unlocked difficulty for this category.
-    const d: Difficulty = progress[pick.id].unlockedDifficulty
+    const d = diffs[Math.floor(Math.random() * diffs.length)]
     questions.push(pick.generator(d))
   }
   return questions

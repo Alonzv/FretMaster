@@ -5,6 +5,8 @@ import { supabase } from '../supabase'
 const STORAGE_KEY = 'fm_progress_v1'
 
 // Default progress record for a category the user has never touched.
+// Note: difficulty locking has been removed — every difficulty is always available.
+// `unlockedDifficulty` is kept for back-compat with stored data; nothing reads it for gating.
 function emptyProgress(categoryId: CategoryId): CategoryProgress {
   return {
     categoryId,
@@ -13,7 +15,7 @@ function emptyProgress(categoryId: CategoryId): CategoryProgress {
     totalCorrect: 0,
     totalAnswered: 0,
     xp: 0,
-    unlockedDifficulty: 'easy',
+    unlockedDifficulty: 'hard',
     mastery: 'none',
   }
 }
@@ -49,7 +51,7 @@ export function applySessionResult(
   const prev = all[result.categoryId] ?? emptyProgress(result.categoryId)
   const accuracy = result.total > 0 ? result.correct / result.total : 0
 
-  // Update accuracy / totals / xp.
+  // Update accuracy / totals / xp. All difficulties are always unlocked.
   const next: CategoryProgress = {
     ...prev,
     sessionsPlayed: prev.sessionsPlayed + 1,
@@ -57,20 +59,8 @@ export function applySessionResult(
     totalCorrect: prev.totalCorrect + result.correct,
     totalAnswered: prev.totalAnswered + result.total,
     xp: prev.xp + result.xpEarned,
-    unlockedDifficulty: prev.unlockedDifficulty,
+    unlockedDifficulty: 'hard',
     mastery: prev.mastery,
-  }
-
-  // Unlock higher difficulty after 2 sessions at 3★ on the current level.
-  if (result.stars === 3) {
-    const starCount = countThreeStarSessions(prev, result)
-    if (starCount >= 2) {
-      if (result.difficulty === 'easy' && next.unlockedDifficulty === 'easy') {
-        next.unlockedDifficulty = 'medium'
-      } else if (result.difficulty === 'medium' && next.unlockedDifficulty === 'medium') {
-        next.unlockedDifficulty = 'hard'
-      }
-    }
   }
 
   // Mastery tiers based on cumulative 3★ sessions and XP.
@@ -84,15 +74,6 @@ export function applySessionResult(
   // Fire-and-forget Supabase sync.
   void syncProgressToSupabase(result.categoryId, next)
   return updated
-}
-
-// We don't persist a full session history locally (it would balloon), so we approximate
-// "2 × 3★" by counting current-session 3★ plus a heuristic: if best accuracy was already
-// ≥ 0.9 in this difficulty, we consider the user to have achieved it before.
-function countThreeStarSessions(prev: CategoryProgress, _result: SessionResult): number {
-  const thisOne = 1
-  const prior = prev.bestAccuracy >= 0.9 ? 1 : 0
-  return thisOne + prior
 }
 
 // Best-effort sync — failures are swallowed so the app keeps working offline.
@@ -122,8 +103,8 @@ export function totalXP(all: Record<CategoryId, CategoryProgress>): number {
   return Object.values(all).reduce((sum, p) => sum + p.xp, 0)
 }
 
-// Difficulty gating UI helper.
-export function isDifficultyUnlocked(progress: CategoryProgress, difficulty: Difficulty): boolean {
-  const order: Difficulty[] = ['easy', 'medium', 'hard']
-  return order.indexOf(difficulty) <= order.indexOf(progress.unlockedDifficulty)
+// Difficulty gating UI helper. Locking has been removed — every difficulty is always
+// available. Kept as a function so existing callers don't break.
+export function isDifficultyUnlocked(_progress: CategoryProgress, _difficulty: Difficulty): boolean {
+  return true
 }

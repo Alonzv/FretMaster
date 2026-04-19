@@ -10,16 +10,15 @@ interface Props {
   onSessionComplete: (result: SessionResult) => void
 }
 
-// Main Challenges screen — grid of categories grouped by phase.
-// Tapping a category opens the difficulty picker; picking a difficulty opens the runner.
-export default function ChallengesTab({ progress, onSessionComplete }: Props) {
+// The app's home screen — showcases every category the app offers, grouped by phase.
+// Tap a category to pick a difficulty and start a session.
+export default function HomeTab({ progress, onSessionComplete }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
   const [pickerFor, setPickerFor] = useState<CategoryId | null>(null)
   const [activeSession, setActiveSession] = useState<{ id: CategoryId; difficulty: Difficulty } | null>(null)
 
-  // Fullscreen challenge runner overlays everything else.
   if (activeSession) {
     return (
       <ChallengeRunner
@@ -37,20 +36,22 @@ export default function ChallengesTab({ progress, onSessionComplete }: Props) {
 
   return (
     <div className="fm-page">
-      <div className="fm-page-header">
+      <div className="fm-page-header" style={{ textAlign: isHe ? 'right' : 'left' }}>
         <div className="fm-page-eyebrow">
-          {isHe ? 'אתגרים' : 'Challenges'}
+          {isHe ? 'ברוך הבא' : 'Welcome'}
         </div>
         <h1 className="fm-page-title">
-          {isHe ? 'למד דרך אתגרים' : 'Learn by challenge'}
+          {isHe ? 'מה לומדים היום?' : 'What will you learn today?'}
         </h1>
         <p className="fm-page-subtitle">
-          {isHe ? 'בחר קטגוריה, ענה על שאלות, ראה הסבר למה טעית. ככה לומדים תאוריה — צעד אחד בכל פעם.' : 'Pick a category, answer questions, see why you got it wrong. That is how theory sticks — one step at a time.'}
+          {isHe
+            ? 'בחר קטגוריה — כל קטגוריה היא סשן קצר של 10 שאלות עם הסבר על כל טעות.'
+            : 'Pick a category — each one is a short 10-question session with an explanation for every mistake.'}
         </p>
       </div>
 
       <CategoryGroup
-        title={isHe ? 'תאוריה בסיסית' : 'Core theory'}
+        title={isHe ? 'תאוריה' : 'Theory'}
         categories={phase1}
         progress={progress}
         onOpen={id => setPickerFor(id)}
@@ -75,7 +76,6 @@ export default function ChallengesTab({ progress, onSessionComplete }: Props) {
 
       {pickerFor && (
         <DifficultyPicker
-          progress={progress[pickerFor]}
           onPick={d => {
             setActiveSession({ id: pickerFor, difficulty: d })
             setPickerFor(null)
@@ -101,7 +101,7 @@ function CategoryGroup({
 
   return (
     <section style={{ marginBottom: 40 }}>
-      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 14 }}>
+      <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 14, textAlign: isHe ? 'right' : 'left' }}>
         {title}
       </div>
       <div className="fm-category-grid">

@@ -5,9 +5,9 @@ import { CATEGORIES, getCategory } from '../../lib/challenges/categories'
 import QuestionCard from '../challenges/QuestionCard'
 import FeedbackPanel from '../challenges/FeedbackPanel'
 
-// Endless, no-scoring practice mode: keeps generating questions from one or all
-// Phase-1 categories until the user exits. No XP, no stars — pure repetition.
-export default function FreePlayTab() {
+// Endless, no-scoring practice. Instant feedback on choice click — drill any category
+// (or all of them at once) at any difficulty for as long as you want.
+export default function PracticeTab() {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
@@ -22,11 +22,15 @@ export default function FreePlayTab() {
   const [streak, setStreak] = useState(0)
   const [seen, setSeen] = useState(0)
 
-  const nextQuestion = () => {
+  const pickNextCategory = () => {
     const pool = filter === 'all' ? available : available.filter(c => c.id === filter)
-    if (pool.length === 0) return
-    const cat = pool[Math.floor(Math.random() * pool.length)]
-    if (!cat.generator) return
+    if (pool.length === 0) return null
+    return pool[Math.floor(Math.random() * pool.length)]
+  }
+
+  const nextQuestion = () => {
+    const cat = pickNextCategory()
+    if (!cat || !cat.generator) return
     setCurrent(cat.generator(difficulty))
     setSelectedIndex(null)
     setRevealed(false)
@@ -36,18 +40,18 @@ export default function FreePlayTab() {
     setStreak(0)
     setSeen(0)
     setRunning(true)
-    const pool = filter === 'all' ? available : available.filter(c => c.id === filter)
-    if (pool.length === 0) return
-    const cat = pool[Math.floor(Math.random() * pool.length)]
-    if (cat.generator) setCurrent(cat.generator(difficulty))
+    const cat = pickNextCategory()
+    if (cat && cat.generator) setCurrent(cat.generator(difficulty))
   }
 
-  const handleSubmit = () => {
-    if (selectedIndex === null || !current) return
-    const correct = selectedIndex === current.correctIndex
+  // Instant feedback — no Check button.
+  const handleSelect = (chosenIndex: number) => {
+    if (revealed || !current) return
+    const correct = chosenIndex === current.correctIndex
+    setSelectedIndex(chosenIndex)
+    setRevealed(true)
     setStreak(s => correct ? s + 1 : 0)
     setSeen(s => s + 1)
-    setRevealed(true)
   }
 
   // ── Active state ─────────────────────────────────────────────────────────
@@ -81,33 +85,16 @@ export default function FreePlayTab() {
         <div className="fm-runner-body">
           <div className="fm-runner-content">
             <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 20, textAlign: 'center' }}>
-              {isHe ? 'תרגול חופשי' : 'Free play'} {cat && `· ${isHe ? cat.titleHe : cat.titleEn}`}
+              {isHe ? 'תרגול' : 'Practice'} {cat && `· ${isHe ? cat.titleHe : cat.titleEn}`}
             </div>
 
             <QuestionCard
               question={current}
               selectedIndex={selectedIndex}
               revealed={revealed}
-              onSelect={setSelectedIndex}
+              onSelect={handleSelect}
               isHe={isHe}
             />
-
-            {!revealed && (
-              <button
-                onClick={handleSubmit}
-                disabled={selectedIndex === null}
-                style={{
-                  marginTop: 28, width: '100%', padding: '14px 20px',
-                  borderRadius: 12,
-                  background: selectedIndex === null ? 'var(--fm-bg-input)' : 'var(--fm-primary)',
-                  color: selectedIndex === null ? 'var(--fm-text-muted)' : 'white',
-                  fontSize: 15, fontWeight: 700,
-                  cursor: selectedIndex === null ? 'not-allowed' : 'pointer',
-                }}
-              >
-                {isHe ? 'בדוק' : 'Check'}
-              </button>
-            )}
 
             {revealed && (
               <FeedbackPanel
@@ -127,19 +114,21 @@ export default function FreePlayTab() {
   // ── Landing ──────────────────────────────────────────────────────────────
   return (
     <div className="fm-page">
-      <div className="fm-page-header">
-        <div className="fm-page-eyebrow">{isHe ? 'תרגול חופשי' : 'Free play'}</div>
+      <div className="fm-page-header" style={{ textAlign: isHe ? 'right' : 'left' }}>
+        <div className="fm-page-eyebrow">{isHe ? 'תרגול' : 'Practice'}</div>
         <h1 className="fm-page-title">{isHe ? 'תרגל בלי לחץ' : 'Practice without pressure'}</h1>
         <p className="fm-page-subtitle">
-          {isHe ? 'שאלות ללא הגבלת זמן, בלי ניקוד, בלי כוכבים. בחר קטגוריה ורמה — תתרגל כמה שתרצה.' : 'No timer, no scoring, no stars. Pick a category and level — drill as long as you want.'}
+          {isHe
+            ? 'בלי טיימר, בלי ניקוד, בלי כוכבים. בחר קטגוריה ורמה — תתרגל כמה שתרצה.'
+            : 'No timer, no scoring, no stars. Pick a category and level — drill as long as you want.'}
         </p>
       </div>
 
       <div className="fm-card" style={{ padding: 24, marginBottom: 20 }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 12, textAlign: isHe ? 'right' : 'left' }}>
           {isHe ? 'קטגוריה' : 'Category'}
         </div>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: isHe ? 'flex-end' : 'flex-start' }}>
           <FilterChip active={filter === 'all'} onClick={() => setFilter('all')}>
             {isHe ? 'הכל' : 'All'}
           </FilterChip>
@@ -152,10 +141,10 @@ export default function FreePlayTab() {
       </div>
 
       <div className="fm-card" style={{ padding: 24, marginBottom: 24 }}>
-        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 12 }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 12, textAlign: isHe ? 'right' : 'left' }}>
           {isHe ? 'רמת קושי' : 'Difficulty'}
         </div>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: isHe ? 'flex-end' : 'flex-start' }}>
           {(['easy', 'medium', 'hard'] as Difficulty[]).map(d => (
             <FilterChip key={d} active={difficulty === d} onClick={() => setDifficulty(d)}>
               {diffLabel(d, isHe)}

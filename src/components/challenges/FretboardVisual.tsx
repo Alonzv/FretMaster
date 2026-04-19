@@ -1,91 +1,143 @@
-// Small fretboard SVG used by fretboard-recognition questions.
-// Renders 6 strings × (minFret..maxFret) and highlights a single string/fret position.
+// Guitar neck SVG — always rendered left-to-right regardless of UI language.
+// String 1 (high e, thin) on top, string 6 (low E, thick) on bottom — the standard
+// chord-diagram orientation viewed as if you're holding the guitar in front of you.
 
 interface Props {
   string: 1 | 2 | 3 | 4 | 5 | 6
   fret: number
-  // Show this many frets total; centered on the target fret where possible.
   frets?: number
-  isRTL?: boolean
+  isHe?: boolean
 }
 
-const STRING_THICKNESS = [5, 4.5, 4, 3, 2.5, 2] // string 6 (low E, thickest) → string 1
+const STRING_THICKNESS = [1.2, 1.6, 2.0, 2.6, 3.2, 3.8] // string 1 (top) → string 6 (bottom)
 
-export default function FretboardVisual({ string, fret, frets = 6, isRTL = false }: Props) {
-  const width = 320
-  const height = 140
-  const padX = 24
-  const padY = 18
+// Lowercase "e" for high E, uppercase "E" for low E so students can tell them apart.
+const STRING_LABELS_SHORT = ['', 'e', 'B', 'G', 'D', 'A', 'E']
+const STRING_LABELS_LONG_HE = ['', 'מי (גבוה)', 'סי', 'סול', 'רה', 'לה', 'מי (בס)']
+const STRING_LABELS_LONG_EN = ['', 'high e',     'B',   'G',   'D',  'A',  'low E']
 
-  // Pick a fret window so the highlighted fret is visible.
-  const minFret = Math.max(0, Math.min(12 - frets + 1, fret - 1))
-  const fretCount = frets
-  const fretWidth = (width - padX * 2) / fretCount
+export default function FretboardVisual({ string, fret, frets = 5, isHe = false }: Props) {
+  const width  = 360
+  const height = 180
+  const leftPad   = 48
+  const rightPad  = 16
+  const topPad    = 16
+  const bottomPad = 30
 
-  const stringGap = (height - padY * 2) / 5 // 5 gaps between 6 strings
+  // Frame the highlighted fret with breathing room on both sides.
+  const minFret = Math.max(0, fret <= 2 ? 0 : fret - 2)
+  const maxFret = minFret + frets
+  const displayedFrets = maxFret - minFret
+  const fretWidth = (width - leftPad - rightPad) / displayedFrets
+  const stringGap = (height - topPad - bottomPad) / 5
 
-  // Helper: SVG x position for a given fret number (center of that fret cell).
-  const xForFret = (f: number) => padX + (f - minFret - 0.5) * fretWidth
+  const yForString = (s: number) => topPad + (s - 1) * stringGap
+  // X for the CENTER of a fret cell (where fingers actually go).
+  const xForFret   = (f: number) => leftPad + (f - minFret - 0.5) * fretWidth
+  // X for the fret-line itself (the wire).
+  const xForFretLine = (f: number) => leftPad + (f - minFret) * fretWidth
 
-  // Strings are drawn with string 6 at the top for RTL guitarists' mental model isn't standard;
-  // we use the conventional diagram where string 1 (high E) is on top.
-  const yForString = (s: number) => padY + (s - 1) * stringGap
-
-  const highlightX = xForFret(fret === 0 ? minFret : fret)
+  const highlightX = fret === 0 ? leftPad - 20 : xForFret(fret)
   const highlightY = yForString(string)
 
-  // Inlay dots at frets 3, 5, 7, 9 (single) and 12 (double).
-  const inlays = [3, 5, 7, 9, 12]
-  const doubleInlay = 12
+  const inlaySingle = [3, 5, 7, 9]
+  const inlayDouble = 12
 
   return (
     <svg
       viewBox={`0 0 ${width} ${height}`}
-      style={{ width: '100%', maxWidth: 420, height: 'auto', transform: isRTL ? 'scaleX(-1)' : 'none' }}
+      style={{ width: '100%', maxWidth: 520, height: 'auto', display: 'block' }}
       role="img"
-      aria-label={`Fretboard highlight: string ${string}, fret ${fret}`}
+      aria-label={`Fretboard: string ${string}, fret ${fret}`}
     >
-      {/* Nut (left edge when fret 0 visible) */}
+      {/* Background neck surface */}
+      <rect
+        x={leftPad}
+        y={topPad - 4}
+        width={width - leftPad - rightPad}
+        height={height - topPad - bottomPad + 8}
+        rx={4}
+        fill="var(--fm-bg-input)"
+        opacity={0.35}
+      />
+
+      {/* Nut (thick bar on the left when fret 0 is visible) */}
       {minFret === 0 && (
-        <rect x={padX - 3} y={padY - 4} width={6} height={height - padY * 2 + 8} rx={2} fill="var(--fm-text)" opacity={0.85} />
+        <rect
+          x={leftPad - 4}
+          y={topPad - 4}
+          width={6}
+          height={height - topPad - bottomPad + 8}
+          rx={2}
+          fill="var(--fm-text)"
+          opacity={0.85}
+        />
       )}
 
       {/* Fret lines */}
-      {Array.from({ length: fretCount + 1 }, (_, i) => (
-        <line
-          key={`fret-${i}`}
-          x1={padX + i * fretWidth}
-          y1={padY - 4}
-          x2={padX + i * fretWidth}
-          y2={height - padY + 4}
-          stroke="var(--fm-border)"
-          strokeWidth={1.5}
-        />
-      ))}
+      {Array.from({ length: displayedFrets + 1 }, (_, i) => {
+        const f = minFret + i
+        return (
+          <line
+            key={`fret-${i}`}
+            x1={xForFretLine(f)}
+            y1={topPad - 4}
+            x2={xForFretLine(f)}
+            y2={height - bottomPad + 4}
+            stroke="var(--fm-border)"
+            strokeWidth={f === 0 ? 0 : 1.5}
+          />
+        )
+      })}
 
       {/* Inlay dots */}
-      {Array.from({ length: fretCount }, (_, i) => {
+      {Array.from({ length: displayedFrets }, (_, i) => {
         const f = minFret + i + 1
-        if (!inlays.includes(f)) return null
-        const cx = padX + (i + 0.5) * fretWidth
-        if (f === doubleInlay) {
+        if (!inlaySingle.includes(f) && f !== inlayDouble) return null
+        const cx = xForFret(f)
+        if (f === inlayDouble) {
           return (
-            <g key={`inlay-${f}`} fill="var(--fm-border)" opacity={0.55}>
-              <circle cx={cx} cy={padY + stringGap * 1.5} r={3.5} />
-              <circle cx={cx} cy={padY + stringGap * 3.5} r={3.5} />
+            <g key={`inlay-${f}`} fill="var(--fm-border)" opacity={0.7}>
+              <circle cx={cx} cy={topPad + stringGap * 1.5} r={3.5} />
+              <circle cx={cx} cy={topPad + stringGap * 3.5} r={3.5} />
             </g>
           )
         }
-        return <circle key={`inlay-${f}`} cx={cx} cy={height / 2} r={3.5} fill="var(--fm-border)" opacity={0.55} />
+        return (
+          <circle
+            key={`inlay-${f}`}
+            cx={cx}
+            cy={(topPad + height - bottomPad) / 2}
+            r={3.5}
+            fill="var(--fm-border)"
+            opacity={0.7}
+          />
+        )
       })}
+
+      {/* String labels on the LEFT, always (regardless of UI direction) */}
+      {[1, 2, 3, 4, 5, 6].map(s => (
+        <g key={`label-${s}`}>
+          <text
+            x={leftPad - 12}
+            y={yForString(s) + 4}
+            textAnchor="end"
+            fontSize={13}
+            fontWeight={700}
+            fill={s === string ? 'var(--fm-primary)' : 'var(--fm-text-muted)'}
+          >
+            {STRING_LABELS_SHORT[s]}
+          </text>
+        </g>
+      ))}
 
       {/* Strings */}
       {[1, 2, 3, 4, 5, 6].map(s => (
         <line
           key={`str-${s}`}
-          x1={padX}
+          x1={leftPad}
           y1={yForString(s)}
-          x2={width - padX}
+          x2={width - rightPad}
           y2={yForString(s)}
           stroke="var(--fm-text-muted)"
           strokeWidth={STRING_THICKNESS[s - 1]}
@@ -93,18 +145,18 @@ export default function FretboardVisual({ string, fret, frets = 6, isRTL = false
         />
       ))}
 
-      {/* Fret numbers */}
-      {Array.from({ length: fretCount }, (_, i) => {
+      {/* Fret numbers under the neck */}
+      {Array.from({ length: displayedFrets }, (_, i) => {
         const f = minFret + i + 1
         return (
           <text
             key={`num-${f}`}
-            x={padX + (i + 0.5) * fretWidth}
-            y={height - 2}
+            x={xForFret(f)}
+            y={height - 10}
             textAnchor="middle"
-            fontSize={9}
+            fontSize={10}
+            fontWeight={600}
             fill="var(--fm-text-muted)"
-            style={{ transform: isRTL ? 'scaleX(-1)' : 'none', transformOrigin: `${padX + (i + 0.5) * fretWidth}px ${height - 2}px` }}
           >
             {f}
           </text>
@@ -112,18 +164,41 @@ export default function FretboardVisual({ string, fret, frets = 6, isRTL = false
       })}
 
       {/* Highlight marker */}
-      <circle cx={highlightX} cy={highlightY} r={12} fill="var(--fm-primary)" />
-      <circle cx={highlightX} cy={highlightY} r={12} fill="none" stroke="var(--fm-primary)" strokeOpacity={0.25} strokeWidth={6} />
+      <circle cx={highlightX} cy={highlightY} r={14} fill="none" stroke="var(--fm-primary)" strokeOpacity={0.25} strokeWidth={8} />
+      <circle cx={highlightX} cy={highlightY} r={13} fill="var(--fm-primary)" />
       <text
         x={highlightX}
-        y={highlightY + 4}
+        y={highlightY}
         textAnchor="middle"
-        fontSize={11}
-        fontWeight={700}
+        dominantBaseline="central"
+        fontSize={13}
+        fontWeight={800}
         fill="white"
-        style={{ transform: isRTL ? 'scaleX(-1)' : 'none', transformOrigin: `${highlightX}px ${highlightY + 4}px` }}
       >
         ?
+      </text>
+
+      {/* Caption under marker showing which string the highlight is on */}
+      <text
+        x={leftPad - 12}
+        y={yForString(string) + 4}
+        textAnchor="end"
+        fontSize={13}
+        fontWeight={700}
+        fill="var(--fm-primary)"
+      >
+        {STRING_LABELS_SHORT[string]}
+      </text>
+
+      {/* Short legend at bottom-right */}
+      <text
+        x={width - rightPad}
+        y={height - 10}
+        textAnchor="end"
+        fontSize={9}
+        fill="var(--fm-text-dim)"
+      >
+        {isHe ? STRING_LABELS_LONG_HE[string] : STRING_LABELS_LONG_EN[string]}
       </text>
     </svg>
   )
