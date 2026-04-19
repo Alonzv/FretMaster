@@ -1,69 +1,167 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-const CHAPTERS = [
-  { id: 1, emoji: '🎸', titleHe: 'יסודות הגיטרה', titleEn: 'Guitar Fundamentals', status: 'active' },
-  { id: 2, emoji: '🎵', titleHe: 'אקורדים ראשונים', titleEn: 'First Chords', status: 'locked' },
-  { id: 3, emoji: '🎼', titleHe: 'ריתמוס ו-Strumming', titleEn: 'Rhythm & Strumming', status: 'locked' },
-  { id: 4, emoji: '🎹', titleHe: 'סולם Pentatonic', titleEn: 'Pentatonic Scale', status: 'locked' },
-  { id: 5, emoji: '🎺', titleHe: 'הרמוניה בסיסית', titleEn: 'Basic Harmony', status: 'locked' },
-]
+interface Lesson {
+  id: string
+  emoji: string
+  titleHe: string
+  titleEn: string
+  sections: Section[]
+}
 
-export default function LearningTab() {
-  const { t, i18n } = useTranslation()
+interface Section {
+  type: 'intro' | 'theory' | 'tip' | 'example' | 'ready'
+  titleHe?: string
+  titleEn?: string
+  bodyHe: string
+  bodyEn: string
+}
+
+const CURRENT_LESSON: Lesson = {
+  id: 'guitar-basics',
+  emoji: '🎸',
+  titleHe: 'יסודות הגיטרה',
+  titleEn: 'Guitar Fundamentals',
+  sections: [
+    {
+      type: 'intro',
+      bodyHe: 'ברוך הבא לשיעור הראשון! נתחיל מהבסיס — איך לאחוז בגיטרה, מה זה frets ו-strings, ואיך מפיקים צליל נקי.',
+      bodyEn: "Welcome to your first lesson! We'll start from the basics — how to hold the guitar, what frets and strings are, and how to produce a clean sound.",
+    },
+    {
+      type: 'theory',
+      titleHe: 'מבנה הגיטרה',
+      titleEn: 'Guitar Anatomy',
+      bodyHe: '🎸 הגיטרה מורכבת מ-6 מיתרים. מהעבה לדקיק: E-A-D-G-B-e\n\n📍 ה-Frets הם הפסים המתכתיים לאורך ה-Neck. כשאתה לוחץ בין שני frets — זה מייצר נוטה.',
+      bodyEn: '🎸 The guitar has 6 strings. From thickest to thinnest: E-A-D-G-B-e\n\n📍 Frets are the metal strips along the neck. When you press between two frets — that produces a note.',
+    },
+    {
+      type: 'tip',
+      titleHe: '💡 טיפ חשוב',
+      titleEn: '💡 Important Tip',
+      bodyHe: 'לחץ את האצבע קרוב ל-fret (מימינו), לא באמצע. זה מייצר צליל נקי יותר ודורש פחות כוח.',
+      bodyEn: 'Press your finger close to the fret (on its right side), not in the middle. This produces a cleaner sound and requires less force.',
+    },
+    {
+      type: 'example',
+      titleHe: '🎵 ננסה ביחד',
+      titleEn: '🎵 Let\'s Try Together',
+      bodyHe: '1. קח את הגיטרה ואחוז בה בצורה נוחה\n2. מצא את המיתר הדקיק ביותר (e)\n3. לחץ ב-fret הראשון עם האצבע המורה\n4. דפוק על המיתר עם הפיק או האגודל',
+      bodyEn: '1. Pick up the guitar and hold it comfortably\n2. Find the thinnest string (e)\n3. Press the 1st fret with your index finger\n4. Strike the string with a pick or your thumb',
+    },
+    {
+      type: 'ready',
+      bodyHe: 'מצוין! עכשיו שלמדת את הבסיס, אתה מוכן לאתגר הראשון שלך במסע שלך.',
+      bodyEn: "Great! Now that you've learned the basics, you're ready for your first challenge in Your Journey.",
+    },
+  ],
+}
+
+const SECTION_COLORS: Record<string, string> = {
+  intro: 'var(--fm-bg-card)',
+  theory: 'var(--fm-primary-bg)',
+  tip: 'rgba(98,150,119,0.15)',
+  example: 'rgba(232,115,106,0.08)',
+  ready: 'var(--fm-secondary-bg)',
+}
+
+const SECTION_BORDER: Record<string, string> = {
+  intro: 'var(--fm-border)',
+  theory: 'var(--fm-primary)',
+  tip: 'var(--fm-secondary)',
+  example: 'var(--fm-coral)',
+  ready: 'var(--fm-secondary)',
+}
+
+interface Props {
+  onGoToJourney: () => void
+}
+
+export default function LearningTab({ onGoToJourney }: Props) {
+  const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
+  const [expanded, setExpanded] = useState<string | null>('intro')
+  const lesson = CURRENT_LESSON
 
   return (
     <div style={{ padding: '20px 16px' }}>
-      <h1 style={{ fontSize: 22, fontWeight: 700, color: 'var(--fm-text)', marginBottom: 6 }}>
-        {t('learning.title')}
-      </h1>
-      <p style={{ color: 'var(--fm-text-muted)', fontSize: 14, marginBottom: 24 }}>
-        {isHe ? 'השלם אתגרים כדי לפתוח את הפרק הבא' : 'Complete challenges to unlock the next chapter'}
-      </p>
+      {/* Header */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+        <span style={{ fontSize: 32 }}>{lesson.emoji}</span>
+        <div>
+          <h1 style={{ fontSize: 20, fontWeight: 700, color: 'var(--fm-text)', margin: 0 }}>
+            {isHe ? lesson.titleHe : lesson.titleEn}
+          </h1>
+          <p style={{ color: 'var(--fm-text-muted)', fontSize: 13, margin: 0 }}>
+            {isHe ? 'שיעור 1' : 'Lesson 1'}
+          </p>
+        </div>
+      </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        {CHAPTERS.map((ch, i) => {
-          const isLocked = ch.status === 'locked'
-          const isActive = ch.status === 'active'
+      <div style={{ height: 1, background: 'var(--fm-border)', margin: '16px 0' }} />
+
+      {/* Sections */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {lesson.sections.map((sec, i) => {
+          const key = `${sec.type}-${i}`
+          const isOpen = expanded === key
+          const hasTitle = sec.titleHe || sec.titleEn
+          const isReady = sec.type === 'ready'
 
           return (
             <div
-              key={ch.id}
-              className={`fm-challenge${isLocked ? ' locked' : ''}`}
-              style={{ display: 'flex', alignItems: 'center', gap: 14 }}
-            >
-              {/* Number / status indicator */}
-              <div style={{
-                width: 48,
-                height: 48,
+              key={key}
+              style={{
                 borderRadius: 12,
-                background: isLocked ? 'var(--fm-bg-input)' : isActive ? 'var(--fm-primary-bg)' : 'var(--fm-secondary-bg)',
-                border: `2px solid ${isLocked ? 'var(--fm-border)' : isActive ? 'var(--fm-primary)' : 'var(--fm-secondary)'}`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 22,
-                flexShrink: 0,
-              }}>
-                {isLocked ? '🔒' : ch.emoji}
-              </div>
-
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 700, fontSize: 15, color: 'var(--fm-text)' }}>
-                  {t('learning.chapter')} {i + 1} — {isHe ? ch.titleHe : ch.titleEn}
-                </div>
-                <div style={{ fontSize: 12, color: 'var(--fm-text-muted)', marginTop: 2 }}>
-                  {isLocked ? t('learning.locked') : isActive ? '3 אתגרים' : t('learning.completed')}
-                </div>
-              </div>
-
-              {isActive && (
+                border: `1.5px solid ${SECTION_BORDER[sec.type]}`,
+                background: SECTION_COLORS[sec.type],
+                overflow: 'hidden',
+              }}
+            >
+              {hasTitle && (
                 <button
-                  className="fm-btn-primary"
-                  style={{ width: 'auto', padding: '8px 16px', fontSize: 13 }}
+                  onClick={() => setExpanded(isOpen ? null : key)}
+                  style={{
+                    width: '100%',
+                    padding: '14px 16px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    color: 'var(--fm-text)',
+                    fontWeight: 700,
+                    fontSize: 15,
+                    textAlign: isHe ? 'right' : 'left',
+                  }}
                 >
-                  {t('learning.startChallenge')}
+                  <span>{isHe ? sec.titleHe : sec.titleEn}</span>
+                  <span style={{ fontSize: 18, color: 'var(--fm-text-muted)', transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'none' }}>
+                    ›
+                  </span>
                 </button>
+              )}
+
+              {(!hasTitle || isOpen) && (
+                <div style={{ padding: hasTitle ? '0 16px 16px' : '16px' }}>
+                  <p style={{
+                    color: 'var(--fm-text)',
+                    fontSize: 15,
+                    lineHeight: 1.7,
+                    margin: 0,
+                    whiteSpace: 'pre-line',
+                  }}>
+                    {isHe ? sec.bodyHe : sec.bodyEn}
+                  </p>
+
+                  {isReady && (
+                    <button
+                      className="fm-btn-primary"
+                      style={{ marginTop: 16 }}
+                      onClick={onGoToJourney}
+                    >
+                      {isHe ? 'עבור למסע שלך ←' : 'Go to Your Journey →'}
+                    </button>
+                  )}
+                </div>
               )}
             </div>
           )

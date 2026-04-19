@@ -5,14 +5,15 @@ import { supabase } from './lib/supabase'
 import OnboardingFlow from './components/onboarding/OnboardingFlow'
 import type { OnboardingData } from './store/onboarding'
 import LearningTab from './components/tabs/LearningTab'
+import JourneyTab from './components/tabs/JourneyTab'
 import PracticeTab from './components/tabs/PracticeTab'
 import TheoryTab from './components/tabs/TheoryTab'
 import type { User } from '@supabase/supabase-js'
 
-type ActiveTab = 'learning' | 'practice' | 'theory'
+type ActiveTab = 'learning' | 'journey' | 'practice' | 'theory'
 
 export default function App() {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
   const [user, setUser] = useState<User | null>(null)
   const [checking, setChecking] = useState(true)
   const [activeTab, setActiveTab] = useState<ActiveTab>('learning')
@@ -49,15 +50,19 @@ export default function App() {
     return <OnboardingFlow onComplete={handleOnboardComplete} />
   }
 
+  const isHe = i18n.language === 'he'
+
   const TABS: { id: ActiveTab; emoji: string; label: string }[] = [
-    { id: 'learning', emoji: '📚', label: t('tabs.learning') },
-    { id: 'practice', emoji: '🎸', label: t('tabs.practice') },
-    { id: 'theory', emoji: '🎼', label: t('tabs.theory') },
+    { id: 'learning', emoji: '📖', label: isHe ? 'למידה' : 'Learn' },
+    { id: 'journey', emoji: '🗺️', label: isHe ? 'המסע' : 'Journey' },
+    { id: 'practice', emoji: '🎸', label: isHe ? 'אימון' : 'Practice' },
+    { id: 'theory', emoji: '🎼', label: isHe ? 'תאוריה' : 'Theory' },
   ]
 
   return (
     <div className="fm-app" dir={isRTL ? 'rtl' : 'ltr'}>
-      {activeTab === 'learning' && <LearningTab />}
+      {activeTab === 'learning' && <LearningTab onGoToJourney={() => setActiveTab('journey')} />}
+      {activeTab === 'journey' && <JourneyTab />}
       {activeTab === 'practice' && <PracticeTab />}
       {activeTab === 'theory' && <TheoryTab />}
 
@@ -68,7 +73,7 @@ export default function App() {
             className={`fm-tab${activeTab === tb.id ? ' active' : ''}`}
             onClick={() => setActiveTab(tb.id)}
           >
-            <span style={{ fontSize: 22 }}>{tb.emoji}</span>
+            <span style={{ fontSize: 20 }}>{tb.emoji}</span>
             <span>{tb.label}</span>
           </button>
         ))}
