@@ -1,19 +1,32 @@
 @import "tailwindcss";
 
+/* ────────────────────────────────────────────────────────────────────────
+   Base reset + system font stack (SF Pro on Apple devices fallback chain)
+   ──────────────────────────────────────────────────────────────────────── */
+
 *, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
 
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
   background-color: var(--fm-bg-deep);
   color: var(--fm-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+               'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-feature-settings: 'ss01', 'ss02';
+  text-rendering: optimizeLegibility;
 }
 
 button { border: none; background: none; cursor: pointer; font-family: inherit; }
+button:focus-visible { outline: 2px solid var(--fm-primary); outline-offset: 2px; border-radius: 6px; }
+
+/* ────────────────────────────────────────────────────────────────────────
+   Design tokens
+   ──────────────────────────────────────────────────────────────────────── */
 
 :root {
   --fm-bg-deep:         #F7F0DC;
@@ -57,21 +70,223 @@ body.dark {
   --fm-coral-faint:     rgba(232,115,106,0.12);
 }
 
-/* Main layout with sidebar */
+/* ────────────────────────────────────────────────────────────────────────
+   Layout: sidebar + main content
+   ──────────────────────────────────────────────────────────────────────── */
+
 .fm-layout {
   display: flex;
   min-height: 100vh;
+  position: relative;
 }
 
-.fm-sidebar-space { width: 220px; flex-shrink: 0; }
+.fm-sidebar {
+  position: fixed;
+}
+
+.fm-sidebar-space { width: 240px; flex-shrink: 0; }
 
 .fm-main {
   flex: 1;
   min-height: 100vh;
+  min-width: 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
-/* Onboarding */
+/* Mobile top bar — hidden on desktop */
+.fm-topbar { display: none; }
+
+@media (max-width: 900px) {
+  .fm-sidebar-space { display: none; }
+  .fm-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+  }
+  [dir='rtl'] .fm-sidebar { transform: translateX(100%); }
+  .fm-sidebar.fm-sidebar-open { transform: translateX(0); box-shadow: 0 0 40px rgba(0, 0, 0, 0.35); }
+
+  .fm-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--fm-bg-deep);
+    border-bottom: 1px solid var(--fm-border);
+    width: 100%;
+  }
+
+  .fm-layout { flex-direction: column; }
+  .fm-main { width: 100%; }
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Page scaffolding (used by every tab)
+   ──────────────────────────────────────────────────────────────────────── */
+
+.fm-page {
+  padding: 48px 48px 80px;
+  max-width: 860px;
+  margin: 0 auto;
+  animation: fm-fade-in 0.25s ease;
+}
+
+.fm-page-header { margin-bottom: 32px; }
+
+.fm-page-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fm-primary);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+}
+
+.fm-page-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--fm-text);
+  margin: 0;
+  letter-spacing: -0.7px;
+  line-height: 1.15;
+}
+
+.fm-page-subtitle {
+  font-size: 15px;
+  color: var(--fm-text-muted);
+  margin: 12px 0 0;
+  line-height: 1.55;
+  max-width: 640px;
+}
+
+@media (max-width: 640px) {
+  .fm-page { padding: 24px 20px 80px; }
+  .fm-page-title { font-size: 26px; }
+  .fm-page-subtitle { font-size: 14px; }
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Cards
+   ──────────────────────────────────────────────────────────────────────── */
+
+.fm-card {
+  background: var(--fm-bg-card);
+  border: 1px solid var(--fm-border);
+  border-radius: 16px;
+  padding: 18px;
+  transition: border-color 0.15s;
+}
+
+/* Category grid on the Challenges tab */
+.fm-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.fm-category-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--fm-bg-card);
+  border: 1px solid var(--fm-border);
+  transition: all 0.18s ease;
+  text-align: inherit;
+}
+.fm-category-card:not(:disabled):hover {
+  border-color: var(--fm-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.fm-category-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--fm-primary-bg);
+  color: var(--fm-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Challenge runner (question page)
+   ──────────────────────────────────────────────────────────────────────── */
+
+.fm-runner {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  animation: fm-fade-in 0.2s ease;
+}
+
+.fm-runner-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--fm-border);
+  background: var(--fm-bg-deep);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+}
+
+.fm-runner-progress {
+  flex: 1;
+  height: 6px;
+  background: var(--fm-bg-input);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.fm-runner-progress-bar {
+  height: 100%;
+  background: var(--fm-primary);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.fm-runner-body {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.fm-runner-content {
+  width: 100%;
+  max-width: 560px;
+}
+
+@media (max-width: 640px) {
+  .fm-runner-top   { padding: 12px 16px; gap: 12px; }
+  .fm-runner-body  { padding: 24px 16px; }
+}
+
+/* Multiple-choice grid: 2×2 on wide screens, single column on narrow */
+.fm-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 520px) {
+  .fm-choices { grid-template-columns: 1fr; }
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+   Onboarding (pre-auth)
+   ──────────────────────────────────────────────────────────────────────── */
+
 .fm-onboard {
   min-height: 100vh;
   display: flex;
@@ -81,18 +296,9 @@ body.dark {
   margin: 0 auto;
 }
 
-/* Cards */
-.fm-card {
-  background: var(--fm-bg-card);
-  border: 1px solid var(--fm-border);
-  border-radius: 14px;
-  padding: 16px;
-}
-
-/* Buttons */
 .fm-btn-primary {
   background: var(--fm-primary);
-  color: var(--fm-white);
+  color: white;
   border-radius: 12px;
   padding: 14px 24px;
   font-size: 16px;
@@ -111,7 +317,6 @@ body.dark {
 }
 .fm-btn-ghost:hover { color: var(--fm-text); }
 
-/* Chip / pill selectors */
 .fm-chip {
   display: inline-flex;
   align-items: center;
@@ -132,12 +337,9 @@ body.dark {
   font-weight: 600;
 }
 
-/* Progress dots (onboarding) */
 .fm-dots { display: flex; gap: 6px; justify-content: center; }
 .fm-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  width: 8px; height: 8px; border-radius: 50%;
   background: var(--fm-border);
   transition: background 0.2s, width 0.2s;
 }
@@ -147,7 +349,6 @@ body.dark {
   border-radius: 4px;
 }
 
-/* Input */
 .fm-input {
   background: var(--fm-bg-input);
   border: 1.5px solid var(--fm-border);
@@ -162,19 +363,6 @@ body.dark {
 }
 .fm-input:focus { border-color: var(--fm-primary); }
 
-/* Challenge card */
-.fm-challenge {
-  background: var(--fm-bg-card);
-  border: 1px solid var(--fm-border);
-  border-radius: 16px;
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-}
-.fm-challenge.locked { opacity: 0.5; pointer-events: none; }
-.fm-challenge.completed { border-color: var(--fm-secondary); }
-
-/* Level selector cards */
 .fm-level-card {
   background: var(--fm-bg-card);
   border: 2px solid var(--fm-border);
@@ -191,6 +379,15 @@ body.dark {
 }
 .fm-level-card:hover { border-color: var(--fm-primary-hov); }
 
-@media (min-width: 900px) {
-  .fm-app { box-shadow: 0 0 40px rgba(0,0,0,0.08); }
+/* ────────────────────────────────────────────────────────────────────────
+   Animations
+   ──────────────────────────────────────────────────────────────────────── */
+
+@keyframes fm-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }

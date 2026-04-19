@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import './i18n'
 import { supabase } from './lib/supabase'
 import OnboardingFlow from './components/onboarding/OnboardingFlow'
 import type { OnboardingData } from './store/onboarding'
-import LearningTab from './components/tabs/LearningTab'
-import JourneyTab from './components/tabs/JourneyTab'
-import PracticeTab from './components/tabs/PracticeTab'
-import TheoryTab from './components/tabs/TheoryTab'
+import ChallengesTab from './components/tabs/ChallengesTab'
+import DailyTab      from './components/tabs/DailyTab'
+import FreePlayTab   from './components/tabs/FreePlayTab'
+import StatsTab      from './components/tabs/StatsTab'
 import ProfileScreen from './components/ProfileScreen'
-import Sidebar from './components/Sidebar'
+import Sidebar       from './components/Sidebar'
 import type { User } from '@supabase/supabase-js'
+import type { CategoryId, CategoryProgress, SessionResult } from './lib/challenges/types'
+import { loadAllProgress, applySessionResult } from './lib/challenges/progress'
 
-type ActiveTab = 'learning' | 'journey' | 'practice' | 'theory'
+export type ActiveTab = 'challenges' | 'daily' | 'free' | 'stats'
 
 interface UserProfile {
   name: string
@@ -25,11 +27,13 @@ interface UserProfile {
 
 export default function App() {
   const { i18n } = useTranslation()
-  const [user, setUser] = useState<User | null>(null)
-  const [profile, setProfile] = useState<UserProfile | null>(null)
+  const [user, setUser]         = useState<User | null>(null)
+  const [profile, setProfile]   = useState<UserProfile | null>(null)
   const [checking, setChecking] = useState(true)
-  const [activeTab, setActiveTab] = useState<ActiveTab>('learning')
+  const [activeTab, setActiveTab] = useState<ActiveTab>('challenges')
   const [showProfile, setShowProfile] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false) // mobile
+  const [progress, setProgress] = useState<Record<CategoryId, CategoryProgress>>(() => loadAllProgress())
   const isRTL = i18n.language === 'he'
 
   useEffect(() => {
@@ -64,6 +68,10 @@ export default function App() {
     i18n.changeLanguage(data.lang)
   }
 
+  const handleSessionComplete = useCallback((result: SessionResult) => {
+    setProgress(prev => applySessionResult(prev, result))
+  }, [])
+
   if (checking) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: 'var(--fm-bg-deep)' }}>
@@ -80,24 +88,57 @@ export default function App() {
 
   return (
     <div className="fm-layout" dir={isRTL ? 'rtl' : 'ltr'}>
+      {/* Mobile top bar */}
+      <header className="fm-topbar">
+        <button
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Menu"
+          style={{
+            width: 40, height: 40, borderRadius: 10,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: 'transparent', cursor: 'pointer',
+            color: 'var(--fm-text)',
+          }}
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+          </svg>
+        </button>
+        <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--fm-primary)' }}>FretMaster</div>
+        <button
+          onClick={() => setShowProfile(true)}
+          aria-label="Profile"
+          style={{
+            width: 36, height: 36, borderRadius: '50%',
+            background: 'var(--fm-primary)', color: 'white',
+            fontSize: 13, fontWeight: 700,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          {profileName.slice(0, 1).toUpperCase()}
+        </button>
+      </header>
+
       <Sidebar
         activeTab={activeTab}
-        onTabChange={setActiveTab}
+        onTabChange={(t) => { setActiveTab(t); setSidebarOpen(false) }}
         onOpenProfile={() => setShowProfile(true)}
         user={user}
         profileName={profileName}
         isRTL={isRTL}
+        mobileOpen={sidebarOpen}
+        onMobileClose={() => setSidebarOpen(false)}
       />
 
-      {/* Sidebar spacer */}
+      {/* Sidebar spacer (desktop only) */}
       <div className="fm-sidebar-space" />
 
-      {/* Main content */}
       <main className="fm-main">
-        {activeTab === 'learning'  && <LearningTab onGoToJourney={() => setActiveTab('journey')} userLevel={profile?.level || 'beginner'} />}
-        {activeTab === 'journey'   && <JourneyTab />}
-        {activeTab === 'practice'  && <PracticeTab />}
-        {activeTab === 'theory'    && <TheoryTab />}
+        {activeTab === 'challenges' && <ChallengesTab progress={progress} onSessionComplete={handleSessionComplete} />}
+        {activeTab === 'daily'      && <DailyTab      progress={progress} onSessionComplete={handleSessionComplete} />}
+        {activeTab === 'free'       && <FreePlayTab />}
+        {activeTab === 'stats'      && <StatsTab      progress={progress} />}
       </main>
 
       {showProfile && user && (
