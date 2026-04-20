@@ -5,6 +5,13 @@ import { generateCircleOfFifthsQuestion }    from './generators/circleOfFifths'
 import { generateNoteReadingQuestion }       from './generators/noteReading'
 import { generateChordConstructionQuestion } from './generators/chordConstruction'
 import { generateScaleConstructionQuestion } from './generators/scaleConstruction'
+import { generateGenreBluesQuestion }        from './generators/genreBlues'
+import { generateGenreRockQuestion }         from './generators/genreRock'
+import { generateGenreJazzQuestion }         from './generators/genreJazz'
+import { generateGenreCountryQuestion }      from './generators/genreCountry'
+import { generateGenreMetalQuestion }        from './generators/genreMetal'
+import { generateGenreFolkQuestion }         from './generators/genreFolk'
+import { generateGenreFunkQuestion }         from './generators/genreFunk'
 
 // Every category registered in the app. Phase 2/3 entries have `generator: null` and
 // render as "coming soon" in the UI.
@@ -127,6 +134,78 @@ export const CATEGORIES: CategoryEntry[] = [
     phase: 2,
     icon: 'M4 11h16v2H4v-2zm0-6h16v2H4V5zm0 12h10v2H4v-2z',
     generator: null,
+  },
+
+  // ── Genre theory ────────────────────────────────────────────────────────
+  {
+    id: 'genre_blues',
+    titleHe: 'תיאוריית בלוז',
+    titleEn: 'Blues Theory',
+    descHe: '12-בר, דומיננט 7, טרנאראונד, תווי בלוז',
+    descEn: '12-bar form, dominant 7ths, turnarounds, blue notes',
+    phase: 1,
+    icon: 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3z',
+    generator: generateGenreBluesQuestion,
+  },
+  {
+    id: 'genre_rock',
+    titleHe: 'תיאוריית רוק',
+    titleEn: 'Rock Theory',
+    descHe: 'Power chords, פנטטוני, מצבים, Drop D',
+    descEn: 'Power chords, pentatonics, modes, Drop D',
+    phase: 1,
+    icon: 'M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z',
+    generator: generateGenreRockQuestion,
+  },
+  {
+    id: 'genre_jazz',
+    titleHe: 'תיאוריית ג׳אז',
+    titleEn: 'Jazz Theory',
+    descHe: 'II-V-I, סולמות, מצבים, extensions, bebop',
+    descEn: 'II-V-I, scales, modes, extensions, bebop',
+    phase: 1,
+    icon: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
+    generator: generateGenreJazzQuestion,
+  },
+  {
+    id: 'genre_country',
+    titleHe: 'תיאוריית קאנטרי',
+    titleEn: 'Country Theory',
+    descHe: 'Capo, double stops, chicken picking, pedal steel',
+    descEn: 'Capo, double stops, chicken picking, pedal steel',
+    phase: 1,
+    icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+    generator: generateGenreCountryQuestion,
+  },
+  {
+    id: 'genre_metal',
+    titleHe: 'תיאוריית מטאל',
+    titleEn: 'Metal Theory',
+    descHe: 'Tritone, harmonic minor, sweep picking, polyrhythm',
+    descEn: 'Tritone, harmonic minor, sweep picking, polyrhythm',
+    phase: 1,
+    icon: 'M7 4v16M17 4v16M3 8h4m10 0h4M3 16h4m10 0h4M7 12h10',
+    generator: generateGenreMetalQuestion,
+  },
+  {
+    id: 'genre_folk',
+    titleHe: 'תיאוריית פולק',
+    titleEn: 'Folk Theory',
+    descHe: 'DADGAD, fingerpicking, מצבים קלטיים, drone',
+    descEn: 'DADGAD, fingerpicking, Celtic modes, drone',
+    phase: 1,
+    icon: 'M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-9h10v2H7v-2z',
+    generator: generateGenreFolkQuestion,
+  },
+  {
+    id: 'genre_funk',
+    titleHe: 'תיאוריית פאנק',
+    titleEn: 'Funk Theory',
+    descHe: 'The One, scratch rhythm, syncopation, extended chords',
+    descEn: 'The One, scratch rhythm, syncopation, extended chords',
+    phase: 1,
+    icon: 'M9 3v12.55c-.59-.34-1.27-.55-2-.55C4.79 15 3 16.79 3 19s1.79 4 4 4 4-1.79 4-4V7h6V3H9z',
+    generator: generateGenreFunkQuestion,
   },
 
   // ── Phase 3: play-with-guitar (Pitchy.js) ───────────────────────────────
