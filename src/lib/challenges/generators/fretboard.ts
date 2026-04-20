@@ -8,11 +8,11 @@ import {
 } from '../musicTheory'
 
 // Easy   → outer strings (1, 2, 6) that students memorize first, frets 0–5.
-// Medium → all strings, frets 0–7.
+// Medium → inner strings (3, 4, 5) — G, D, A — frets 0–9. Completely different string set from easy.
 // Hard   → all strings, frets 0–12 (includes sharps / octave register).
 const DIFF_CONFIG: Record<Difficulty, { strings: number[]; minFret: number; maxFret: number }> = {
   easy:   { strings: [1, 2, 6],            minFret: 0, maxFret: 5  },
-  medium: { strings: [1, 2, 3, 4, 5, 6],   minFret: 0, maxFret: 7  },
+  medium: { strings: [3, 4, 5],            minFret: 0, maxFret: 9  },
   hard:   { strings: [1, 2, 3, 4, 5, 6],   minFret: 0, maxFret: 12 },
 }
 

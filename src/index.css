@@ -95,79 +95,79 @@ input { font-family: inherit; }
    ──────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* ── Surfaces ──────────────────────────────────────────────────────────── */
-  --fm-bg-deep:           #111118;   /* midnight ink — deep charcoal-indigo   */
-  --fm-bg-card:           #1A1A22;   /* card surface                          */
-  --fm-bg-elevated:       #222232;   /* raised / active surface               */
-  --fm-bg-input:          #1E1E2C;   /* input / interactive surfaces          */
-  --fm-border:            #2A2A40;   /* subtle border                         */
-  --fm-border-mid:        #353550;   /* mid-weight border                     */
+  /* ── Surfaces — warm analog dark ──────────────────────────────────────── */
+  --fm-bg-deep:           #0D0C09;   /* old leather near-black                */
+  --fm-bg-card:           #161310;   /* dark walnut card                      */
+  --fm-bg-elevated:       #1E1B15;   /* raised surface                        */
+  --fm-bg-input:          #191612;   /* input / interactive                   */
+  --fm-border:            #2A2520;   /* warm dark border                      */
+  --fm-border-mid:        #3A3228;   /* medium warm border                    */
 
-  /* ── Primary — burnt terracotta (retro-warm, mature) ──────────────────── */
-  --fm-primary:           #C84B2F;
-  --fm-primary-hov:       #D85535;
-  --fm-primary-bg:        rgba(200,75,47,0.12);
-  --fm-primary-soft:      rgba(200,75,47,0.22);
-  --fm-primary-glow:      rgba(200,75,47,0.38);
-  --fm-primary-shadow:    #8C3320;   /* tactile hard-press shadow             */
+  /* ── Primary — sage olive green (botanical, hipster, analog) ──────────── */
+  --fm-primary:           #8FAD79;
+  --fm-primary-hov:       #A0C088;
+  --fm-primary-bg:        rgba(143,173,121,0.12);
+  --fm-primary-soft:      rgba(143,173,121,0.22);
+  --fm-primary-glow:      rgba(143,173,121,0.35);
+  --fm-primary-shadow:    #577048;   /* deep forest — tactile press shadow    */
 
-  /* ── Success / Correct — muted sage green ─────────────────────────────── */
-  --fm-secondary:         #3EAB7C;
-  --fm-secondary-bg:      rgba(62,171,124,0.12);
-  --fm-secondary-faint:   rgba(62,171,124,0.06);
-  --fm-secondary-shadow:  #2A7A58;   /* tactile shadow for success buttons    */
+  /* ── Success / Correct — aged brass / warm amber ──────────────────────── */
+  --fm-secondary:         #C49A52;
+  --fm-secondary-bg:      rgba(196,154,82,0.12);
+  --fm-secondary-faint:   rgba(196,154,82,0.06);
+  --fm-secondary-shadow:  #8C6A28;
 
-  /* ── Error / Wrong — warm coral-red ───────────────────────────────────── */
-  --fm-coral:             #D44550;
-  --fm-coral-faint:       rgba(212,69,80,0.10);
-  --fm-coral-shadow:      #8C2030;
+  /* ── Error / Wrong — dusty terracotta-red ─────────────────────────────── */
+  --fm-coral:             #C46858;
+  --fm-coral-faint:       rgba(196,104,88,0.10);
+  --fm-coral-shadow:      #8C3828;
 
-  /* ── Streak / XP / Stars — warm amber ─────────────────────────────────── */
-  --fm-streak:            #D9922A;
-  --fm-streak-bg:         rgba(217,146,42,0.14);
-  --fm-xp:                #D9922A;
-  --fm-xp-bg:             rgba(217,146,42,0.12);
+  /* ── Streak / XP — same amber as secondary ────────────────────────────── */
+  --fm-streak:            #C49A52;
+  --fm-streak-bg:         rgba(196,154,82,0.14);
+  --fm-xp:                #C49A52;
+  --fm-xp-bg:             rgba(196,154,82,0.12);
 
-  /* ── Text ──────────────────────────────────────────────────────────────── */
-  --fm-text:              #EAE8F0;
-  --fm-text-muted:        rgba(234,232,240,0.48);
-  --fm-text-dim:          rgba(234,232,240,0.24);
+  /* ── Text — warm cream parchment ──────────────────────────────────────── */
+  --fm-text:              #EDE6D8;
+  --fm-text-muted:        rgba(237,230,216,0.48);
+  --fm-text-dim:          rgba(237,230,216,0.24);
   --fm-white:             #FFFFFF;
 }
 
-/* ── Light mode — warm off-white paper ─────────────────────────────────── */
+/* ── Light mode — warm parchment paper ─────────────────────────────────── */
 body.light {
-  --fm-bg-deep:           #F6F4F0;   /* warm off-white paper                  */
-  --fm-bg-card:           #FFFFFF;
-  --fm-bg-elevated:       #EDE9E4;
-  --fm-bg-input:          #E8E4DE;
-  --fm-border:            #D0CAC0;
-  --fm-border-mid:        #B8B0A4;
+  --fm-bg-deep:           #F0EAD6;   /* warm parchment                        */
+  --fm-bg-card:           #FAF5E8;   /* slightly off-white                    */
+  --fm-bg-elevated:       #E8E0C8;
+  --fm-bg-input:          #E0D8C0;
+  --fm-border:            #C8BCA0;
+  --fm-border-mid:        #B0A485;
 
-  --fm-primary:           #C84B2F;
-  --fm-primary-hov:       #D85535;
-  --fm-primary-bg:        rgba(200,75,47,0.09);
-  --fm-primary-soft:      rgba(200,75,47,0.18);
-  --fm-primary-glow:      rgba(200,75,47,0.28);
-  --fm-primary-shadow:    #8C3320;
+  --fm-primary:           #6A8A58;   /* deeper sage for contrast              */
+  --fm-primary-hov:       #7A9A68;
+  --fm-primary-bg:        rgba(106,138,88,0.10);
+  --fm-primary-soft:      rgba(106,138,88,0.20);
+  --fm-primary-glow:      rgba(106,138,88,0.30);
+  --fm-primary-shadow:    #3F5F30;
 
-  --fm-secondary:         #2E8A62;
-  --fm-secondary-bg:      rgba(46,138,98,0.10);
-  --fm-secondary-faint:   rgba(46,138,98,0.05);
-  --fm-secondary-shadow:  #1F6044;
+  --fm-secondary:         #A87A30;   /* deeper amber                          */
+  --fm-secondary-bg:      rgba(168,122,48,0.10);
+  --fm-secondary-faint:   rgba(168,122,48,0.05);
+  --fm-secondary-shadow:  #785418;
 
-  --fm-coral:             #C43040;
-  --fm-coral-faint:       rgba(196,48,64,0.08);
-  --fm-coral-shadow:      #8C1828;
+  --fm-coral:             #A84840;
+  --fm-coral-faint:       rgba(168,72,64,0.08);
+  --fm-coral-shadow:      #782028;
 
-  --fm-streak:            #BF7A18;
-  --fm-streak-bg:         rgba(191,122,24,0.10);
-  --fm-xp:                #BF7A18;
-  --fm-xp-bg:             rgba(191,122,24,0.10);
+  --fm-streak:            #A87A30;
+  --fm-streak-bg:         rgba(168,122,48,0.10);
+  --fm-xp:                #A87A30;
+  --fm-xp-bg:             rgba(168,122,48,0.10);
 
-  --fm-text:              #1C1A28;
-  --fm-text-muted:        rgba(28,26,40,0.50);
-  --fm-text-dim:          rgba(28,26,40,0.26);
+  --fm-text:              #1C1810;   /* warm very dark brown                  */
+  --fm-text-muted:        rgba(28,24,16,0.50);
+  --fm-text-dim:          rgba(28,24,16,0.26);
   --fm-white:             #FFFFFF;
 }
 

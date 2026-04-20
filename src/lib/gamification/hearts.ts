@@ -1,8 +1,8 @@
 // Hearts system — max 5, lose 1 per wrong answer, refill 1 per 30 minutes.
 // Stored in localStorage; no server sync needed (local-first).
 
-export const MAX_HEARTS = 5
-const REFILL_MS = 30 * 60 * 1000  // 30 minutes per heart
+export const MAX_HEARTS = 3
+const REFILL_MS = 20 * 60 * 1000  // 20 minutes per heart
 const KEY = 'fm_hearts_v1'
 
 export interface HeartsState {

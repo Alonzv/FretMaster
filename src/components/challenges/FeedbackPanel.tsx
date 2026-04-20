@@ -11,8 +11,35 @@ interface Props {
   isHe: boolean
 }
 
+// Randomised encouragement messages — picked once when the component mounts
+const CORRECT_HE = [
+  'מעולה!', 'כל הכבוד!', 'נכון בול!', 'אש!', 'ממש טוב!',
+  'בדיוק!', 'מהיר ומדויק!', 'גאה בך!', 'ידעת!', 'תותח!',
+]
+const CORRECT_EN = [
+  'Correct!', 'Nailed it!', 'Spot on!', 'Well done!', 'Perfect!',
+  'Exactly!', 'Great job!', 'You got it!', 'Brilliant!', 'Nice work!',
+]
+const WRONG_HE = [
+  'לא מדויק', 'כמעט!', 'נסה שוב', 'לא נורא', 'למד מזה',
+  'קרוב!', 'בפעם הבאה!', 'לא ידעת הפעם', 'זה קורה', 'תמשיך!',
+]
+const WRONG_EN = [
+  'Not quite', 'Almost!', 'Try again', 'Keep going', 'Learn from it',
+  'Close!', 'Next time!', 'Missed this one', 'Happens!', 'Keep it up!',
+]
+
+function pick<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)]
+}
+
 export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, isHe }: Props) {
   const correctChoice = question.choices[question.correctIndex]
+
+  // Pick encouragement phrase once (stable during component lifetime via useMemo equivalent — just compute on render, it's fast)
+  const label = wasCorrect
+    ? (isHe ? pick(CORRECT_HE) : pick(CORRECT_EN))
+    : (isHe ? pick(WRONG_HE)   : pick(WRONG_EN))
 
   return (
     <div
@@ -60,9 +87,7 @@ export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, is
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
             }}>
-              {wasCorrect
-                ? (isHe ? 'מעולה!' : 'Correct!')
-                : (isHe ? 'לא מדויק' : 'Not quite')}
+              {label}
             </div>
             {!wasCorrect && (
               <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 2 }}>

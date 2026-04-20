@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { CategoryId, CategoryProgress, Difficulty, Question, SessionResult } from '../../lib/challenges/types'
 import { CATEGORIES, getCategory } from '../../lib/challenges/categories'
@@ -10,8 +10,8 @@ import TheoryIntro from '../challenges/TheoryIntro'
 import { CATEGORY_THEORY } from '../../lib/challenges/categoryTheory'
 import type { AnsweredQuestion } from '../challenges/ChallengeRunner'
 import { scoreSession } from '../../lib/challenges/engine'
-import { getTreeWithStatus, findNextNode } from '../../lib/skilltree/treeEngine'
 import type { HeartsState } from '../../lib/gamification/hearts'
+import TactileButton from '../ui/TactileButton'
 
 interface Props {
   progress: Record<CategoryId, CategoryProgress>
@@ -20,76 +20,35 @@ interface Props {
   onWrongAnswer?: () => void
 }
 
-const DAILY_LENGTH   = 10
-const DAILY_DONE_KEY = 'fm_daily_done_v1'
-
-function getTodayStr() {
-  return new Date().toISOString().slice(0, 10)
-}
-function isDailyDone() {
-  return localStorage.getItem(DAILY_DONE_KEY) === getTodayStr()
-}
-function markDailyDone() {
-  localStorage.setItem(DAILY_DONE_KEY, getTodayStr())
-}
+const DAILY_LENGTH = 10
 
 export default function DailyTab({ progress, onSessionComplete, hearts, onWrongAnswer }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
-  // ── Focus node from skill tree ──────────────────────────────────────────
-  const focusNode = useMemo(() => {
-    const nodes = getTreeWithStatus()
-    return findNextNode(nodes) ?? null
-  }, [])
-
-  const [dailyDone, setDailyDone] = useState(() => isDailyDone())
-
-  // ── Session state ────────────────────────────────────────────────────────
-  const [mode, setMode]           = useState<'landing' | 'focus' | 'mixed'>('landing')
-  const [showTheory, setShowTheory] = useState(false)
-  const [started, setStarted]     = useState(false)
-  const [idx, setIdx]             = useState(0)
+  const [showTheory, setShowTheory]   = useState(false)
+  const [started, setStarted]         = useState(false)
+  const [idx, setIdx]                 = useState(0)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
-  const [revealed, setRevealed]   = useState(false)
-  const [answers, setAnswers]     = useState<AnsweredQuestion[]>([])
-  const [done, setDone]           = useState<SessionResult | null>(null)
-  const [questions, setQuestions] = useState<Question[]>([])
+  const [revealed, setRevealed]       = useState(false)
+  const [answers, setAnswers]         = useState<AnsweredQuestion[]>([])
+  const [done, setDone]               = useState<SessionResult | null>(null)
+  const [questions, setQuestions]     = useState<Question[]>([])
   const [justLostHeart, setJustLostHeart] = useState(false)
 
-  const startedAt = useMemo(() => Date.now(), [started])
+  const startedAt = useMemo(() => Date.now(), [started]) // eslint-disable-line
 
-  useEffect(() => {
-    if (!started) return
-    if (mode === 'mixed') {
-      setQuestions(buildMixedSession(progress, DAILY_LENGTH))
-    } else if (mode === 'focus' && focusNode) {
-      const cat = getCategory(focusNode.categoryId)
-      if (cat?.generator) {
-        const qs: Question[] = Array.from({ length: 10 }, () =>
-          cat.generator!(focusNode.difficulty)
-        )
-        setQuestions(qs)
-      }
-    }
-  }, [started])
+  const available = CATEGORIES.filter(c => c.phase === 1 && c.generator)
 
-  const handleStart = (m: 'focus' | 'mixed') => {
-    setMode(m)
-    if (m === 'mixed') {
-      setShowTheory(true)
-    } else {
-      setStarted(true)
-      setIdx(0)
-      setSelectedIndex(null)
-      setRevealed(false)
-      setAnswers([])
-      setDone(null)
-    }
+  const handleStart = () => {
+    // No hearts = can't play
+    if (hearts && hearts.current === 0) return
+    setShowTheory(true)
   }
 
   const handleTheoryDone = () => {
     setShowTheory(false)
+    setQuestions(buildMixedSession(progress, DAILY_LENGTH))
     setStarted(true)
     setIdx(0)
     setSelectedIndex(null)
@@ -118,12 +77,9 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
     if (!current) return
     if (isLast) {
       const bools  = answers.map(a => a.correct)
-      const catId  = mode === 'focus' && focusNode ? focusNode.categoryId : current.categoryId
-      const diff   = mode === 'focus' && focusNode ? focusNode.difficulty  : current.difficulty
-      const result = scoreSession(catId, diff, bools, startedAt)
+      const result = scoreSession(current.categoryId, current.difficulty, bools, startedAt)
       setDone(result)
       onSessionComplete(result)
-      if (mode === 'mixed') { markDailyDone(); setDailyDone(true) }
       return
     }
     setIdx(i => i + 1)
@@ -133,7 +89,6 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
 
   const exitSession = () => {
     setStarted(false)
-    setMode('landing')
     setDone(null)
     setShowTheory(false)
   }
@@ -146,8 +101,7 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
 
   // ── Summary ───────────────────────────────────────────────────────────────
   if (done) {
-    const catId = mode === 'focus' && focusNode ? focusNode.categoryId : done.categoryId
-    const cat   = getCategory(catId)
+    const cat = getCategory(done.categoryId)
     if (!cat) return null
     return (
       <SessionSummary
@@ -163,10 +117,6 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
   // ── Active session ────────────────────────────────────────────────────────
   if (started && current) {
     const progressPct = ((idx + (revealed ? 1 : 0)) / questions.length) * 100
-    const sessionLabel = mode === 'focus' && focusNode
-      ? (isHe ? focusNode.titleHe : focusNode.titleEn)
-      : (isHe ? 'האתגר היומי' : 'Daily Challenge')
-
     return (
       <div className="fm-runner">
         <div className="fm-runner-top">
@@ -200,8 +150,8 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
 
         <div className="fm-runner-body">
           <div className="fm-runner-content">
-            <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 20, textAlign: 'center' }}>
-              {sessionLabel}
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 20, textAlign: 'center', fontFamily: "'Oswald','DM Sans',sans-serif" }}>
+              {isHe ? 'האתגר היומי' : 'Daily Challenge'}
             </div>
 
             <QuestionCard
@@ -227,118 +177,68 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
     )
   }
 
-  // ── Landing ───────────────────────────────────────────────────────────────
-  const available = CATEGORIES.filter(c => c.phase === 1 && c.generator)
+  // ── Landing — centered, minimal ───────────────────────────────────────────
+  const noHearts = hearts && hearts.current === 0
 
   return (
-    <div className="fm-page" style={{ maxWidth: 520, paddingTop: 32 }}>
-
-      <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 8, textAlign: 'center' }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      minHeight: '80vh',
+      textAlign: 'center',
+      padding: '0 24px',
+    }}>
+      <div style={{
+        fontFamily: "'Oswald','DM Sans',sans-serif",
+        fontSize: 11, fontWeight: 600,
+        color: 'var(--fm-primary)',
+        textTransform: 'uppercase', letterSpacing: '0.2em',
+        marginBottom: 12,
+      }}>
         {isHe ? 'האתגר היומי' : 'Daily Challenge'}
       </div>
 
-      {/* ── Today's Focus (next skill tree node) ─── */}
-      {focusNode && (
+      <h1 style={{ fontSize: 32, fontWeight: 800, color: 'var(--fm-text)', margin: '0 0 12px', letterSpacing: '-0.5px' }}>
+        {isHe ? 'מוכן לאתגר?' : "Ready for today's challenge?"}
+      </h1>
+
+      <p style={{ fontSize: 15, color: 'var(--fm-text-muted)', lineHeight: 1.65, margin: '0 0 40px', maxWidth: 400 }}>
+        {isHe
+          ? `${DAILY_LENGTH} שאלות מעורבות מכל הקטגוריות, מותאמות לנקודות החולשה שלך. בערך 5 דקות.`
+          : `${DAILY_LENGTH} mixed questions across every category, weighted toward your weak spots. About 5 minutes.`}
+      </p>
+
+      {noHearts ? (
         <div style={{
-          background: 'var(--fm-bg-card)',
-          border: '2px solid var(--fm-primary)',
-          borderRadius: 16, padding: '20px 20px 18px',
-          marginBottom: 20,
+          padding: '18px 24px', borderRadius: 14,
+          background: 'var(--fm-bg-card)', border: '1px solid var(--fm-border)',
+          fontSize: 14, color: 'var(--fm-text-muted)', maxWidth: 340,
+          boxShadow: '0 3px 0 0 var(--fm-border)',
         }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
-            {isHe ? '🎯 הצעד הבא שלך' : '🎯 Your next step'}
-          </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 14 }}>
-            <div style={{
-              width: 48, height: 48, borderRadius: '50%', flexShrink: 0,
-              backgroundColor: 'var(--fm-primary)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
-                <path d={focusNode.icon} />
-              </svg>
-            </div>
-            <div>
-              <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--fm-text)' }}>
-                {isHe ? focusNode.titleHe : focusNode.titleEn}
-              </div>
-              <div style={{ fontSize: 13, color: 'var(--fm-text-muted)' }}>
-                {isHe ? focusNode.descHe : focusNode.descEn}
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={() => handleStart('focus')}
-            style={{
-              width: '100%', padding: '12px 0', borderRadius: 10,
-              background: 'var(--fm-primary)', color: 'white',
-              fontSize: 14, fontWeight: 700, cursor: 'pointer', border: 'none',
-            }}
-          >
-            {isHe ? 'התחל אתגר זה' : 'Start this challenge'}
-          </button>
+          {isHe ? '❤️ אזלו הלבבות. המתן לטעינה מחדש כדי להמשיך.' : '❤️ Out of hearts. Wait for a refill to continue.'}
+        </div>
+      ) : (
+        <div style={{ width: '100%', maxWidth: 320 }}>
+          <TactileButton fullWidth onClick={handleStart} disabled={available.length === 0}>
+            {isHe ? 'התחל' : 'Start'}
+          </TactileButton>
         </div>
       )}
-
-      {/* ── Mixed daily ─── */}
-      <div style={{
-        background: 'var(--fm-bg-card)',
-        border: `1px solid ${dailyDone ? 'var(--fm-primary)' : 'var(--fm-border)'}`,
-        borderRadius: 16, padding: '20px 20px 18px',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-          <div style={{ fontSize: 16, fontWeight: 800, color: 'var(--fm-text)' }}>
-            {isHe ? 'תרגול מעורב' : 'Mixed Practice'}
-          </div>
-          {dailyDone && (
-            <div style={{
-              fontSize: 11, fontWeight: 700, color: 'var(--fm-primary)',
-              background: 'rgba(88,204,2,0.1)', border: '1px solid var(--fm-primary)',
-              borderRadius: 20, padding: '2px 10px',
-            }}>
-              {isHe ? '✓ הושלם היום' : '✓ Done today'}
-            </div>
-          )}
-        </div>
-        <p style={{ fontSize: 13, color: 'var(--fm-text-muted)', lineHeight: 1.5, marginBottom: 16 }}>
-          {isHe
-            ? `${DAILY_LENGTH} שאלות מכל הקטגוריות, מותאמות לנקודות החולשה שלך`
-            : `${DAILY_LENGTH} questions across all categories, weighted toward your weak spots`}
-        </p>
-        <button
-          onClick={() => handleStart('mixed')}
-          disabled={available.length === 0}
-          style={{
-            width: '100%', padding: '12px 0', borderRadius: 10,
-            background: dailyDone ? 'var(--fm-bg-deep)' : 'var(--fm-bg-deep)',
-            color: dailyDone ? 'var(--fm-primary)' : 'var(--fm-text)',
-            border: `1px solid ${dailyDone ? 'var(--fm-primary)' : 'var(--fm-border)'}`,
-            fontSize: 14, fontWeight: 700,
-            cursor: available.length === 0 ? 'not-allowed' : 'pointer',
-            opacity: available.length === 0 ? 0.5 : 1,
-          }}
-        >
-          {dailyDone
-            ? (isHe ? 'שחק שוב' : 'Play again')
-            : (isHe ? 'התחל' : 'Start')}
-        </button>
-      </div>
     </div>
   )
 }
 
-// Weighted mix: categories with lower best-accuracy get more questions.
 function buildMixedSession(progress: Record<CategoryId, CategoryProgress>, length: number): Question[] {
   const available = CATEGORIES.filter(c => c.phase === 1 && c.generator)
   if (available.length === 0) return []
-
-  const weights    = available.map(c => 1 + (1 - (progress[c.id]?.bestAccuracy ?? 0)))
+  const weights     = available.map(c => 1 + (1 - (progress[c.id]?.bestAccuracy ?? 0)))
   const totalWeight = weights.reduce((s, w) => s + w, 0)
   const diffs: Difficulty[] = ['easy', 'medium', 'hard']
-
   const questions: Question[] = []
   for (let i = 0; i < length; i++) {
-    let r    = Math.random() * totalWeight
+    let r = Math.random() * totalWeight
     let pick = available[0]
     for (let j = 0; j < available.length; j++) {
       r -= weights[j]

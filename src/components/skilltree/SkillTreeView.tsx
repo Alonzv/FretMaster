@@ -96,7 +96,7 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
 
   // ── Node detail bottom sheet ────────────────────────────────────────────
   if (selected) {
-    return <NodeSheet node={selected} isHe={isHe} onStart={() => setRunning(true)} onClose={() => setSelected(null)} />
+    return <NodeSheet node={selected} isHe={isHe} hearts={hearts} onStart={() => setRunning(true)} onClose={() => setSelected(null)} />
   }
 
   const suggestedNext = findNextNode(nodes)
@@ -500,14 +500,16 @@ function StreakChip({ count, isHe }: { count: number; isHe: boolean }) {
 
 // ── Node detail bottom sheet ──────────────────────────────────────────────────
 
-function NodeSheet({ node, isHe, onStart, onClose }: {
+function NodeSheet({ node, isHe, hearts, onStart, onClose }: {
   node: NodeWithStatus
   isHe: boolean
+  hearts?: HeartsState
   onStart: () => void
   onClose: () => void
 }) {
-  const locked = node.status === 'locked'
-  const done   = node.status === 'complete' || node.status === 'mastered'
+  const locked    = node.status === 'locked'
+  const done      = node.status === 'complete' || node.status === 'mastered'
+  const noHearts  = hearts && hearts.current === 0
 
   const diffLabel = (d: Difficulty) => {
     if (d === 'easy')   return isHe ? 'קל' : 'Easy'
@@ -594,6 +596,15 @@ function NodeSheet({ node, isHe, onStart, onClose }: {
             borderBottom: '3px solid var(--fm-border)',
           }}>
             {isHe ? '🔒 השלם את הצמתים הקודמים כדי לפתוח' : '🔒 Complete previous nodes to unlock'}
+          </div>
+        ) : noHearts ? (
+          <div style={{
+            padding: '13px 16px', borderRadius: 10,
+            background: 'var(--fm-bg-input)', border: '1px solid var(--fm-coral)',
+            fontSize: 13, color: 'var(--fm-text-muted)', textAlign: 'center',
+            borderBottom: '3px solid var(--fm-coral-shadow)',
+          }}>
+            {isHe ? '❤️ אזלו הלבבות — המתן לטעינה מחדש כדי להמשיך' : '❤️ No hearts left — wait for a refill to continue'}
           </div>
         ) : (
           <TactileButton

@@ -4,6 +4,7 @@ import type { CategoryId, Difficulty, Question } from '../../lib/challenges/type
 import { CATEGORIES, getCategory } from '../../lib/challenges/categories'
 import QuestionCard from '../challenges/QuestionCard'
 import FeedbackPanel from '../challenges/FeedbackPanel'
+import TactileButton from '../ui/TactileButton'
 
 // ── Persist practice session state so user can resume ────────────────────────
 const RESUME_KEY = 'fm_practice_resume_v1'
@@ -35,13 +36,21 @@ function clearResume() {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Endless, no-scoring practice. Instant feedback on choice click — drill any category
-// (or all of them at once) at any difficulty for as long as you want.
 export default function PracticeTab() {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
-  const available = useMemo(() => CATEGORIES.filter(c => c.phase === 1 && c.generator), [])
+  // Core theory categories (non-genre)
+  const available = useMemo(
+    () => CATEGORIES.filter(c => c.phase === 1 && c.generator && !c.id.startsWith('genre_')),
+    [],
+  )
+
+  // Genre categories
+  const genreCategories = useMemo(
+    () => CATEGORIES.filter(c => c.id.startsWith('genre_') && c.generator),
+    [],
+  )
 
   const [filter, setFilter]     = useState<CategoryId | 'all'>('all')
   const [difficulty, setDifficulty] = useState<Difficulty>('easy')
@@ -52,45 +61,61 @@ export default function PracticeTab() {
   const [streak, setStreak]     = useState(0)
   const [seen, setSeen]         = useState(0)
 
-  // Resume prompt: null = no resume available, 'show' = showing prompt
   const [resumeData, setResumeData] = useState<ResumeState | null>(null)
   const [showResumePrompt, setShowResumePrompt] = useState(false)
 
-  // On mount, check for a saved session
   useEffect(() => {
     const saved = loadResume()
-    if (saved && saved.seen > 0) {
-      setResumeData(saved)
-    }
+    if (saved && saved.seen > 0) setResumeData(saved)
   }, [])
 
-  const pickNextCategory = (f: CategoryId | 'all' = filter) => {
-    const pool = f === 'all' ? available : available.filter(c => c.id === f)
-    if (pool.length === 0) return null
-    return pool[Math.floor(Math.random() * pool.length)]
+  const pickNextCategory = (f: CategoryId | 'all' = filter, pool = available) => {
+    const cats = f === 'all' ? pool : pool.filter(c => c.id === f)
+    if (cats.length === 0) return null
+    return cats[Math.floor(Math.random() * cats.length)]
   }
 
-  const nextQuestion = () => {
-    const cat = pickNextCategory()
+  const nextQuestion = (f: CategoryId | 'all' = filter, d: Difficulty = difficulty, pool = available) => {
+    const cat = pickNextCategory(f, pool)
     if (!cat || !cat.generator) return
-    setCurrent(cat.generator(difficulty))
+    setCurrent(cat.generator(d))
     setSelectedIndex(null)
     setRevealed(false)
   }
 
-  const startFresh = () => {
+  const startFresh = (
+    f: CategoryId | 'all' = filter,
+    d: Difficulty = difficulty,
+    pool = available,
+  ) => {
     clearResume()
     setResumeData(null)
     setShowResumePrompt(false)
     setStreak(0)
     setSeen(0)
+    setFilter(f)
+    setDifficulty(d)
     setRunning(true)
-    const cat = pickNextCategory()
-    if (cat && cat.generator) setCurrent(cat.generator(difficulty))
+    const cat = pickNextCategory(f, pool)
+    if (cat && cat.generator) setCurrent(cat.generator(d))
+  }
+
+  /** Launch a genre session directly (bypasses difficulty selection) */
+  const startGenre = (categoryId: CategoryId, d: Difficulty = 'easy') => {
+    clearResume()
+    setResumeData(null)
+    setShowResumePrompt(false)
+    setStreak(0)
+    setSeen(0)
+    setFilter(categoryId)
+    setDifficulty(d)
+    setRunning(true)
+    const genreCats = CATEGORIES.filter(c => c.id === categoryId && c.generator)
+    const cat = genreCats[0]
+    if (cat && cat.generator) setCurrent(cat.generator(d))
   }
 
   const handleStart = () => {
-    // If there's saved data for the current filter+difficulty, show resume prompt
     if (resumeData && resumeData.filter === filter && resumeData.difficulty === difficulty) {
       setShowResumePrompt(true)
       return
@@ -106,11 +131,9 @@ export default function PracticeTab() {
     setSeen(resumeData.seen)
     setShowResumePrompt(false)
     setRunning(true)
-    const cat = pickNextCategory(resumeData.filter)
-    if (cat && cat.generator) setCurrent(cat.generator(resumeData.difficulty))
+    nextQuestion(resumeData.filter, resumeData.difficulty, CATEGORIES.filter(c => c.phase === 1 && c.generator))
   }
 
-  // Instant feedback — no Check button.
   const handleSelect = (chosenIndex: number) => {
     if (revealed || !current) return
     const correct = chosenIndex === current.correctIndex
@@ -120,24 +143,20 @@ export default function PracticeTab() {
     const newSeen   = seen + 1
     setStreak(newStreak)
     setSeen(newSeen)
-    // Persist for resume
     saveResume({ filter, difficulty, streak: newStreak, seen: newSeen })
   }
 
   const handleClose = () => {
     setRunning(false)
     setCurrent(null)
-    // Keep resume data so user can come back
   }
 
   // ── Resume prompt modal ───────────────────────────────────────────────────
   if (showResumePrompt && resumeData) {
+    const catEntry = CATEGORIES.find(a => a.id === resumeData.filter)
     const catLabel = resumeData.filter === 'all'
       ? (isHe ? 'הכל' : 'All categories')
-      : (() => {
-          const c = available.find(a => a.id === resumeData.filter)
-          return c ? (isHe ? c.titleHe : c.titleEn) : resumeData.filter
-        })()
+      : catEntry ? (isHe ? catEntry.titleHe : catEntry.titleEn) : resumeData.filter
 
     return (
       <div className="fm-page" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh', textAlign: 'center' }}>
@@ -156,27 +175,12 @@ export default function PracticeTab() {
             : `${resumeData.seen} questions answered · Streak: ${resumeData.streak}`}
         </p>
         <div style={{ display: 'flex', gap: 12, flexDirection: 'column', width: '100%', maxWidth: 320 }}>
-          <button
-            onClick={handleResume}
-            style={{
-              padding: '14px 20px', borderRadius: 12,
-              background: 'var(--fm-primary)', color: 'white',
-              fontSize: 15, fontWeight: 700, cursor: 'pointer',
-            }}
-          >
+          <TactileButton variant="primary" fullWidth onClick={handleResume}>
             {isHe ? 'המשך מאיפה שעצרתי' : 'Resume where I left off'}
-          </button>
-          <button
-            onClick={startFresh}
-            style={{
-              padding: '14px 20px', borderRadius: 12,
-              background: 'var(--fm-bg-card)', color: 'var(--fm-text)',
-              border: '1px solid var(--fm-border)',
-              fontSize: 15, fontWeight: 600, cursor: 'pointer',
-            }}
-          >
+          </TactileButton>
+          <TactileButton variant="ghost" fullWidth onClick={() => startFresh()}>
             {isHe ? 'התחל מהתחלה' : 'Start fresh'}
-          </button>
+          </TactileButton>
         </div>
       </div>
     )
@@ -212,7 +216,7 @@ export default function PracticeTab() {
 
         <div className="fm-runner-body">
           <div className="fm-runner-content">
-            <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 20, textAlign: 'center' }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 20, textAlign: 'center', fontFamily: "'Oswald','DM Sans',sans-serif" }}>
               {isHe ? 'תרגול חופשי' : 'Free Practice'} {cat && `· ${isHe ? cat.titleHe : cat.titleEn}`}
             </div>
 
@@ -228,7 +232,7 @@ export default function PracticeTab() {
               <FeedbackPanel
                 question={current}
                 wasCorrect={selectedIndex === current.correctIndex}
-                onNext={nextQuestion}
+                onNext={() => nextQuestion(filter, difficulty, CATEGORIES.filter(c => c.phase === 1 && c.generator))}
                 isLast={false}
                 isHe={isHe}
               />
@@ -252,7 +256,7 @@ export default function PracticeTab() {
         </p>
       </div>
 
-      {/* Resume banner when there's a saved session for a different filter/difficulty */}
+      {/* Resume banner */}
       {resumeData && resumeData.seen > 0 && !(resumeData.filter === filter && resumeData.difficulty === difficulty) && (
         <div style={{
           padding: '12px 16px', borderRadius: 12, marginBottom: 16,
@@ -271,8 +275,7 @@ export default function PracticeTab() {
             }}
             style={{
               padding: '6px 12px', borderRadius: 8, fontSize: 12, fontWeight: 700,
-              background: 'var(--fm-primary)', color: 'white', cursor: 'pointer',
-              flexShrink: 0,
+              background: 'var(--fm-primary)', color: 'white', cursor: 'pointer', flexShrink: 0,
             }}
           >
             {isHe ? 'טען' : 'Load'}
@@ -280,7 +283,24 @@ export default function PracticeTab() {
         </div>
       )}
 
-      <div className="fm-card" style={{ padding: 24, marginBottom: 20 }}>
+      {/* ── Core Theory ─────────────────────────────────────────────────── */}
+      <div style={{
+        fontFamily: "'Oswald','DM Sans',sans-serif",
+        fontSize: 11, fontWeight: 600,
+        color: 'var(--fm-text-muted)',
+        textTransform: 'uppercase', letterSpacing: '0.15em',
+        background: 'var(--fm-bg-card)',
+        border: '1px solid var(--fm-border-mid)',
+        borderRadius: 6,
+        padding: '5px 14px',
+        boxShadow: '0 2px 0 0 var(--fm-border)',
+        display: 'inline-block',
+        marginBottom: 16,
+      }}>
+        {isHe ? 'תיאוריה בסיסית' : 'Core Theory'}
+      </div>
+
+      <div className="fm-card" style={{ padding: 24, marginBottom: 16 }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 12, textAlign: isHe ? 'right' : 'left' }}>
           {isHe ? 'קטגוריה' : 'Category'}
         </div>
@@ -296,7 +316,7 @@ export default function PracticeTab() {
         </div>
       </div>
 
-      <div className="fm-card" style={{ padding: 24, marginBottom: 24 }}>
+      <div className="fm-card" style={{ padding: 24, marginBottom: 20 }}>
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 12, textAlign: isHe ? 'right' : 'left' }}>
           {isHe ? 'רמת קושי' : 'Difficulty'}
         </div>
@@ -309,24 +329,138 @@ export default function PracticeTab() {
         </div>
       </div>
 
-      <button
-        onClick={handleStart}
-        style={{
-          width: '100%', padding: '14px 20px',
-          borderRadius: 12, background: 'var(--fm-primary)', color: 'white',
-          fontSize: 15, fontWeight: 700, cursor: 'pointer',
-          transition: 'filter 0.15s',
-        }}
-        onMouseEnter={e => (e.currentTarget.style.filter = 'brightness(1.1)')}
-        onMouseLeave={e => (e.currentTarget.style.filter = '')}
-      >
+      <TactileButton variant="primary" fullWidth onClick={handleStart}>
         {resumeData && resumeData.filter === filter && resumeData.difficulty === difficulty
           ? (isHe ? '▶ המשך / התחל' : '▶ Continue / Start')
           : (isHe ? 'התחל תרגול' : 'Start practice')}
-      </button>
+      </TactileButton>
+
+      {/* ── Genre Theory Section ─────────────────────────────────────────── */}
+      <div style={{ marginTop: 40 }}>
+        <div style={{
+          fontFamily: "'Oswald','DM Sans',sans-serif",
+          fontSize: 11, fontWeight: 600,
+          color: 'var(--fm-text-muted)',
+          textTransform: 'uppercase', letterSpacing: '0.15em',
+          background: 'var(--fm-bg-card)',
+          border: '1px solid var(--fm-border-mid)',
+          borderRadius: 6,
+          padding: '5px 14px',
+          boxShadow: '0 2px 0 0 var(--fm-border)',
+          display: 'inline-block',
+          marginBottom: 16,
+        }}>
+          {isHe ? 'תיאוריית ז׳אנר' : 'Genre Theory'}
+        </div>
+        <p style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginBottom: 16, lineHeight: 1.6, textAlign: isHe ? 'right' : 'left' }}>
+          {isHe
+            ? 'תרגל תיאוריה ספציפית לז׳אנר — בחר ז׳אנר ורמת קושי ותתחיל.'
+            : 'Drill genre-specific theory — choose a genre and difficulty level to start.'}
+        </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12 }}>
+          {genreCategories.map(cat => (
+            <GenreCard
+              key={cat.id}
+              titleHe={cat.titleHe}
+              titleEn={cat.titleEn}
+              descHe={cat.descHe}
+              descEn={cat.descEn}
+              icon={cat.icon}
+              isHe={isHe}
+              onStart={(d) => startGenre(cat.id as CategoryId, d)}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
+
+// ── Genre card ────────────────────────────────────────────────────────────────
+
+function GenreCard({
+  titleHe, titleEn, descHe, descEn, icon, isHe, onStart,
+}: {
+  titleHe: string; titleEn: string; descHe: string; descEn: string
+  icon: string; isHe: boolean
+  onStart: (d: Difficulty) => void
+}) {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <div
+      className="fm-card"
+      style={{
+        padding: 16,
+        cursor: 'pointer',
+        transition: 'border-color 0.15s',
+        direction: isHe ? 'rtl' : 'ltr',
+        textAlign: isHe ? 'right' : 'left',
+      }}
+      onClick={() => setExpanded(e => !e)}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+        <div style={{
+          width: 34, height: 34, borderRadius: 8, flexShrink: 0,
+          background: 'var(--fm-primary-bg)', border: '1px solid var(--fm-primary)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--fm-primary)">
+            <path d={icon} />
+          </svg>
+        </div>
+        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text)', lineHeight: 1.2 }}>
+          {isHe ? titleHe : titleEn}
+        </div>
+      </div>
+
+      {!expanded && (
+        <div style={{ fontSize: 12, color: 'var(--fm-text-muted)', lineHeight: 1.5 }}>
+          {isHe ? descHe : descEn}
+        </div>
+      )}
+
+      {expanded && (
+        <div
+          style={{ animation: 'fm-fade-in 0.15s ease' }}
+          onClick={e => e.stopPropagation()}
+        >
+          <div style={{ fontSize: 12, color: 'var(--fm-text-muted)', marginBottom: 12, lineHeight: 1.5 }}>
+            {isHe ? descHe : descEn}
+          </div>
+          <div style={{ display: 'flex', gap: 6 }}>
+            {(['easy', 'medium', 'hard'] as Difficulty[]).map(d => (
+              <button
+                key={d}
+                onClick={() => onStart(d)}
+                style={{
+                  flex: 1, padding: '7px 4px', borderRadius: 8,
+                  background: 'var(--fm-primary)', color: 'white',
+                  fontSize: 11, fontWeight: 700, cursor: 'pointer',
+                  border: 'none',
+                  boxShadow: '0 3px 0 0 var(--fm-primary-shadow)',
+                  transition: 'transform 0.08s, box-shadow 0.08s',
+                }}
+                onMouseDown={e => {
+                  e.currentTarget.style.transform = 'translateY(3px)'
+                  e.currentTarget.style.boxShadow = '0 0 0 0 transparent'
+                }}
+                onMouseUp={e => {
+                  e.currentTarget.style.transform = ''
+                  e.currentTarget.style.boxShadow = '0 3px 0 0 var(--fm-primary-shadow)'
+                }}
+              >
+                {diffLabel(d, isHe)}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── Shared helpers ────────────────────────────────────────────────────────────
 
 function FilterChip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
@@ -351,5 +485,5 @@ function FilterChip({ active, onClick, children }: { active: boolean; onClick: (
 
 function diffLabel(d: Difficulty, isHe: boolean): string {
   if (isHe) return d === 'easy' ? 'קל' : d === 'medium' ? 'בינוני' : 'קשה'
-  return d === 'easy' ? 'Easy' : d === 'medium' ? 'Medium' : 'Hard'
+  return d === 'easy' ? 'Easy' : d === 'medium' ? 'Med' : 'Hard'
 }
