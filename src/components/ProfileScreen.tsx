@@ -6,7 +6,8 @@ import type { CategoryId, CategoryProgress } from '../lib/challenges/types'
 import { CATEGORIES } from '../lib/challenges/categories'
 import { totalXP } from '../lib/challenges/progress'
 import type { AppSettings } from '../lib/settings'
-import { requestNotificationPermission, resizeAvatarToBase64 } from '../lib/settings'
+import { requestNotificationPermission } from '../lib/settings'
+import AvatarCropModal from './AvatarCropModal'
 
 interface UserProfile {
   name: string
@@ -37,6 +38,7 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
   const isHe = i18n.language === 'he'
   const fileRef = useRef<HTMLInputElement>(null)
   const [notifState, setNotifState] = useState<'idle' | 'denied'>('idle')
+  const [cropSrc, setCropSrc] = useState<string | null>(null)
 
   const displayName = profile?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'
   const initials = displayName.slice(0, 2).toUpperCase()
@@ -52,15 +54,21 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
 
   const handleAvatarClick = () => fileRef.current?.click()
 
-  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    try {
-      const b64 = await resizeAvatarToBase64(file)
-      onSettingsChange({ avatar: b64 })
-    } catch {
-      // silently ignore
+    // Reset input so the same file can be re-selected after cancel
+    e.target.value = ''
+    const reader = new FileReader()
+    reader.onload = ev => {
+      if (ev.target?.result) setCropSrc(ev.target.result as string)
     }
+    reader.readAsDataURL(file)
+  }
+
+  const handleCropConfirm = (dataUrl: string) => {
+    onSettingsChange({ avatar: dataUrl })
+    setCropSrc(null)
   }
 
   const handleNotifToggle = async () => {
@@ -82,6 +90,16 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
   }
 
   return (
+    <>
+    {cropSrc && (
+      <AvatarCropModal
+        imageSrc={cropSrc}
+        onConfirm={handleCropConfirm}
+        onCancel={() => setCropSrc(null)}
+        isHe={isHe}
+      />
+    )}
+    <div style={{ display: cropSrc ? 'none' : undefined }}>
     <div
       style={{
         position: 'fixed', inset: 0, zIndex: 100,
@@ -137,8 +155,8 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
               onClick={handleAvatarClick}
               style={{
                 width: 68, height: 68, borderRadius: '50%', flexShrink: 0,
-                background: settings.avatar ? 'transparent' : 'var(--fm-primary)',
-                backgroundImage: settings.avatar ? `url(${settings.avatar})` : undefined,
+                backgroundColor: settings.avatar ? 'transparent' : 'var(--fm-primary)',
+                backgroundImage: settings.avatar ? `url("${settings.avatar}")` : 'none',
                 backgroundSize: 'cover', backgroundPosition: 'center',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 22, fontWeight: 700, color: 'white',
@@ -318,6 +336,8 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
         </div>
       </div>
     </div>
+    </div>
+    </>
   )
 }
 

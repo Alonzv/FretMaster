@@ -133,7 +133,7 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
         <div className="fm-runner-body">
           <div className="fm-runner-content">
             <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 20, textAlign: 'center' }}>
-              {isHe ? 'אתגר היומי' : 'Daily challenge'}
+              {isHe ? 'האתגר היומי' : 'Daily challenge'}
             </div>
 
             <QuestionCard
@@ -173,7 +173,7 @@ export default function DailyTab({ progress, onSessionComplete }: Props) {
       maxWidth: 520,
     }}>
       <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
-        {isHe ? 'אתגר היומי' : 'Daily Challenge'}
+        {isHe ? 'האתגר היומי' : 'Daily Challenge'}
       </div>
       <h1 style={{ fontSize: 34, fontWeight: 800, color: 'var(--fm-text)', margin: '0 0 14px', letterSpacing: '-0.5px' }}>
         {isHe ? 'מוכן לאתגר?' : 'Ready for today\'s challenge?'}

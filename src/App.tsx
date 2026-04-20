@@ -131,11 +131,11 @@ export default function App() {
           aria-label="Profile"
           style={{
             width: 36, height: 36, borderRadius: '50%',
-            background: settings.avatar ? 'transparent' : 'var(--fm-primary)',
+            backgroundColor: settings.avatar ? 'transparent' : 'var(--fm-primary)',
             color: 'white', fontSize: 13, fontWeight: 700,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             cursor: 'pointer', overflow: 'hidden',
-            backgroundImage: settings.avatar ? `url(${settings.avatar})` : undefined,
+            backgroundImage: settings.avatar ? `url("${settings.avatar}")` : 'none',
             backgroundSize: 'cover', backgroundPosition: 'center',
           }}
         >
