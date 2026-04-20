@@ -18,6 +18,7 @@ const NAV_ITEMS: { id: ActiveTab; labelHe: string; labelEn: string; icon: string
   { id: 'home',     labelHe: 'בית',           labelEn: 'Home',           icon: 'M12 3 2 12h3v8h6v-6h2v6h6v-8h3z' },
   { id: 'daily',    labelHe: 'האתגר היומי',     labelEn: 'Daily Challenge', icon: 'M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7z' },
   { id: 'practice', labelHe: 'תרגול חופשי',   labelEn: 'Free Practice',   icon: 'M8 5v14l11-7z' },
+  { id: 'tuner',    labelHe: 'כוונן',          labelEn: 'Tuner',           icon: 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3z' },
 ]
 
 export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, profileName, avatar, isRTL, mobileOpen, onMobileClose }: Props) {

@@ -6,6 +6,7 @@ import OnboardingFlow from './components/onboarding/OnboardingFlow'
 import type { OnboardingData } from './store/onboarding'
 import DailyTab    from './components/tabs/DailyTab'
 import PracticeTab from './components/tabs/PracticeTab'
+import TunerTab    from './components/tabs/TunerTab'
 import ProfileScreen from './components/ProfileScreen'
 import Sidebar       from './components/Sidebar'
 import AppIntro, { hasSeenIntro } from './components/AppIntro'
@@ -20,7 +21,7 @@ import type { HeartsState } from './lib/gamification/hearts'
 import { loadStreak, recordActivity } from './lib/gamification/streak'
 import type { StreakState } from './lib/gamification/streak'
 
-export type ActiveTab = 'home' | 'daily' | 'practice'
+export type ActiveTab = 'home' | 'daily' | 'practice' | 'tuner'
 
 interface UserProfile {
   name: string
@@ -181,8 +182,9 @@ export default function App() {
 
       <main className="fm-main">
         {activeTab === 'home'     && <SkillTreeView hearts={hearts} streak={streak} onSessionComplete={handleSessionComplete} onWrongAnswer={handleWrongAnswer} />}
-        {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} />}
+        {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
         {activeTab === 'practice' && <PracticeTab />}
+        {activeTab === 'tuner'    && <TunerTab />}
       </main>
 
       {showProfile && user && (

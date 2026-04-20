@@ -702,6 +702,12 @@ body.large-text .fm-choices button  { font-size: 18px; }
   100% { transform: scale(1) translateY(0); opacity: 1; }
 }
 
+@keyframes fm-burst {
+  0%   { transform: translate(-50%, -50%) translate(0, 0) scale(0); opacity: 1; }
+  60%  { opacity: 1; }
+  100% { transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0.4); opacity: 0; }
+}
+
 @keyframes fm-shake {
   0%,100% { transform: translateX(0) rotate(0); }
   20%  { transform: translateX(-4px) rotate(-8deg); }
