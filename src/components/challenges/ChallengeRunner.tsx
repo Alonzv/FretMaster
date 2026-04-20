@@ -6,12 +6,16 @@ import { getCategory } from '../../lib/challenges/categories'
 import QuestionCard from './QuestionCard'
 import FeedbackPanel from './FeedbackPanel'
 import SessionSummary from './SessionSummary'
+import HeartsDisplay from './HeartsDisplay'
+import type { HeartsState } from '../../lib/gamification/hearts'
 
 interface Props {
   categoryId: CategoryId
   difficulty: Difficulty
   onExit: () => void
   onComplete: (result: SessionResult) => void
+  hearts?: HeartsState
+  onWrongAnswer?: () => void
 }
 
 // A record of one question plus what the user answered — powers the end-of-session review.
@@ -23,7 +27,7 @@ export interface AnsweredQuestion {
 
 // Runs a full challenge session: renders questions, captures answers instantly on click,
 // flashes feedback, then shows the summary at the end.
-export default function ChallengeRunner({ categoryId, difficulty, onExit, onComplete }: Props) {
+export default function ChallengeRunner({ categoryId, difficulty, onExit, onComplete, hearts, onWrongAnswer }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
@@ -36,6 +40,7 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
   const [revealed, setRevealed] = useState(false)
   const [answers, setAnswers] = useState<AnsweredQuestion[]>([])
   const [done, setDone] = useState<SessionResult | null>(null)
+  const [justLostHeart, setJustLostHeart] = useState(false)
 
   if (!category) return null
 
@@ -53,6 +58,11 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
     setSelectedIndex(chosenIndex)
     setRevealed(true)
     setAnswers(prev => [...prev, { question: current, chosenIndex, correct }])
+    if (!correct && onWrongAnswer) {
+      onWrongAnswer()
+      setJustLostHeart(true)
+      setTimeout(() => setJustLostHeart(false), 600)
+    }
   }
 
   const handleNext = () => {
@@ -97,9 +107,13 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
           <div className="fm-runner-progress-bar" style={{ width: `${progress}%` }} />
         </div>
 
-        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', minWidth: 40, textAlign: 'center' }}>
-          {idx + 1}/{questions.length}
-        </div>
+        {hearts ? (
+          <HeartsDisplay hearts={hearts} lastLost={justLostHeart} />
+        ) : (
+          <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-text-muted)', minWidth: 40, textAlign: 'center' }}>
+            {idx + 1}/{questions.length}
+          </div>
+        )}
       </div>
 
       <div className="fm-runner-body">

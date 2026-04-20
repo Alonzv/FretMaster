@@ -1,20 +1,24 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import './i18n'
 import { supabase } from './lib/supabase'
 import OnboardingFlow from './components/onboarding/OnboardingFlow'
 import type { OnboardingData } from './store/onboarding'
-import HomeTab     from './components/tabs/HomeTab'
 import DailyTab    from './components/tabs/DailyTab'
 import PracticeTab from './components/tabs/PracticeTab'
 import ProfileScreen from './components/ProfileScreen'
 import Sidebar       from './components/Sidebar'
 import AppIntro, { hasSeenIntro } from './components/AppIntro'
+import SkillTreeView from './components/skilltree/SkillTreeView'
 import type { User } from '@supabase/supabase-js'
 import type { CategoryId, CategoryProgress, SessionResult } from './lib/challenges/types'
 import { loadAllProgress, applySessionResult } from './lib/challenges/progress'
 import { loadSettings, saveSettings, applySettings } from './lib/settings'
 import type { AppSettings } from './lib/settings'
+import { loadAndRefill, loseHeart, applyRefill } from './lib/gamification/hearts'
+import type { HeartsState } from './lib/gamification/hearts'
+import { loadStreak, recordActivity } from './lib/gamification/streak'
+import type { StreakState } from './lib/gamification/streak'
 
 export type ActiveTab = 'home' | 'daily' | 'practice'
 
@@ -38,12 +42,25 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [progress, setProgress] = useState<Record<CategoryId, CategoryProgress>>(() => loadAllProgress())
   const [settings, setSettings] = useState<AppSettings>(() => loadSettings())
+  const [hearts, setHearts] = useState<HeartsState>(() => loadAndRefill())
+  const [streak, setStreak] = useState<StreakState>(() => loadStreak())
+  const refillTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const isRTL = i18n.language === 'he'
 
   // Apply theme + font-size to <body> on mount and whenever settings change.
   useEffect(() => {
     applySettings(settings)
   }, [settings])
+
+  // Periodically check if hearts have refilled (every 60s).
+  useEffect(() => {
+    refillTimerRef.current = setInterval(() => {
+      setHearts(prev => applyRefill(prev))
+    }, 60_000)
+    return () => {
+      if (refillTimerRef.current) clearInterval(refillTimerRef.current)
+    }
+  }, [])
 
   const updateSettings = useCallback((patch: Partial<AppSettings>) => {
     setSettings(prev => {
@@ -86,6 +103,11 @@ export default function App() {
 
   const handleSessionComplete = useCallback((result: SessionResult) => {
     setProgress(prev => applySessionResult(prev, result))
+    setStreak(prev => recordActivity(prev))
+  }, [])
+
+  const handleWrongAnswer = useCallback(() => {
+    setHearts(prev => loseHeart(prev))
   }, [])
 
   if (checking) {
@@ -158,7 +180,7 @@ export default function App() {
       <div className="fm-sidebar-space" />
 
       <main className="fm-main">
-        {activeTab === 'home'     && <HomeTab     progress={progress} onSessionComplete={handleSessionComplete} />}
+        {activeTab === 'home'     && <SkillTreeView hearts={hearts} streak={streak} onSessionComplete={handleSessionComplete} onWrongAnswer={handleWrongAnswer} />}
         {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} />}
         {activeTab === 'practice' && <PracticeTab />}
       </main>

@@ -1,0 +1,310 @@
+import type { CategoryId, Difficulty } from '../challenges/types'
+
+// ── Node definition ───────────────────────────────────────────────────────────
+
+export interface TreeNode {
+  id: string
+  categoryId: CategoryId
+  difficulty: Difficulty
+  titleHe: string
+  titleEn: string
+  descHe: string
+  descEn: string
+  /** IDs of nodes that must be complete (stars ≥ 1) before this unlocks. */
+  requires: string[]
+  xpReward: number
+  /** SVG path for the node icon (24x24 viewBox). */
+  icon: string
+  /** Visual group label shown as a section divider above the first node of each group. */
+  group?: { he: string; en: string }
+}
+
+// ── Tree nodes — linear Duolingo-style path ───────────────────────────────────
+//
+// Zigzag column positions are assigned by the UI based on index,
+// so here we only define the logical order + prerequisites.
+
+export const TREE_NODES: TreeNode[] = [
+
+  // ═══ FOUNDATIONS ══════════════════════════════════════════════════════════
+  {
+    id: 'fret_easy',
+    categoryId: 'fretboard',
+    difficulty: 'easy',
+    titleHe: 'פרטבורד — בסיס',
+    titleEn: 'Fretboard Basics',
+    descHe: 'תווים על מיתרים פתוחים ופרטים ראשונים',
+    descEn: 'Notes on open strings and first frets',
+    requires: [],
+    xpReward: 20,
+    icon: 'M3 7h18v2H3V7zm0 4h18v2H3v-2zm0 4h18v2H3v-2z',
+    group: { he: 'יסודות', en: 'Foundations' },
+  },
+  {
+    id: 'fret_medium',
+    categoryId: 'fretboard',
+    difficulty: 'medium',
+    titleHe: 'פרטבורד — מתקדם',
+    titleEn: 'Fretboard Advanced',
+    descHe: 'כל 12 התווים על כל הצוואר',
+    descEn: 'All 12 notes across the full neck',
+    requires: ['fret_easy'],
+    xpReward: 30,
+    icon: 'M3 7h18v2H3V7zm0 4h18v2H3v-2zm0 4h18v2H3v-2z',
+  },
+  {
+    id: 'notes_easy',
+    categoryId: 'note_reading',
+    difficulty: 'easy',
+    titleHe: 'קריאת תווים',
+    titleEn: 'Note Reading',
+    descHe: 'תווים על החמשה המוסיקלית',
+    descEn: 'Reading notes on the musical staff',
+    requires: ['fret_easy'],
+    xpReward: 25,
+    icon: 'M9 3v12.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3H9z',
+  },
+
+  // ═══ INTERVALS ════════════════════════════════════════════════════════════
+  {
+    id: 'intervals_easy',
+    categoryId: 'intervals_theory',
+    difficulty: 'easy',
+    titleHe: 'אינטרוולים — בסיס',
+    titleEn: 'Intervals I',
+    descHe: 'חצי-טון, טון שלם, טרצות',
+    descEn: 'Semitones, whole steps, thirds',
+    requires: ['fret_medium', 'notes_easy'],
+    xpReward: 30,
+    icon: 'M4 20V4h2v16H4zm14 0V4h2v16h-2zM9 8h6v2H9V8zm0 6h6v2H9v-2z',
+    group: { he: 'אינטרוולים', en: 'Intervals' },
+  },
+  {
+    id: 'intervals_hard',
+    categoryId: 'intervals_theory',
+    difficulty: 'hard',
+    titleHe: 'אינטרוולים — מתקדם',
+    titleEn: 'Intervals II',
+    descHe: 'קווינטות, ספטימות, היפוכים',
+    descEn: 'Fifths, sevenths, inversions',
+    requires: ['intervals_easy'],
+    xpReward: 40,
+    icon: 'M4 20V4h2v16H4zm14 0V4h2v16h-2zM9 8h6v2H9V8zm0 6h6v2H9v-2z',
+  },
+
+  // ═══ CIRCLE OF FIFTHS ═════════════════════════════════════════════════════
+  {
+    id: 'circle_easy',
+    categoryId: 'circle_of_fifths',
+    difficulty: 'easy',
+    titleHe: 'מעגל החמישיות — בסיס',
+    titleEn: 'Circle of Fifths I',
+    descHe: 'סולמות ומפתחות קרובים',
+    descEn: 'Keys and close relationships',
+    requires: ['intervals_easy'],
+    xpReward: 35,
+    icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm0-13a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3z',
+    group: { he: 'הרמוניה', en: 'Harmony' },
+  },
+  {
+    id: 'circle_hard',
+    categoryId: 'circle_of_fifths',
+    difficulty: 'hard',
+    titleHe: 'מעגל החמישיות — מתקדם',
+    titleEn: 'Circle of Fifths II',
+    descHe: 'אנהרמוניה, מינוריים, מודולציות',
+    descEn: 'Enharmonics, minors, modulations',
+    requires: ['circle_easy'],
+    xpReward: 45,
+    icon: 'M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm0-13a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3z',
+  },
+
+  // ═══ CHORDS ═══════════════════════════════════════════════════════════════
+  {
+    id: 'chords_easy',
+    categoryId: 'chord_construction',
+    difficulty: 'easy',
+    titleHe: 'בניית אקורדים — בסיס',
+    titleEn: 'Chord Building I',
+    descHe: 'טריאדות: מז׳ור, מינור, מוקטן',
+    descEn: 'Triads: major, minor, diminished',
+    requires: ['intervals_easy'],
+    xpReward: 35,
+    icon: 'M12 2L2 12l10 10 10-10L12 2zm0 3.83L18.17 12 12 18.17 5.83 12 12 5.83z',
+    group: { he: 'אקורדים', en: 'Chords' },
+  },
+  {
+    id: 'chords_hard',
+    categoryId: 'chord_construction',
+    difficulty: 'hard',
+    titleHe: 'אקורדים מרובעים',
+    titleEn: 'Seventh Chords',
+    descHe: 'maj7, m7, dom7, m7b5',
+    descEn: 'maj7, m7, dom7, m7b5',
+    requires: ['chords_easy', 'circle_easy'],
+    xpReward: 50,
+    icon: 'M12 2L2 12l10 10 10-10L12 2zm0 3.83L18.17 12 12 18.17 5.83 12 12 5.83z',
+  },
+
+  // ═══ SCALES ════════════════════════════════════════════════════════════════
+  {
+    id: 'scales_easy',
+    categoryId: 'scale_construction',
+    difficulty: 'easy',
+    titleHe: 'סולמות — בסיס',
+    titleEn: 'Scales I',
+    descHe: 'סולם מז׳ור ומינור טבעי',
+    descEn: 'Major and natural minor scales',
+    requires: ['chords_easy'],
+    xpReward: 35,
+    icon: 'M3 3h2v18H3V3zm16 0h2v18h-2V3zM7 7h2v14H7V7zm4-4h2v18h-2V3zm4 4h2v14h-2V7z',
+    group: { he: 'סולמות', en: 'Scales' },
+  },
+  {
+    id: 'scales_hard',
+    categoryId: 'scale_construction',
+    difficulty: 'hard',
+    titleHe: 'סולמות — מתקדם',
+    titleEn: 'Scales II',
+    descHe: 'פנטטוני, בלוז, הרמוני מינור',
+    descEn: 'Pentatonic, blues, harmonic minor',
+    requires: ['scales_easy'],
+    xpReward: 50,
+    icon: 'M3 3h2v18H3V3zm16 0h2v18h-2V3zM7 7h2v14H7V7zm4-4h2v18h-2V3zm4 4h2v14h-2V7z',
+  },
+
+  // ═══ GENRE TRACKS ═════════════════════════════════════════════════════════
+  {
+    id: 'blues_easy',
+    categoryId: 'genre_blues',
+    difficulty: 'easy',
+    titleHe: 'בלוז — בסיס',
+    titleEn: 'Blues Basics',
+    descHe: '12-בר, I-IV-V, סולם בלוז',
+    descEn: '12-bar, I-IV-V, blues scale',
+    requires: ['scales_easy', 'chords_easy'],
+    xpReward: 40,
+    icon: 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3z',
+    group: { he: 'מסלולי ז׳אנר', en: 'Genre Tracks' },
+  },
+  {
+    id: 'blues_hard',
+    categoryId: 'genre_blues',
+    difficulty: 'hard',
+    titleHe: 'בלוז — מתקדם',
+    titleEn: 'Blues Advanced',
+    descHe: 'טרנאראונד, tritone sub, ג׳אז בלוז',
+    descEn: 'Turnarounds, tritone sub, jazz blues',
+    requires: ['blues_easy', 'chords_hard'],
+    xpReward: 60,
+    icon: 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm1-11h-2v3H8v2h3v3h2v-3h3v-2h-3z',
+  },
+  {
+    id: 'rock_easy',
+    categoryId: 'genre_rock',
+    difficulty: 'easy',
+    titleHe: 'רוק — בסיס',
+    titleEn: 'Rock Basics',
+    descHe: 'Power chords, Drop D, פנטטוני',
+    descEn: 'Power chords, Drop D, pentatonic',
+    requires: ['scales_easy', 'chords_easy'],
+    xpReward: 40,
+    icon: 'M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z',
+  },
+  {
+    id: 'rock_hard',
+    categoryId: 'genre_rock',
+    difficulty: 'hard',
+    titleHe: 'רוק — מתקדם',
+    titleEn: 'Rock Advanced',
+    descHe: 'מצבים, modal interchange, borrowed chords',
+    descEn: 'Modes, modal interchange, borrowed chords',
+    requires: ['rock_easy', 'scales_hard'],
+    xpReward: 60,
+    icon: 'M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z',
+  },
+  {
+    id: 'jazz_easy',
+    categoryId: 'genre_jazz',
+    difficulty: 'easy',
+    titleHe: 'ג׳אז — בסיס',
+    titleEn: 'Jazz Basics',
+    descHe: 'II-V-I, maj7, swing, walking bass',
+    descEn: 'II-V-I, maj7, swing, walking bass',
+    requires: ['chords_hard', 'circle_hard'],
+    xpReward: 45,
+    icon: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
+  },
+  {
+    id: 'jazz_hard',
+    categoryId: 'genre_jazz',
+    difficulty: 'hard',
+    titleHe: 'ג׳אז — מתקדם',
+    titleEn: 'Jazz Advanced',
+    descHe: 'Altered scale, Coltrane changes, bebop',
+    descEn: 'Altered scale, Coltrane changes, bebop',
+    requires: ['jazz_easy'],
+    xpReward: 70,
+    icon: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
+  },
+  {
+    id: 'country_easy',
+    categoryId: 'genre_country',
+    difficulty: 'easy',
+    titleHe: 'קאנטרי — בסיס',
+    titleEn: 'Country Basics',
+    descHe: 'Capo, double stops, chicken picking',
+    descEn: 'Capo, double stops, chicken picking',
+    requires: ['scales_easy', 'chords_easy'],
+    xpReward: 40,
+    icon: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+  },
+  {
+    id: 'metal_easy',
+    categoryId: 'genre_metal',
+    difficulty: 'easy',
+    titleHe: 'מטאל — בסיס',
+    titleEn: 'Metal Basics',
+    descHe: 'Drop D, tritone, harmonic minor',
+    descEn: 'Drop D, tritone, harmonic minor',
+    requires: ['scales_hard', 'intervals_hard'],
+    xpReward: 45,
+    icon: 'M7 4v16M17 4v16M3 8h4m10 0h4M3 16h4m10 0h4M7 12h10',
+  },
+  {
+    id: 'folk_easy',
+    categoryId: 'genre_folk',
+    difficulty: 'easy',
+    titleHe: 'פולק — בסיס',
+    titleEn: 'Folk Basics',
+    descHe: 'DADGAD, fingerpicking, drone',
+    descEn: 'DADGAD, fingerpicking, drone',
+    requires: ['scales_easy'],
+    xpReward: 40,
+    icon: 'M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-9h10v2H7v-2z',
+  },
+  {
+    id: 'funk_easy',
+    categoryId: 'genre_funk',
+    difficulty: 'easy',
+    titleHe: 'פאנק — בסיס',
+    titleEn: 'Funk Basics',
+    descHe: 'The One, scratch rhythm, syncopation',
+    descEn: 'The One, scratch rhythm, syncopation',
+    requires: ['chords_easy', 'scales_easy'],
+    xpReward: 40,
+    icon: 'M9 3v12.55c-.59-.34-1.27-.55-2-.55C4.79 15 3 16.79 3 19s1.79 4 4 4 4-1.79 4-4V7h6V3H9z',
+  },
+  {
+    id: 'funk_hard',
+    categoryId: 'genre_funk',
+    difficulty: 'hard',
+    titleHe: 'פאנק — מתקדם',
+    titleEn: 'Funk Advanced',
+    descHe: 'Extended chords, polyrhythm, clave',
+    descEn: 'Extended chords, polyrhythm, clave',
+    requires: ['funk_easy', 'chords_hard'],
+    xpReward: 60,
+    icon: 'M9 3v12.55c-.59-.34-1.27-.55-2-.55C4.79 15 3 16.79 3 19s1.79 4 4 4 4-1.79 4-4V7h6V3H9z',
+  },
+]

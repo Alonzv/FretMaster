@@ -19,6 +19,14 @@ export type CategoryId =
   // Phase 3 (Pitchy.js)
   | 'play_interval'
   | 'find_note_fretboard'
+  // Genre theory
+  | 'genre_blues'
+  | 'genre_rock'
+  | 'genre_jazz'
+  | 'genre_country'
+  | 'genre_metal'
+  | 'genre_folk'
+  | 'genre_funk'
 
 export interface CategoryMeta {
   id: CategoryId
