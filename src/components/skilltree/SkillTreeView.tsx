@@ -7,6 +7,7 @@ import { loadXP, addXP, getLevel, getLevelProgress, type XPState } from '../../l
 import { getTreeWithStatus, findNextNode, applySessionToNode, type NodeWithStatus } from '../../lib/skilltree/treeEngine'
 import ChallengeRunner from '../challenges/ChallengeRunner'
 import HeartsDisplay from '../challenges/HeartsDisplay'
+import TactileButton from '../ui/TactileButton'
 
 // Zigzag offsets for the linear path (px, applied to each node container)
 const ZIGZAG = [0, 60, 100, 60, 0, -60, -100, -60]
@@ -111,15 +112,14 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
         position: 'sticky', top: 0, zIndex: 10,
         background: 'var(--fm-bg-deep)',
         borderBottom: '1px solid var(--fm-border)',
-        padding: '10px 16px',
-        display: 'flex', flexDirection: 'column', gap: 8,
+        padding: '10px 16px 12px',
+        display: 'flex', flexDirection: 'column', gap: 10,
+        boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
       }}>
-        {/* Row 1: streak + hearts */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <StreakChip count={streak.count} isHe={isHe} />
           <HeartsDisplay hearts={hearts} />
         </div>
-        {/* Row 2: XP bar */}
         <XPBar xp={xp.total} level={level} progress={levelPct} isHe={isHe} />
       </div>
 
@@ -138,25 +138,27 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
             <div key={node.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               {showDivider && (
                 <div style={{
-                  marginTop: idx === 0 ? 0 : 32,
-                  marginBottom: 16,
-                  fontSize: 11, fontWeight: 700,
+                  marginTop: idx === 0 ? 0 : 36,
+                  marginBottom: 18,
+                  fontFamily: "'Oswald', 'DM Sans', sans-serif",
+                  fontSize: 11, fontWeight: 600,
                   color: 'var(--fm-text-muted)',
-                  textTransform: 'uppercase', letterSpacing: 1.2,
+                  textTransform: 'uppercase', letterSpacing: '0.15em',
                   background: 'var(--fm-bg-card)',
-                  border: '1px solid var(--fm-border)',
-                  borderRadius: 20,
-                  padding: '4px 14px',
+                  border: '1px solid var(--fm-border-mid)',
+                  borderRadius: 6,
+                  padding: '5px 16px',
+                  boxShadow: '0 2px 0 0 var(--fm-border)',
                 }}>
                   {isHe ? node.group!.he : node.group!.en}
                 </div>
               )}
 
               {idx > 0 && !showDivider && (
-                <div style={{ width: 2, height: 28, borderLeft: '2px dashed var(--fm-border)' }} />
+                <div style={{ width: 2, height: 32, borderLeft: '2px dashed var(--fm-border-mid)' }} />
               )}
               {idx > 0 && showDivider && (
-                <div style={{ width: 2, height: 12, borderLeft: '2px dashed var(--fm-border)' }} />
+                <div style={{ width: 2, height: 14, borderLeft: '2px dashed var(--fm-border-mid)' }} />
               )}
 
               <div style={{ transform: `translateX(${offset}px)`, position: 'relative' }}>
@@ -186,31 +188,42 @@ function XPBar({ xp, level, progress, isHe }: {
 }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-      {/* Level badge */}
+      {/* Level badge — Oswald font for retro-label feel */}
       <div style={{
-        fontSize: 11, fontWeight: 800, color: 'var(--fm-primary)',
-        background: 'var(--fm-primary-bg, rgba(88,204,2,0.1))',
+        fontFamily: "'Oswald', 'DM Sans', sans-serif",
+        fontSize: 11, fontWeight: 600,
+        color: 'var(--fm-primary)',
+        background: 'var(--fm-primary-bg)',
         border: '1px solid var(--fm-primary)',
-        borderRadius: 6, padding: '2px 7px', flexShrink: 0,
-        whiteSpace: 'nowrap',
+        borderRadius: 5,
+        padding: '3px 8px',
+        flexShrink: 0,
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
+        boxShadow: '0 2px 0 0 var(--fm-primary-shadow)',
       }}>
-        Lv {level.level}
+        LV{level.level}
       </div>
-      {/* Progress bar */}
-      <div style={{ flex: 1, height: 6, borderRadius: 3, background: 'var(--fm-border)', overflow: 'hidden' }}>
+      {/* Progress bar with inset shadow (depth feel) */}
+      <div style={{
+        flex: 1, height: 7, borderRadius: 999,
+        background: 'var(--fm-bg-input)',
+        overflow: 'hidden',
+        boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.28)',
+      }}>
         <div style={{
-          height: '100%', borderRadius: 3,
+          height: '100%', borderRadius: 999,
           background: 'var(--fm-primary)',
           width: `${progress * 100}%`,
-          transition: 'width 0.5s cubic-bezier(0.22,1,0.36,1)',
+          boxShadow: '0 1px 4px var(--fm-primary-glow)',
+          transition: 'width 0.6s cubic-bezier(0.22,1,0.36,1)',
         }} />
       </div>
-      {/* XP label */}
-      <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--fm-text-muted)', flexShrink: 0 }}>
+      {/* XP total */}
+      <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--fm-xp)', flexShrink: 0 }}>
         {xp} XP
       </div>
-      {/* Level title */}
-      <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--fm-text-muted)', flexShrink: 0 }}>
+      <div style={{ fontSize: 11, color: 'var(--fm-text-muted)', flexShrink: 0, display: 'none' /* hidden on small screens */ }}>
         {isHe ? level.titleHe : level.title}
       </div>
     </div>
@@ -378,16 +391,34 @@ const TreeNodeButton = React.forwardRef<HTMLButtonElement, {
           border: `3px solid ${ringColor}`,
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           cursor: locked ? 'not-allowed' : 'pointer',
-          opacity: locked ? 0.45 : 1,
+          opacity: locked ? 0.42 : 1,
           position: 'relative',
-          boxShadow: isNext
-            ? '0 0 0 6px rgba(88,204,2,0.15), 0 4px 20px rgba(0,0,0,0.25)'
-            : '0 2px 8px rgba(0,0,0,0.15)',
-          transition: 'transform 0.15s, box-shadow 0.15s',
-          animation: isNext && available ? 'fm-pulse 2s infinite' : undefined,
+          /* Tactile hard shadow — same language as buttons */
+          boxShadow: locked
+            ? '0 3px 0 0 var(--fm-border)'
+            : mastered
+              ? '0 5px 0 0 #8C7010, 0 2px 12px rgba(0,0,0,0.2)'
+              : (complete || available)
+                ? '0 5px 0 0 var(--fm-primary-shadow), 0 2px 12px rgba(0,0,0,0.2)'
+                : '0 3px 0 0 var(--fm-border)',
+          transition: 'transform 0.1s ease, box-shadow 0.1s ease',
+          animation: isNext && available ? 'fm-pulse 2.4s ease-in-out infinite' : undefined,
         }}
-        onMouseEnter={e => { if (!locked) e.currentTarget.style.transform = 'scale(1.08)' }}
-        onMouseLeave={e => { e.currentTarget.style.transform = 'scale(1)' }}
+        onMouseEnter={e => {
+          if (!locked) {
+            e.currentTarget.style.transform = 'translateY(-3px) scale(1.06)'
+          }
+        }}
+        onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0) scale(1)' }}
+        onMouseDown={e => {
+          if (!locked) {
+            e.currentTarget.style.transform = 'translateY(5px) scale(0.97)'
+            e.currentTarget.style.boxShadow = '0 0 0 0 transparent'
+          }
+        }}
+        onMouseUp={e => {
+          if (!locked) e.currentTarget.style.transform = 'translateY(0) scale(1)'
+        }}
       >
         <svg width="28" height="28" viewBox="0 0 24 24" fill={iconColor}>
           <path d={node.icon} />
@@ -444,17 +475,23 @@ TreeNodeButton.displayName = 'TreeNodeButton'
 // ── Streak chip ───────────────────────────────────────────────────────────────
 
 function StreakChip({ count, isHe }: { count: number; isHe: boolean }) {
+  const active = count > 0
   return (
     <div style={{
       display: 'flex', alignItems: 'center', gap: 6,
-      padding: '6px 12px', borderRadius: 20,
-      background: count > 0 ? 'rgba(245,183,48,0.12)' : 'var(--fm-bg-card)',
-      border: `1px solid ${count > 0 ? '#f5b730' : 'var(--fm-border)'}`,
+      padding: '6px 12px', borderRadius: 8,
+      background: active ? 'var(--fm-streak-bg)' : 'var(--fm-bg-card)',
+      border: `1px solid ${active ? 'var(--fm-streak)' : 'var(--fm-border)'}`,
+      boxShadow: active ? '0 2px 0 0 color-mix(in srgb, var(--fm-streak) 60%, black)' : '0 2px 0 0 var(--fm-border)',
     }}>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill={count > 0 ? '#f5b730' : 'var(--fm-text-muted)'}>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill={active ? 'var(--fm-streak)' : 'var(--fm-text-muted)'}>
         <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z" />
       </svg>
-      <span style={{ fontSize: 13, fontWeight: 700, color: count > 0 ? '#f5b730' : 'var(--fm-text-muted)' }}>
+      <span style={{
+        fontFamily: "'Oswald', 'DM Sans', sans-serif",
+        fontSize: 13, fontWeight: 600, letterSpacing: '0.04em',
+        color: active ? 'var(--fm-streak)' : 'var(--fm-text-muted)',
+      }}>
         {count} {isHe ? 'ימים' : count === 1 ? 'day' : 'days'}
       </span>
     </div>
@@ -516,10 +553,15 @@ function NodeSheet({ node, isHe, onStart, onClose }: {
             </svg>
           </div>
           <div>
-            <div style={{ fontSize: 19, fontWeight: 800, color: 'var(--fm-text)', lineHeight: 1.2 }}>
+            <div style={{ fontSize: 18, fontWeight: 800, color: 'var(--fm-text)', lineHeight: 1.2 }}>
               {isHe ? node.titleHe : node.titleEn}
             </div>
-            <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 4 }}>
+            <div style={{
+              fontSize: 11, marginTop: 5,
+              fontFamily: "'Oswald', 'DM Sans', sans-serif",
+              letterSpacing: '0.08em', textTransform: 'uppercase',
+              color: 'var(--fm-text-muted)',
+            }}>
               {diffLabel(node.difficulty)} · {node.xpReward} XP
             </div>
           </div>
@@ -546,23 +588,21 @@ function NodeSheet({ node, isHe, onStart, onClose }: {
 
         {locked ? (
           <div style={{
-            padding: '12px 16px', borderRadius: 12,
-            background: 'var(--fm-bg-card)', border: '1px solid var(--fm-border)',
+            padding: '13px 16px', borderRadius: 10,
+            background: 'var(--fm-bg-input)', border: '1px solid var(--fm-border)',
             fontSize: 13, color: 'var(--fm-text-muted)', textAlign: 'center',
+            borderBottom: '3px solid var(--fm-border)',
           }}>
-            {isHe ? 'השלם את הצמתים הקודמים כדי לפתוח' : 'Complete previous nodes to unlock'}
+            {isHe ? '🔒 השלם את הצמתים הקודמים כדי לפתוח' : '🔒 Complete previous nodes to unlock'}
           </div>
         ) : (
-          <button
+          <TactileButton
+            variant={done ? 'success' : 'primary'}
+            fullWidth
             onClick={onStart}
-            style={{
-              width: '100%', padding: '14px 0', borderRadius: 12,
-              background: 'var(--fm-primary)', color: 'white',
-              fontSize: 15, fontWeight: 700, cursor: 'pointer', border: 'none',
-            }}
           >
-            {done ? (isHe ? 'שחק שוב' : 'Play again') : (isHe ? 'התחל' : 'Start')}
-          </button>
+            {done ? (isHe ? '▶ שחק שוב' : '▶ Play again') : (isHe ? 'התחל' : 'Start')}
+          </TactileButton>
         )}
       </div>
     </div>

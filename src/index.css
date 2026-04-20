@@ -54,7 +54,9 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body, #root { height: 100%; }
 
-/* Hebrew text uses Miriam Libre; Latin uses system stack */
+/* Body typography:
+   – LTR (English): DM Sans (modern grotesque) for body; Oswald for display
+   – RTL (Hebrew): Miriam Libre for body; Oswald for display labels              */
 body {
   margin: 0;
   min-width: 320px;
@@ -63,18 +65,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-
-  /* Default: Hebrew */
-  font-family: 'Miriam Libre', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Miriam Libre', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Switch to system font for LTR (English) mode */
 body:not([dir='rtl']), body[dir='ltr'] {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto,
-               'Helvetica Neue', Arial, sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 :lang(he), [dir='rtl'] {
-  font-family: 'Miriam Libre', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Miriam Libre', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Oswald for display text — eyebrows, runner labels, section headers */
+.fm-display {
+  font-family: 'Oswald', 'DM Sans', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+[dir='rtl'] .fm-display {
+  font-family: 'Miriam Libre', sans-serif;
+  letter-spacing: 0.02em;
 }
 
 button { border: none; background: none; cursor: pointer; font-family: inherit; }
@@ -86,61 +95,80 @@ input { font-family: inherit; }
    ──────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Surfaces */
-  --fm-bg-deep:          #0F1923;
-  --fm-bg-card:          #182233;
-  --fm-bg-input:         #1E2D45;
-  --fm-border:           #2A3F5F;
+  /* ── Surfaces ──────────────────────────────────────────────────────────── */
+  --fm-bg-deep:           #111118;   /* midnight ink — deep charcoal-indigo   */
+  --fm-bg-card:           #1A1A22;   /* card surface                          */
+  --fm-bg-elevated:       #222232;   /* raised / active surface               */
+  --fm-bg-input:          #1E1E2C;   /* input / interactive surfaces          */
+  --fm-border:            #2A2A40;   /* subtle border                         */
+  --fm-border-mid:        #353550;   /* mid-weight border                     */
 
-  /* Brand */
-  --fm-primary:          #FF6B35;
-  --fm-primary-hov:      #FF8557;
-  --fm-primary-bg:       rgba(255,107,53,0.14);
-  --fm-primary-soft:     rgba(255,107,53,0.22);
-  --fm-primary-glow:     rgba(255,107,53,0.40);
+  /* ── Primary — burnt terracotta (retro-warm, mature) ──────────────────── */
+  --fm-primary:           #C84B2F;
+  --fm-primary-hov:       #D85535;
+  --fm-primary-bg:        rgba(200,75,47,0.12);
+  --fm-primary-soft:      rgba(200,75,47,0.22);
+  --fm-primary-glow:      rgba(200,75,47,0.38);
+  --fm-primary-shadow:    #8C3320;   /* tactile hard-press shadow             */
 
-  /* Correct / Secondary */
-  --fm-secondary:        #2DCE89;
-  --fm-secondary-bg:     rgba(45,206,137,0.13);
-  --fm-secondary-faint:  rgba(45,206,137,0.07);
+  /* ── Success / Correct — muted sage green ─────────────────────────────── */
+  --fm-secondary:         #3EAB7C;
+  --fm-secondary-bg:      rgba(62,171,124,0.12);
+  --fm-secondary-faint:   rgba(62,171,124,0.06);
+  --fm-secondary-shadow:  #2A7A58;   /* tactile shadow for success buttons    */
 
-  /* Wrong / Coral */
-  --fm-coral:            #FF5C6C;
-  --fm-coral-faint:      rgba(255,92,108,0.10);
+  /* ── Error / Wrong — warm coral-red ───────────────────────────────────── */
+  --fm-coral:             #D44550;
+  --fm-coral-faint:       rgba(212,69,80,0.10);
+  --fm-coral-shadow:      #8C2030;
 
-  /* XP / Stars */
-  --fm-xp:               #FBBF24;
-  --fm-xp-bg:            rgba(251,191,36,0.14);
+  /* ── Streak / XP / Stars — warm amber ─────────────────────────────────── */
+  --fm-streak:            #D9922A;
+  --fm-streak-bg:         rgba(217,146,42,0.14);
+  --fm-xp:                #D9922A;
+  --fm-xp-bg:             rgba(217,146,42,0.12);
 
-  /* Text */
-  --fm-text:             #EFF2F7;
-  --fm-text-muted:       rgba(239,242,247,0.55);
-  --fm-text-dim:         rgba(239,242,247,0.28);
-  --fm-white:            #FFFFFF;
+  /* ── Text ──────────────────────────────────────────────────────────────── */
+  --fm-text:              #EAE8F0;
+  --fm-text-muted:        rgba(234,232,240,0.48);
+  --fm-text-dim:          rgba(234,232,240,0.24);
+  --fm-white:             #FFFFFF;
 }
 
-/* ── Light mode ─────────────────────────────────────────────────────────── */
+/* ── Light mode — warm off-white paper ─────────────────────────────────── */
 body.light {
-  --fm-bg-deep:          #FFFFFF;
-  --fm-bg-card:          #F0F4F9;
-  --fm-bg-input:         #E4EAF2;
-  --fm-border:           #CBD5E1;
-  --fm-primary:          #E8541A;
-  --fm-primary-hov:      #FF6B35;
-  --fm-primary-bg:       rgba(232,84,26,0.10);
-  --fm-primary-soft:     rgba(232,84,26,0.18);
-  --fm-primary-glow:     rgba(232,84,26,0.30);
-  --fm-secondary:        #059669;
-  --fm-secondary-bg:     rgba(5,150,105,0.10);
-  --fm-secondary-faint:  rgba(5,150,105,0.06);
-  --fm-coral:            #DC2626;
-  --fm-coral-faint:      rgba(220,38,38,0.08);
-  --fm-xp:               #D97706;
-  --fm-xp-bg:            rgba(217,119,6,0.10);
-  --fm-text:             #0F172A;
-  --fm-text-muted:       rgba(15,23,42,0.52);
-  --fm-text-dim:         rgba(15,23,42,0.28);
-  --fm-white:            #FFFFFF;
+  --fm-bg-deep:           #F6F4F0;   /* warm off-white paper                  */
+  --fm-bg-card:           #FFFFFF;
+  --fm-bg-elevated:       #EDE9E4;
+  --fm-bg-input:          #E8E4DE;
+  --fm-border:            #D0CAC0;
+  --fm-border-mid:        #B8B0A4;
+
+  --fm-primary:           #C84B2F;
+  --fm-primary-hov:       #D85535;
+  --fm-primary-bg:        rgba(200,75,47,0.09);
+  --fm-primary-soft:      rgba(200,75,47,0.18);
+  --fm-primary-glow:      rgba(200,75,47,0.28);
+  --fm-primary-shadow:    #8C3320;
+
+  --fm-secondary:         #2E8A62;
+  --fm-secondary-bg:      rgba(46,138,98,0.10);
+  --fm-secondary-faint:   rgba(46,138,98,0.05);
+  --fm-secondary-shadow:  #1F6044;
+
+  --fm-coral:             #C43040;
+  --fm-coral-faint:       rgba(196,48,64,0.08);
+  --fm-coral-shadow:      #8C1828;
+
+  --fm-streak:            #BF7A18;
+  --fm-streak-bg:         rgba(191,122,24,0.10);
+  --fm-xp:                #BF7A18;
+  --fm-xp-bg:             rgba(191,122,24,0.10);
+
+  --fm-text:              #1C1A28;
+  --fm-text-muted:        rgba(28,26,40,0.50);
+  --fm-text-dim:          rgba(28,26,40,0.26);
+  --fm-white:             #FFFFFF;
 }
 
 /* ── Large text mode ─────────────────────────────────────────────────────── */
@@ -266,12 +294,17 @@ body.large-text .fm-choices button  { font-size: 18px; }
 .fm-page-header { margin-bottom: 36px; }
 
 .fm-page-eyebrow {
+  font-family: 'Oswald', 'DM Sans', sans-serif;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--fm-primary);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 2px;
   margin-bottom: 10px;
+}
+[dir='rtl'] .fm-page-eyebrow {
+  font-family: 'Miriam Libre', sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .fm-page-title {
@@ -408,15 +441,17 @@ body.large-text .fm-choices button  { font-size: 18px; }
 
 .fm-runner-progress {
   flex: 1;
-  height: 8px;
+  height: 9px;
   background: var(--fm-bg-input);
   border-radius: 999px;
   overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.25);
 }
 .fm-runner-progress-bar {
   height: 100%;
-  background: linear-gradient(90deg, var(--fm-primary), var(--fm-xp));
+  background: var(--fm-primary);
   border-radius: 999px;
+  box-shadow: 0 1px 4px var(--fm-primary-glow);
   transition: width 0.4s cubic-bezier(0.22,1,0.36,1);
 }
 
@@ -433,23 +468,24 @@ body.large-text .fm-choices button  { font-size: 18px; }
   max-width: 580px;
 }
 
-/* Fixed bottom feedback panel (Duolingo style) */
+/* Fixed bottom feedback panel */
 .fm-feedback-panel {
   position: fixed;
   bottom: 0;
-  left: 252px; /* sidebar width */
+  left: 252px;
   right: 0;
   z-index: 40;
-  padding: 20px 28px 28px;
-  border-top: 2px solid;
-  animation: fm-slide-up 0.25s cubic-bezier(0.22,1,0.36,1);
+  padding: 22px 28px 32px;
+  border-top: 3px solid;
+  animation: fm-slide-up 0.22s cubic-bezier(0.22,1,0.36,1);
+  backdrop-filter: blur(8px);
 }
 .fm-feedback-panel.correct {
-  background: var(--fm-secondary-bg);
+  background: color-mix(in srgb, var(--fm-bg-deep) 85%, var(--fm-secondary));
   border-color: var(--fm-secondary);
 }
 .fm-feedback-panel.wrong {
-  background: var(--fm-coral-faint);
+  background: color-mix(in srgb, var(--fm-bg-deep) 88%, var(--fm-coral));
   border-color: var(--fm-coral);
 }
 @media (max-width: 900px) {
@@ -475,42 +511,72 @@ body.large-text .fm-choices button  { font-size: 18px; }
   .fm-choices { grid-template-columns: 1fr; }
 }
 
+/* ── Answer choice — tactile card with hard bottom shadow ───────────────── */
 .fm-choice {
   padding: 18px 20px;
   border-radius: 16px;
   background: var(--fm-bg-card);
   border: 2px solid var(--fm-border);
   color: var(--fm-text);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
   text-align: center;
   min-height: 64px;
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum';
-  letter-spacing: -0.2px;
+  letter-spacing: -0.1px;
+  user-select: none;
+  /* Tactile hard shadow */
+  box-shadow: 0 4px 0 0 var(--fm-border-mid, #353550);
+  transform: translateY(0);
+  transition:
+    transform 0.09s cubic-bezier(0.34,1.2,0.64,1),
+    box-shadow 0.09s ease,
+    border-color 0.12s ease,
+    background 0.12s ease,
+    color 0.12s ease,
+    opacity 0.15s ease;
 }
-.fm-choice:not(:disabled):hover {
+.fm-choice:not(:disabled):not(.correct):not(.wrong):hover {
+  border-color: var(--fm-primary-soft);
+  background: var(--fm-primary-bg);
+  color: var(--fm-primary);
+  box-shadow: 0 4px 0 0 var(--fm-primary-shadow);
+  transform: translateY(-2px);
+}
+.fm-choice:not(:disabled):not(.correct):not(.wrong):active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 0 transparent;
+}
+/* Selected (before reveal) */
+.fm-choice.selected {
   border-color: var(--fm-primary);
   background: var(--fm-primary-bg);
   color: var(--fm-primary);
-  transform: scale(1.02);
+  box-shadow: 0 4px 0 0 var(--fm-primary-shadow);
 }
+/* Correct answer */
 .fm-choice.correct {
   border-color: var(--fm-secondary);
   background: var(--fm-secondary-bg);
   color: var(--fm-secondary);
+  box-shadow: 0 4px 0 0 var(--fm-secondary-shadow);
   animation: fm-correct-pop 0.35s cubic-bezier(0.22,1,0.36,1);
 }
+/* Wrong answer picked */
 .fm-choice.wrong {
   border-color: var(--fm-coral);
   background: var(--fm-coral-faint);
   color: var(--fm-coral);
+  box-shadow: 0 4px 0 0 var(--fm-coral-shadow);
   animation: fm-wrong-shake 0.45s ease;
 }
+/* Other choices after reveal */
 .fm-choice.dimmed {
-  opacity: 0.38;
+  opacity: 0.32;
+  box-shadow: none;
+  transform: none;
 }
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -541,27 +607,75 @@ body.large-text .fm-choices button  { font-size: 18px; }
   margin: 0 auto;
 }
 
+/* ── Tactile primary button — hard bottom shadow, physical press ────────── */
 .fm-btn-primary {
   background: var(--fm-primary);
-  color: white;
+  color: var(--fm-white);
   border-radius: 14px;
   padding: 15px 24px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   width: 100%;
-  transition: filter 0.15s, transform 0.1s;
-  letter-spacing: -0.2px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  letter-spacing: -0.1px;
+  /* Hard tactile shadow — creates physical button feel */
+  box-shadow: 0 5px 0 0 var(--fm-primary-shadow);
+  transform: translateY(0);
+  transition:
+    transform 0.09s cubic-bezier(0.34,1.2,0.64,1),
+    box-shadow 0.09s ease,
+    filter 0.12s ease;
 }
-.fm-btn-primary:hover { filter: brightness(1.1); transform: scale(1.01); }
-.fm-btn-primary:active { transform: scale(0.98); }
-.fm-btn-primary:disabled { opacity: 0.42; cursor: not-allowed; transform: none; }
+.fm-btn-primary:not(:disabled):hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 0 var(--fm-primary-shadow);
+}
+.fm-btn-primary:not(:disabled):active {
+  transform: translateY(5px);
+  box-shadow: 0 0px 0 0 var(--fm-primary-shadow);
+  filter: brightness(0.96);
+}
+.fm-btn-primary:disabled { opacity: 0.40; cursor: not-allowed; box-shadow: none; }
 
+/* ── Tactile success button (green) ────────────────────────────────────── */
+.fm-btn-success {
+  background: var(--fm-secondary);
+  color: var(--fm-white);
+  border-radius: 14px;
+  padding: 15px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 5px 0 0 var(--fm-secondary-shadow);
+  transform: translateY(0);
+  transition: transform 0.09s cubic-bezier(0.34,1.2,0.64,1), box-shadow 0.09s ease, filter 0.12s ease;
+}
+.fm-btn-success:not(:disabled):hover {
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 0 0 var(--fm-secondary-shadow);
+}
+.fm-btn-success:not(:disabled):active {
+  transform: translateY(5px);
+  box-shadow: 0 0px 0 0 var(--fm-secondary-shadow);
+}
+
+/* ── Ghost button ───────────────────────────────────────────────────────── */
 .fm-btn-ghost {
   color: var(--fm-text-muted);
   padding: 10px;
   font-size: 14px;
   transition: color 0.15s;
   font-weight: 600;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 .fm-btn-ghost:hover { color: var(--fm-text); }
 
@@ -717,8 +831,8 @@ body.large-text .fm-choices button  { font-size: 18px; }
 }
 
 @keyframes fm-pulse {
-  0%,100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(88,204,2,0); }
-  50%     { transform: scale(1.06); box-shadow: 0 0 0 10px rgba(88,204,2,0.15); }
+  0%,100% { transform: scale(1); box-shadow: 0 5px 0 0 var(--fm-primary-shadow); }
+  50%     { transform: scale(1.06); box-shadow: 0 5px 0 0 var(--fm-primary-shadow), 0 0 0 14px var(--fm-primary-bg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
