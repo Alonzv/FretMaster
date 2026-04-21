@@ -67,10 +67,12 @@ function deriveStatus(node: TreeNode, progress: Record<string, NodeProgress>): N
   return allDone ? 'available' : 'locked'
 }
 
-/** Returns all tree nodes enriched with status and progress. */
-export function getTreeWithStatus(): NodeWithStatus[] {
+/** Returns all tree nodes enriched with status and progress.
+ *  Pass a custom nodes array for topic-specific trees; defaults to the
+ *  global TREE_NODES when called with no argument. */
+export function getTreeWithStatus(nodes: TreeNode[] = TREE_NODES): NodeWithStatus[] {
   const progress = loadTreeProgress()
-  return TREE_NODES.map(node => ({
+  return nodes.map(node => ({
     ...node,
     status:   deriveStatus(node, progress),
     progress: progress[node.id] ?? { stars: 0, bestAccuracy: 0, attempts: 0 },

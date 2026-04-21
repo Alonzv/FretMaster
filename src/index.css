@@ -183,6 +183,32 @@ body.large-text .fm-choices button  { font-size: 18px; }
    Layout: sidebar + main content
    ──────────────────────────────────────────────────────────────────────── */
 
+/* ── Sidebar width token ─────────────────────────────────────────────────── */
+:root { --fm-sidebar-w: 252px; }
+@media (max-width: 900px) { :root { --fm-sidebar-w: 0px; } }
+
+/* Modal overlay that's centered inside the main content area (not full viewport) */
+.fm-modal-overlay {
+  position: fixed;
+  top: 0; bottom: 0;
+  left: var(--fm-sidebar-w);
+  right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  background: rgba(0,0,0,0.6);
+}
+/* RTL: sidebar is on the right side */
+[dir='rtl'] .fm-modal-overlay {
+  left: 0;
+  right: var(--fm-sidebar-w);
+}
+@media (max-width: 900px) {
+  .fm-modal-overlay { left: 0; right: 0; }
+}
+
 .fm-layout {
   display: flex;
   min-height: 100vh;

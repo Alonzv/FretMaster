@@ -27,6 +27,20 @@ export type CategoryId =
   | 'genre_metal'
   | 'genre_folk'
   | 'genre_funk'
+  // Stage 1 — Foundations
+  | 'major_scale'
+  // Stage 2 — Intermediate
+  | 'diatonic_harmony'
+  | 'caged_system'
+  | 'seventh_chords'
+  | 'pentatonic_blues'
+  | 'minor_scales'
+  // Stage 3 — Advanced
+  | 'modes_theory'
+  | 'modal_interchange'
+  | 'voice_leading'
+  | 'polyrhythm'
+  | 'chord_soloing'
 
 export interface CategoryMeta {
   id: CategoryId
@@ -107,4 +121,4 @@ export interface CategoryProgress {
   mastery: 'none' | 'bronze' | 'silver' | 'gold'
 }
 
-export type QuestionGenerator = (difficulty: Difficulty) => Question
+export type QuestionGenerator = (difficulty: Difficulty, lessonFocus?: string) => Question

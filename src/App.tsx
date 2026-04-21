@@ -6,10 +6,13 @@ import OnboardingFlow from './components/onboarding/OnboardingFlow'
 import type { OnboardingData } from './store/onboarding'
 import DailyTab    from './components/tabs/DailyTab'
 import PracticeTab from './components/tabs/PracticeTab'
+import HomeTab     from './components/tabs/HomeTab'
 import ProfileScreen from './components/ProfileScreen'
 import Sidebar       from './components/Sidebar'
 import AppIntro, { hasSeenIntro } from './components/AppIntro'
 import SkillTreeView from './components/skilltree/SkillTreeView'
+import type { Topic } from './lib/topics/topicData'
+import { getTopicTree } from './lib/topics/topicTrees'
 import type { User } from '@supabase/supabase-js'
 import type { CategoryId, CategoryProgress, SessionResult } from './lib/challenges/types'
 import { loadAllProgress, applySessionResult } from './lib/challenges/progress'
@@ -37,6 +40,7 @@ export default function App() {
   const [profile, setProfile]   = useState<UserProfile | null>(null)
   const [checking, setChecking] = useState(true)
   const [activeTab, setActiveTab] = useState<ActiveTab>('home')
+  const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
   const [showProfile, setShowProfile] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -167,7 +171,7 @@ export default function App() {
 
       <Sidebar
         activeTab={activeTab}
-        onTabChange={(t) => { setActiveTab(t); setSidebarOpen(false) }}
+        onTabChange={(t) => { setActiveTab(t); setSidebarOpen(false); if (t !== 'home') setSelectedTopic(null) }}
         onOpenProfile={() => setShowProfile(true)}
         user={user}
         profileName={profileName}
@@ -180,7 +184,20 @@ export default function App() {
       <div className="fm-sidebar-space" />
 
       <main className="fm-main">
-        {activeTab === 'home'     && <SkillTreeView hearts={hearts} streak={streak} onSessionComplete={handleSessionComplete} onWrongAnswer={handleWrongAnswer} />}
+        {activeTab === 'home' && !selectedTopic && (
+          <HomeTab onSelectTopic={topic => setSelectedTopic(topic)} />
+        )}
+        {activeTab === 'home' && selectedTopic && (
+          <SkillTreeView
+            hearts={hearts}
+            streak={streak}
+            onSessionComplete={handleSessionComplete}
+            onWrongAnswer={handleWrongAnswer}
+            topicNodes={getTopicTree(selectedTopic.id)}
+            topicTitle={{ he: selectedTopic.titleHe, en: selectedTopic.titleEn }}
+            onBack={() => setSelectedTopic(null)}
+          />
+        )}
         {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
         {activeTab === 'practice' && <PracticeTab />}
       </main>

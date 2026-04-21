@@ -5,6 +5,7 @@ import type { HeartsState } from '../../lib/gamification/hearts'
 import type { StreakState } from '../../lib/gamification/streak'
 import { loadXP, addXP, getLevel, getLevelProgress, type XPState } from '../../lib/gamification/xp'
 import { getTreeWithStatus, findNextNode, applySessionToNode, type NodeWithStatus } from '../../lib/skilltree/treeEngine'
+import type { TreeNode } from '../../lib/skilltree/treeData'
 import ChallengeRunner from '../challenges/ChallengeRunner'
 import HeartsDisplay from '../challenges/HeartsDisplay'
 import TactileButton from '../ui/TactileButton'
@@ -25,20 +26,24 @@ interface Props {
   streak: StreakState
   onSessionComplete: (result: SessionResult) => void
   onWrongAnswer: () => void
+  /** When provided, shows this topic's 25-node tree instead of the global tree */
+  topicNodes?: TreeNode[]
+  topicTitle?: { he: string; en: string }
+  onBack?: () => void
 }
 
-export default function SkillTreeView({ hearts, streak, onSessionComplete, onWrongAnswer }: Props) {
+export default function SkillTreeView({ hearts, streak, onSessionComplete, onWrongAnswer, topicNodes, topicTitle, onBack }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
-  const [nodes, setNodes]       = useState<NodeWithStatus[]>(() => getTreeWithStatus())
+  const [nodes, setNodes]       = useState<NodeWithStatus[]>(() => getTreeWithStatus(topicNodes))
   const [selected, setSelected] = useState<NodeWithStatus | null>(null)
   const [running, setRunning]   = useState(false)
   const [xp, setXp]             = useState<XPState>(() => loadXP())
   const [winNode, setWinNode]   = useState<{ title: string; xpGained: number; stars: number } | null>(null)
   const nextNodeRef             = useRef<HTMLButtonElement>(null)
 
-  const refreshTree = useCallback(() => setNodes(getTreeWithStatus()), [])
+  const refreshTree = useCallback(() => setNodes(getTreeWithStatus(topicNodes)), [topicNodes])
 
   useEffect(() => {
     setTimeout(() => nextNodeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300)
@@ -106,6 +111,31 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
         display: 'flex', flexDirection: 'column', gap: 10,
         boxShadow: '0 2px 12px rgba(0,0,0,0.18)',
       }}>
+        {/* Topic back button row */}
+        {onBack && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 2 }}>
+            <button
+              onClick={onBack}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                background: 'transparent', border: 'none', cursor: 'pointer',
+                color: 'var(--fm-primary)', fontSize: 14, fontWeight: 700, padding: '2px 0',
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d={isHe
+                  ? 'M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z'
+                  : 'M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z'} />
+              </svg>
+              {isHe ? 'חזרה לנושאים' : 'Back to Topics'}
+            </button>
+            {topicTitle && (
+              <span style={{ fontSize: 15, fontWeight: 800, color: 'var(--fm-text)', flex: 1, textAlign: 'center' }}>
+                {isHe ? topicTitle.he : topicTitle.en}
+              </span>
+            )}
+          </div>
+        )}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <StreakChip count={streak.count} isHe={isHe} />
           <HeartsDisplay hearts={hearts} />
@@ -507,15 +537,7 @@ function NodeSheet({ node, isHe, hearts, onStart, onClose }: {
   }
 
   return (
-    <div
-      style={{
-        position: 'fixed', inset: 0, zIndex: 50,
-        background: 'rgba(0,0,0,0.6)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '0 16px',
-      }}
-      onClick={onClose}
-    >
+    <div className="fm-modal-overlay" onClick={onClose}>
       <div
         style={{
           width: '100%', maxWidth: 460,
