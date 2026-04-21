@@ -81,16 +81,17 @@ export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, is
 
           <div>
             <div style={{
-              fontSize: 15, fontWeight: 800,
+              fontSize: 18, fontWeight: 900,
               color: wasCorrect ? 'var(--fm-secondary)' : 'var(--fm-coral)',
               fontFamily: "'Oswald', 'DM Sans', sans-serif",
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
+              animation: wasCorrect ? 'fm-correct-pop 0.3s ease' : 'fm-wrong-shake 0.4s ease',
             }}>
               {label}
             </div>
             {!wasCorrect && (
-              <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 2 }}>
+              <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 4 }}>
                 {isHe ? 'התשובה הנכונה: ' : 'Answer: '}
                 <span style={{ fontWeight: 700, color: 'var(--fm-text)' }}>
                   {isHe ? correctChoice.he : correctChoice.en}
