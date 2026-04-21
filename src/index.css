@@ -26,6 +26,20 @@
   font-display: swap;
 }
 @font-face {
+  font-family: 'Shimshon';
+  src: url('./assets/fonts/Shimshon-Regular.ttf') format('truetype');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Shimshon';
+  src: url('./assets/fonts/Shimshon-Bold.ttf') format('truetype');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Oswald';
   src: url('./assets/fonts/Oswald-Regular.ttf') format('truetype');
   font-weight: 400;
@@ -56,7 +70,7 @@ html, body, #root { height: 100%; }
 
 /* Body typography:
    – LTR (English): DM Sans (modern grotesque) for body; Oswald for display
-   – RTL (Hebrew): Miriam Libre for body; Oswald for display labels              */
+   – RTL (Hebrew): Shimshon for body & display                                   */
 body {
   margin: 0;
   min-width: 320px;
@@ -65,14 +79,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-family: 'Miriam Libre', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Shimshon', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body:not([dir='rtl']), body[dir='ltr'] {
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 :lang(he), [dir='rtl'] {
-  font-family: 'Miriam Libre', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Shimshon', sans-serif;
 }
 
 /* Oswald for display text — eyebrows, runner labels, section headers */
@@ -82,7 +96,7 @@ body:not([dir='rtl']), body[dir='ltr'] {
   text-transform: uppercase;
 }
 [dir='rtl'] .fm-display {
-  font-family: 'Miriam Libre', sans-serif;
+  font-family: 'Shimshon', sans-serif;
   letter-spacing: 0.02em;
 }
 
@@ -329,7 +343,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
   margin-bottom: 10px;
 }
 [dir='rtl'] .fm-page-eyebrow {
-  font-family: 'Miriam Libre', sans-serif;
+  font-family: 'Shimshon', sans-serif;
   letter-spacing: 0.5px;
 }
 
