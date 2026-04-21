@@ -150,7 +150,7 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
 
         <div className="fm-runner-body">
           <div className="fm-runner-content">
-            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 20, textAlign: 'center', fontFamily: "'Oswald','DM Sans',sans-serif" }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 20, textAlign: 'center', fontFamily: 'var(--fm-font-display)' }}>
               {isHe ? 'האתגר היומי' : 'Daily Challenge'}
             </div>
 
@@ -191,7 +191,7 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
       padding: '0 24px',
     }}>
       <div style={{
-        fontFamily: "'Oswald','DM Sans',sans-serif",
+        fontFamily: 'var(--fm-font-display)',
         fontSize: 11, fontWeight: 600,
         color: 'var(--fm-primary)',
         textTransform: 'uppercase', letterSpacing: '0.2em',

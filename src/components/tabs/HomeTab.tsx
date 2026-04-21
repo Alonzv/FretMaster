@@ -41,7 +41,7 @@ export default function HomeTab({ onSelectTopic }: Props) {
         <h1 style={{
           fontSize: 26, fontWeight: 900, margin: '0 0 6px',
           color: 'var(--fm-text)',
-          fontFamily: "'Oswald', 'DM Sans', sans-serif",
+          fontFamily: 'var(--fm-font-display)',
         }}>
           {isHe ? 'בחר נושא ללמידה' : 'Choose a Topic'}
         </h1>

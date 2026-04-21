@@ -87,6 +87,8 @@ body:not([dir='rtl']), body[dir='ltr'] {
 }
 :lang(he), [dir='rtl'] {
   font-family: 'Shimshon', sans-serif;
+  --fm-font-display: 'Shimshon', sans-serif;
+  --fm-font-body:    'Shimshon', sans-serif;
 }
 
 /* Oswald for display text — eyebrows, runner labels, section headers */
@@ -109,6 +111,10 @@ input { font-family: inherit; }
    ──────────────────────────────────────────────────────────────────────── */
 
 :root {
+  /* ── Font stacks — swapped by RTL ─────────────────────────────────────── */
+  --fm-font-display: 'Oswald', 'DM Sans', sans-serif;
+  --fm-font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
   /* ── Surfaces — warm analog dark ──────────────────────────────────────── */
   --fm-bg-deep:           #0D0C09;   /* old leather near-black                */
   --fm-bg-card:           #161310;   /* dark walnut card                      */

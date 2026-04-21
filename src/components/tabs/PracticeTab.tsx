@@ -216,7 +216,7 @@ export default function PracticeTab() {
 
         <div className="fm-runner-body">
           <div className="fm-runner-content">
-            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 20, textAlign: 'center', fontFamily: "'Oswald','DM Sans',sans-serif" }}>
+            <div style={{ fontSize: 11, fontWeight: 600, color: 'var(--fm-primary)', textTransform: 'uppercase', letterSpacing: '0.15em', marginBottom: 20, textAlign: 'center', fontFamily: 'var(--fm-font-display)' }}>
               {isHe ? 'תרגול חופשי' : 'Free Practice'} {cat && `· ${isHe ? cat.titleHe : cat.titleEn}`}
             </div>
 
@@ -285,7 +285,7 @@ export default function PracticeTab() {
 
       {/* ── Core Theory ─────────────────────────────────────────────────── */}
       <div style={{
-        fontFamily: "'Oswald','DM Sans',sans-serif",
+        fontFamily: 'var(--fm-font-display)',
         fontSize: 11, fontWeight: 600,
         color: 'var(--fm-text-muted)',
         textTransform: 'uppercase', letterSpacing: '0.15em',
@@ -338,7 +338,7 @@ export default function PracticeTab() {
       {/* ── Genre Theory Section ─────────────────────────────────────────── */}
       <div style={{ marginTop: 40 }}>
         <div style={{
-          fontFamily: "'Oswald','DM Sans',sans-serif",
+          fontFamily: 'var(--fm-font-display)',
           fontSize: 11, fontWeight: 600,
           color: 'var(--fm-text-muted)',
           textTransform: 'uppercase', letterSpacing: '0.15em',

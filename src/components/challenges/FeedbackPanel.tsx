@@ -83,7 +83,7 @@ export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, is
             <div style={{
               fontSize: 18, fontWeight: 900,
               color: wasCorrect ? 'var(--fm-secondary)' : 'var(--fm-coral)',
-              fontFamily: "'Oswald', 'DM Sans', sans-serif",
+              fontFamily: 'var(--fm-font-display)',
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
               animation: wasCorrect ? 'fm-correct-pop 0.3s ease' : 'fm-wrong-shake 0.4s ease',
