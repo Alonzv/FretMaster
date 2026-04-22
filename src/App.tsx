@@ -117,7 +117,7 @@ export default function App() {
   if (checking) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: 'var(--fm-bg-deep)' }}>
-        <div style={{ fontSize: 32, fontWeight: 800, color: 'var(--fm-primary)' }}>FretMaster</div>
+        <div style={{ fontSize: 34, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em' }} className="fm-logo-glow">🎸 FretMaster</div>
       </div>
     )
   }
@@ -151,7 +151,7 @@ export default function App() {
             <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
           </svg>
         </button>
-        <div style={{ fontSize: 17, fontWeight: 800, color: 'var(--fm-primary)' }}>FretMaster</div>
+        <div style={{ fontSize: 19, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em' }}>🎸 FretMaster</div>
         <button
           onClick={() => setShowProfile(true)}
           aria-label="Profile"

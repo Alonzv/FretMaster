@@ -70,7 +70,7 @@ export default function AuthScreen({ onboardingData, onComplete }: Props) {
       onComplete(onboardingData)
     } catch (e: unknown) {
       setError(t('auth.error'))
-      console.error(e)
+      void e // swallow — user sees error message above
     } finally {
       setLoading(false)
     }
@@ -79,7 +79,7 @@ export default function AuthScreen({ onboardingData, onComplete }: Props) {
   return (
     <div className="fm-onboard" dir={isRTL ? 'rtl' : 'ltr'}>
       <div style={{ marginBottom: 32 }}>
-        <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--fm-primary)' }}>🎸 FretMaster</span>
+        <span style={{ fontSize: 26, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em' }} className="fm-logo-glow">🎸 FretMaster</span>
       </div>
 
       <h1 style={{ fontSize: 26, fontWeight: 700, color: 'var(--fm-text)', marginBottom: 8 }}>

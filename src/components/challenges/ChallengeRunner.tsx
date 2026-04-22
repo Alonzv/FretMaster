@@ -137,6 +137,9 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
               onNext={handleNext}
               isLast={isLast}
               isHe={isHe}
+              xpEarned={selectedIndex === current.correctIndex
+                ? (difficulty === 'easy' ? 5 : difficulty === 'medium' ? 10 : 20)
+                : undefined}
             />
           )}
         </div>

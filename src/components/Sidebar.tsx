@@ -53,8 +53,8 @@ export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, p
       >
         {/* Logo */}
         <div style={{ padding: '28px 22px 20px' }}>
-          <div style={{ fontSize: 20, fontWeight: 800, color: 'var(--fm-primary)', letterSpacing: '-0.4px' }}>
-            FretMaster
+          <div style={{ fontSize: 22, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em' }} className="fm-logo-glow">
+            🎸 FretMaster
           </div>
         </div>
 

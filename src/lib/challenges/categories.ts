@@ -20,6 +20,13 @@ import { generateCagedSystemQuestion }       from './generators/cagedSystem'
 import { generateSeventhChordsQuestion }     from './generators/seventhChords'
 import { generatePentatonicBluesQuestion }   from './generators/pentatonicBlues'
 import { generateMinorScalesQuestion }       from './generators/minorScales'
+// Ear training (Phase 2 — text-based conceptual questions)
+import {
+  generateIntervalsEarQuestion,
+  generateChordQualityQuestion,
+  generateChordProgressionsQuestion,
+  generateScaleIdQuestion,
+} from './generators/earTraining'
 // Stage 3
 import { generateModesTheoryQuestion }       from './generators/modesTheory'
 import { generateModalInterchangeQuestion }  from './generators/modalInterchange'
@@ -233,37 +240,37 @@ export const CATEGORIES: CategoryEntry[] = [
     descEn: 'Hear two notes — what is the interval?',
     phase: 2,
     icon: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
-    generator: null,
+    generator: generateIntervalsEarQuestion,
   },
   {
     id: 'chord_quality',
     titleHe: 'זיהוי אקורד',
     titleEn: 'Chord Recognition',
-    descHe: 'שמע אקורד — מז׳ור, מינור, מוקטן, מוגדל',
-    descEn: 'Hear a chord and name its type',
+    descHe: 'מז׳ור, מינור, מוקטן, מוגדל — מה ההבדלים?',
+    descEn: 'Major, minor, diminished, augmented — spot the difference',
     phase: 2,
     icon: 'M6 3h12v18H6V3zm2 2v14h8V5H8z',
-    generator: null,
+    generator: generateChordQualityQuestion,
   },
   {
     id: 'chord_progressions',
     titleHe: 'פרוגרסיות אקורדים',
     titleEn: 'Chord Progressions',
-    descHe: 'שמע פרוגרסיה — זהה את הדרגות',
-    descEn: 'Hear a progression — name the degrees',
+    descHe: 'I–IV–V, ii–V–I, 12-bar blues ועוד',
+    descEn: 'I–IV–V, ii–V–I, 12-bar blues and more',
     phase: 2,
     icon: 'M3 12h4l3-9 4 18 3-9h4',
-    generator: null,
+    generator: generateChordProgressionsQuestion,
   },
   {
     id: 'scale_id',
-    titleHe: 'זיהוי סולם',
+    titleHe: 'זיהוי סולמות',
     titleEn: 'Scale ID',
     descHe: 'מז׳ור, מינור, פנטטוני, מודוסים',
     descEn: 'Major, minor, pentatonic, modes',
     phase: 2,
     icon: 'M4 11h16v2H4v-2zm0-6h16v2H4V5zm0 12h10v2H4v-2z',
-    generator: null,
+    generator: generateScaleIdQuestion,
   },
 
   // ── Genre theory ────────────────────────────────────────────────────────
