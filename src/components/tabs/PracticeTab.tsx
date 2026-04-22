@@ -5,6 +5,7 @@ import { CATEGORIES, getCategory } from '../../lib/challenges/categories'
 import QuestionCard from '../challenges/QuestionCard'
 import FeedbackPanel from '../challenges/FeedbackPanel'
 import TactileButton from '../ui/TactileButton'
+import type { HeartsState } from '../../lib/gamification/hearts'
 
 // ── Persist practice session state so user can resume ────────────────────────
 const RESUME_KEY = 'fm_practice_resume_v1'
@@ -36,7 +37,12 @@ function clearResume() {
 
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PracticeTab() {
+interface Props {
+  hearts?: HeartsState
+  onWrongAnswer?: () => void
+}
+
+export default function PracticeTab({ hearts: _hearts, onWrongAnswer }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
@@ -139,6 +145,7 @@ export default function PracticeTab() {
     const correct = chosenIndex === current.correctIndex
     setSelectedIndex(chosenIndex)
     setRevealed(true)
+    if (!correct) onWrongAnswer?.()
     const newStreak = correct ? streak + 1 : 0
     const newSeen   = seen + 1
     setStreak(newStreak)

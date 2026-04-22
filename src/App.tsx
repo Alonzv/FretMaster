@@ -199,7 +199,7 @@ export default function App() {
           />
         )}
         {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
-        {activeTab === 'practice' && <PracticeTab />}
+        {activeTab === 'practice' && <PracticeTab hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
       </main>
 
       {showProfile && user && (

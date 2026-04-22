@@ -5,23 +5,9 @@
    ──────────────────────────────────────────────────────────────────────── */
 
 @font-face {
-  font-family: 'Miriam Libre';
-  src: url('./assets/fonts/MiriamLibre-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Miriam Libre';
-  src: url('./assets/fonts/MiriamLibre-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Miriam Libre';
-  src: url('./assets/fonts/MiriamLibre-Bold.ttf') format('truetype');
-  font-weight: 700;
+  font-family: 'BoldsPixels';
+  src: url('./assets/fonts/BoldsPixels.ttf') format('truetype');
+  font-weight: 400 900;
   font-style: normal;
   font-display: swap;
 }
@@ -91,9 +77,9 @@ body:not([dir='rtl']), body[dir='ltr'] {
   --fm-font-body:    'Shimshon', sans-serif;
 }
 
-/* Oswald for display text — eyebrows, runner labels, section headers */
+/* BoldsPixels for display text — eyebrows, runner labels, section headers */
 .fm-display {
-  font-family: 'Oswald', 'DM Sans', sans-serif;
+  font-family: 'BoldsPixels', 'DM Sans', sans-serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -112,7 +98,7 @@ input { font-family: inherit; }
 
 :root {
   /* ── Font stacks — swapped by RTL ─────────────────────────────────────── */
-  --fm-font-display: 'Oswald', 'DM Sans', sans-serif;
+  --fm-font-display: 'BoldsPixels', 'DM Sans', sans-serif;
   --fm-font-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* ── Surfaces — warm analog dark ──────────────────────────────────────── */
@@ -193,11 +179,11 @@ body.light {
 
 /* ── Large text mode ─────────────────────────────────────────────────────── */
 body.large-text {
-  font-size: 18px;
+  font-size: 21px;
 }
-body.large-text .fm-page-title      { font-size: 36px; }
-body.large-text .fm-page-subtitle   { font-size: 17px; }
-body.large-text .fm-choices button  { font-size: 18px; }
+body.large-text .fm-page-title      { font-size: 41px; }
+body.large-text .fm-page-subtitle   { font-size: 20px; }
+body.large-text .fm-choices button  { font-size: 21px; }
 
 /* ────────────────────────────────────────────────────────────────────────
    Layout: sidebar + main content
@@ -294,7 +280,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
   padding: 12px 16px;
   border-radius: 14px;
   color: var(--fm-text-muted);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 600;
   letter-spacing: -0.2px;
   width: 100%;
@@ -340,8 +326,8 @@ body.large-text .fm-choices button  { font-size: 18px; }
 .fm-page-header { margin-bottom: 36px; }
 
 .fm-page-eyebrow {
-  font-family: 'Oswald', 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-family: 'BoldsPixels', 'DM Sans', sans-serif;
+  font-size: 13px;
   font-weight: 600;
   color: var(--fm-primary);
   text-transform: uppercase;
@@ -354,7 +340,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
 }
 
 .fm-page-title {
-  font-size: 34px;
+  font-size: 39px;
   font-weight: 800;
   color: var(--fm-text);
   margin: 0;
@@ -363,7 +349,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
 }
 
 .fm-page-subtitle {
-  font-size: 15px;
+  font-size: 17px;
   color: var(--fm-text-muted);
   margin: 12px 0 0;
   line-height: 1.6;
@@ -372,8 +358,8 @@ body.large-text .fm-choices button  { font-size: 18px; }
 
 @media (max-width: 640px) {
   .fm-page { padding: 24px 18px 80px; }
-  .fm-page-title { font-size: 26px; }
-  .fm-page-subtitle { font-size: 14px; }
+  .fm-page-title { font-size: 30px; }
+  .fm-page-subtitle { font-size: 16px; }
 }
 
 /* ────────────────────────────────────────────────────────────────────────
@@ -457,7 +443,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
   box-shadow: 0 16px 40px rgba(0,0,0,0.25);
 }
 .fm-genre-icon {
-  font-size: 36px;
+  font-size: 41px;
   line-height: 1;
 }
 
@@ -564,7 +550,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
   background: var(--fm-bg-card);
   border: 2px solid var(--fm-border);
   color: var(--fm-text);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
@@ -631,7 +617,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
 
 .fm-heart {
   display: inline-flex;
-  font-size: 20px;
+  font-size: 23px;
   transition: transform 0.2s, opacity 0.3s;
 }
 .fm-heart.lost {
@@ -659,7 +645,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
   color: var(--fm-white);
   border-radius: 14px;
   padding: 15px 24px;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   width: 100%;
   border: none;
@@ -692,7 +678,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
   color: var(--fm-white);
   border-radius: 14px;
   padding: 15px 24px;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   width: 100%;
   border: none;
@@ -716,7 +702,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
 .fm-btn-ghost {
   color: var(--fm-text-muted);
   padding: 10px;
-  font-size: 14px;
+  font-size: 16px;
   transition: color 0.15s;
   font-weight: 600;
   border: none;
@@ -733,7 +719,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
   border: 2px solid var(--fm-border);
   background: var(--fm-bg-input);
   color: var(--fm-text);
-  font-size: 14px;
+  font-size: 16px;
   cursor: pointer;
   transition: all 0.15s;
   user-select: none;
@@ -766,7 +752,7 @@ body.large-text .fm-choices button  { font-size: 18px; }
   border: 2px solid var(--fm-border);
   border-radius: 12px;
   padding: 13px 16px;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--fm-text);
   width: 100%;
   outline: none;
