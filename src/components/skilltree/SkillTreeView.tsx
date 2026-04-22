@@ -433,7 +433,11 @@ function WinOverlay({ title, xpGained, stars, isHe, onClose }: {
         animation: 'fm-celebrate 0.4s cubic-bezier(0.22,1,0.36,1)',
         position: 'relative', zIndex: 1,
       }}>
-        <div style={{ fontSize: 52, marginBottom: 8 }}>🏆</div>
+        <div style={{ marginBottom: 8, display: 'flex', justifyContent: 'center' }}>
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="var(--fm-secondary)" aria-hidden="true">
+            <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2z"/>
+          </svg>
+        </div>
         <div style={{ fontSize: 22, fontWeight: 800, color: 'var(--fm-text)', marginBottom: 4 }}>
           {isHe ? 'כל הכבוד!' : 'Well done!'}
         </div>
@@ -611,7 +615,12 @@ function NodeSheet({ node, isHe, hearts, onStart, onClose }: {
             fontSize: 13, color: 'var(--fm-text-muted)', textAlign: 'center',
             borderBottom: '3px solid var(--fm-border)',
           }}>
-            {isHe ? '🔒 השלם את הצמתים הקודמים כדי לפתוח' : '🔒 Complete previous nodes to unlock'}
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+              </svg>
+              {isHe ? 'השלם את הצמתים הקודמים כדי לפתוח' : 'Complete previous nodes to unlock'}
+            </span>
           </div>
         ) : noHearts ? (
           <div style={{
@@ -620,11 +629,16 @@ function NodeSheet({ node, isHe, hearts, onStart, onClose }: {
             fontSize: 13, color: 'var(--fm-text-muted)', textAlign: 'center',
             borderBottom: '3px solid var(--fm-coral-shadow)',
           }}>
-            {isHe ? '❤️ אזלו הלבבות — המתן לטעינה מחדש כדי להמשיך' : '❤️ No hearts left — wait for a refill to continue'}
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--fm-coral)" aria-hidden="true">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              {isHe ? 'אזלו הלבבות — המתן לטעינה מחדש כדי להמשיך' : 'No hearts left — wait for a refill to continue'}
+            </span>
           </div>
         ) : (
           <TactileButton variant={done ? 'success' : 'primary'} fullWidth onClick={onStart}>
-            {done ? (isHe ? '▶ שחק שוב' : '▶ Play again') : (isHe ? 'התחל' : 'Start')}
+            {done ? (isHe ? 'שחק שוב' : 'Play again') : (isHe ? 'התחל' : 'Start')}
           </TactileButton>
         )}
       </div>

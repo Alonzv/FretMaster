@@ -79,7 +79,14 @@ export default function AuthScreen({ onboardingData, onComplete }: Props) {
   return (
     <div className="fm-onboard" dir={isRTL ? 'rtl' : 'ltr'}>
       <div style={{ marginBottom: 32 }}>
-        <span style={{ fontSize: 26, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em' }} className="fm-logo-glow">🎸 FretMaster</span>
+        <span style={{ fontSize: 26, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em', display: 'inline-flex', alignItems: 'center', gap: 9 }} className="fm-logo-glow">
+          <svg width="17" height="13" viewBox="0 0 17 13" fill="none" aria-hidden="true">
+            <rect y="0" width="17" height="2.5" fill="currentColor"/>
+            <rect y="5.25" width="17" height="2.5" fill="currentColor"/>
+            <rect y="10.5" width="17" height="2.5" fill="currentColor"/>
+          </svg>
+          FretMaster
+        </span>
       </div>
 
       <h1 style={{ fontSize: 26, fontWeight: 700, color: 'var(--fm-text)', marginBottom: 8 }}>

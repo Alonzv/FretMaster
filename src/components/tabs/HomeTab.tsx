@@ -32,10 +32,16 @@ function stageCompletionPct(stage: 1 | 2 | 3): number {
   return totalNodes > 0 ? Math.round((totalDone / totalNodes) * 100) : 0
 }
 
+// Stage icons: geometric SVG paths (no emoji)
+const STAGE_ICONS = {
+  1: <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style={{flexShrink:0}}><path d="M3 3h6v6H3V3zm12 0h6v6h-6V3zM3 15h6v6H3v-6zm12 0h6v6h-6v-6z"/></svg>,
+  2: <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style={{flexShrink:0}}><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>,
+  3: <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style={{flexShrink:0}}><path d="M7 19v-2h4v-3.1c-1.44-.31-2.63-1.05-3.56-2.22C6.5 10.52 6 9.14 6 7.55v-.92L4.08 4.5 5.5 3.08 20.92 18.5 19.5 19.92l-1.97-1.97c-.52.38-1.09.67-1.72.88-.63.21-1.19.16-1.81.17V17H10l-3 2zm9-4.85-3.06-3.06c.04.31.06.62.06.91 0 1.01-.27 1.93-.82 2.75-.55.82-1.27 1.37-2.18 1.65V15h-1V7.55c0-.6.08-1.18.23-1.72L5.4 3.98c.04-.04.04-.06 0-.06l.27.47-.51.52L5 4.77V7.55c0 2.08.7 3.85 2.1 5.33C8.5 14.35 10.13 15 12 15c.63 0 1.24-.09 1.82-.27L14 15h-.15l3 3c.04-.28.07-.57.09-.85H19v-1h-3V15z"/></svg>,
+}
 const STAGE_META = {
-  1: { labelHe: 'שלב 1 — יסודות', labelEn: 'Stage 1 — Foundations',  emoji: '⭐' },
-  2: { labelHe: 'שלב 2 — ביניים',  labelEn: 'Stage 2 — Intermediate', emoji: '🎸' },
-  3: { labelHe: 'שלב 3 — מתקדם',   labelEn: 'Stage 3 — Advanced',     emoji: '🎓' },
+  1: { labelHe: 'שלב 1 — יסודות', labelEn: 'Stage 1 — Foundations' },
+  2: { labelHe: 'שלב 2 — ביניים',  labelEn: 'Stage 2 — Intermediate' },
+  3: { labelHe: 'שלב 3 — מתקדם',   labelEn: 'Stage 3 — Advanced' },
 }
 
 export default function HomeTab({ onSelectTopic }: Props) {
@@ -85,9 +91,11 @@ export default function HomeTab({ onSelectTopic }: Props) {
             padding: '5px 12px',
             background: 'var(--fm-primary-bg)',
             border: '1px solid var(--fm-primary-soft)',
-            borderRadius: 999, cursor: 'default',
+            borderRadius: 0, cursor: 'default',
           }}>
-            <span style={{ fontSize: 14 }}>🏆</span>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--fm-primary)" aria-hidden="true">
+              <path d="M7 2v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-2V2h-2v2H9V2H7zm12 6v12H5V8h14zm-7 2l-1.5 3.1L7 13.5l2.5 2.4-.6 3.1L12 17.4l3.1 1.6-.6-3.1 2.5-2.4-3.5-.4L12 10z"/>
+            </svg>
             <span style={{
               fontSize: 13, fontWeight: 700, color: 'var(--fm-primary)',
               fontFamily: 'var(--fm-font-display)',
@@ -102,10 +110,12 @@ export default function HomeTab({ onSelectTopic }: Props) {
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '5px 12px',
               background: 'var(--fm-streak-bg)',
-              border: '1px solid rgba(196,154,82,0.3)',
-              borderRadius: 999, cursor: 'default',
+              border: '1px solid rgba(245,194,0,0.3)',
+              borderRadius: 0, cursor: 'default',
             }}>
-              <span className="fm-streak-anim" style={{ fontSize: 15 }}>🔥</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--fm-streak)" className="fm-streak-anim" aria-hidden="true">
+                <path d="M7 2v13h3v7l7-12h-4l4-8z"/>
+              </svg>
               <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-streak)' }}>
                 {streakState.count} {isHe ? 'ימים ברצף' : 'day streak'}
               </span>
@@ -117,10 +127,12 @@ export default function HomeTab({ onSelectTopic }: Props) {
             display: 'inline-flex', alignItems: 'center', gap: 6,
             padding: '5px 12px',
             background: 'var(--fm-xp-bg)',
-            border: '1px solid rgba(196,154,82,0.2)',
-            borderRadius: 999, cursor: 'default',
+            border: '1px solid rgba(245,194,0,0.2)',
+            borderRadius: 0, cursor: 'default',
           }}>
-            <span style={{ fontSize: 13 }}>✨</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--fm-xp)" aria-hidden="true">
+              <path d="M12 1L9 9H1l6.5 5L5 22l7-5 7 5-2.5-8L22 9h-8z"/>
+            </svg>
             <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--fm-xp)' }}>
               {xpState.total.toLocaleString()} XP
             </span>
@@ -198,12 +210,17 @@ export default function HomeTab({ onSelectTopic }: Props) {
                   fontSize: 13, fontWeight: 700,
                   color: locked ? 'var(--fm-text-dim)' : 'var(--fm-text-muted)',
                   textTransform: 'uppercase', letterSpacing: '0.12em',
+                  display: 'flex', alignItems: 'center', gap: 6,
                 }}>
-                  {meta.emoji} {isHe ? meta.labelHe : meta.labelEn}
+                  {STAGE_ICONS[stage]}
+                  {isHe ? meta.labelHe : meta.labelEn}
                 </span>
                 {locked && (
                   <span className="fm-locked-badge">
-                    🔒 {isHe ? `נפתח ב-50% שלב 2 (${stage2Pct}%)` : `Unlocks at 50% Stage 2 (${stage2Pct}%)`}
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                    </svg>
+                    {isHe ? `נפתח ב-50% שלב 2 (${stage2Pct}%)` : `Unlocks at 50% Stage 2 (${stage2Pct}%)`}
                   </span>
                 )}
               </div>

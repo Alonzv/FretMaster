@@ -117,7 +117,14 @@ export default function App() {
   if (checking) {
     return (
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: 'var(--fm-bg-deep)' }}>
-        <div style={{ fontSize: 34, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em' }} className="fm-logo-glow">🎸 FretMaster</div>
+        <div style={{ fontSize: 34, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em', display: 'flex', alignItems: 'center', gap: 10 }} className="fm-logo-glow">
+          <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+            <rect y="0" width="22" height="3" fill="currentColor"/>
+            <rect y="6.5" width="22" height="3" fill="currentColor"/>
+            <rect y="13" width="22" height="3" fill="currentColor"/>
+          </svg>
+          FretMaster
+        </div>
       </div>
     )
   }
@@ -151,7 +158,14 @@ export default function App() {
             <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
           </svg>
         </button>
-        <div style={{ fontSize: 19, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em' }}>🎸 FretMaster</div>
+        <div style={{ fontSize: 19, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em', display: 'flex', alignItems: 'center', gap: 7 }}>
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="none" aria-hidden="true">
+            <rect y="0" width="15" height="2" fill="currentColor"/>
+            <rect y="4.5" width="15" height="2" fill="currentColor"/>
+            <rect y="9" width="15" height="2" fill="currentColor"/>
+          </svg>
+          FretMaster
+        </div>
         <button
           onClick={() => setShowProfile(true)}
           aria-label="Profile"

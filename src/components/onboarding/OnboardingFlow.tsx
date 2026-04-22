@@ -91,7 +91,14 @@ export default function OnboardingFlow({ onComplete }: Props) {
     <div className="fm-onboard" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
-        <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--fm-primary)' }}>🎸 FretMaster</span>
+        <span style={{ fontSize: 22, fontWeight: 700, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="none" aria-hidden="true">
+            <rect y="0" width="15" height="2" fill="currentColor"/>
+            <rect y="4.5" width="15" height="2" fill="currentColor"/>
+            <rect y="9" width="15" height="2" fill="currentColor"/>
+          </svg>
+          FretMaster
+        </span>
         <div style={{ display: 'flex', gap: 6 }}>
           {(['he', 'en'] as const).map(l => (
             <button

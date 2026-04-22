@@ -98,7 +98,9 @@ export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, is
                 fontSize: 12, color: 'var(--fm-secondary)', fontWeight: 700, marginTop: 4,
                 display: 'flex', alignItems: 'center', gap: 4,
               }}>
-                <span>✨</span>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 1L9 9H1l6.5 5L5 22l7-5 7 5-2.5-8L22 9h-8z"/>
+                </svg>
                 <span style={{ fontFamily: 'var(--fm-font-display)' }}>+{xpEarned} XP</span>
               </div>
             )}
@@ -122,7 +124,7 @@ export default function FeedbackPanel({ question, wasCorrect, onNext, isLast, is
       {/* CTA */}
       <TactileButton variant={wasCorrect ? 'success' : 'primary'} fullWidth onClick={onNext}>
         {isLast
-          ? (isHe ? '🏆 סיים סשן' : '🏆 Finish session')
+          ? (isHe ? 'סיים סשן' : 'Finish session')
           : (isHe ? 'השאלה הבאה ←' : 'Next question →')}
       </TactileButton>
     </div>
