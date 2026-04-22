@@ -57,15 +57,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-family: 'TelAvivEclecticHe', sans-serif;
+  font-family: 'TelAvivBrutalist', sans-serif;
 }
 body:not([dir='rtl']), body[dir='ltr'] {
-  font-family: 'TelAvivEclecticLat', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'TelAvivBrutalist', sans-serif;
 }
 :lang(he), [dir='rtl'] {
-  font-family: 'TelAvivEclecticHe', sans-serif;
+  font-family: 'TelAvivBrutalist', sans-serif;
   --fm-font-display: 'TelAvivBrutalist', sans-serif;
-  --fm-font-body:    'TelAvivEclecticHe', sans-serif;
+  --fm-font-body:    'TelAvivBrutalist', sans-serif;
 }
 
 /* TelAvivBrutalist for display text */
@@ -90,7 +90,7 @@ input { font-family: inherit; }
 :root {
   /* ── Font stacks ─────────────────────────────────────────────────────── */
   --fm-font-display: 'TelAvivBrutalist', sans-serif;
-  --fm-font-body:    'TelAvivEclecticLat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --fm-font-body:    'TelAvivBrutalist', sans-serif;
 
   /* ── BAUHAUS DARK surfaces ───────────────────────────────────────────── */
   --fm-bg-deep:           #070709;   /* near-void black, slight violet cast */
@@ -663,6 +663,7 @@ body.large-text .fm-choices button  { font-size: 21px; }
   animation: fm-xp-particle-up 1.0s cubic-bezier(0.25,0,0.75,1) forwards;
 }
 [dir='rtl'] .fm-xp-particle { font-family: 'TelAvivBrutalist', sans-serif; }
+
 @keyframes fm-xp-particle-up {
   0%   { transform: translateY(0) scaleX(0.4); opacity: 0; }
   12%  { transform: translateY(-6px) scaleX(1); opacity: 1; }
