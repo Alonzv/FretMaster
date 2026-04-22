@@ -46,7 +46,7 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
 
   // Real stats
   const xp = totalXP(progress)
-  const availableCats = CATEGORIES.filter(c => c.phase === 1 && c.generator)
+  const availableCats = CATEGORIES.filter(c => c.phase === 1 && c.generator && !c.id.startsWith('genre_'))
   const sessions = Object.values(progress).reduce((s, p) => s + p.sessionsPlayed, 0)
   const totalAnswered = Object.values(progress).reduce((s, p) => s + p.totalAnswered, 0)
   const totalCorrect  = Object.values(progress).reduce((s, p) => s + p.totalCorrect, 0)
