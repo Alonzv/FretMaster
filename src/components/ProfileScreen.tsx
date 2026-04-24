@@ -359,7 +359,7 @@ function Section({ title, isHe, children }: { title: string; isHe: boolean; chil
       }}>
         {title}
       </div>
-      <div style={{ padding: '4px 18px 16px' }}>
+      <div style={{ padding: '10px 18px 18px' }}>
         {children}
       </div>
     </div>

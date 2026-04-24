@@ -7,8 +7,10 @@ import { loadXP, addXP, getLevel, getLevelProgress, type XPState } from '../../l
 import { getTreeWithStatus, findNextNode, applySessionToNode, type NodeWithStatus } from '../../lib/skilltree/treeEngine'
 import type { TreeNode } from '../../lib/skilltree/treeData'
 import ChallengeRunner from '../challenges/ChallengeRunner'
+import TheoryIntro from '../challenges/TheoryIntro'
 import HeartsDisplay from '../challenges/HeartsDisplay'
 import TactileButton from '../ui/TactileButton'
+import { CATEGORY_THEORY } from '../../lib/challenges/categoryTheory'
 
 const ZIGZAG = [0, 60, 100, 60, 0, -60, -100, -60]
 
@@ -36,14 +38,24 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
-  const [nodes, setNodes]       = useState<NodeWithStatus[]>(() => getTreeWithStatus(topicNodes))
-  const [selected, setSelected] = useState<NodeWithStatus | null>(null)
-  const [running, setRunning]   = useState(false)
-  const [xp, setXp]             = useState<XPState>(() => loadXP())
-  const [winNode, setWinNode]   = useState<{ title: string; xpGained: number; stars: number } | null>(null)
-  const nextNodeRef             = useRef<HTMLButtonElement>(null)
+  const [nodes, setNodes]         = useState<NodeWithStatus[]>(() => getTreeWithStatus(topicNodes))
+  const [selected, setSelected]   = useState<NodeWithStatus | null>(null)
+  const [running, setRunning]     = useState(false)
+  const [showingTheory, setShowingTheory] = useState(false)
+  const [xp, setXp]               = useState<XPState>(() => loadXP())
+  const [winNode, setWinNode]     = useState<{ title: string; xpGained: number; stars: number } | null>(null)
+  const nextNodeRef               = useRef<HTMLButtonElement>(null)
 
   const refreshTree = useCallback(() => setNodes(getTreeWithStatus(topicNodes)), [topicNodes])
+
+  const handleNodeStart = () => {
+    const entry = selected ? CATEGORY_THEORY[selected.categoryId] : null
+    if (entry) {
+      setShowingTheory(true)
+    } else {
+      setRunning(true)
+    }
+  }
 
   useEffect(() => {
     setTimeout(() => nextNodeRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300)
@@ -87,12 +99,26 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
     )
   }
 
+  if (showingTheory && selected) {
+    const entry = CATEGORY_THEORY[selected.categoryId]
+    if (!entry) { setShowingTheory(false); setRunning(true) }
+    else {
+      return (
+        <TheoryIntro
+          entry={entry}
+          isHe={isHe}
+          onStart={() => { setShowingTheory(false); setRunning(true) }}
+        />
+      )
+    }
+  }
+
   if (winNode) {
     return <WinOverlay title={winNode.title} xpGained={winNode.xpGained} stars={winNode.stars} isHe={isHe} onClose={() => setWinNode(null)} />
   }
 
   if (selected) {
-    return <NodeSheet node={selected} isHe={isHe} hearts={hearts} onStart={() => setRunning(true)} onClose={() => setSelected(null)} />
+    return <NodeSheet node={selected} isHe={isHe} hearts={hearts} onStart={handleNodeStart} onClose={() => setSelected(null)} />
   }
 
   const suggestedNext = findNextNode(nodes)
