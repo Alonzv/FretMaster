@@ -23,6 +23,8 @@ const RING_CIRC   = 2 * Math.PI * RING_R          // ≈ 244.9
 const SEG_LEN     = (RING_CIRC - 6) / 3           // 3 equal arcs, 2px gap each
 const SEG_GAP     = 2
 
+import type { PushBackFn, CleanupBackFn } from '../../App'
+
 interface Props {
   hearts: HeartsState
   streak: StreakState
@@ -32,9 +34,14 @@ interface Props {
   topicNodes?: TreeNode[]
   topicTitle?: { he: string; en: string }
   onBack?: () => void
+  /** App-level history helpers — wire browser back into the component's nav */
+  pushBack?: PushBackFn
+  cleanupBack?: CleanupBackFn
+  /** Called when entering/leaving fullscreen challenge or theory screens */
+  onFullscreenChange?: (fullscreen: boolean) => void
 }
 
-export default function SkillTreeView({ hearts, streak, onSessionComplete, onWrongAnswer, topicNodes, topicTitle, onBack }: Props) {
+export default function SkillTreeView({ hearts, streak, onSessionComplete, onWrongAnswer, topicNodes, topicTitle, onBack, pushBack, cleanupBack, onFullscreenChange }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
@@ -45,15 +52,46 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
   const [xp, setXp]               = useState<XPState>(() => loadXP())
   const [winNode, setWinNode]     = useState<{ title: string; xpGained: number; stars: number } | null>(null)
   const nextNodeRef               = useRef<HTMLButtonElement>(null)
+  /** Tracks how many history entries this component has pushed */
+  const navDepth                  = useRef(0)
 
   const refreshTree = useCallback(() => setNodes(getTreeWithStatus(topicNodes)), [topicNodes])
+
+  // ── Navigation helpers that keep browser history in sync ──────────────────
+  const openNode = useCallback((node: NodeWithStatus) => {
+    setSelected(node)
+    navDepth.current++
+    pushBack?.(() => { setSelected(null) })
+  }, [pushBack])
+
+  const openTheory = useCallback(() => {
+    setShowingTheory(true)
+    onFullscreenChange?.(true)
+    navDepth.current++
+    pushBack?.(() => { setShowingTheory(false); onFullscreenChange?.(false) })
+  }, [pushBack, onFullscreenChange])
+
+  const startChallenge = useCallback(() => {
+    setRunning(true)
+    onFullscreenChange?.(true)
+    navDepth.current++
+    pushBack?.(() => { setRunning(false); onFullscreenChange?.(false) })
+  }, [pushBack, onFullscreenChange])
+
+  /** Silently pops all nav entries this component pushed (for natural exits). */
+  const cleanupNav = useCallback(() => {
+    const depth = navDepth.current
+    navDepth.current = 0
+    if (depth > 0) cleanupBack?.(depth)
+    onFullscreenChange?.(false)
+  }, [cleanupBack, onFullscreenChange])
 
   const handleNodeStart = () => {
     const entry = selected ? CATEGORY_THEORY[selected.categoryId] : null
     if (entry) {
-      setShowingTheory(true)
+      openTheory()
     } else {
-      setRunning(true)
+      startChallenge()
     }
   }
 
@@ -69,8 +107,15 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
         difficulty={selected.difficulty}
         hearts={hearts}
         onWrongAnswer={onWrongAnswer}
-        onExit={() => { setRunning(false); setSelected(null); refreshTree() }}
+        onExit={() => {
+          cleanupNav()
+          setRunning(false)
+          setSelected(null)
+          refreshTree()
+        }}
         onComplete={result => {
+          cleanupNav()
+
           const prevNodes = getTreeWithStatus()
           const prevNode  = prevNodes.find(n => n.id === selected.id)
           const wasNew    = !prevNode || prevNode.progress.stars === 0
@@ -101,13 +146,13 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
 
   if (showingTheory && selected) {
     const entry = CATEGORY_THEORY[selected.categoryId]
-    if (!entry) { setShowingTheory(false); setRunning(true) }
+    if (!entry) { setShowingTheory(false); startChallenge() }
     else {
       return (
         <TheoryIntro
           entry={entry}
           isHe={isHe}
-          onStart={() => { setShowingTheory(false); setRunning(true) }}
+          onStart={() => { setShowingTheory(false); startChallenge() }}
         />
       )
     }
@@ -118,7 +163,20 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
   }
 
   if (selected) {
-    return <NodeSheet node={selected} isHe={isHe} hearts={hearts} onStart={handleNodeStart} onClose={() => setSelected(null)} />
+    return (
+      <NodeSheet
+        node={selected}
+        isHe={isHe}
+        hearts={hearts}
+        onStart={handleNodeStart}
+        onClose={() => {
+          // Closing the sheet is the same as pressing browser back — consume the entry
+          navDepth.current = Math.max(0, navDepth.current - 1)
+          cleanupBack?.(1)
+          setSelected(null)
+        }}
+      />
+    )
   }
 
   const suggestedNext = findNextNode(nodes)
@@ -203,7 +261,7 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
                   isNext={isNext}
                   isHe={isHe}
                   ref={isNext ? nextNodeRef : undefined}
-                  onClick={() => node.status !== 'locked' && setSelected(node)}
+                  onClick={() => node.status !== 'locked' && openNode(node)}
                 />
               </div>
             </div>
