@@ -56,7 +56,6 @@ export default function App() {
   const [settings, setSettings] = useState<AppSettings>(() => loadSettings())
   const [hearts, setHearts] = useState<HeartsState>(() => loadAndRefill())
   const [streak, setStreak] = useState<StreakState>(() => loadStreak())
-  const [navHidden, setNavHidden] = useState(false)   // hide bottom nav in fullscreen modes
   const refillTimerRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const isRTL = i18n.language === 'he'
 
@@ -181,7 +180,6 @@ export default function App() {
     setActiveTab(tab)
     setSelectedTopic(null)  // always clear topic when switching tabs
     setSidebarOpen(false)
-    setNavHidden(false)
   }, [resetToRoot])
 
   // ── Topic navigation ────────────────────────────────────────────────────────
@@ -196,7 +194,6 @@ export default function App() {
     skipPopCount.current++
     history.go(-1)
     setSelectedTopic(null)
-    setNavHidden(false)
   }, [])
 
   if (checking) {
@@ -227,7 +224,7 @@ export default function App() {
 
       {/* ── Top bar ──────────────────────────────────────────────────────────── */}
       <header className="fm-topbar">
-        {selectedTopic && !navHidden ? (
+        {selectedTopic ? (
           /* Back arrow + topic name when inside a topic */
           <button
             onClick={handleBackFromTopic}
@@ -314,7 +311,7 @@ export default function App() {
       <div className="fm-sidebar-space" />
 
       {/* ── Main content ───────────────────────────────────────────────────── */}
-      <main className="fm-main" style={{ paddingBottom: navHidden ? 0 : 72 }}>
+      <main className="fm-main">
         {activeTab === 'home' && !selectedTopic && (
           <HomeTab onSelectTopic={handleSelectTopic} />
         )}
@@ -329,17 +326,11 @@ export default function App() {
             onBack={handleBackFromTopic}
             pushBack={pushBack}
             cleanupBack={cleanupBack}
-            onFullscreenChange={setNavHidden}
           />
         )}
         {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
         {activeTab === 'practice' && <PracticeTab hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
       </main>
-
-      {/* ── Bottom tab navigation bar ────────────────────────────────────────── */}
-      {!navHidden && (
-        <BottomNav activeTab={activeTab} onTabChange={handleTabChange} isRTL={isRTL} />
-      )}
 
       {showProfile && user && (
         <ProfileScreen
@@ -355,94 +346,3 @@ export default function App() {
   )
 }
 
-// ── Bottom navigation bar ─────────────────────────────────────────────────────
-
-const BOTTOM_TABS: { id: ActiveTab; labelHe: string; labelEn: string; iconPath: string }[] = [
-  {
-    id: 'home',
-    labelHe: 'בית',
-    labelEn: 'Home',
-    iconPath: 'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
-  },
-  {
-    id: 'daily',
-    labelHe: 'יומי',
-    labelEn: 'Daily',
-    iconPath: 'M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7z',
-  },
-  {
-    id: 'practice',
-    labelHe: 'תרגול',
-    labelEn: 'Practice',
-    iconPath: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
-  },
-]
-
-function BottomNav({
-  activeTab,
-  onTabChange,
-  isRTL,
-}: {
-  activeTab: ActiveTab
-  onTabChange: (tab: ActiveTab) => void
-  isRTL: boolean
-}) {
-  return (
-    <nav
-      style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
-        background: 'var(--fm-bg-card)',
-        borderTop: '2px solid var(--fm-border)',
-        display: 'flex',
-        direction: isRTL ? 'rtl' : 'ltr',
-        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-        boxShadow: '0 -4px 24px rgba(0,0,0,0.22)',
-      }}
-    >
-      {BOTTOM_TABS.map(tab => {
-        const active = activeTab === tab.id
-        return (
-          <button
-            key={tab.id}
-            onClick={() => onTabChange(tab.id)}
-            style={{
-              flex: 1, padding: '10px 0 12px',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
-              background: 'transparent', border: 'none', cursor: 'pointer',
-              color: active ? 'var(--fm-primary)' : 'var(--fm-text-muted)',
-              transition: 'color 0.15s',
-              position: 'relative',
-            }}
-          >
-            {/* Active indicator bar at top */}
-            {active && (
-              <div style={{
-                position: 'absolute', top: 0, left: '20%', right: '20%',
-                height: 2, background: 'var(--fm-primary)',
-                borderRadius: '0 0 2px 2px',
-              }} />
-            )}
-            <svg
-              width="22" height="22"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              style={{
-                transform: active ? 'scale(1.12)' : 'scale(1)',
-                transition: 'transform 0.15s cubic-bezier(0.22,1,0.36,1)',
-              }}
-            >
-              <path d={tab.iconPath} />
-            </svg>
-            <span style={{
-              fontSize: 10, fontWeight: active ? 700 : 500,
-              letterSpacing: '0.04em',
-              fontFamily: 'var(--fm-font-display)',
-            }}>
-              {isRTL ? tab.labelHe : tab.labelEn}
-            </span>
-          </button>
-        )
-      })}
-    </nav>
-  )
-}

@@ -37,11 +37,9 @@ interface Props {
   /** App-level history helpers — wire browser back into the component's nav */
   pushBack?: PushBackFn
   cleanupBack?: CleanupBackFn
-  /** Called when entering/leaving fullscreen challenge or theory screens */
-  onFullscreenChange?: (fullscreen: boolean) => void
 }
 
-export default function SkillTreeView({ hearts, streak, onSessionComplete, onWrongAnswer, topicNodes, topicTitle, onBack, pushBack, cleanupBack, onFullscreenChange }: Props) {
+export default function SkillTreeView({ hearts, streak, onSessionComplete, onWrongAnswer, topicNodes, topicTitle, onBack, pushBack, cleanupBack }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
@@ -66,25 +64,22 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
 
   const openTheory = useCallback(() => {
     setShowingTheory(true)
-    onFullscreenChange?.(true)
     navDepth.current++
-    pushBack?.(() => { setShowingTheory(false); onFullscreenChange?.(false) })
-  }, [pushBack, onFullscreenChange])
+    pushBack?.(() => { setShowingTheory(false) })
+  }, [pushBack])
 
   const startChallenge = useCallback(() => {
     setRunning(true)
-    onFullscreenChange?.(true)
     navDepth.current++
-    pushBack?.(() => { setRunning(false); onFullscreenChange?.(false) })
-  }, [pushBack, onFullscreenChange])
+    pushBack?.(() => { setRunning(false) })
+  }, [pushBack])
 
   /** Silently pops all nav entries this component pushed (for natural exits). */
   const cleanupNav = useCallback(() => {
     const depth = navDepth.current
     navDepth.current = 0
     if (depth > 0) cleanupBack?.(depth)
-    onFullscreenChange?.(false)
-  }, [cleanupBack, onFullscreenChange])
+  }, [cleanupBack])
 
   const handleNodeStart = () => {
     const entry = selected ? CATEGORY_THEORY[selected.categoryId] : null
