@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { theoryContent, type ArticleSection } from '../../data/theoryContent'
-import IntervalExplorer from './IntervalExplorer'
+import IntervalExplorer    from './IntervalExplorer'
+import TriadConstructor   from './TriadConstructor'
+import MajorMinorFlip     from './MajorMinorFlip'
+import VoicingVisualizer  from './VoicingVisualizer'
 
 interface Props {
   articleId: string
@@ -384,7 +387,10 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
               case 'interactive':
                 return (
                   <div key={i} style={{ marginBottom: 48 }}>
-                    {section.content === 'interval-explorer' && <IntervalExplorer isHe={isHe} />}
+                    {section.content === 'interval-explorer'   && <IntervalExplorer   isHe={isHe} />}
+                    {section.content === 'triad-construction'  && <TriadConstructor   isHe={isHe} />}
+                    {section.content === 'major-minor-flip'    && <MajorMinorFlip     isHe={isHe} />}
+                    {section.content === 'voicing-visualizer'  && <VoicingVisualizer  isHe={isHe} />}
                   </div>
                 )
               default:

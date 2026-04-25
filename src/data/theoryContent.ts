@@ -89,6 +89,108 @@ export const theoryContent: Record<string, TheoryArticle> = {
     }
   },
 
+  triads_chords: {
+    id: "triads_chords",
+    he: {
+      title: "טריאדות ואקורדים",
+      subtitle: "הארכיטקטורה של ההרמוניה והסוף לשינון בעל-פה",
+      tags: ["יסודות", "אקורדים", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: שקר חוברות האקורדים",
+          content: "רובנו התחלנו את דרכנו בגיטרה באותה צורה: פתחנו חוברת (או אתר אינטרנט), ראינו שרטוט של רשת עם נקודות שחורות, ופשוט הנחנו את האצבעות איפה שאמרו לנו. לימדו אותנו שזה C, וזה Am, וזה G. התייחסנו לאקורדים כמו אל מספרי טלפון, רצף אקראי שצריך לשנן בעל פה. ואם שכחנו את הצורה, לא יכולנו לנגן את האקורד. אבל אקורדים הם לא צורות אקראיות, והם לא קסם. אקורדים הם מבנים. בדיוק כמו שמהנדס לא מנחש איפה לשים עמודים כדי שהבניין לא יקרוס, מוזיקאי לא מנחש איפה לשים את האצבעות. בפרק הקודם למדנו על אינטרוולים, המרחקים המדויקים בין שני צלילים. עכשיו, אנחנו הולכים לקחת את המרחקים האלה, להעמיד אותם אחד על השני, ולבנות מהם ארכיטקטורה. ברגע שתבין איך אקורד בנוי, אתה לעולם לא תצטרך חוברת אקורדים יותר. אתה תוכל לבנות כל אקורד בעולם, בכל מקום על צוואר הגיטרה, לגמרי בעצמך."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: חוק השלוש (מהי טריאדה?)",
+          content: "המילה 'אקורד' מתארת פשוט מצב שבו מנגנים שלושה צלילים שונים או יותר באותו הזמן. המבנה הבסיסי ביותר של אקורד במוזיקה המערבית, ה-DNA שממנו הכל מתחיל, נקרא טריאדה (Triad), קבוצה של שלושה צלילים. למה דווקא שלושה? כי זה המינימום הנדרש כדי לספר סיפור שלם. תחשוב על טריאדה כמו על בית:\n1. השורש (Root): הרצפה. היסודות של הבית. הצליל הזה נותן לאקורד את השם שלו (למשל, התו דו באקורד דו מז'ור). הוא מספק את כוח המשיכה ואת תחושת היציבות.\n2. הטרצה (Third): החלונות והצבע של הקירות. זהו הצליל השני שאנחנו מוסיפים, והוא נמצא במרחק של 'טרצה' (אינטרוול של 3 או 4 סריגים) מהשורש. הטרצה היא מתג הרגש, היא זו שקובעת באופן בלעדי אם האקורד יישמע שמח או עצוב.\n3. הקווינטה (Fifth): הגג. הצליל השלישי והאחרון נמצא במרחק של קווינטה זכה (7 סריגים) מהשורש. הוא סוגר את המבנה מלמעלה ונותן לו יציבות ועוצמה הדוקה."
+        },
+        {
+          type: "interactive",
+          content: "triad-construction"
+        },
+        {
+          type: "fretboard",
+          title: "פרק 2: מתג הרגש (הקרב בין מז'ור למינור)",
+          content: "הבנו שטריאדה בנויה משורש פלוס טרצה פלוס קווינטה. אבל מה ההבדל בין אקורד שמח לאקורד עצוב? ההבדל הזה מתנקז בסופו של דבר לאצבע אחת בלבד, ולמרחק של סריג אחד בלבד.\n\nהטריאדה המז'ורית (השמחה):\nאם ניקח את תו השורש שלנו, ונוסיף לו טרצה גדולה (מרחק של 4 סריגים), נקבל אקורד מז'ורי. המרווח הזה מייצר תחושה של אור, פתיחות, חגיגה או שלווה. (הנוסחה המלאה: שורש + טרצה גדולה + קווינטה זכה).\n\nהטריאדה המינורית (העצובה):\nאם נרצה לקחת את אותו אקורד שמח ולהפוך אותו לעצוב, אנחנו לא צריכים לפרק את כל הבית. הרצפה (השורש) נשארת במקום. הגג (הקווינטה) נשאר במקום. כל מה שאנחנו צריכים לעשות זה לקחת את האצבע שמנגנת את הטרצה, ולהחליק אותה סריג אחד אחורה. ברגע שהקטנו את המרחק מ-4 סריגים ל-3 סריגים (טרצה קטנה), הכל קורס פנימה אל תוך תחושה של מלנכוליה, דרמה, או בלוז.\n\nבגיטרה, הגיאומטריה הזו היא כוח על. אתה יכול לקחת צורה של כל אקורד מז'ורי שאתה מכיר, לאתר את האצבע שמנגנת את הטרצה, להזיז אותה סריג אחד אחורה (לכיוון מפתחות הכיוון) ויצרת אקורד מינורי מבלי להסתכל בשום ספר."
+        },
+        {
+          type: "interactive",
+          content: "major-minor-flip"
+        },
+        {
+          type: "paragraph",
+          title: "פרק 3: קצוות האור והחושך (מוקטן ומוגדל)",
+          content: "עד עכשיו דיברנו על בתים יציבים. הגג שלנו (הקווינטה) תמיד היה עשוי מקווינטה זכה, מרווח מושלם של 7 סריגים שלא מעורר שמחה ולא עצב, אלא פשוט יציב. אבל מה קורה אם נחליט להזיז גם את הגג?\n\nהאקורד המוקטן (Diminished):\nלוקחים אקורד מינורי (שהוא כבר עצוב ודרמטי), ואת הגג שלו (הקווינטה) מנמיכים בסריג אחד. יצרנו מצב שבו האקורד 'התכווץ' משני הכיוונים. התוצאה? סאונד של סרט אימה. האקורד המוקטן נשמע מתוח בצורה קיצונית, מעוות, ומעביר תחושה שהוא חייב להיפתר ולברוח מיד לאקורד אחר.\n\nהאקורד המוגדל (Augmented):\nלוקחים אקורד מז'ורי (שמח ופתוח), ואת הגג שלו מגביהים בסריג אחד. הפעם האקורד 'נמתח' כלפי חוץ. התוצאה היא סאונד מרחף, חלומי, מוזר, שמרגיש כאילו הוא נעלם בחלל ולא מחובר לקרקע. תחשבו על מוזיקה של פיות או קסם בסרטי דיסני ישנים."
+        },
+        {
+          type: "example",
+          title: "פרק 4: סוד המיתרים המרובים (הכפלות ו-Voicing)",
+          content: "בשלב הזה אתה כנראה שואל את עצמך שאלה מתבקשת והגיונית: 'אם טריאדה מורכבת מ-3 צלילים בלבד, למה כשאני מנגן אקורד E מז'ור פשוט, אני פורט על כל 6 המיתרים של הגיטרה?'.\nזוהי התגלית הגדולה: כפילויות (Voicing).\nבאקורד E מז'ור, אתה אמנם מנגן על 6 מיתרים, אבל אתה עדיין מנגן רק 3 צלילים ייחודיים! אתה פשוט מנגן אותם שוב ושוב באוקטבות שונות.\n\nבאקורד E מז'ור קלאסי (מיתרים פתוחים):\n* מיתר 6 פתוח מנגן את השורש (E).\n* מיתר 5 מנגן את הקווינטה (B).\n* מיתר 4 מנגן שוב את השורש.\n* מיתר 3 מנגן את הטרצה הגדולה (G# - זה התו שעושה אותו שמח!).\n* מיתר 2 מנגן שוב את הקווינטה.\n* מיתר 1 מנגן שוב את השורש.\n\nההרכב המדויק של אילו כפילויות אתה בוחר לנגן, ובאיזה סדר (למשל, האם הטרצה תהיה הצליל הגבוה ביותר באקורד או הצליל האמצעי?), נקרא Voicing. זו הסיבה שאקורד C יכול להישמע עמום וכהה באזור אחד של הצוואר, ונוצץ ופעמוני באזור אחר, זה אותו אקורד (אותם 3 צלילים), פשוט עם Voicing שונה."
+        },
+        {
+          type: "interactive",
+          content: "voicing-visualizer"
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: ממשננים לארכיטקטים",
+          content: "ברגע שאתה מפנים שאקורד הוא נוסחה של 3 חלקים (שורש, טרצה, קווינטה), היחס שלך לצוואר הגיטרה משתנה לתמיד. אם אתה מחפש אקורד חדש, אתה לא כותב בגוגל 'איך מנגנים...', אלא אתה מסתכל על הצוואר, מוצא את השורש שאתה רוצה, בונה מעליו קווינטה ליציבות, ומחליט איזה רגש להוסיף עם הטרצה. הפכת ממישהו שמשנן ציורים, לארכיטקט שבונה הרמוניה מאפס."
+        }
+      ]
+    },
+    en: {
+      title: "Triads and Chords",
+      subtitle: "The Architecture of Harmony and the End of Rote Memorization",
+      tags: ["Basics", "Chords", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: The Chord Book Lie",
+          content: "Most of us started our guitar journey the same way: we opened a book (or a website), saw a diagram of a grid with black dots, and simply placed our fingers where we were told. We were taught that this is C, and this is Am, and this is G. We treated chords like phone numbers, a random sequence to be memorized. And if we forgot the shape, we couldn't play the chord. But chords are not random shapes, and they are not magic. Chords are structures. Just as an engineer doesn't guess where to put pillars so the building won't collapse, a musician doesn't guess where to put their fingers. In the previous chapter, we learned about intervals, the exact distances between two sounds. Now, we are going to take those distances, stack them on top of each other, and build architecture out of them. Once you understand how a chord is built, you will never need a chord book again. You will be able to build any chord in the world, anywhere on the guitar neck, entirely on your own."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Rule of Three (What is a Triad?)",
+          content: "The word 'chord' simply describes a situation where three or more different notes are played at the same time. The most basic structure of a chord in Western music, the DNA from which everything begins, is called a Triad, a group of three notes. Why three? Because that's the minimum required to tell a complete story. Think of a triad like a house:\n1. The Root: The floor. The foundation of the house. This note gives the chord its name (for example, the note C in a C Major chord). It provides the gravity and the sense of stability.\n2. The Third: The windows and the color of the walls. This is the second note we add, and it is located at a distance of a 'third' (an interval of 3 or 4 frets) from the root. The third is the emotion switch, it solely determines whether the chord will sound happy or sad.\n3. The Fifth: The roof. The third and final note is located at a distance of a perfect fifth (7 frets) from the root. It closes the structure from above and gives it tight stability and power."
+        },
+        {
+          type: "interactive",
+          content: "triad-construction"
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 2: The Emotion Switch (The Battle Between Major and Minor)",
+          content: "We understand that a triad is built of a root plus a third plus a fifth. But what is the difference between a happy chord and a sad chord? This difference ultimately boils down to just one finger, and a distance of just one fret.\n\nThe Major Triad (The Happy One):\nIf we take our root note, and add a major third (a distance of 4 frets) to it, we get a major chord. This interval creates a sense of light, openness, celebration, or tranquility. (The full formula: Root + Major 3rd + Perfect 5th).\n\nThe Minor Triad (The Sad One):\nIf we want to take that same happy chord and make it sad, we don't need to tear down the whole house. The floor (root) stays in place. The roof (fifth) stays in place. All we have to do is take the finger playing the third, and slide it one fret back. The moment we reduce the distance from 4 frets to 3 frets (minor third), everything collapses inward into a feeling of melancholy, drama, or blues.\n\nOn the guitar, this geometry is a superpower. You can take the shape of any major chord you know, locate the finger playing the third, move it one fret back (towards the tuning pegs) and you've created a minor chord without looking at any book."
+        },
+        {
+          type: "interactive",
+          content: "major-minor-flip"
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 3: The Edges of Light and Dark (Diminished and Augmented)",
+          content: "Until now we have talked about stable houses. Our roof (the fifth) has always been made of a perfect fifth, a perfect interval of 7 frets that evokes neither joy nor sadness, but is simply stable. But what happens if we decide to move the roof as well?\n\nThe Diminished Chord:\nTake a minor chord (which is already sad and dramatic), and lower its roof (the fifth) by one fret. We have created a situation where the chord has 'shrunk' from both directions. The result? The sound of a horror movie. The diminished chord sounds extremely tense, distorted, and conveys a feeling that it must be resolved and escape immediately to another chord.\n\nThe Augmented Chord:\nTake a major chord (happy and open), and raise its roof by one fret. This time the chord is 'stretched' outwards. The result is a floating, dreamy, bizarre sound that feels as if it disappears into space and is ungrounded. Think of fairy music or magic in old Disney movies."
+        },
+        {
+          type: "example",
+          title: "Chapter 4: The Secret of Multiple Strings (Voicing)",
+          content: "At this point you are probably asking yourself an obvious and logical question: 'If a triad consists of only 3 notes, why is it that when I play a simple E Major chord, I strum all 6 strings of the guitar?'.\nThis is the great discovery: Voicings (Doublings).\nIn an E Major chord, you may be playing on 6 strings, but you are still only playing 3 unique notes! You are simply playing them over and over again in different octaves.\n\nIn a classic open E Major chord:\n* The open 6th string plays the Root (E).\n* The 5th string plays the Fifth (B).\n* The 4th string plays the Root again.\n* The 3rd string plays the Major Third (G# - this is the note that makes it happy!).\n* The 2nd string plays the Fifth again.\n* The 1st string plays the Root again.\n\nThe exact composition of which doublings you choose to play, and in what order (for example, will the third be the highest note in the chord or the middle note?), is called Voicing. This is why a C chord can sound muffled and dark in one area of the neck, and sparkling and bell-like in another area, it is the same chord (the same 3 notes), simply with a different Voicing."
+        },
+        {
+          type: "interactive",
+          content: "voicing-visualizer"
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: From Memorizers to Architects",
+          content: "Once you internalize that a chord is a 3-part formula (root, third, fifth), your relationship to the guitar neck changes forever. If you are looking for a new chord, you don't type 'how to play...' into Google, instead you look at the neck, find the root you want, build a fifth above it for stability, and decide what emotion to add with the third. You have transformed from someone who memorizes pictures into an architect who builds harmony from scratch."
+        }
+      ]
+    }
+  },
+
   intervals: {
     id: "intervals",
     he: {
