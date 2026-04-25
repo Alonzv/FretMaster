@@ -6,6 +6,7 @@ import IntervalExplorer from './IntervalExplorer'
 interface Props {
   articleId: string
   onBack: () => void
+  onTagClick?: (tag: string) => void
 }
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
@@ -184,9 +185,46 @@ function ExampleSection({ section }: { section: ArticleSection }) {
   )
 }
 
+// ── Article tag chip (clickable) ──────────────────────────────────────────────
+
+function ArticleTagChip({ tag, onClick }: { tag: string; onClick?: (tag: string) => void }) {
+  const [hovered, setHovered] = useState(false)
+  const interactive = !!onClick
+
+  const bg     = hovered && interactive ? '#1A1A2E' : 'transparent'
+  const color  = hovered && interactive ? '#FAF8F0' : '#1A1A2E'
+  const border = hovered && interactive ? '#1A1A2E' : '#1A1A2E'
+
+  return (
+    <span
+      role={interactive ? 'button' : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      onClick={interactive ? () => onClick(tag) : undefined}
+      onKeyDown={interactive ? e => { if (e.key === 'Enter' || e.key === ' ') onClick(tag) } : undefined}
+      onMouseEnter={() => interactive && setHovered(true)}
+      onMouseLeave={() => interactive && setHovered(false)}
+      style={{
+        fontFamily: 'var(--fm-font-display)',
+        fontSize: 11, fontWeight: 700,
+        color, background: bg,
+        border: `1.5px solid ${border}`,
+        padding: '4px 10px',
+        letterSpacing: '0.1em', textTransform: 'uppercase',
+        borderRadius: 0,
+        cursor: interactive ? 'pointer' : 'default',
+        transition: 'color 0.12s, background 0.12s',
+        userSelect: 'none',
+        display: 'inline-block',
+      }}
+    >
+      {tag}
+    </span>
+  )
+}
+
 // ── Main component ────────────────────────────────────────────────────────────
 
-export default function ArticleReader({ articleId, onBack }: Props) {
+export default function ArticleReader({ articleId, onBack, onTagClick }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
   const lang = isHe ? 'he' : 'en'
@@ -314,20 +352,10 @@ export default function ArticleReader({ articleId, onBack }: Props) {
             {content.subtitle}
           </p>
 
-          {/* Tags */}
+          {/* Tags — clickable for filtering */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 48 }}>
             {content.tags.map((tag, i) => (
-              <span key={i} style={{
-                fontFamily: 'var(--fm-font-display)',
-                fontSize: 11, fontWeight: 700,
-                color: '#1A1A2E', background: 'transparent',
-                border: '1.5px solid #1A1A2E',
-                padding: '4px 10px',
-                letterSpacing: '0.1em', textTransform: 'uppercase',
-                borderRadius: 0,
-              }}>
-                {tag}
-              </span>
+              <ArticleTagChip key={i} tag={tag} onClick={onTagClick} />
             ))}
           </div>
 
