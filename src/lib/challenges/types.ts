@@ -77,6 +77,12 @@ export interface Question {
   correctIndex: number
   explanation: Bilingual
   theory: Bilingual
+  /**
+   * When present, this question is answered by playing the target pitch into
+   * the microphone rather than selecting a multiple-choice option.
+   * The PitchQuestionCard component consumes this field directly.
+   */
+  pitchTarget?: import('../engine/questionGenerator').PitchTarget
 }
 
 export type QuestionVisual =

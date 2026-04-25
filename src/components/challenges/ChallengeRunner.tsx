@@ -1,9 +1,11 @@
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { CategoryId, Difficulty, Question, SessionResult } from '../../lib/challenges/types'
+import type { PitchTarget } from '../../lib/engine/questionGenerator'
 import { buildSession, scoreSession, SESSION_LENGTH } from '../../lib/challenges/engine'
 import { getCategory } from '../../lib/challenges/categories'
 import QuestionCard from './QuestionCard'
+import PitchQuestionCard from './PitchQuestionCard'
 import FeedbackPanel from './FeedbackPanel'
 import SessionSummary from './SessionSummary'
 import HeartsDisplay from './HeartsDisplay'
@@ -50,6 +52,7 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
 
   const current = questions[idx]
   const isLast = idx === questions.length - 1
+  const pitchTarget = (current as Question & { pitchTarget?: PitchTarget }).pitchTarget ?? null
 
   // Instant-reveal: the moment the user picks a choice, we lock + score.
   const handleSelect = (chosenIndex: number) => {
@@ -122,15 +125,25 @@ export default function ChallengeRunner({ categoryId, difficulty, onExit, onComp
             {isHe ? category.titleHe : category.titleEn} · {isHe ? difficultyLabelHe(difficulty) : difficultyLabelEn(difficulty)}
           </div>
 
-          <QuestionCard
-            question={current}
-            selectedIndex={selectedIndex}
-            revealed={revealed}
-            onSelect={handleSelect}
-            isHe={isHe}
-          />
+          {pitchTarget ? (
+            <PitchQuestionCard
+              question={current}
+              pitchTarget={pitchTarget}
+              isHe={isHe}
+              onSuccess={() => handleSelect(current.correctIndex)}
+              onSkip={() => handleSelect(current.correctIndex === 0 ? 1 : 0)}
+            />
+          ) : (
+            <QuestionCard
+              question={current}
+              selectedIndex={selectedIndex}
+              revealed={revealed}
+              onSelect={handleSelect}
+              isHe={isHe}
+            />
+          )}
 
-          {revealed && (
+          {revealed && !pitchTarget && (
             <FeedbackPanel
               question={current}
               wasCorrect={selectedIndex === current.correctIndex}
