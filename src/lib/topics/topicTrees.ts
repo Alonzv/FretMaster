@@ -14,6 +14,14 @@ interface NodeSpec {
   extraReq?: string[]
 }
 
+/** Override specific node indices with a different categoryId (for pitch challenge nodes). */
+function withPitchNodes(nodes: TreeNode[], overrides: Array<[number, CategoryId]>): TreeNode[] {
+  overrides.forEach(([idx, cat]) => {
+    if (nodes[idx]) nodes[idx] = { ...nodes[idx], categoryId: cat }
+  })
+  return nodes
+}
+
 function makeTopic(
   categoryId: CategoryId,
   icon: string,
@@ -58,7 +66,7 @@ function makeTopic(
 
 // ── major_scale ───────────────────────────────────────────────────────────────
 
-const MAJOR_SCALE_NODES = makeTopic(
+const MAJOR_SCALE_NODES = withPitchNodes(makeTopic(
   'major_scale',
   'M12 3l1.45 4.47H18l-3.73 2.71 1.42 4.38L12 11.9l-3.69 2.66 1.42-4.38L6 7.47h4.55L12 3z',
   [
@@ -92,11 +100,11 @@ const MAJOR_SCALE_NODES = makeTopic(
     { titleHe: 'תנועה דיאטונית', titleEn: 'Diatonic Motion', descHe: 'צעדים ודילוגים בתוך הסולם', descEn: 'Steps and skips within the scale' },
     { titleHe: 'מאסטרי מפתחות', titleEn: 'Key Mastery', descHe: 'כל 12 המפתחות — שטף מלא', descEn: 'All 12 keys — full fluency' },
   ],
-)
+), [[5, 'engine_scale_degree'], [15, 'engine_scale_degree'], [22, 'engine_scale_degree']])
 
 // ── intervals_theory ──────────────────────────────────────────────────────────
 
-const INTERVALS_NODES = makeTopic(
+const INTERVALS_NODES = withPitchNodes(makeTopic(
   'intervals_theory',
   'M4 20V4h2v16H4zm14 0V4h2v16h-2zM9 8h6v2H9V8zm0 6h6v2H9v-2z',
   [
@@ -130,7 +138,7 @@ const INTERVALS_NODES = makeTopic(
     { titleHe: 'אינטרוולים וז׳אנר', titleEn: 'Intervals & Genre', descHe: 'טריטון במטאל, ספיטות בג׳אז', descEn: 'Tritones in metal, sixths in jazz' },
     { titleHe: 'שליטה מלאה', titleEn: 'Full Mastery', descHe: 'כל האינטרוולים בכל כיוון ומפתח', descEn: 'All intervals in every direction and key' },
   ],
-)
+), [[4, 'engine_interval'], [12, 'engine_interval'], [22, 'engine_interval']])
 
 // ── chord_construction ────────────────────────────────────────────────────────
 
@@ -552,7 +560,7 @@ const POLY_NODES = makeTopic(
 
 // ── chord_soloing ─────────────────────────────────────────────────────────────
 
-const SOLOING_NODES = makeTopic(
+const SOLOING_NODES = withPitchNodes(makeTopic(
   'chord_soloing',
   'M12 14l9-5-9-5-9 5 9 5zm0 2l-9-5v6l9 5 9-5v-6l-9 5z',
   [
@@ -586,7 +594,7 @@ const SOLOING_NODES = makeTopic(
     { titleHe: 'ז׳אז Chord Soloing', titleEn: 'Jazz Chord Soloing', descHe: 'ניגון מלודיה על אקורדי ג׳אז', descEn: 'Soloing over jazz chord changes' },
     { titleHe: 'שליטה מלאה', titleEn: 'Full Soloing Mastery', descHe: 'ארפג׳יו וסולו על כל אקורד', descEn: 'Arpeggios and soloing over any chord' },
   ],
-)
+), [[3, 'engine_chord_tone'], [15, 'engine_chord_tone'], [21, 'engine_chord_tone']])
 
 // ── Export all trees ──────────────────────────────────────────────────────────
 

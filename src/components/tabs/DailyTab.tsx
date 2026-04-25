@@ -18,11 +18,13 @@ interface Props {
   onSessionComplete: (result: SessionResult) => void
   hearts?: HeartsState
   onWrongAnswer?: () => void
+  pushBack?: import('../../App').PushBackFn
+  cleanupBack?: import('../../App').CleanupBackFn
 }
 
 const DAILY_LENGTH = 10
 
-export default function DailyTab({ progress, onSessionComplete, hearts, onWrongAnswer }: Props) {
+export default function DailyTab({ progress, onSessionComplete, hearts, onWrongAnswer, pushBack, cleanupBack }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
 
@@ -43,6 +45,7 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
   const handleStart = () => {
     // No hearts = can't play
     if (hearts && hearts.current === 0) return
+    pushBack?.(() => exitSession())
     setShowTheory(true)
   }
 
@@ -88,6 +91,7 @@ export default function DailyTab({ progress, onSessionComplete, hearts, onWrongA
   }
 
   const exitSession = () => {
+    cleanupBack?.(1)
     setStarted(false)
     setDone(null)
     setShowTheory(false)

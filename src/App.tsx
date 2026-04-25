@@ -328,7 +328,7 @@ export default function App() {
             cleanupBack={cleanupBack}
           />
         )}
-        {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
+        {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} pushBack={pushBack} cleanupBack={cleanupBack} />}
         {activeTab === 'practice' && <PracticeTab hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
       </main>
 
