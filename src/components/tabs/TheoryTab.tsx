@@ -17,6 +17,7 @@ export default function TheoryTab() {
     )
   }
 
+  const lang     = isHe ? 'he' : 'en'
   const articles = Object.values(theoryContent)
 
   return (
@@ -77,8 +78,8 @@ export default function TheoryTab() {
           >
             {/* Tags */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
-              {article.tags.map(tag => (
-                <span key={tag} style={{
+              {article.tags.map((tag, i) => (
+                <span key={i} style={{
                   fontFamily: 'var(--fm-font-display)',
                   fontSize: 10, fontWeight: 700,
                   color: 'var(--fm-text-muted)',
@@ -87,7 +88,7 @@ export default function TheoryTab() {
                   letterSpacing: '0.12em',
                   textTransform: 'uppercase',
                 }}>
-                  {tag}
+                  {tag[lang]}
                 </span>
               ))}
             </div>
@@ -100,7 +101,7 @@ export default function TheoryTab() {
               marginBottom: 6,
               lineHeight: 1.25,
             }}>
-              {article.title}
+              {article.title[lang]}
             </div>
 
             {/* Subtitle */}
@@ -109,7 +110,7 @@ export default function TheoryTab() {
               color: 'var(--fm-text-muted)',
               lineHeight: 1.55,
             }}>
-              {article.subtitle}
+              {article.subtitle[lang]}
             </div>
 
             {/* Section count */}
