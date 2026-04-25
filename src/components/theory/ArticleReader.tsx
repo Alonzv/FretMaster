@@ -9,16 +9,13 @@ interface Props {
 
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
-function IconArrowRight() {
-  return (
+function IconBack({ rtl }: { rtl: boolean }) {
+  // Points right in RTL (toward list), left in LTR
+  return rtl ? (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z" />
     </svg>
-  )
-}
-
-function IconArrowLeft() {
-  return (
+  ) : (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M15.41 16.59 10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
     </svg>
@@ -51,40 +48,37 @@ function IconQuote() {
 
 // ── Section renderers ─────────────────────────────────────────────────────────
 
-function ParagraphSection({ section, lang }: { section: ArticleSection; lang: 'he' | 'en' }) {
-  const title   = section.title?.[lang]
-  const content = section.content[lang]
+function ParagraphSection({ section }: { section: ArticleSection }) {
   return (
     <div style={{ marginBottom: 48 }}>
-      {title && (
+      {section.title && (
         <h2 style={{
           fontFamily: 'var(--fm-font-display)',
           fontSize: 20, fontWeight: 700,
           color: '#1A1A2E', margin: '0 0 18px',
           letterSpacing: '0.01em', lineHeight: 1.35,
         }}>
-          {title}
+          {section.title}
         </h2>
       )}
       <p style={{
         fontFamily: 'var(--fm-font-body)',
         fontSize: 18, fontWeight: 400,
         color: '#2A2820', lineHeight: 1.85, margin: 0,
+        whiteSpace: 'pre-line',
       }}>
-        {content}
+        {section.content}
       </p>
     </div>
   )
 }
 
-function HighlightSection({ section, lang, accent }: { section: ArticleSection; lang: 'he' | 'en'; accent: 'blue' | 'sand' }) {
+function HighlightSection({ section, accent }: { section: ArticleSection; accent: 'blue' | 'sand' }) {
   const bg      = accent === 'blue' ? 'rgba(43,80,232,0.05)' : '#F5F2EB'
   const border  = accent === 'blue' ? '#2B50E8' : '#C8B870'
   const iconBg  = accent === 'blue' ? 'rgba(43,80,232,0.12)' : 'rgba(200,184,112,0.20)'
   const iconCol = accent === 'blue' ? '#2B50E8' : '#8A7840'
   const Icon    = accent === 'blue' ? IconBookOpen : IconFretboard
-  const title   = section.title?.[lang]
-  const content = section.content[lang]
 
   return (
     <div style={{
@@ -93,21 +87,21 @@ function HighlightSection({ section, lang, accent }: { section: ArticleSection; 
       borderRight: `4px solid ${border}`,
       padding: '28px 28px 28px 24px',
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: title ? 16 : 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: section.title ? 16 : 0 }}>
         <div style={{
           width: 30, height: 30, background: iconBg,
           display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
         }}>
           <span style={{ color: iconCol }}><Icon /></span>
         </div>
-        {title && (
+        {section.title && (
           <h2 style={{
             fontFamily: 'var(--fm-font-display)',
             fontSize: 18, fontWeight: 700,
             color: '#1A1A2E', margin: 0,
             letterSpacing: '0.01em', lineHeight: 1.35,
           }}>
-            {title}
+            {section.title}
           </h2>
         )}
       </div>
@@ -115,17 +109,16 @@ function HighlightSection({ section, lang, accent }: { section: ArticleSection; 
         fontFamily: 'var(--fm-font-body)',
         fontSize: 18, fontWeight: 400,
         color: '#2A2820', lineHeight: 1.85, margin: 0,
+        whiteSpace: 'pre-line',
       }}>
-        {content}
+        {section.content}
       </p>
     </div>
   )
 }
 
-function ExampleSection({ section, lang }: { section: ArticleSection; lang: 'he' | 'en' }) {
-  const title   = section.title?.[lang]
-  const content = section.content[lang]
-  const entries = content.split('\n').filter(Boolean)
+function ExampleSection({ section }: { section: ArticleSection }) {
+  const entries = section.content.split('\n').filter(Boolean)
 
   return (
     <div style={{ marginBottom: 48 }}>
@@ -140,13 +133,13 @@ function ExampleSection({ section, lang }: { section: ArticleSection; lang: 'he'
         }}>
           <span style={{ color: '#FAF8F0' }}><IconQuote /></span>
         </div>
-        {title && (
+        {section.title && (
           <h2 style={{
             fontFamily: 'var(--fm-font-display)',
             fontSize: 18, fontWeight: 700,
             color: '#1A1A2E', margin: 0, letterSpacing: '0.01em',
           }}>
-            {title}
+            {section.title}
           </h2>
         )}
       </div>
@@ -194,9 +187,9 @@ function ExampleSection({ section, lang }: { section: ArticleSection; lang: 'he'
 
 export default function ArticleReader({ articleId, onBack }: Props) {
   const { i18n } = useTranslation()
-  const isHe  = i18n.language === 'he'
-  const lang  = isHe ? 'he' : 'en'
-  const dir   = isHe ? 'rtl' : 'ltr'
+  const isHe = i18n.language === 'he'
+  const lang = isHe ? 'he' : 'en'
+  const dir  = isHe ? 'rtl' : 'ltr'
 
   const article   = theoryContent[articleId]
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -222,7 +215,7 @@ export default function ArticleReader({ articleId, onBack }: Props) {
     )
   }
 
-  const BackIcon = isHe ? IconArrowRight : IconArrowLeft
+  const content = article[lang]
 
   return (
     <div
@@ -259,7 +252,7 @@ export default function ArticleReader({ articleId, onBack }: Props) {
             aria-label={isHe ? 'חזור' : 'Back'}
             style={{
               display: 'flex', alignItems: 'center', gap: 6,
-              padding: isHe ? '6px 14px 6px 10px' : '6px 10px 6px 14px',
+              padding: isHe ? '6px 10px 6px 14px' : '6px 14px 6px 10px',
               background: 'transparent',
               border: '1px solid #C0B898',
               color: '#1A1A2E',
@@ -272,7 +265,7 @@ export default function ArticleReader({ articleId, onBack }: Props) {
             onMouseEnter={e => (e.currentTarget.style.background = '#EDE8DC')}
             onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
           >
-            <BackIcon />
+            <IconBack rtl={isHe} />
             <span>{isHe ? 'חזור' : 'Back'}</span>
           </button>
 
@@ -308,7 +301,7 @@ export default function ArticleReader({ articleId, onBack }: Props) {
             color: '#0F0D08', margin: '0 0 16px',
             lineHeight: 1.12, letterSpacing: '-0.01em',
           }}>
-            {article.title[lang]}
+            {content.title}
           </h1>
 
           <p style={{
@@ -317,12 +310,12 @@ export default function ArticleReader({ articleId, onBack }: Props) {
             color: '#5A5040', lineHeight: 1.6,
             margin: '0 0 28px',
           }}>
-            {article.subtitle[lang]}
+            {content.subtitle}
           </p>
 
           {/* Tags */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 48 }}>
-            {article.tags.map((tag, i) => (
+            {content.tags.map((tag, i) => (
               <span key={i} style={{
                 fontFamily: 'var(--fm-font-display)',
                 fontSize: 11, fontWeight: 700,
@@ -332,7 +325,7 @@ export default function ArticleReader({ articleId, onBack }: Props) {
                 letterSpacing: '0.1em', textTransform: 'uppercase',
                 borderRadius: 0,
               }}>
-                {tag[lang]}
+                {tag}
               </span>
             ))}
           </div>
@@ -349,16 +342,16 @@ export default function ArticleReader({ articleId, onBack }: Props) {
 
         {/* Sections */}
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '0 32px 80px' }}>
-          {article.sections.map((section, i) => {
+          {content.sections.map((section, i) => {
             switch (section.type) {
               case 'paragraph':
-                return <ParagraphSection key={i} section={section} lang={lang} />
+                return <ParagraphSection key={i} section={section} />
               case 'highlight':
-                return <HighlightSection key={i} section={section} lang={lang} accent="blue" />
+                return <HighlightSection key={i} section={section} accent="blue" />
               case 'fretboard':
-                return <HighlightSection key={i} section={section} lang={lang} accent="sand" />
+                return <HighlightSection key={i} section={section} accent="sand" />
               case 'example':
-                return <ExampleSection key={i} section={section} lang={lang} />
+                return <ExampleSection key={i} section={section} />
               default:
                 return null
             }

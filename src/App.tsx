@@ -331,7 +331,7 @@ export default function App() {
         )}
         {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} pushBack={pushBack} cleanupBack={cleanupBack} />}
         {activeTab === 'practice' && <PracticeTab hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
-        {activeTab === 'theory'   && <TheoryTab />}
+        {activeTab === 'theory'   && <TheoryTab pushBack={pushBack} cleanupBack={cleanupBack} onClose={() => handleTabChange('home')} />}
       </main>
 
       {showProfile && user && (
