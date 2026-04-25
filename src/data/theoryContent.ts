@@ -4,17 +4,20 @@ export interface ArticleSection {
   content: string;
 }
 
-export interface ArticleLang {
+export interface LocalizedContent {
   title: string;
   subtitle: string;
   tags: string[];
   sections: ArticleSection[];
 }
 
+// Backwards-compat alias
+export type ArticleLang = LocalizedContent;
+
 export interface TheoryArticle {
   id: string;
-  he: ArticleLang;
-  en: ArticleLang;
+  he: LocalizedContent;
+  en: LocalizedContent;
 }
 
 export const theoryContent: Record<string, TheoryArticle> = {
@@ -90,33 +93,41 @@ export const theoryContent: Record<string, TheoryArticle> = {
     id: "intervals",
     he: {
       title: "אינטרוולים (מרווחים)",
-      subtitle: "השפה הסודית של המוזיקה והקואורדינטות של הפרטבורד",
-      tags: ["יסודות", "מרחקים", "אימון_שמיעה"],
+      subtitle: "הגלולה האדומה של המוזיקה והקוד הסודי של הפרטבורד",
+      tags: ["יסודות", "מאסטר-קלאס", "אימון_שמיעה"],
       sections: [
         {
           type: "paragraph",
-          title: "הקדמה: למה לא אכפת לנו משמות התווים?",
-          content: "תחשוב על אינטרוולים כמו על קואורדינטות ב-GPS. כשאנחנו מאזינים למוזיקה, המוח האנושי כמעט ולא מזהה תווים ספציפיים כמו 'פה דיאז' או 'מי במול'. מה שהמוח שלנו כן מזהה, ובצורה מושלמת, זה את המרחק בין הצלילים. אינטרוול הוא פשוט המרחק הפיזי והתדרי בין שני תווים. ההבנה של אינטרוולים היא קו ההפרדה בין גיטריסטים שמנגנים מהזיכרון, לבין מוזיקאים שבאמת מבינים מה הם עושים. ברגע שאתה מבין אינטרוולים, אתה יכול לקחת כל ריף, סולו או מהלך אקורדים, ולהזיז אותו לכל מקום על צוואר הגיטרה. אתה מפסיק לחשוב 'איזה תו בא עכשיו?' ומתחיל לחשוב 'איזה מרחק בא עכשיו?'"
+          title: "הקדמה: האשליה של שמות התווים",
+          content: "אחת הטעויות הגדולות ביותר של גיטריסטים בתחילת דרכם היא האובססיה לשמות התווים. אנחנו מבלים חודשים בניסיון לשנן איפה נמצא כל 'דו דיאז' ו'פה במול' על הפרטבורד, מתוך מחשבה שזוהי הדרך להבין מוזיקה. אבל האמת היא שלמוח האנושי ממש לא אכפת מאיזה תו התחלת לנגן. המוח שלנו לא מזהה תווים אבסולוטיים, הוא מזהה אך ורק יחסים. תחשוב על זה כמו על קואורדינטות. התו 'סול' הוא רק כתובת פיזית במרחב, אבל 'אינטרוול' (מרווח) הוא הוראת הנסיעה. הוא המרחק המדויק, הפיזי והתדרי, בין שני צלילים. כשאתה שומע שיר שמרגש אותך, מה שאתה חווה זה לא את התווים עצמם, אלא את רכבת ההרים של המרחקים ביניהם. מרווח אחד יישמע לנו שמח ופתוח, ומרווח אחר, שרחוק ממנו רק במילימטרים ספורים, יישמע קודר ומאיים. ההבנה של אינטרוולים היא הרגע שבו אתה מפסיק להיות קלדן שמבצע הוראות והופך למוזיקאי שמדבר שפה חיה. זהו הרגע שבו צוואר הגיטרה הופך מים של תווים אקראיים לרשת מבריקה של אפשרויות רגשיות."
         },
         {
           type: "highlight",
-          title: "פרק 1: מילון האינטרוולים (המרחקים בסריגים)",
-          content: "בגיטרה, כל סריג שווה ל'חצי טון'. כדי לחשב אינטרוול, אנחנו בוחרים נקודת התחלה (השורש), ופשוט סופרים כמה סריגים אנחנו זזים ממנו:\n• סקונדה קטנה (סריג 1): המרווח הקטן ביותר. נשמע מותח ואפל.\n• סקונדה גדולה (2 סריגים): מרחק של טון שלם.\n• טרצה קטנה (3 סריגים): ה-DNA של העצב. המרווח שקובע שאקורד הוא מינורי.\n• טרצה גדולה (4 סריגים): ה-DNA של השמחה. המרווח שקובע שאקורד הוא מז'ורי.\n• קוורטה זכה (5 סריגים): מרווח פתוח ויציב.\n• טריטון (6 סריגים): 'מרווח השטן'. נשמע מרושע ולא פתור.\n• קווינטה זכה (7 סריגים): הבסיס לכל אקורדי הכוח (Power Chords).\n• ספטימה קטנה (10 סריגים): התבלין של הבלוז והפאנק.\n• אוקטבה (12 סריגים): חזרה לאותו צליל בתדר כפול."
+          title: "פרק 1: הפיזיקה של הרגש (אריתמטיקה של צלילים)",
+          content: "כדי למדוד מרחקים, אנחנו צריכים יחידת מידה. במוזיקה המערבית, יחידת המידה הקטנה ביותר היא 'חצי טון' (Half Step), שבגיטרה שווה בדיוק לסריג אחד. כדי לחשב אינטרוול, אנחנו בוחרים נקודת התחלה כלשהי (השורש) וסופרים כמה סריגים אנחנו מתרחקים ממנה. לכל מרחק כזה יש פונקציה פסיכולוגית מובהקת.\n\nהאינטרוולים הדיסוננטיים (מייצרי המתח):\n* סקונדה קטנה (סריג 1): המרחק הקטן ביותר האפשרי. נשמע דחוס, צורם ומאיים. כששני צלילים קרובים כל כך מנוגנים יחד, גלי הקול שלהם מתנגשים ומייצרים תחושה של חוסר מנוחה עמוק.\n* טריטון (6 סריגים): ממוקם בדיוק באמצע הדרך לאוקטבה. בימי הביניים הוא נאסר לנגינה וכונה 'מרווח השטן' בגלל חוסר היציבות המוחלט שלו. הוא נשמע כאילו הוא עומד להתפוצץ ודורש פתרון מיידי.\n\nהאינטרוולים הרגשיים (הטרצות):\nהטרצות הן הלב הפועם של ההרמוניה, הן מחליטות איזה 'צבע' רגשי יהיה למוזיקה שלך.\n* טרצה קטנה (3 סריגים): המרכיב הסודי של העצב והמלנכוליה. אם תוסיף לשורש צליל במרחק 3 סריגים, יצרת הרגע את ה-DNA של אקורד מינורי.\n* טרצה גדולה (4 סריגים): האור, השמש והשמחה. זהו המרווח שהופך אקורד ל'מז'ורי' ומשדר ביטחון ותקווה.\n\nהאינטרוולים היציבים (הזכים):\nמשדרים יציבות ועוצמה נטולת רגש ספציפי (לא שמח ולא עצוב).\n* קוורטה זכה (5 סריגים): נשמע פתוח, רחב ומרחף. רוב מיתרי הגיטרה מכוונים במרווח הזה.\n* קווינטה זכה (7 סריגים): האינטרוול העוצמתי ביותר. נשמע יציב כמו סלע בטון. זהו הבסיס לאקורדי הכוח (Power Chords) ברוק ומטאל, כוח טהור ובלתי מתפשר."
+        },
+        {
+          type: "interactive",
+          content: "interval-explorer"
         },
         {
           type: "fretboard",
-          title: "פרק 2: אינטרוולים כיצירות גיאומטריות",
-          content: "הגיטרה היא כלי גיאומטרי. אינטרוולים מתורגמים על הצוואר לצורות קבועות שלא משתנות:\n- קווינטה זכה (Perfect 5th): שורש במיתר השישי, הקווינטה תהיה במיתר שמתחתיו, שני סריגים קדימה.\n- אוקטבה: שורש במיתר השישי, דילוג על מיתר, אצבע במיתר הרביעי שני סריגים קדימה.\n- טרצה גדולה (Major 3rd): מיתר אחד למטה, סריג אחד אחורה מהשורש.\nברגע שהידיים לומדות את הצורות האלה, הפרטבורד הופך לרשת ברורה של מרחקים."
+          title: "פרק 2: היתרון הלא-הוגן של גיטריסטים (גיאומטריה קבועה)",
+          content: "לפסנתרנים יש חיים קשים כשזה מגיע לאינטרוולים. בגלל הסידור של הקלידים הלבנים והשחורים, טרצה גדולה מ'דו' נראית אחרת לגמרי ביד מאשר טרצה גדולה מ'מי במול'. הם חייבים לשנן עשרות שילובים. לנו, הגיטריסטים, יש 'צ'יט קוד' (Cheat Code) מובנה: הגיטרה היא כלי גיאומטרי. המשמעות היא שברגע שלמדת צורה פיזית של אינטרוול על הצוואר, הצורה הזו תישאר זהה לחלוטין לא משנה לאיזה סריג תזיז אותה.\n\nאיך זה נראה בפועל?\n1. הקווינטה (Power Chord): הנח אצבע על מיתר 6. הקווינטה תמיד תמתין לך מיתר אחד למטה, שני סריגים קדימה לכיוון הגוף של הגיטרה. תמיד.\n2. האוקטבה: הנח אצבע על מיתר 6, דלג לגמרי על מיתר 5, והנח אצבע על מיתר 4, שני סריגים קדימה. תקבל אוקטבה מדויקת ומהדהדת.\n3. הטרצה הגדולה (המרכיב השמח): תמיד נמצאת בדיוק מיתר אחד למטה, וסריג אחד אחורה מהשורש שלך.\n4. הטרצה הקטנה (המרכיב העצוב): תמיד נמצאת בדיוק מיתר אחד למטה, שני סריגים אחורה מהשורש שלך.\n\nברגע שהאצבעות שלך מבינות את הגיאומטריה הזו, הצוואר נפתח. כדי להפוך אקורד מז'ורי לאקורד מינורי, אתה לא צריך לחשב שמות תווים, אתה פשוט יודע שאתה צריך להחליק את האצבע שמנגנת את הטרצה סריג אחד אחורה."
+        },
+        {
+          type: "interactive",
+          content: "interval-explorer"
         },
         {
           type: "example",
-          title: "פרק 3: טריק השירים (אימון שמיעה)",
-          content: "הדרך הטובה ביותר לזהות אינטרוולים היא לחבר אליהם שיר מוכר:\n• סקונדה קטנה (סריג 1): נעימת הסרט 'מלתעות' (Jaws).\n• טרצה קטנה (3 סריגים): הפתיח של Seven Nation Army.\n• קוורטה זכה (5 סריגים): נעימת 'מלחמת הכוכבים'.\n• טריטון (6 סריגים): הפתיח של 'משפחת סימפסון'.\n• קווינטה זכה (7 סריגים): הפסקול של 'סופרמן'.\n• אוקטבה (12 סריגים): Somewhere Over the Rainbow."
+          title: "פרק 3: חיבור אוזן-יד (טריק השירים)",
+          content: "התיאוריה חשובה, אבל מוזיקה קורית באוזניים. המטרה האמיתית היא לשמוע שיר, ולזהות מיד אילו אינטרוולים מנוגנים. הדרך היעילה ביותר ללמד את המוח לזהות מרחקים היא לחבר לכל אינטרוול שיר מפורסם שהמלודיה שלו מתחילה בדיוק באותה קפיצה:\n* סקונדה קטנה (1 סריג): הפתיח של הסרט 'מלתעות' (Jaws). הלחץ המצטבר נובע מהמרחק המזערי.\n* טרצה קטנה (3 סריגים): הריף האלמותי של 'Seven Nation Army'. הקפיצה מהתו הראשון לשני נותנת לריף את החספוס והתוקפנות שלו.\n* קוורטה זכה (5 סריגים): תרועת החצוצרות שפותחת את הפסקול של 'מלחמת הכוכבים'. משדר גבורה והכרזה.\n* טריטון (6 סריגים): המילה הראשונה בשיר הפתיחה של 'משפחת סימפסון'. קפיצה שנשמעת חייזרית ומוזרה.\n* קווינטה זכה (7 סריגים): הפתיח ההרואי בפסקול של 'סופרמן'. זינוק נקי לשמיים.\n* אוקטבה (12 סריגים): המילה הראשונה בשיר 'Somewhere Over the Rainbow'. פתיחת מרחב חדש ומרגש."
         },
         {
           type: "paragraph",
-          title: "סיכום: מאבני בניין לאקורדים",
-          content: "אינטרוולים הם אבני הלגו של המוזיקה. ברגע שאתה מזהה אותם ויודע למצוא אותם על הגיטרה, בניית אקורדים הופכת למשימה פשוטה. למשל, אקורד מז'ורי הוא בסך הכל שורש, אליו הוספנו טרצה גדולה, ואליה הוספנו קווינטה זכה. אקורד מינורי הוא פשוט שורש, אליו הוספנו טרצה קטנה (שעושה אותו עצוב), ואליה הוספנו קווינטה זכה. השליטה בגיאומטריה הזו היא המפתח לאלתור חופשי על כל הצוואר."
+          title: "סיכום: המאסטר-קי לאקורדים וסולואים",
+          content: "הכל במוזיקה, מאקורדים של מדורות ועד לסולואים של וירטואוזים, בנוי מאינטרוולים. אקורד הוא בסך הכל סדרה של אינטרוולים שמנוגנים באותו זמן (שורש + טרצה גדולה + קווינטה זכה = אקורד מז'ורי). כשאתה מאלתר סולו, אתה לא בוחר תווים באקראי מתוך סולם, אתה בוחר מרווחים לפי הרגש שאתה רוצה להעביר למאזין. רוצה להישמע קודר? נגן טרצה קטנה. רוצה לייצר מתח לפני הפזמון? זרוק סקונדה קטנה או טריטון. השליטה במרחקים האלה היא השליטה המוחלטת בחוקיות של צוואר הגיטרה וברגש המוזיקלי שלך."
         },
         {
           type: "interactive",
@@ -126,33 +137,41 @@ export const theoryContent: Record<string, TheoryArticle> = {
     },
     en: {
       title: "Intervals",
-      subtitle: "The Secret Language of Music and the Coordinates of the Fretboard",
-      tags: ["Basics", "Distances", "Ear_Training"],
+      subtitle: "The Red Pill of Music and the Secret Code of the Fretboard",
+      tags: ["Masterclass", "Distances", "Ear_Training"],
       sections: [
         {
           type: "paragraph",
-          title: "Introduction: Why Note Names Don't Matter",
-          content: "Think of intervals like GPS coordinates. When we listen to music, the human brain rarely identifies specific notes like 'F sharp' or 'E flat'. What our brain does recognize, and perfectly so, is the distance between the notes. An interval is simply the physical and frequency distance between two notes. Understanding intervals is the dividing line between guitarists who play from memory and musicians who truly understand what they are doing. Once you understand intervals, you can take any riff, solo, or chord progression and move it anywhere on the guitar neck. You stop thinking 'what note comes next?' and start thinking 'what distance comes next?'"
+          title: "Introduction: The Illusion of Note Names",
+          content: "One of the biggest mistakes guitarists make early on is obsessing over note names. We spend months trying to memorize where every 'C sharp' and 'F flat' is on the fretboard, thinking this is the way to understand music. But the truth is, the human brain really doesn't care which note you started on. Our brain does not recognize absolute notes; it only recognizes relationships. Think of it like coordinates. The note 'G' is just a physical address in space, but an 'interval' is the driving direction. It is the exact physical and frequency distance between two sounds. When you hear a song that moves you, what you are experiencing is not the notes themselves, but the roller coaster of the distances between them. One interval will sound happy and open to us, and another, just millimeters away, will sound gloomy and menacing. Understanding intervals is the moment you stop being a typist executing instructions and become a musician speaking a living language. This is the moment the guitar neck turns from a sea of random notes into a brilliant network of emotional possibilities."
         },
         {
           type: "highlight",
-          title: "Chapter 1: The Interval Dictionary (Distances in Frets)",
-          content: "On the guitar, every fret equals a 'Half Step'. To calculate an interval, we choose a starting point (the root), and simply count how many frets we move from it:\n• Minor 2nd (1 fret): The smallest interval. Sounds tense and dark.\n• Major 2nd (2 frets): A distance of a whole step.\n• Minor 3rd (3 frets): The DNA of sadness. Determines a chord is minor.\n• Major 3rd (4 frets): The DNA of happiness. Determines a chord is major.\n• Perfect 4th (5 frets): An open and stable interval.\n• Tritone (6 frets): The 'Devil's Interval'. Sounds evil and unresolved.\n• Perfect 5th (7 frets): The foundation for Power Chords.\n• Minor 7th (10 frets): The spice of blues and funk.\n• Octave (12 frets): A return to the exact same note at double the frequency."
+          title: "Chapter 1: The Physics of Emotion (Arithmetic of Sounds)",
+          content: "To measure distances, we need a unit of measurement. In Western music, the smallest unit is a 'Half Step', which on a guitar equals exactly one fret. To calculate an interval, we choose a starting point (the root) and count how many frets we move away from it. Each such distance has a distinct psychological function.\n\nThe Dissonant (Tension-Building) Intervals:\n* Minor 2nd (1 fret): The smallest distance possible. Sounds compressed, jarring, and menacing. When two sounds this close are played together, their sound waves clash, creating a deep sense of restlessness.\n* Tritone (6 frets): Located exactly halfway to the octave. In the Middle Ages, it was banned from playing and dubbed the 'Devil's Interval' due to its absolute instability. It sounds as if it's about to explode and demands an immediate resolution.\n\nThe Emotional Intervals (The Thirds):\nThe thirds are the beating heart of harmony, they decide what emotional 'color' your music will have.\n* Minor 3rd (3 frets): The secret ingredient of sadness and melancholy. If you add a sound 3 frets away to a root, you have just created the DNA of a minor chord.\n* Major 3rd (4 frets): The light, the sun, and the joy. This is the interval that makes a chord 'major' and projects confidence and hope.\n\nThe Stable (Perfect) Intervals:\nProject stability and power without a specific emotion (neither happy nor sad).\n* Perfect 4th (5 frets): Sounds open, wide, and floating. Most guitar strings are tuned in this interval.\n* Perfect 5th (7 frets): The most powerful interval. Sounds stable as a concrete rock. This is the foundation for Power Chords in rock and metal, pure, uncompromising power."
+        },
+        {
+          type: "interactive",
+          content: "interval-explorer"
         },
         {
           type: "fretboard",
-          title: "Chapter 2: Intervals as Geometric Shapes",
-          content: "The guitar is a geometric instrument. Intervals translate on the neck to fixed shapes that do not change:\n- Perfect 5th: Root on the 6th string, its 5th will be on the string below, two frets ahead.\n- Octave: Root on the 6th string, skip a string, finger on the 4th string two frets ahead.\n- Major 3rd: One string down, one fret behind your root.\nOnce your hands learn these shapes, the fretboard becomes a clear grid of distances."
+          title: "Chapter 2: The Guitarist's Unfair Advantage (Fixed Geometry)",
+          content: "Pianists have a hard life when it comes to intervals. Because of the arrangement of black and white keys, a major third from 'C' looks completely different in the hand than a major third from 'E flat'. They have to memorize dozens of combinations. We guitarists have a built-in 'Cheat Code': the guitar is a geometric instrument. This means that once you learn the physical shape of an interval on the neck, that shape remains exactly the same no matter which fret you move it to.\n\nWhat does this look like in practice?\n1. The Fifth (Power Chord): Place a finger on string 6. The fifth will always be waiting for you one string down, two frets forward towards the body of the guitar. Always.\n2. The Octave: Place a finger on string 6, completely skip string 5, and place a finger on string 4, two frets forward. You get a precise, resonant octave.\n3. The Major 3rd (The happy component): Always located exactly one string down, and one fret behind your root.\n4. The Minor 3rd (The sad component): Always located exactly one string down, two frets behind your root.\n\nOnce your fingers understand this geometry, the neck opens up. To turn a major chord into a minor chord, you don't need to calculate note names, you simply know that you need to slide the finger playing the third one fret back."
+        },
+        {
+          type: "interactive",
+          content: "interval-explorer"
         },
         {
           type: "example",
-          title: "Chapter 3: The Song Trick (Ear Training)",
-          content: "The best way to recognize intervals is to associate them with a famous song:\n• Minor 2nd (1 fret): The 'Jaws' theme.\n• Minor 3rd (3 frets): Seven Nation Army riff.\n• Perfect 4th (5 frets): Star Wars theme.\n• Tritone (6 frets): The Simpsons opening.\n• Perfect 5th (7 frets): Superman soundtrack.\n• Octave (12 frets): Somewhere Over the Rainbow."
+          title: "Chapter 3: Ear-Hand Connection (The Song Trick)",
+          content: "Theory is important, but music happens in the ears. The real goal is to hear a song and immediately recognize which intervals are being played. The most effective way to teach the brain to recognize distances is to associate each interval with a famous song whose melody starts with the exact same jump:\n* Minor 2nd (1 fret): The intro of the movie 'Jaws'. The accumulating tension stems from the tiny distance.\n* Minor 3rd (3 frets): The immortal riff of 'Seven Nation Army'. The jump from the first to the second note gives the riff its grit and aggression.\n* Perfect 4th (5 frets): The trumpet fanfare that opens the 'Star Wars' soundtrack. Projects heroism and announcement.\n* Tritone (6 frets): The first word in the opening song of 'The Simpsons'. A jump that sounds alien and bizarre.\n* Perfect 5th (7 frets): The heroic intro in the 'Superman' soundtrack. A clean leap to the sky.\n* Octave (12 frets): The first word in the song 'Somewhere Over the Rainbow'. Opening a new, exciting space."
         },
         {
           type: "paragraph",
-          title: "Conclusion: From Building Blocks to Chords",
-          content: "Intervals are the Lego blocks of music. Once you recognize them and know how to find them on the guitar, building chords becomes a simple task. For example, a major chord is simply a root, to which we added a major third, and to which we added a perfect fifth. A minor chord is simply a root, to which we added a minor third (which makes it sad), and to which we added a perfect fifth. Mastering this geometry is the key to free improvisation all over the neck."
+          title: "Conclusion: The Master Key to Chords and Solos",
+          content: "Everything in music, from campfire chords to virtuoso solos, is built from intervals. A chord is simply a series of intervals played at the same time (Root + Major 3rd + Perfect 5th = Major Chord). When you improvise a solo, you don't randomly pick notes from a scale, you choose intervals based on the emotion you want to convey to the listener. Want to sound gloomy? Play a minor third. Want to build tension before the chorus? Throw in a minor second or a tritone. Mastering these distances is absolute mastery over the logic of the guitar neck and your musical emotion."
         },
         {
           type: "interactive",
