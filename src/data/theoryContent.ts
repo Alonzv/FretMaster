@@ -45,5 +45,39 @@ export const theoryContent: Record<string, TheoryArticle> = {
         content: "The Beatles - Let It Be: בית הספר הטוב ביותר לסולם המז'ורי. השיר כתוב בסולם דו מז'ור (C Major). מהלך האקורדים המפורסם (C, G, Am, F) משתמש בדרגות הראשונה, החמישית, השישית והרביעית של הסולם. גם סולו הגיטרה של ג'ורג' האריסון מסתמך כמעט לחלוטין על התווים הנקיים של סולם דו מז'ור (בשילוב פנטטוניקה), מה שמעניק לסולו תחושה של השלמה, תקווה ובהירות.\nPink Floyd - Wish You Were Here: ריף הפתיחה האקוסטי המפורסם בעולם. השיר מבוסס על סולם סול מז'ור (G Major). דיוויד גילמור משתמש בסולם המז'ורי כדי לנגן מלודיה שנשמעת עממית, חמה ופתוחה, במיוחד בגלל השימוש במיתר סול (G) הפתוח שמהדהד ברקע ומשמש כטוניקה יציבה בזמן שהאצבעות מטיילות על הסולם.\nLudwig van Beethoven - Symphony No. 9 (Ode to Joy): המלודיה אולי המפורסמת ביותר בהיסטוריה האנושית מבוססת בצורה הטהורה ביותר על הסולם המז'ורי. המנגינה צועדת למעלה ולמטה על פני חמישה צלילים רצופים מתוך הסולם (דרגות 1 עד 5), שלב אחר שלב, ללא קפיצות גדולות. המתמטיקה הפשוטה הזו היא מה שמייצר את תחושת הניצחון והאוניברסליות של היצירה."
       }
     ]
+  },
+
+  major_scale_en: {
+    id: "major_scale_en",
+    title: "The Major Scale",
+    subtitle: "The DNA of Western Music and the Ground Zero of Theory",
+    tags: ["Basics", "Scales", "Basic_Theory"],
+    sections: [
+      {
+        type: "paragraph",
+        title: "Introduction: The Ground Zero of Theory",
+        content: "If we compare the world of music to an operating system, the major scale is the source code. It is the reference point from which everything is measured. When musicians talk about other scales, complex chords, or intervals, they always compare them to the major scale. It consists of seven notes (plus one that closes the loop and starts it anew). Emotionally, the human ear has grown accustomed to interpreting this sequence of sounds as 'happy,' 'open,' 'stable,' and 'resolved.' Unlike minor scales that evoke a gloomy or melancholic atmosphere, the major scale feels like coming home. About 90 percent of the pop, rock, and folk songs you hear on the radio were written from the pool of these seven notes. To truly understand the guitar, the mechanics of this scale must become second nature."
+      },
+      {
+        type: "highlight",
+        title: "Chapter 1: Anatomy of the Scale (The Magic Formula)",
+        content: "To understand how the major scale works, we first need to agree on our units of measurement. On the guitar, the most basic unit of measurement is the fret. Moving one fret (for example, from the third to the fourth fret on the same string) is theoretically called a 'Half Step'. Moving two frets is called a 'Whole Step'. A major scale is not a random collection of notes that happen to sound good together. It is a strict mathematical-geometrical formula of distances. You can choose any note in the world, declare it your starting point (called the 'Root' or 'Tonic'), and if you step forward according to the following formula, you will inevitably get the major scale of that note. The formula consists of whole steps and half steps, and it goes like this: Whole, Whole, Half, Whole, Whole, Whole, Half. It is commonly memorized as the sequence: W-W-H-W-W-W-H. Let's test this on the most well-known scale, C Major. This scale is special because it has no 'sharps' (#) or 'flats' (b). On a piano, these are just the white keys. If we start from the note C and apply the formula: From C we go up a whole step to D. From D up a whole step to E. From E up a half step to F. From F up a whole step to G. From G up a whole step to A. From A up a whole step to B. From B up a half step to C (and we're back to the root, just one octave higher)."
+      },
+      {
+        type: "fretboard",
+        title: "Chapter 2: Theory Meets Wood and Strings (The Linear Approach)",
+        content: "Most guitarists learn scales through 'Boxes' because they are convenient to play, but they hide the theory. The best way to see and internalize the major scale formula is to play it on just one string. This way, the distances pop out at you. Let's take the open fifth string on the guitar. Its note is A. This will be our root. Now let's step according to the formula (Whole = 2 frets, Half = 1 fret): Start: Open string (A). Step 1 (Whole): Fret 2 (B). Step 2 (Whole): Fret 4 (C# - notice, we had to go up a whole step from B, so we skipped C which is on fret 3). Step 3 (Half): Fret 5 (D). Step 4 (Whole): Fret 7 (E). Step 5 (Whole): Fret 9 (F#). Step 6 (Whole): Fret 11 (G#). Step 7 (Half): Fret 12 (A - we are back home). The moment you play this string back and forth, you immediately hear the character of the scale. However, playing solos on one string isn't efficient. Your fingers would have to jump from one side of the neck to the other. Therefore, the guitar is tuned in a way that allows us to chop this formula and arrange it across the strings. Instead of moving up two frets on the same string, we can simply move to the string below it. The distances remain exactly the same; they are just folded into a structure that fits the palm of your hand."
+      },
+      {
+        type: "paragraph",
+        title: "Chapter 3: The Chord Family (Diatonic Harmony)",
+        content: "The major scale is not just a melodic line you can play note by note. It is also the factory where chords are made. If you take the seven notes of the C Major scale, and build chords from them by skipping notes (e.g., note 1, note 3, and note 5), you get a series of seven chords that belong to the same family. Because they are all built from the same raw materials, they will sound fantastic together. This is called a 'diatonic chord progression'. The major scale logic always produces the exact same family structure, no matter which root you started on: The first chord (the root), the fourth, and the fifth will always be major chords (happy). The second, third, and sixth chords will always be minor chords (sad). The seventh chord will be diminished, possessing a tense and unstable sound. If we stay in C Major, our major chords are C, F, and G. Our minor chords are Am, Dm, and Em. This is why a song composed of the chords C, G, Am, F sounds so natural and logical to us; it is simply playing the degrees of the major scale."
+      },
+      {
+        type: "example",
+        title: "Chapter 4: The Major Scale in the Real World",
+        content: "The Beatles - Let It Be: The best school for the major scale. The song is written in C Major. The famous chord progression (C, G, Am, F) uses the first, fifth, sixth, and fourth degrees of the scale. George Harrison's guitar solo also relies almost entirely on the clean notes of the C major scale (combined with pentatonics), which gives the solo a sense of completion, hope, and clarity.\nPink Floyd - Wish You Were Here: The most famous acoustic opening riff in the world. The song is based on the G Major scale. David Gilmour uses the major scale to play a melody that sounds folk-like, warm, and open, especially due to the use of the open G string that resonates in the background and serves as a stable tonic while the fingers travel across the scale.\nLudwig van Beethoven - Symphony No. 9 (Ode to Joy): Perhaps the most famous melody in human history is based in the purest way on the major scale. The melody marches up and down across five consecutive notes from the scale (degrees 1 through 5), step by step, without large leaps. This simple math is what creates the piece's sense of triumph and universality."
+      }
+    ]
   }
 };
