@@ -41,6 +41,10 @@ export type CategoryId =
   | 'voice_leading'
   | 'polyrhythm'
   | 'chord_soloing'
+  // Procedural engine (pitch-detection aware)
+  | 'engine_scale_degree'
+  | 'engine_interval'
+  | 'engine_chord_tone'
 
 export interface CategoryMeta {
   id: CategoryId
