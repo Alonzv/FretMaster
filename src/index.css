@@ -292,7 +292,7 @@ body.large-text .fm-choices button  { font-size: 21px; }
 .fm-page {
   padding: 52px 52px 80px;
   max-width: 880px; margin: 0 auto;
-  animation: fm-construct 0.4s cubic-bezier(0.25,0,0.75,1);
+  animation: fm-construct 0.22s ease-out;
 }
 .fm-page-header { margin-bottom: 36px; }
 
@@ -407,7 +407,7 @@ body.large-text .fm-choices button  { font-size: 21px; }
 
 .fm-runner {
   min-height: 100vh; display: flex; flex-direction: column;
-  animation: fm-construct 0.3s cubic-bezier(0.25,0,0.75,1);
+  animation: fm-construct 0.22s ease-out;
   background: transparent;
 }
 
@@ -695,7 +695,7 @@ body.large-text .fm-choices button  { font-size: 21px; }
   position: fixed; inset: 0; z-index: 9000;
   display: flex; align-items: center; justify-content: center;
   background: rgba(7,7,9,0.88);
-  animation: fm-construct 0.25s cubic-bezier(0.25,0,0.75,1);
+  animation: fm-construct 0.2s ease-out;
 }
 .fm-levelup-card {
   text-align: center; padding: 48px 40px;
@@ -724,14 +724,11 @@ body.large-text .fm-choices button  { font-size: 21px; }
    Linear / mechanical / constructive — no spring, no bounce
    ════════════════════════════════════════════════════════════════════════ */
 
-/* Mechanical reveal — Bauhaus entry animation */
+/* Mechanical reveal — opacity + scale stamp (no swipe, no direction bias) */
 @keyframes fm-construct {
-  0%   { clip-path: inset(0 100% 0 0); opacity: 0.6; }
-  100% { clip-path: inset(0 0% 0 0); opacity: 1; }
-}
-[dir='rtl'] @keyframes fm-construct {
-  0%   { clip-path: inset(0 0 0 100%); }
-  100% { clip-path: inset(0 0 0 0); }
+  0%   { opacity: 0;   transform: scale(0.982); }
+  60%  { opacity: 1; }
+  100% { opacity: 1;   transform: scale(1); }
 }
 
 @keyframes fm-geo-in {
@@ -808,14 +805,10 @@ body.large-text .fm-choices button  { font-size: 21px; }
   to   { transform: rotate(360deg); }
 }
 
-/* Sharp stagger entrance — no ease */
+/* Sharp stagger entrance */
 @keyframes fm-stagger-in {
-  from { opacity: 0; transform: translateX(-12px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-[dir='rtl'] @keyframes fm-stagger-in {
-  from { opacity: 0; transform: translateX(12px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Mechanical draw — left/right bar animation */
