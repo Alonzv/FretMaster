@@ -7,6 +7,7 @@ import type { OnboardingData } from './store/onboarding'
 import DailyTab    from './components/tabs/DailyTab'
 import PracticeTab from './components/tabs/PracticeTab'
 import HomeTab     from './components/tabs/HomeTab'
+import TheoryTab   from './components/tabs/TheoryTab'
 import ProfileScreen from './components/ProfileScreen'
 import Sidebar       from './components/Sidebar'
 import AppIntro, { hasSeenIntro } from './components/AppIntro'
@@ -23,7 +24,7 @@ import type { HeartsState } from './lib/gamification/hearts'
 import { loadStreak, recordActivity } from './lib/gamification/streak'
 import type { StreakState } from './lib/gamification/streak'
 
-export type ActiveTab = 'home' | 'daily' | 'practice'
+export type ActiveTab = 'home' | 'daily' | 'practice' | 'theory'
 
 interface UserProfile {
   name: string
@@ -330,6 +331,7 @@ export default function App() {
         )}
         {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} pushBack={pushBack} cleanupBack={cleanupBack} />}
         {activeTab === 'practice' && <PracticeTab hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
+        {activeTab === 'theory'   && <TheoryTab />}
       </main>
 
       {showProfile && user && (

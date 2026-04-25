@@ -18,6 +18,7 @@ const NAV_ITEMS: { id: ActiveTab; labelHe: string; labelEn: string; icon: string
   { id: 'home',     labelHe: 'בית',           labelEn: 'Home',           icon: 'M12 3 2 12h3v8h6v-6h2v6h6v-8h3z' },
   { id: 'daily',    labelHe: 'האתגר היומי',     labelEn: 'Daily Challenge', icon: 'M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7z' },
   { id: 'practice', labelHe: 'תרגול חופשי',   labelEn: 'Free Practice',   icon: 'M8 5v14l11-7z' },
+  { id: 'theory',   labelHe: 'ספריית תיאוריה', labelEn: 'Theory Library',  icon: 'M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zM21 18.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z' },
 ]
 
 export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, profileName, avatar, isRTL, mobileOpen, onMobileClose }: Props) {
