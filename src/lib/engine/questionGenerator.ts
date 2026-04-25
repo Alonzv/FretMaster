@@ -425,6 +425,31 @@ export function generateQuestion(difficulty: Difficulty): GeneratedQuestion {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Category-specific generators (registered in categories.ts)
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Scale-degree questions only — for the engine_scale_degree category */
+export function generateScaleDegreeQuestionForCategory(difficulty: Difficulty): GeneratedQuestion {
+  return generateScaleDegreeQuestion(DIFFICULTY_SCHEMA[difficulty], difficulty)
+}
+
+/** Interval questions only (above / below) — for the engine_interval category */
+export function generateIntervalQuestionForCategory(difficulty: Difficulty): GeneratedQuestion {
+  const config = DIFFICULTY_SCHEMA[difficulty]
+  // Bias toward above/below (ear training); use id only on medium/hard
+  type Dir = 'above' | 'below' | 'id'
+  const directions: Dir[] = difficulty === 'easy'
+    ? ['above', 'above', 'below']
+    : ['above', 'below', 'id']
+  return generateIntervalQuestion(config, difficulty, randomOf(directions))
+}
+
+/** Chord-tone questions only — for the engine_chord_tone category */
+export function generateChordToneQuestionForCategory(difficulty: Difficulty): GeneratedQuestion {
+  return generateChordToneQuestion(DIFFICULTY_SCHEMA[difficulty], difficulty)
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Matching utility — for use by the pitch detection layer
 // ─────────────────────────────────────────────────────────────────────────────
 

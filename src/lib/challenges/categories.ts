@@ -34,6 +34,13 @@ import { generateVoiceLeadingQuestion }      from './generators/voiceLeading'
 import { generatePolyrhythmQuestion }        from './generators/polyrhythm'
 import { generateChordToneSoloingQuestion }  from './generators/chordToneSoloing'
 
+// Procedural pitch-detection engine
+import {
+  generateScaleDegreeQuestionForCategory,
+  generateIntervalQuestionForCategory,
+  generateChordToneQuestionForCategory,
+} from '../engine/questionGenerator'
+
 // Every category registered in the app. Phase 2/3 entries have `generator: null` and
 // render as "coming soon" in the UI.
 export interface CategoryEntry extends CategoryMeta {
@@ -343,6 +350,38 @@ export const CATEGORIES: CategoryEntry[] = [
     phase: 1,
     icon: 'M9 3v12.55c-.59-.34-1.27-.55-2-.55C4.79 15 3 16.79 3 19s1.79 4 4 4 4-1.79 4-4V7h6V3H9z',
     generator: generateGenreFunkQuestion,
+  },
+
+  // ── Procedural pitch-detection engine ──────────────────────────────────
+  {
+    id: 'engine_scale_degree',
+    titleHe: 'דרגות סולם — נגן',
+    titleEn: 'Scale Degrees — Play',
+    descHe: 'זהה וְנגן דרגות סולם על הגיטרה',
+    descEn: 'Identify and play scale degrees on guitar',
+    phase: 3,
+    icon: 'M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z',
+    generator: generateScaleDegreeQuestionForCategory,
+  },
+  {
+    id: 'engine_interval',
+    titleHe: 'אינטרוולים — נגן',
+    titleEn: 'Intervals — Play',
+    descHe: 'שמע אינטרוול וְנגן אותו בגיטרה',
+    descEn: 'Hear an interval and play it on guitar',
+    phase: 3,
+    icon: 'M12 14l9-5-9-5-9 5 9 5zm0 2l-9-5v6l9 5 9-5v-6l-9 5z',
+    generator: generateIntervalQuestionForCategory,
+  },
+  {
+    id: 'engine_chord_tone',
+    titleHe: 'צלילי אקורד — נגן',
+    titleEn: 'Chord Tones — Play',
+    descHe: 'נגן את הצליל הנכון מתוך האקורד',
+    descEn: 'Play the correct tone from a chord',
+    phase: 3,
+    icon: 'M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z',
+    generator: generateChordToneQuestionForCategory,
   },
 
   // ── Phase 3: play-with-guitar (Pitchy.js) ───────────────────────────────

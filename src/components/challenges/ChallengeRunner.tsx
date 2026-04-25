@@ -263,7 +263,7 @@ export default function ChallengeRunner({
         style={{
           flex: 1,
           display: 'flex', flexDirection: 'column', alignItems: 'center',
-          padding: '28px 20px 116px',
+          padding: pitchTarget ? '28px 20px 116px' : '28px 20px 40px',
           animation: shaking ? 'fm-wrong-shake 0.45s cubic-bezier(0.25,0,0.75,1)' : 'none',
         }}
       >
@@ -366,14 +366,16 @@ export default function ChallengeRunner({
         </div>
       </div>
 
-      {/* ══ Geometric Waveform Visualizer (position: fixed, bottom) ══════════ */}
-      <GeometricVisualizer
-        isMatching={pitchInfo?.isMatching   ?? false}
-        holdProgress={pitchInfo?.holdProgress ?? 0}
-        isListening={pitchInfo?.isListening  ?? false}
-        isPitchQuestion={!!pitchTarget}
-        isHe={isHe}
-      />
+      {/* ══ Geometric Waveform Visualizer — only shown during pitch questions ══ */}
+      {pitchTarget && (
+        <GeometricVisualizer
+          isMatching={pitchInfo?.isMatching   ?? false}
+          holdProgress={pitchInfo?.holdProgress ?? 0}
+          isListening={pitchInfo?.isListening  ?? false}
+          isPitchQuestion
+          isHe={isHe}
+        />
+      )}
     </div>
   )
 }
