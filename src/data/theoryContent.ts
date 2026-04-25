@@ -1,5 +1,5 @@
 export interface ArticleSection {
-  type: 'paragraph' | 'highlight' | 'example' | 'fretboard';
+  type: 'paragraph' | 'highlight' | 'example' | 'fretboard' | 'interactive';
   title?: string;
   content: string;
 }
@@ -117,6 +117,10 @@ export const theoryContent: Record<string, TheoryArticle> = {
           type: "paragraph",
           title: "סיכום: מאבני בניין לאקורדים",
           content: "אינטרוולים הם אבני הלגו של המוזיקה. ברגע שאתה מזהה אותם ויודע למצוא אותם על הגיטרה, בניית אקורדים הופכת למשימה פשוטה. למשל, אקורד מז'ורי הוא בסך הכל שורש, אליו הוספנו טרצה גדולה, ואליה הוספנו קווינטה זכה. אקורד מינורי הוא פשוט שורש, אליו הוספנו טרצה קטנה (שעושה אותו עצוב), ואליה הוספנו קווינטה זכה. השליטה בגיאומטריה הזו היא המפתח לאלתור חופשי על כל הצוואר."
+        },
+        {
+          type: "interactive",
+          content: "interval-explorer"
         }
       ]
     },
@@ -149,6 +153,10 @@ export const theoryContent: Record<string, TheoryArticle> = {
           type: "paragraph",
           title: "Conclusion: From Building Blocks to Chords",
           content: "Intervals are the Lego blocks of music. Once you recognize them and know how to find them on the guitar, building chords becomes a simple task. For example, a major chord is simply a root, to which we added a major third, and to which we added a perfect fifth. A minor chord is simply a root, to which we added a minor third (which makes it sad), and to which we added a perfect fifth. Mastering this geometry is the key to free improvisation all over the neck."
+        },
+        {
+          type: "interactive",
+          content: "interval-explorer"
         }
       ]
     }

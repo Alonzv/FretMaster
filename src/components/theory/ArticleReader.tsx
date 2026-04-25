@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { theoryContent, type ArticleSection } from '../../data/theoryContent'
+import IntervalExplorer from './IntervalExplorer'
 
 interface Props {
   articleId: string
@@ -352,6 +353,12 @@ export default function ArticleReader({ articleId, onBack }: Props) {
                 return <HighlightSection key={i} section={section} accent="sand" />
               case 'example':
                 return <ExampleSection key={i} section={section} />
+              case 'interactive':
+                return (
+                  <div key={i} style={{ marginBottom: 48 }}>
+                    {section.content === 'interval-explorer' && <IntervalExplorer isHe={isHe} />}
+                  </div>
+                )
               default:
                 return null
             }
