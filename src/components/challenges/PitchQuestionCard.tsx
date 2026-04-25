@@ -40,6 +40,10 @@ interface Props {
   onSuccess: () => void
   /** Called when the player taps Skip — marks as incorrect and advances. */
   onSkip: () => void
+  /** When true, the prompt text is hidden (ChallengeRunner renders it instead). */
+  hidePrompt?: boolean
+  /** Called on every tick with current pitch detection state for the visualizer. */
+  onPitchUpdate?: (info: { isMatching: boolean; holdProgress: number; isListening: boolean }) => void
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -57,7 +61,7 @@ const RING_CIRC   = 2 * Math.PI * RING_R   // ≈ 238.7
 // Component
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function PitchQuestionCard({ question, pitchTarget, isHe, onSuccess, onSkip }: Props) {
+export default function PitchQuestionCard({ question, pitchTarget, isHe, onSuccess, onSkip, hidePrompt, onPitchUpdate }: Props) {
   const cardRef = useRef<HTMLDivElement>(null)
 
   const { status, detected, isMatching, holdProgress, errorMessage, start, stop, reset } =
@@ -80,6 +84,13 @@ export default function PitchQuestionCard({ question, pitchTarget, isHe, onSucce
         setTimeout(onSuccess, 480)
       },
     })
+
+  // Report pitch state to ChallengeRunner for the visualizer (throttled naturally by usePitchListener)
+  const onPitchUpdateRef = useRef(onPitchUpdate)
+  useEffect(() => { onPitchUpdateRef.current = onPitchUpdate }, [onPitchUpdate])
+  useEffect(() => {
+    onPitchUpdateRef.current?.({ isMatching, holdProgress, isListening: status === 'listening' })
+  }, [isMatching, holdProgress, status])
 
   // Reset the hook whenever the question changes (new pitchTarget)
   useEffect(() => {
@@ -126,13 +137,15 @@ export default function PitchQuestionCard({ question, pitchTarget, isHe, onSucce
         gap: 24, padding: '8px 0',
       }}
     >
-      {/* ── Prompt ─────────────────────────────────────────────────────────── */}
-      <p style={{
-        fontSize: 20, fontWeight: 800, textAlign: 'center', lineHeight: 1.4,
-        color: 'var(--fm-text)', margin: 0, maxWidth: 380,
-      }}>
-        {isHe ? question.prompt.he : question.prompt.en}
-      </p>
+      {/* ── Prompt (hidden when ChallengeRunner owns it) ─────────────────── */}
+      {!hidePrompt && (
+        <p style={{
+          fontSize: 20, fontWeight: 800, textAlign: 'center', lineHeight: 1.4,
+          color: 'var(--fm-text)', margin: 0, maxWidth: 380,
+        }}>
+          {isHe ? question.prompt.he : question.prompt.en}
+        </p>
+      )}
 
       {/* ── Note chips row ─────────────────────────────────────────────────── */}
       <div style={{
