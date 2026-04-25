@@ -281,5 +281,107 @@ export const theoryContent: Record<string, TheoryArticle> = {
         }
       ]
     }
+  },
+
+  circle_of_fifths: {
+    id: "circle_of_fifths",
+    he: {
+      title: "מעגל החמישיות",
+      subtitle: "המפה הסודית של כל המוזיקה המערבית ואיך להשתמש בה בגיטרה",
+      tags: ["יסודות", "תיאוריה_בסיסית", "הרמוניה"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: הנשק הסודי של המוזיקאים",
+          content: "יש תמונה אחת שתמצא מוסמרת מעל שולחן של כמעט כל מוזיקאי מקצועי. היא לא שרטוט של אקורד, לא תמונת אמן אהוב, ולא ספר תיאוריה. זוהי תרשים עגול, מחולק ל-12 חתיכות כמו שעון או פרוסות פיצה, ובכל חתיכה רשום שם של טונאליות. הם קוראים לו 'מעגל החמישיות' (Circle of Fifths). הסיבה שמוזיקאים מחזיקים אותו קרוב היא שהוא לא רק כלי עזר. הוא מפה. מפה שמגלה את הארכיטקטורה הפנימית של כל המוזיקה המערבית. ברגע שאתה מבין את הלוגיקה שמאחורי המעגל הזה, אתה מבין למה שירים מסוימים נשמעים 'נכון' ביחד, למה מנגנים מדלגים בין קונצרטו אחד לשני, ואיך להמציא מהלכי אקורדים שנשמעים מקצועיים בצורה מיידית. עבור גיטריסטים, המעגל הוא אפילו יותר ספציפי מאשר כלי תיאורטי: הוא מתרגם ישירות לגיאומטריה על הפרטבורד."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: הלוגיקה מאחורי המעגל",
+          content: "כדי להבין את המעגל, בואו נתחיל בשאלה: למה דווקא 'חמישיות'?\n\nהיזכרו ממה שלמדנו על אינטרוולים: קווינטה זכה (Perfect Fifth) היא מרחק של 7 סריגים. הוא האינטרוול שנשמע הכי יציב ועוצמתי אחרי האוקטבה. זהו הבסיס לאקורדי הכוח (Power Chords) שרוקרים אוהבים.\n\nמה קורה אם ניקח כל תו ונעלה ממנו קווינטה זכה, שוב ושוב?\nנתחיל מ-C. עולים קווינטה: G. עולים עוד קווינטה: D. ועוד: A. ועוד: E. ועוד: B. ועוד: F#. ועוד: Db. ועוד: Ab. ועוד: Eb. ועוד: Bb. ועוד: F. ועוד קווינטה אחת אחרונה... וחזרנו לC!\n\nזאת ההתגלות: יש בדיוק 12 תווים במוזיקה המערבית, וצעד קווינטה אחרי קווינטה עובר דרך כולם בדיוק פעם אחת לפני שחוזר לנקודת ההתחלה. התוצאה היא מעגל מושלם.\n\nהמעגל מסודר כך: בכל צעד בכיוון השעון, עולים קווינטה זכה אחת. בכל צעד נגד כיוון השעון, יורדים קווינטה (שזה כמו לעלות קוורטה). הממוקמים זה לצד זה על המעגל ישמעו קרובים ומתאימים זה לזה. הממוקמים זה מול זה ישמעו מתוחים ומרוחקים."
+        },
+        {
+          type: "interactive",
+          content: "circle-clock"
+        },
+        {
+          type: "fretboard",
+          title: "פרק 2: המעגל על הפרטבורד (הגיאומטריה הסודית)",
+          content: "כאן הגיטרה מגלה את הקסם שלה. מכיוון שהגיטרה היא כלי גיאומטרי, המרחקים על הפרטבורד תמיד קבועים וחוזרים על עצמם. עבור קווינטות זכות, ישנה נוסחה פשוטה ואחידה:\n\nנוסחת הקווינטה על הגיטרה (Power Chord):\nאם אצבע שלך נמצאת על מיתר מסוים, הקווינטה שלה תמיד תחכה לך: מיתר אחד מתחת, שני סריגים קדימה. תמיד. ללא יוצא מן הכלל.\n\nבפועל, אם תנגן שורש על מיתר E (מיתר 6), ותוסיף אצבע על מיתר A (מיתר 5) שני סריגים קדימה, יצרת Power Chord. עכשיו תחשוב: כל ה-12 הטונאליות במעגל החמישיות נמצאות בטווח של 12 סריגים על מיתר E. המרחק ביניהן? תמיד 7 סריגים (קווינטה = 7 סריגים). כלומר, מעגל החמישיות מתרגם ישירות לקו אחד על הפרטבורד, שחוזר על עצמו כל 12 סריגים.\n\nסריג 0 (פתוח): E ← שורש\nסריג 2: F#\nסריג 4: G#/Ab\nסריג 5: A\nסריג 7: B\nסריג 9: C#/Db\nסריג 11: D#/Eb"
+        },
+        {
+          type: "interactive",
+          content: "neighborhood-finder"
+        },
+        {
+          type: "paragraph",
+          title: "פרק 3: השכנים (הקסם של הקרבה)",
+          content: "הכוח הגדול ביותר של המעגל הוא מה שהוא אומר לנו על 'שכנות'. בואו ניקח טונאליות אקראית, נגיד C Major. במעגל, היא יושבת בין שני שכנים: G (לצד ימין, צעד אחד בכיוון השעון) ו-F (לצד שמאל, צעד אחד נגד כיוון השעון).\n\nמה הם עושים? G הוא הדרגה החמישית של C Major (הדומיננטה). הוא מייצר מתח שרוצה לחזור ל-C. F הוא הדרגה הרביעית של C Major (תת-הדומיננטה). הוא מייצר תחושה של תנועה לפני שחוזרים הביתה.\n\nבמילים אחרות, שלושת השכנים הקרובים ביותר (אחד מכל צד + אתה עצמך) הם בדיוק הדרגות I, IV ו-V של הסולם שלך. אלו שלושת האקורדים הבסיסיים של כל שיר בלוז, רוק, קאנטרי ופולק שנכתב מאז ועד עולם.\n\nמכך נובעת אמת פשוטה אך עמוקה: כל שיר שמנגן רק I-IV-V נשמע 'נכון' כי הוא שוהה ב'שכונה' הקרובה של הסולם שלו, בלי לצאת מרחוק מדי."
+        },
+        {
+          type: "interactive",
+          content: "dominant-trick-lab"
+        },
+        {
+          type: "example",
+          title: "פרק 4: הטריק של הדרגה החמישית (הדומיננטה)",
+          content: "Am - Smoke on the Water (Deep Purple): הריף המפורסם ביותר בהיסטוריה מבוסס על הדרגות i ו-IV של לה מינור. תחשוב על המעגל: Am יושבת על המעגל עם E (הדרגה החמישית שלה) בצד ימין ו-Dm (הדרגה הרביעית) בצד שמאל.\nAm - Stairway to Heaven (Led Zeppelin): הרצף Am-G-F-E מדגים את ה'טריק' הקלאסי. שימו לב ש-E הוא אקורד מז'ורי (E Major, לא Em), וזה מה שנקרא 'הדומיננטה של לה מינור'. הוא שאוּל מחוץ לסולם כדי ליצור מתח מגנטי שמושך בחזרה ל-Am.\nC Major - Let It Be (The Beatles): C-G-Am-F. שלוש מתוך ארבע האקורדים הם שכנים ישירים של C במעגל: G (ימין), F (שמאל), ו-Am (קרוב מאוד — הוא המינורית הרלטיבית של C).\nG Major - Knocking on Heaven's Door (Bob Dylan): G-D-Am/C. G ו-D הם שכנים ישירים במעגל, והמהלך זזה בדיוק בכיוון השעון."
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: מפה חיה",
+          content: "המעגל אינו כלי שינון, הוא כלי חשיבה. כשאתה מסתכל על מעגל החמישיות ורואה שיר שמנגן Am-Dm-E7-Am, אתה מזהה מיד: זה לא ארבעה אקורדים אקראיים. זו שכונה אחת על המעגל (Am ו-Dm הם שכנים), עם ה'טריק' של הדרגה החמישית (E7 במקום Em), שיוצר מתח מגנטי שמתפרק בחזרה ל-Am. ברגע שהמפה הזו מוטמעת, כל שיר שאתה שומע מתחיל לגלות את הארכיטקטורה הפנימית שלו. אתה לא רק שומע מוזיקה. אתה מבין אותה."
+        }
+      ]
+    },
+    en: {
+      title: "The Circle of Fifths",
+      subtitle: "The Secret Map of All Western Music and How to Use It on Guitar",
+      tags: ["Basics", "Basic_Theory", "Harmony"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: The Musician's Secret Weapon",
+          content: "There is one image you will find pinned above almost every professional musician's desk. It is not a chord diagram, not a photo of a favorite artist, not a theory book. It is a circular chart, divided into 12 pieces like a clock or pizza slices, each piece labeled with the name of a key. They call it the 'Circle of Fifths'. The reason musicians keep it close is that it is not just a reference tool. It is a map. A map that reveals the internal architecture of all Western music. Once you understand the logic behind this circle, you understand why certain songs sound 'right' together, why musicians jump between one key and another, and how to invent chord progressions that sound professional instantly. For guitarists, the circle is even more specific than a theoretical tool: it translates directly into geometry on the fretboard."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Logic Behind the Circle",
+          content: "To understand the circle, let's start with the question: why 'fifths'?\n\nRecall from intervals: a Perfect Fifth is a distance of 7 frets. It is the interval that sounds most stable and powerful after the octave. This is the foundation of the Power Chords that rock guitarists love.\n\nWhat happens if we take every note and move up a perfect fifth, over and over?\nStart from C. Up a fifth: G. Up another fifth: D. And again: A. E. B. F#. Db. Ab. Eb. Bb. F. One final fifth... and we're back to C!\n\nThis is the revelation: there are exactly 12 notes in Western music, and stepping a fifth after a fifth passes through all of them exactly once before returning to the start. The result is a perfect circle.\n\nThe circle is arranged so that each clockwise step moves up a perfect fifth. Each counter-clockwise step moves down a fifth (which is the same as up a fourth). Keys placed next to each other will sound close and compatible. Keys placed opposite each other will sound tense and distant."
+        },
+        {
+          type: "interactive",
+          content: "circle-clock"
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 2: The Circle on the Fretboard (The Secret Geometry)",
+          content: "Here the guitar reveals its magic. Since the guitar is a geometric instrument, distances on the fretboard are always fixed and repeating. For perfect fifths, there is one simple, uniform formula:\n\nThe Fifth Formula on Guitar (Power Chord):\nIf your finger is on a certain string, its fifth will always be waiting for you: one string below, two frets forward. Always. Without exception.\n\nIn practice, if you play a root on the E string (string 6), and add a finger on the A string (string 5) two frets forward, you have created a Power Chord. Now think: all 12 keys of the Circle of Fifths lie within 12 frets on the E string. The distance between them? Always 7 frets (fifth = 7 frets). In other words, the Circle of Fifths translates directly into one line on the fretboard, repeating every 12 frets.\n\nFret 0 (open): E ← Root\nFret 2: F#\nFret 4: G#/Ab\nFret 5: A\nFret 7: B\nFret 9: C#/Db\nFret 11: D#/Eb"
+        },
+        {
+          type: "interactive",
+          content: "neighborhood-finder"
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 3: The Neighbors (The Magic of Proximity)",
+          content: "The greatest power of the circle is what it tells us about 'neighborhood'. Take any key, say C Major. On the circle, it sits between two neighbors: G (to the right, one step clockwise) and F (to the left, one step counter-clockwise).\n\nWhat do they do? G is the 5th degree of C Major (the Dominant). It creates tension that wants to resolve back to C. F is the 4th degree of C Major (the Sub-dominant). It creates a sense of movement before returning home.\n\nIn other words, the three closest neighbors (one on each side + yourself) are exactly the I, IV, and V degrees of your scale. These are the three basic chords of every blues, rock, country, and folk song ever written.\n\nFrom this follows a simple but profound truth: any song that plays only I-IV-V sounds 'right' because it stays in the 'neighborhood' of its key, without wandering too far."
+        },
+        {
+          type: "interactive",
+          content: "dominant-trick-lab"
+        },
+        {
+          type: "example",
+          title: "Chapter 4: The Fifth Degree Trick (The Dominant)",
+          content: "Am - Smoke on the Water (Deep Purple): The most famous riff in history is based on the i and IV degrees of A minor. Think of the circle: Am sits on the circle with E (its fifth degree) to the right and Dm (its fourth degree) to the left.\nAm - Stairway to Heaven (Led Zeppelin): The sequence Am-G-F-E demonstrates the classic 'trick'. Note that E is a major chord (E Major, not Em), and this is what is called the 'Dominant of A minor'. It is borrowed from outside the scale to create a magnetic tension that pulls back to Am.\nC Major - Let It Be (The Beatles): C-G-Am-F. Three of the four chords are direct neighbors of C on the circle: G (right), F (left), and Am (very close — it is the relative minor of C).\nG Major - Knocking on Heaven's Door (Bob Dylan): G-D-Am/C. G and D are direct neighbors on the circle, and the progression moves exactly clockwise."
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: A Living Map",
+          content: "The circle is not a memorization tool; it is a thinking tool. When you look at the Circle of Fifths and see a song playing Am-Dm-E7-Am, you immediately recognize: these are not four random chords. This is one neighborhood on the circle (Am and Dm are neighbors), with the fifth degree 'trick' (E7 instead of Em), creating magnetic tension that resolves back to Am. Once this map is internalized, every song you hear begins to reveal its internal architecture. You are not just hearing music. You are understanding it."
+        }
+      ]
+    }
   }
 };

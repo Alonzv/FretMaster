@@ -5,6 +5,9 @@ import IntervalExplorer    from './IntervalExplorer'
 import TriadConstructor   from './TriadConstructor'
 import MajorMinorFlip     from './MajorMinorFlip'
 import VoicingVisualizer  from './VoicingVisualizer'
+import CircleClock        from './CircleClock'
+import NeighborhoodFinder from './NeighborhoodFinder'
+import DominantTrickLab   from './DominantTrickLab'
 
 interface Props {
   articleId: string
@@ -391,6 +394,9 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'triad-construction'  && <TriadConstructor   isHe={isHe} />}
                     {section.content === 'major-minor-flip'    && <MajorMinorFlip     isHe={isHe} />}
                     {section.content === 'voicing-visualizer'  && <VoicingVisualizer  isHe={isHe} />}
+                    {section.content === 'circle-clock'        && <CircleClock        isHe={isHe} />}
+                    {section.content === 'neighborhood-finder' && <NeighborhoodFinder isHe={isHe} />}
+                    {section.content === 'dominant-trick-lab'  && <DominantTrickLab   isHe={isHe} />}
                   </div>
                 )
               default:
