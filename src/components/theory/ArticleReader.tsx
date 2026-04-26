@@ -5,9 +5,12 @@ import IntervalExplorer    from './IntervalExplorer'
 import TriadConstructor   from './TriadConstructor'
 import MajorMinorFlip     from './MajorMinorFlip'
 import VoicingVisualizer  from './VoicingVisualizer'
-import CircleClock        from './CircleClock'
-import NeighborhoodFinder from './NeighborhoodFinder'
-import DominantTrickLab   from './DominantTrickLab'
+import CircleClock              from './CircleClock'
+import NeighborhoodFinder       from './NeighborhoodFinder'
+import DominantTrickLab         from './DominantTrickLab'
+import NotationVisualDictionary from './NotationVisualDictionary'
+import NoteToFretTranslator     from './NoteToFretTranslator'
+import FirstScoreBuilder        from './FirstScoreBuilder'
 
 interface Props {
   articleId: string
@@ -394,9 +397,12 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'triad-construction'  && <TriadConstructor   isHe={isHe} />}
                     {section.content === 'major-minor-flip'    && <MajorMinorFlip     isHe={isHe} />}
                     {section.content === 'voicing-visualizer'  && <VoicingVisualizer  isHe={isHe} />}
-                    {section.content === 'circle-clock'        && <CircleClock        isHe={isHe} />}
-                    {section.content === 'neighborhood-finder' && <NeighborhoodFinder isHe={isHe} />}
-                    {section.content === 'dominant-trick-lab'  && <DominantTrickLab   isHe={isHe} />}
+                    {section.content === 'circle-clock'              && <CircleClock              isHe={isHe} />}
+                    {section.content === 'neighborhood-finder'       && <NeighborhoodFinder       isHe={isHe} />}
+                    {section.content === 'dominant-trick-lab'        && <DominantTrickLab         isHe={isHe} />}
+                    {section.content === 'notation-visual-dictionary' && <NotationVisualDictionary isHe={isHe} />}
+                    {section.content === 'note-to-fret-translator'   && <NoteToFretTranslator     isHe={isHe} />}
+                    {section.content === 'first-score-builder'       && <FirstScoreBuilder        isHe={isHe} />}
                   </div>
                 )
               default:

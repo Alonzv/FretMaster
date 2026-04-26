@@ -283,6 +283,108 @@ export const theoryContent: Record<string, TheoryArticle> = {
     }
   },
 
+  sight_reading: {
+    id: "sight_reading",
+    he: {
+      title: "קריאת תווים: המטריקס של המוזיקה",
+      subtitle: "השפה האוניברסלית שתשחרר אותך מכבלי הטאבים",
+      tags: ["יסודות", "קריאת_תווים", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: מלכודת הדבש של הטאבים",
+          content: "כ-90 אחוזים מנגני הגיטרה בעולם לא יודעים לקרוא תווים. הם מסתמכים על טאבים – הוראות הפעלה מכניות שאומרות 'שים אצבע בסריג 5'. אבל טאבים לא מלמדים אותך מוזיקה, הם מלמדים אותך כוריאוגרפיה. קריאת תווים היא המעבר מצפייה בסרט עם כתוביות להבנת השפה עצמה. ברגע שאתה לומד לפצח את הקוד, אתה מפסיק להיות טכנאי של גיטרה והופך למוזיקאי במשרה מלאה."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: האדריכלות של החמשה",
+          content: "החמשה היא גרף של 5 שורות שבו הגובה הפיזי של התו קובע את גובה הצליל. מפתח סול (Treble Clef) הוא העוגן שלנו, המכריז על השורה השנייה מלמטה כתו סול (G). מכאן, אנחנו מטפסים או יורדים לפי סדר ה-ABC. בגיטרה קיים סוד מקצועי: אנחנו כלי טרנספוזיציה. התווים נכתבים אוקטבה אחת גבוה יותר מאיך שהם נשמעים באמת כדי לשמור על קריאות נוחה בתוך החמשה."
+        },
+        {
+          type: "interactive",
+          content: "notation-visual-dictionary"
+        },
+        {
+          type: "fretboard",
+          title: "פרק 2: ריבוי האפשרויות של הגיטרה",
+          content: "בפסנתר, לכל תו יש קליד אחד. בגיטרה, את אותו התו בדיוק אפשר לנגן בכמה מקומות שונים. תו 'מי' (E) יכול להופיע על 4 מיתרים שונים! לכל מיקום יש גוון (Timbre) אחר – חם ועמוק או בהיר וחד. דף התווים נותן לך את החופש לבחור את הסאונד לפי הרגש."
+        },
+        {
+          type: "interactive",
+          content: "note-to-fret-translator"
+        },
+        {
+          type: "paragraph",
+          title: "פרק 3: שפת הקצב והזמן",
+          content: "הזמן זורם משמאל לימין. צורת התו קובעת כמה זמן הוא יצלצל: עיגול חלול (שלם) ל-4 פעימות, עיגול מלא (רבע) לפעימה אחת. מוזיקה היא גם השקט שבין הצלילים – לכל תו יש הפסקה (Rest) מקבילה באותו אורך."
+        },
+        {
+          type: "example",
+          title: "פרק 4: הדינמיקה והנשמה של התו",
+          content: "תווים אומרים לך לא רק מה לנגן, אלא איך. סימנים כמו p (חלש) או f (חזק) קובעים את העוצמה. נקודה מעל התו (Staccato) דורשת נגינה קצרה וקופצנית, וקשת (Slur) מסמנת ליגטו – חיבור זורם בין צלילים."
+        },
+        {
+          type: "interactive",
+          content: "first-score-builder"
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: להתחיל לקרוא מילים",
+          content: "ללמוד לקרוא תווים זה כמו ללמוד שפה חדשה. בהתחלה אתה מאיית אותיות, אבל המטרה היא לזהות תבניות. יום אחד תפתח דף תווים והאצבעות יזוזו מעצמן – שם מתחיל החופש המוחלט שלך כמוזיקאי."
+        }
+      ]
+    },
+    en: {
+      title: "Reading Music: The Matrix of Sound",
+      subtitle: "The Universal Language That Will Free You From Tabs",
+      tags: ["Basics", "Sight_Reading", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: The Tablature Trap",
+          content: "About 90 percent of guitarists worldwide cannot read music. They rely on tabs – mechanical instructions that say 'put finger on fret 5'. But tabs don't teach you music; they teach you choreography. Reading music is the transition from watching a movie with subtitles to understanding the language itself. Once you decode the script, you stop being a guitar technician and become a full-time musician."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Staff Architecture",
+          content: "The staff is a 5-line graph where a note's physical height determines its pitch. The Treble Clef is our anchor, marking the second line from the bottom as the note G. From here, we climb or descend in ABC order. On the guitar, there's a pro secret: we are a transposing instrument. Music is written an octave higher than it actually sounds to keep it readable within the staff."
+        },
+        {
+          type: "interactive",
+          content: "notation-visual-dictionary"
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 2: The Guitar's Multiple Choices",
+          content: "On a piano, every note has one key. On a guitar, the exact same note can be played in several different places. An 'E' note can appear on 4 different strings! Each location has a different timbre – warm and deep or bright and sharp. Sheet music gives you the freedom to choose the sound based on emotion."
+        },
+        {
+          type: "interactive",
+          content: "note-to-fret-translator"
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 3: The Language of Rhythm and Time",
+          content: "Time flows from left to right. The shape of the note determines its duration: a hollow circle (whole note) for 4 beats, a solid circle (quarter note) for one beat. Music is also the silence between sounds – every note has a corresponding Rest of the same length."
+        },
+        {
+          type: "example",
+          title: "Chapter 4: Dynamics and the Soul of the Note",
+          content: "Notes tell you not just what to play, but how. Symbols like p (piano/soft) or f (forte/loud) dictate volume. A dot above a note (staccato) requires short, bouncy playing, and a slur indicates legato – a fluid connection between notes."
+        },
+        {
+          type: "interactive",
+          content: "first-score-builder"
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: Reading Words, Not Letters",
+          content: "Learning to read music is like learning a new language. At first, you spell out letters, but the goal is to recognize patterns. One day you'll open a piece of music and your fingers will move on their own – that's where your absolute freedom as a musician begins."
+        }
+      ]
+    }
+  },
+
   circle_of_fifths: {
     id: "circle_of_fifths",
     he: {
