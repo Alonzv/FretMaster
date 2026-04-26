@@ -398,7 +398,7 @@ export const theoryContent: Record<string, TheoryArticle> = {
   fretboard_matrix: {
     id: "fretboard_matrix",
     he: {
-      title: "הפרטבורד: המטריקס של ששת המיתרים",
+      title: "הפרטבורד",
       subtitle: "הגשר שבין התיאוריה המוזיקלית לארכיטקטורה של העץ",
       tags: ["יסודות", "פרטבורד", "מאסטר-קלאס"],
       sections: [
@@ -452,7 +452,7 @@ export const theoryContent: Record<string, TheoryArticle> = {
       ]
     },
     en: {
-      title: "The Fretboard: The Matrix of Six Strings",
+      title: "The Fretboard",
       subtitle: "The Bridge Between Musical Theory and the Architecture of Wood",
       tags: ["Basics", "Fretboard", "Masterclass"],
       sections: [
