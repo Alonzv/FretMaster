@@ -49,6 +49,7 @@ export default function App() {
   const [profile, setProfile]   = useState<UserProfile | null>(null)
   const [checking, setChecking] = useState(true)
   const [activeTab, setActiveTab] = useState<ActiveTab>('home')
+  const [theoryResetSignal, setTheoryResetSignal] = useState(0)
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
   const [showProfile, setShowProfile] = useState(false)
   const [showIntro, setShowIntro] = useState(false)
@@ -177,11 +178,17 @@ export default function App() {
 
   // ── Tab navigation ──────────────────────────────────────────────────────────
   const handleTabChange = useCallback((tab: ActiveTab) => {
+    if (tab === 'theory' && activeTab === 'theory') {
+      // Already on theory tab — signal TheoryTab to close any open article
+      setTheoryResetSignal(s => s + 1)
+      setSidebarOpen(false)
+      return
+    }
     resetToRoot()
     setActiveTab(tab)
     setSelectedTopic(null)  // always clear topic when switching tabs
     setSidebarOpen(false)
-  }, [resetToRoot])
+  }, [activeTab, resetToRoot])
 
   // ── Topic navigation ────────────────────────────────────────────────────────
   const handleSelectTopic = useCallback((topic: Topic) => {
@@ -331,7 +338,7 @@ export default function App() {
         )}
         {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} pushBack={pushBack} cleanupBack={cleanupBack} />}
         {activeTab === 'practice' && <PracticeTab hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
-        {activeTab === 'theory'   && <TheoryTab pushBack={pushBack} cleanupBack={cleanupBack} onClose={() => handleTabChange('home')} />}
+        {activeTab === 'theory'   && <TheoryTab pushBack={pushBack} cleanupBack={cleanupBack} onClose={() => handleTabChange('home')} resetSignal={theoryResetSignal} />}
       </main>
 
       {showProfile && user && (

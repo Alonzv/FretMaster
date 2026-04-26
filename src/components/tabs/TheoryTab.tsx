@@ -8,6 +8,7 @@ interface Props {
   pushBack?: PushBackFn
   cleanupBack?: CleanupBackFn
   onClose?: () => void
+  resetSignal?: number
 }
 
 function IconX() {
@@ -19,7 +20,7 @@ function IconX() {
   )
 }
 
-export default function TheoryTab({ pushBack, cleanupBack, onClose }: Props) {
+export default function TheoryTab({ pushBack, cleanupBack, onClose, resetSignal }: Props) {
   const { i18n } = useTranslation()
   const isHe = i18n.language === 'he'
   const lang  = isHe ? 'he' : 'en'
@@ -43,6 +44,16 @@ export default function TheoryTab({ pushBack, cleanupBack, onClose }: Props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  // Close open article when the sidebar theory link is clicked while already on this tab
+  useEffect(() => {
+    if (!resetSignal) return
+    if (openArticleIdRef.current) {
+      cleanupBack?.(1)
+      closeArticle()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetSignal])
 
   // Sync activeTag ↔ URL search param
   useEffect(() => {
@@ -115,7 +126,7 @@ export default function TheoryTab({ pushBack, cleanupBack, onClose }: Props) {
           color: 'var(--fm-text)',
           margin: '0 0 10px', letterSpacing: '-0.3px',
         }}>
-          {isHe ? 'מאמרי עומק' : 'Deep Reads'}
+          {isHe ? 'הספרייה התאורטית' : 'Theory Library'}
         </h1>
         <p style={{
           fontSize: 15, color: 'var(--fm-text-muted)',
