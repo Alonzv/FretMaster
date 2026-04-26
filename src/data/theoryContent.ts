@@ -286,19 +286,19 @@ export const theoryContent: Record<string, TheoryArticle> = {
   sight_reading: {
     id: "sight_reading",
     he: {
-      title: "קריאת תווים: המטריקס של המוזיקה",
-      subtitle: "השפה האוניברסלית שתשחרר אותך מכבלי הטאבים",
+      title: "קריאת תווים: המטריקס של הסאונד",
+      subtitle: "הפיזיקה של הנייר והשפה שתשחרר אותך מכבלי הטאבלטורה",
       tags: ["יסודות", "קריאת_תווים", "מאסטר-קלאס"],
       sections: [
         {
           type: "paragraph",
-          title: "הקדמה: מלכודת הדבש של הטאבים",
-          content: "כ-90 אחוזים מנגני הגיטרה בעולם לא יודעים לקרוא תווים. הם מסתמכים על טאבים – הוראות הפעלה מכניות שאומרות 'שים אצבע בסריג 5'. אבל טאבים לא מלמדים אותך מוזיקה, הם מלמדים אותך כוריאוגרפיה. קריאת תווים היא המעבר מצפייה בסרט עם כתוביות להבנת השפה עצמה. ברגע שאתה לומד לפצח את הקוד, אתה מפסיק להיות טכנאי של גיטרה והופך למוזיקאי במשרה מלאה."
+          title: "הקדמה: האשליה של הטאבלטורה",
+          content: "תעשיית הגיטרה העולמית מבוססת על סוד גלוי: כמעט כל נגני הגיטרה החובבים אינם יודעים לקרוא את שפת המוזיקה. כדי לעקוף את המכשול הזה, הומצאה הטאבלטורה. טאב הוא המצאה מבריקה, אך הוא טומן בחובו מלכודת דבש קטלנית להתפתחות המוזיקלית שלך. טאבלטורה היא רצף של הוראות הפעלה מכניות. היא אומרת לך להניח את האצבע השלישית על הסריג החמישי במיתר השני. היא אינה אומרת לך איזה צליל אתה מנגן, מהי הפונקציה ההרמונית שלו, והכי חמור הוא שהיא עיוורת לחלוטין לממד הזמן והקצב. לנגן מטאבים זה כמו להקליד מילה בסינית על ידי העתקת הציור שלה, מבלי להבין את המשמעות, את התחביר או את הטון.\n\nתווים סטנדרטיים (Standard Notation) לעומת זאת, הם שפה אוניברסלית של תדר וזמן. כשאתה קורא תווים, אתה חולק את אותו מוח עם הפסנתרן, נגן הסקסופון והזמרת. אתה מפסיק להיות מפעיל מכונה של גיטרה, ומתחיל להיות מוזיקאי שמשתמש בגיטרה ככלי ביטוי. בפרק זה נפרק את שפת המטריקס הזו לשני צירים: ציר הגובה (Pitch) וציר הזמן (Rhythm)."
         },
         {
           type: "highlight",
-          title: "פרק 1: האדריכלות של החמשה",
-          content: "החמשה היא גרף של 5 שורות שבו הגובה הפיזי של התו קובע את גובה הצליל. מפתח סול (Treble Clef) הוא העוגן שלנו, המכריז על השורה השנייה מלמטה כתו סול (G). מכאן, אנחנו מטפסים או יורדים לפי סדר ה-ABC. בגיטרה קיים סוד מקצועי: אנחנו כלי טרנספוזיציה. התווים נכתבים אוקטבה אחת גבוה יותר מאיך שהם נשמעים באמת כדי לשמור על קריאות נוחה בתוך החמשה."
+          title: "פרק 1: ציר ה-Y (המיפוי המתמטי של התדר)",
+          content: "תחשוב על דף תווים כעל תרשים מתמטי. הציר האנכי מייצג את גובה הצליל: ככל שהסימון גבוה יותר על הדף, כך התדר (הצליל) שייווצר יהיה גבוה וחד יותר.\n\nהאדריכלות של החמשה (The Staff):\nהחמשה מורכבת מחמישה קווים אופקיים מקבילים, היוצרים ביניהם ארבעה רווחים. כל קו וכל רווח מייצג מדרגה אחת בסולם התווים הטבעי (A-B-C-D-E-F-G).\n\nמפתח סול (Treble Clef) כנקודת כיול:\nבתחילת כל שורת תווים לגיטרה יופיע סמל מסולסל הנקרא מפתח סול. המפתח הזה אינו עיטור גרפי, הוא מערכת כיול. אם תבחן אותו מקרוב, תראה שהעיגול הפנימי שלו נועל כמו כוונת את הקו השני מלמטה. זוהי הכרזה משפטית: כל תו שיושב על הקו השני מלמטה, הוא בדיוק התו סול (G). מנקודת העוגן הזו, היקום כולו מסתדר:\n* על הקו השני: G (סול)\n* ברווח שמעליו: A (לה)\n* על הקו השלישי: B (סי)\n* ברווח שמעליו: C (דו)\n\nכדי להימנע מספירה איטית, מוזיקאים משתמשים בעוגני זיכרון:\n* הקווים מלמטה למעלה: E-G-B-D-F (Every Good Boy Does Fine).\n* הרווחים מלמטה למעלה: F-A-C-E (היוצרים את המילה פנים באנגלית).\n\nהסוד המקצועי של הגיטרה (Transposition):\nלגיטרה יש טווח צלילים נמוך מאוד שמגיע עד לתו E (מיתר 6 פתוח). אם היינו כותבים את התווים בדיוק בתדר שבו הם נשמעים, היינו צריכים לצייר המון קווי עזר מתחת לחמשה, מה שהיה הופך את הקריאה לבלתי אפשרית. לכן, הגיטרה מוגדרת ככלי טרנספוזיציה של אוקטבה. כל מה שאתה רואה על דף התווים, נשמע במציאות אוקטבה אחת נמוך יותר."
         },
         {
           type: "interactive",
@@ -306,48 +306,53 @@ export const theoryContent: Record<string, TheoryArticle> = {
         },
         {
           type: "fretboard",
-          title: "פרק 2: ריבוי האפשרויות של הגיטרה",
-          content: "בפסנתר, לכל תו יש קליד אחד. בגיטרה, את אותו התו בדיוק אפשר לנגן בכמה מקומות שונים. תו 'מי' (E) יכול להופיע על 4 מיתרים שונים! לכל מיקום יש גוון (Timbre) אחר – חם ועמוק או בהיר וחד. דף התווים נותן לך את החופש לבחור את הסאונד לפי הרגש."
+          title: "פרק 2: הקונפליקט של הפרטבורד (Timbre vs. Pitch)",
+          content: "הגענו לסיבה האמיתית שבגללה גיטריסטים מפחדים מתווים. בפסנתר, יש יחס של אחד לאחד. אם מופיע 'דו אמצעי' על הדף, יש רק קליד אחד ספציפי על הפסנתר שמפיק אותו. אין אפשרויות אחרות.\n\nבגיטרה, המערכת היא רב-ממדית. את אותו תו 'מי' (E) שמופיע ברווח העליון של החמשה, ניתן לנגן במספר מיקומים בעלי תדר זהה לחלוטין:\n1. מיתר 1 פתוח.\n2. מיתר 2, סריג 5.\n3. מיתר 3, סריג 9.\n4. מיתר 4, סריג 14.\n\nאם התדר זהה, למה זה משנה היכן ננגן אותו? התשובה היא גוון הצליל (Timbre). מיתר עבה (כמו מיתר 4) ייצר צליל חם, עמוק, עשיר בתדרים נמוכים ועם הדהוד ארוך. מיתר דק (כמו מיתר 1 פתוח) ייצר צליל מבריק, צלול וחותך.\nקורא תווים מיומן אינו מחפש רק איפה התו נמצא. הוא מסתכל על המשפט המוזיקלי כולו, ומחליט באיזו פוזיציה לנגן אותו כדי להפיק את האופי והרגש המדויק שהמלחין התכוון אליו."
         },
         {
           type: "interactive",
-          content: "note-to-fret-translator"
+          content: "note-to-fret-matrix"
         },
         {
           type: "paragraph",
-          title: "פרק 3: שפת הקצב והזמן",
-          content: "הזמן זורם משמאל לימין. צורת התו קובעת כמה זמן הוא יצלצל: עיגול חלול (שלם) ל-4 פעימות, עיגול מלא (רבע) לפעימה אחת. מוזיקה היא גם השקט שבין הצלילים – לכל תו יש הפסקה (Rest) מקבילה באותו אורך."
+          title: "פרק 3: ציר ה-X (הפיזיקה של הזמן)",
+          content: "הציר האופקי על הנייר הוא ציר הזמן. הזמן מחולק לתיבות (Measures), המופרדות על ידי קווים אנכיים. בראש היצירה מופיע סימן המשקל (Time Signature), למשל 4/4. המספר העליון קובע כמה פעימות (Beats) ייכנסו בכל תיבה, והמספר התחתון קובע איזה תו ייחשב לפעימה אחת.\n\nהצורה הגרפית של התו אינה אקראית, היא נוסחה מתמטית מדויקת של יחסים:\n* תו שלם (Whole Note): עיגול חלול ללא מקל. משמעותו היא פריטה אחת הממשיכה להדהד במשך 4 פעימות שלמות. זהו הבסיס.\n* חצי תו (Half Note): הוספנו מקל לעיגול החלול. הזמן נחתך בחצי. התו יהדהד 2 פעימות.\n* תו רבע (Quarter Note): העיגול החלול מתמלא בצבע שחור. הזמן נחתך שוב בחצי. פעימה אחת בודדת כמו פעימת לב או תקתוק של שעון שניות.\n* תו שמינית (Eighth Note): הוספנו דגל או קו מחבר למקל. הזמן נחתך שוב. אנחנו מנגנים שני צלילים בתוך פעימת לב אחת.\n* חלקי 16 (Sixteenth Note): שני דגלים. ארבעה צלילים נדחסים לתוך פעימה אחת.\n\nהארכיטקטורה של השקט (Rests):\nמוזיקה ללא שקט היא פשוט רעש. לכל אורך של תו, קיים סימן הפסקה מקביל המורה לך להשתיק את המיתר במכוון. שליטה בהפסקות היא מה שמייצר גרוב. גיטריסט שמשאיר מיתרים מהדהדים בזמן הפסקה, הורס את המבנה הקצבי של השיר."
+        },
+        {
+          type: "interactive",
+          content: "rhythm-visualizer"
+        },
+        {
+          type: "paragraph",
+          title: "פרק 4: שריון המפתח (Key Signatures) והגיאומטריה של הסולם",
+          content: "כפי שלמדנו בפרק האינטרוולים, המוזיקה אינה מוגבלת רק לתווים הטבעיים (הקלידים הלבנים). לפעמים עלינו לנגן את הצלילים שביניהם.\n* דיאז (#): מורה לנו להעלות את התו המודפס בחצי טון (בגיטרה: להזיז סריג אחד קדימה לכיוון הגוף).\n* במול (b): מורה לנו להוריד את התו המודפס בחצי טון (סריג אחד אחורה לכיוון מפתחות הכיוון).\n\nכדי לא לכתוב סימן דיאז ליד כל תו שני לאורך דפים שלמים, הומצא שריון המפתח. מיד אחרי מפתח סול בתחילת השורה, תראה לעיתים קבוצה של דיאזים או במולים. זהו קוד העל של השיר. אם מופיע סימן דיאז על הקו של התו פה (F), החוק קובע: כל תו פה שתראה אי פעם בשיר הזה, בכל אוקטבה שהיא, מנוגן אוטומטית כפה דיאז (F#), אלא אם מופיע סימן ביטול ספציפי לידו. קריאת השריון הזה היא הדרך שבה מוזיקאים יודעים באיזה סולם היצירה נכתבה."
         },
         {
           type: "example",
-          title: "פרק 4: הדינמיקה והנשמה של התו",
-          content: "תווים אומרים לך לא רק מה לנגן, אלא איך. סימנים כמו p (חלש) או f (חזק) קובעים את העוצמה. נקודה מעל התו (Staccato) דורשת נגינה קצרה וקופצנית, וקשת (Slur) מסמנת ליגטו – חיבור זורם בין צלילים."
-        },
-        {
-          type: "interactive",
-          content: "first-score-builder"
+          title: "פרק 5: דינמיקה, ארטיקולציה והנשמה של הנגינה",
+          content: "הגענו לסיבה העליונה שבגללה תווים הם שפת פרימיום. טאבים לעולם לא יספרו לך איך לנגן. דף תווים כולל שכבה שלמה של מידע רגשי וטכני:\n\nדינמיקה (עוצמה):\nסימונים כמו p (חלש ורך), או f (חזק ותקיף) מורים לך כמה כוח להפעיל בפריטה. סימן קרשנדו (Crescendo) דורש ממך להגביר את העוצמה בהדרגה, בונה מתח דרמטי לקראת שיא היצירה.\n\nארטיקולציה (מגע):\n* סטקטו (Staccato): נקודה קטנה מעל או מתחת לתו מורה לך לקטוע את הצליל מיד לאחר הפריטה, מה שמייצר תחושה קופצנית, מכנית ומדויקת.\n* ליגטו (Slur): קשת המחברת בין שני תווים בגבהים שונים מורה לך לנגן את שניהם בפריטה אחת בלבד על ידי שימוש בטכניקות של Hammer-on או Pull-off, מה שמייצר חיבור חלקי, זורם ואנושי במיוחד.\n\nכיווניות (הוראות ניווט):\nסימנים כמו סימני חזרה המורים לך לנגן קטע שוב, או המונח D.C. al Fine (מאיטלקית: מההתחלה ועד הסוף) החוסכים דפים מיותרים ויוצרים מבנה שיר הגיוני של בית, פזמון וגשר."
         },
         {
           type: "paragraph",
-          title: "סיכום: להתחיל לקרוא מילים",
-          content: "ללמוד לקרוא תווים זה כמו ללמוד שפה חדשה. בהתחלה אתה מאיית אותיות, אבל המטרה היא לזהות תבניות. יום אחד תפתח דף תווים והאצבעות יזוזו מעצמן – שם מתחיל החופש המוחלט שלך כמוזיקאי."
+          title: "סיכום: שלב הפענוח ושלב השטף",
+          content: "קריאת תווים לגיטרה היא מסע. בשבועות הראשונים, המוח שלך יעבוד במצב של תרגום עיוור. אתה תראה נקודה, תחשב את שמה, תחשב את המיקום בגיטרה, ואז תנגן. זה תהליך מתסכל שמרגיש כמו גמגום.\n\nאבל הפלא קורה לאחר חודשים של אימון עקבי: התרגום נעלם. המוח מתחיל לקשר ישירות בין הגירוי הוויזואלי שעל הדף לבין הפעולה המוטורית של האצבע, מבלי לעבור דרך שם התו. אתה רואה תבנית ויזואלית של טרצה, והאצבעות שלך מסתדרות אוטומטית בצורה של טרצה על הצוואר שאותה למדנו בפרק האינטרוולים.\n\nביום שבו אתה מתיישב מול יצירה שלא שמעת מעולם, והידיים שלך מנגנות אותה פשוט מתוך התבוננות בדף, ביום הזה רכשת את השפה האוניברסלית של המוזיקה לנצח."
         }
       ]
     },
     en: {
       title: "Reading Music: The Matrix of Sound",
-      subtitle: "The Universal Language That Will Free You From Tabs",
+      subtitle: "The Physics of Paper and the Language That Will Free You From Tablature",
       tags: ["Basics", "Sight_Reading", "Masterclass"],
       sections: [
         {
           type: "paragraph",
-          title: "Introduction: The Tablature Trap",
-          content: "About 90 percent of guitarists worldwide cannot read music. They rely on tabs – mechanical instructions that say 'put finger on fret 5'. But tabs don't teach you music; they teach you choreography. Reading music is the transition from watching a movie with subtitles to understanding the language itself. Once you decode the script, you stop being a guitar technician and become a full-time musician."
+          title: "Introduction: The Illusion of Tablature",
+          content: "The global guitar industry is based on an open secret: almost all amateur guitarists cannot read the language of music. To bypass this obstacle, tablature (Tabs) was invented. A tab is a brilliant invention, but it harbors a deadly trap for your musical development. Tablature is a sequence of mechanical operating instructions. It tells you to place your third finger on the fifth fret of the second string. It does not tell you what note you are playing, what its harmonic function is, and worst of all, it is completely blind to the dimension of time and rhythm. Playing from tabs is like typing a word in a foreign language by copying its drawing, without understanding the meaning, syntax, or tone.\n\nStandard notation on the other hand, is a universal language of frequency and time. When you read music, you share the exact same mind with the pianist, the saxophone player, and the singer. You stop being a machine operator of a guitar, and start being a musician who uses the guitar as a tool for expression. In this chapter, we will break down this matrix language into two axes: the vertical axis of Pitch and the horizontal axis of Rhythm."
         },
         {
           type: "highlight",
-          title: "Chapter 1: The Staff Architecture",
-          content: "The staff is a 5-line graph where a note's physical height determines its pitch. The Treble Clef is our anchor, marking the second line from the bottom as the note G. From here, we climb or descend in ABC order. On the guitar, there's a pro secret: we are a transposing instrument. Music is written an octave higher than it actually sounds to keep it readable within the staff."
+          title: "Chapter 1: The Y-Axis (Mathematical Mapping of Frequency)",
+          content: "Think of sheet music as a mathematical chart. The vertical axis represents pitch: the higher the mark on the page, the higher and sharper the resulting frequency.\n\nThe Architecture of the Staff:\nThe staff consists of five parallel horizontal lines creating four spaces between them. Each line and each space represents one step in the natural musical scale (A-B-C-D-E-F-G).\n\nThe Treble Clef as a Calibration Point:\nAt the beginning of every guitar staff, you will see a curled symbol called the Treble Clef. This clef is not a graphic decoration, it is a calibration system. If you look closely, you will see that its inner circle locks onto the second line from the bottom like a crosshair. This is a legal declaration: any note sitting on the second line from the bottom is exactly the note G. From this anchor point, the whole universe aligns:\n* On the second line: G\n* In the space above it: A\n* On the third line: B\n* In the space above it: C\n\nTo avoid slow counting, musicians use memory anchors:\n* The lines from bottom to top: E-G-B-D-F (Every Good Boy Does Fine).\n* The spaces from bottom to top: F-A-C-E (spelling the word FACE).\n\nThe Guitar's Professional Secret (Transposition):\nThe guitar has a very low range reaching down to the note E (open 6th string). If we wrote the notes exactly at the frequency they sound, we would need to draw many ledger lines below the staff, making reading impossible. Therefore, the guitar is defined as an octave transposing instrument. Everything you see on the sheet music actually sounds one octave lower in reality."
         },
         {
           type: "interactive",
@@ -355,31 +360,36 @@ export const theoryContent: Record<string, TheoryArticle> = {
         },
         {
           type: "fretboard",
-          title: "Chapter 2: The Guitar's Multiple Choices",
-          content: "On a piano, every note has one key. On a guitar, the exact same note can be played in several different places. An 'E' note can appear on 4 different strings! Each location has a different timbre – warm and deep or bright and sharp. Sheet music gives you the freedom to choose the sound based on emotion."
+          title: "Chapter 2: The Fretboard Conflict (Timbre vs. Pitch)",
+          content: "We have reached the real reason why guitarists fear sheet music. On the piano, there is a one-to-one ratio. If 'Middle C' appears on the page, there is only one specific key on the piano that produces it. There are no other options.\n\nOn the guitar, the system is multidimensional. The exact same note 'E' appearing in the top space of the staff can be played in multiple locations with identical frequency:\n1. Open 1st string.\n2. 2nd string, 5th fret.\n3. 3rd string, 9th fret.\n4. 4th string, 14th fret.\n\nIf the frequency is identical, why does it matter where we play it? The answer is Timbre. A thick string (like the 4th string) will produce a warm, deep sound rich in low frequencies with long sustain. A thin string (like the open 1st string) will produce a bright, clear, and cutting sound.\nA skilled sight-reader does not just look for where the note is. They look at the entire musical phrase and decide in which position to play it to produce the exact character and emotion the composer intended."
         },
         {
           type: "interactive",
-          content: "note-to-fret-translator"
+          content: "note-to-fret-matrix"
         },
         {
           type: "paragraph",
-          title: "Chapter 3: The Language of Rhythm and Time",
-          content: "Time flows from left to right. The shape of the note determines its duration: a hollow circle (whole note) for 4 beats, a solid circle (quarter note) for one beat. Music is also the silence between sounds – every note has a corresponding Rest of the same length."
+          title: "Chapter 3: The X-Axis (The Physics of Time)",
+          content: "The horizontal axis on paper is the axis of time. Time is divided into Measures, separated by vertical lines. At the top of the piece is the Time Signature, for example 4/4. The top number determines how many beats fit into each measure, and the bottom number determines which note counts as one beat.\n\nThe graphical shape of the note is a precise mathematical formula of proportions:\n* Whole Note: A hollow circle with no stem. It means a single pluck that continues to resonate for 4 full beats. This is the foundation.\n* Half Note: We added a stem to the hollow circle. The time is cut in half. The note will resonate for 2 beats.\n* Quarter Note: The hollow circle is filled with black ink. The time is cut in half again. A single beat just like a heartbeat or a ticking second hand.\n* Eighth Note: We added a flag or a connecting beam to the stem. The time is cut again. We play two sounds within a single heartbeat.\n* Sixteenth Note: Two flags. Four sounds are compressed into a single beat.\n\nThe Architecture of Silence (Rests):\nMusic without silence is simply noise. For every note duration, there is a corresponding Rest symbol instructing you to intentionally mute the string. Mastering rests is what creates a strong groove. A guitarist who leaves strings ringing during a rest destroys the rhythmic structure of the song."
+        },
+        {
+          type: "interactive",
+          content: "rhythm-visualizer"
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 4: Key Signatures and the Geometry of the Scale",
+          content: "As we learned in the intervals chapter, music is not limited to natural notes (the white keys). Sometimes we must play the sounds in between.\n* Sharp (#): Instructs us to raise the printed note by a half step (on guitar: move one fret forward towards the body).\n* Flat (b): Instructs us to lower the printed note by a half step (one fret back towards the tuning pegs).\n\nTo avoid writing a sharp sign next to every other note across entire pages, the Key Signature was invented. Right after the treble clef at the start of the line, you will sometimes see a group of sharps or flats. This is the master code of the song. If a sharp sign appears on the line for the note F, the rule states: every F note you ever see in this song, in any octave, is automatically played as F# (F sharp), unless a specific natural sign appears next to it. Reading this signature is how musicians know the scale in which the piece was written."
         },
         {
           type: "example",
-          title: "Chapter 4: Dynamics and the Soul of the Note",
-          content: "Notes tell you not just what to play, but how. Symbols like p (piano/soft) or f (forte/loud) dictate volume. A dot above a note (staccato) requires short, bouncy playing, and a slur indicates legato – a fluid connection between notes."
-        },
-        {
-          type: "interactive",
-          content: "first-score-builder"
+          title: "Chapter 5: Dynamics, Articulation, and the Soul of Playing",
+          content: "We have reached the ultimate reason why sheet music is a premium language. Tabs will never tell you how to play. Sheet music includes a whole layer of emotional and technical information:\n\nDynamics (Volume):\nMarkings like p (soft and gentle) or f (loud and assertive) tell you how much force to apply when plucking. A crescendo mark requires you to gradually increase the volume, building dramatic tension towards the climax of the piece.\n\nArticulation (Touch):\n* Staccato: A small dot above or below the note tells you to cut the sound immediately after plucking, creating a bouncy, mechanical, and precise feel.\n* Slur (Legato): A curved line connecting two notes of different pitches tells you to play both with a single pluck using Hammer-on or Pull-off techniques, creating a fluid and highly human connection.\n\nNavigation Instructions:\nSymbols like repeat signs telling you to play a section again, or the term D.C. al Fine (Italian for from the beginning to the end) which save unnecessary pages and create a logical song structure of verse, chorus, and bridge."
         },
         {
           type: "paragraph",
-          title: "Conclusion: Reading Words, Not Letters",
-          content: "Learning to read music is like learning a new language. At first, you spell out letters, but the goal is to recognize patterns. One day you'll open a piece of music and your fingers will move on their own – that's where your absolute freedom as a musician begins."
+          title: "Conclusion: From Decoding to Fluency",
+          content: "Reading sheet music for guitar is a journey. In the first few weeks, your brain will operate in blind translation mode. You will see a dot, calculate its name, calculate its location on the guitar, and then play. It is a frustrating process that feels like stuttering.\n\nBut the magic happens after months of consistent practice: the translation disappears. The brain begins to link directly between the visual stimulus on the page and the motor action of the finger, without passing through the note's name. You see a visual pattern of a third, and your fingers automatically arrange themselves into the shape of a third on the neck that we learned in the intervals chapter.\n\nThe day you sit down with a piece you have never heard before, and your hands play it simply by looking at the page, on that day you have acquired the universal language of music forever."
         }
       ]
     }
