@@ -8,9 +8,12 @@ import VoicingVisualizer  from './VoicingVisualizer'
 import CircleClock              from './CircleClock'
 import NeighborhoodFinder       from './NeighborhoodFinder'
 import DominantTrickLab         from './DominantTrickLab'
-import NotationVisualDictionary from './NotationVisualDictionary'
-import NoteToFretTranslator     from './NoteToFretTranslator'
-import FirstScoreBuilder        from './FirstScoreBuilder'
+import NotationVisualDictionary  from './NotationVisualDictionary'
+import NoteToFretTranslator      from './NoteToFretTranslator'
+import FirstScoreBuilder         from './FirstScoreBuilder'
+import TuningAnomalyVisualizer   from './TuningAnomalyVisualizer'
+import OctaveConstellationMap    from './OctaveConstellationMap'
+import TriadInversionNavigator   from './TriadInversionNavigator'
 
 interface Props {
   articleId: string
@@ -400,9 +403,12 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'circle-clock'              && <CircleClock              isHe={isHe} />}
                     {section.content === 'neighborhood-finder'       && <NeighborhoodFinder       isHe={isHe} />}
                     {section.content === 'dominant-trick-lab'        && <DominantTrickLab         isHe={isHe} />}
-                    {section.content === 'notation-visual-dictionary' && <NotationVisualDictionary isHe={isHe} />}
-                    {section.content === 'note-to-fret-translator'   && <NoteToFretTranslator     isHe={isHe} />}
-                    {section.content === 'first-score-builder'       && <FirstScoreBuilder        isHe={isHe} />}
+                    {section.content === 'notation-visual-dictionary' && <NotationVisualDictionary  isHe={isHe} />}
+                    {section.content === 'note-to-fret-translator'   && <NoteToFretTranslator      isHe={isHe} />}
+                    {section.content === 'first-score-builder'       && <FirstScoreBuilder         isHe={isHe} />}
+                    {section.content === 'tuning-anomaly-visualizer' && <TuningAnomalyVisualizer   isHe={isHe} />}
+                    {section.content === 'octave-constellation-map'  && <OctaveConstellationMap    isHe={isHe} />}
+                    {section.content === 'triad-inversion-navigator' && <TriadInversionNavigator   isHe={isHe} />}
                   </div>
                 )
               default:

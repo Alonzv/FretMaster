@@ -395,6 +395,118 @@ export const theoryContent: Record<string, TheoryArticle> = {
     }
   },
 
+  fretboard_matrix: {
+    id: "fretboard_matrix",
+    he: {
+      title: "הפרטבורד: המטריקס של ששת המיתרים",
+      subtitle: "הגשר שבין התיאוריה המוזיקלית לארכיטקטורה של העץ",
+      tags: ["יסודות", "פרטבורד", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: החרדה מהחושך שמעבר לסריג החמישי",
+          content: "רוב הגיטריסטים מתחילים את דרכם באזור הנוחות הפרוס לאורך שלושת הסריגים הראשונים. שם נמצאים האקורדים הפתוחים, ושם הכל מרגיש מוכר ומנחם. אך ברגע שצריך לחצות את הסריג החמישי, צוואר הגיטרה הופך לארץ לא נודעת, חור שחור של נקודות מתכת ומיתרים שחוזרים על עצמם ללא היגיון נראה לעין. הגישה המסורתית ללימוד הפרטבורד היא שינון יבש. מורים אומרים לנו לשנן שפה זה C ופה זה F. הבעיה היא ששינון מכני קורס תחת לחץ, וכשהוא קורס בזמן אלתור או הופעה, הזיכרון בוגד בנו. אבל הגיטרה אינה אוסף מקרי של צלילים. היא ייצוג פיזי ודו-ממדי של כל התיאוריה המוזיקלית שלמדנו עד כה. בפרק זה לא נשנן שמות של תווים. במקום זאת, ניקח את חוקי הסולם המז'ורי, את הגיאומטריה של האינטרוולים ואת מבנה הטריאדות, ונראה כיצד הם נשפכים על הצוואר ויוצרים רשת אחת שלמה ומחוברת."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: תעלומת הכיוון (למה מיתר B תמיד הורס הכל?)",
+          content: "כדי להבין את המגרש שעליו אנחנו משחקים, צריך לפצח את החוקיות שלפיה הוא נבנה. הכיוון הסטנדרטי בגיטרה מבוסס על הגיאומטריה שלמדנו בפרק האינטרוולים. רוב הגיטרה מכוונת במרווח של קוורטה זכה (Perfect 4th). המשמעות היא שהמרחק מכל מיתר למיתר שמתחתיו הוא בדיוק 5 סריגים (או 5 חצאי טונים). מיתר 6 (E) ועוד 5 סריגים מביא אותנו ל-A (מיתר 5). מיתר 5 (A) ועוד 5 סריגים מביא אותנו ל-D (מיתר 4). מיתר 4 (D) ועוד 5 סריגים מביא אותנו ל-G (מיתר 3). אך כאן, בדיוק בין מיתר 3 (G) למיתר 2 (B), הארכיטקטורה נשברת. המרחק ביניהם הוא של טרצה גדולה בלבד (4 סריגים במקום 5). החריגה הזו נעשתה היסטורית כדי לאפשר לנו לנגן אקורדים פתוחים בקלות עם היד, אך היא המחיר שאנחנו משלמים בניווט. החוק שעליך לחקוק בזיכרון: כל צורה גיאומטרית של אינטרוול, סולם או אקורד שחוצה את מיתר 3 בדרכה מטה למיתר 2, חייבת לקבל פיצוי של סריג אחד קדימה לכיוון גוף הגיטרה. הבנת נקודת השבר הזו מסירה 80 אחוזים מהבלבול על הצוואר."
+        },
+        {
+          type: "interactive",
+          content: "tuning-anomaly-visualizer"
+        },
+        {
+          type: "fretboard",
+          title: "פרק 2: הקרנת התיאוריה על העץ (אינטרוולים הלכה למעשה)",
+          content: "בפרק האינטרוולים למדנו שהמוח מזהה מרחקים, לא תווים ספציפיים. הצוואר מאפשר לנו לראות את המרחקים האלה בעיניים. אם נבחר נקודה אקראית על מיתר 6 ונחליט שהיא השורש שלנו, נוכל מיד לייצר סביבה מערכת שמש שלמה של תיאוריה. מציאת הקווינטה ליציבות: הקווינטה הזכה (הגג של האקורד שלמדנו בפרק הטריאדות) תמיד תמתין לך מיתר אחד למטה, ושני סריגים קדימה. מתג הרגש (הטרצה): הטרצה הגדולה (מז'ור) תמיד נמצאת מיתר אחד למטה, וסריג אחד אחורה מהשורש. אם נרצה אקורד עצוב, נחליק את האצבע הזו עוד סריג אחד אחורה אל הטרצה הקטנה (מינור). בניית הסולם המז'ורי מבלי לחשוב: בפרק הראשון למדנו את נוסחת הסולם (טון, טון, חצי, טון, טון, טון, חצי). במקום לנגן את זה על מיתר אחד, הגיאומטריה מאפשרת לנו לחתוך למיתר שמתחת. התו הרביעי בסולם (הקוורטה) תמיד יהיה בדיוק מתחת לשורש באותו סריג. ברגע שאתה רואה אינטרוולים כמרחקים פיזיים, אתה מפסיק לחשוב איזה תו בא עכשיו בסולם מינור פנטטוני. אתה פשוט רואה שורש, ומושיט את האצבע למרחק המוכר של טרצה קטנה."
+        },
+        {
+          type: "highlight",
+          title: "פרק 3: רשת האוקטבות (מערכת הרדאר הפנימית)",
+          content: "אם אינטרוולים הם הלבנים, האוקטבות הן הפיגומים שמחזיקים את כל הבניין. האוקטבה היא אותו התו בדיוק, בתדר כפול. במקום לנסות למצוא את התו פה (F) בכל מקום על הצוואר מחדש, הגיטריסט המקצועי מוצא אותו פעם אחת ומשתמש בקפיצות גיאומטריות קבועות כדי למצוא את כל השאר. 1. קפיצת שני מיתרים: מהשורש במיתר 6 או 5, דלג על מיתר אחד, והאוקטבה תמתין לך שני סריגים קדימה. 2. קפיצת שלושה מיתרים: אם השורש במיתר 6 ואתה מחפש את האוקטבה במיתר 3, אתה חוצה את נקודת השבר של מיתר B. לכן, הקפיצה תהיה של 3 סריגים קדימה. 3. מתנת הקצוות: מיתר 6 ומיתר 1 שניהם מיתרי E. כל תו שתמצא על מיתר 6 נמצא בדיוק באותו מקום גם על מיתר 1. המערכת הזו פורסת רשת של תחנות עוגן לאורך כל הצוואר."
+        },
+        {
+          type: "interactive",
+          content: "octave-constellation-map"
+        },
+        {
+          type: "paragraph",
+          title: "פרק 4: טריאדות בתנועה (לצאת מהאקורדים הסטטיים)",
+          content: "בפרק הטריאדות בנינו בתים (שורש, טרצה, קווינטה). אבל אקורד לא חייב להיות מנוגן תמיד כשהשורש הוא הצליל הנמוך ביותר. על הפרטבורד, אנחנו יכולים לקחת את אותם 3 תווים, ולשחק עם הסדר שלהם (Inversions). במקום לקפוץ בטירוף מצד אחד של הצוואר לצד השני כדי להחליף מ-C ל-G, גיטריסט שרואה את המטריקס יישאר באותו אזור בצוואר. הוא ימצא טריאדה של C במצב יסודי על מיתרים 1-2-3, ולידה ממש, במרחק הזזת אצבע אחת או שתיים, ימצא היפוך של G. זוהי אמנות הובלת הקולות (Voice Leading). התיאוריה מפסיקה להיות מתמטיקה, והופכת לזרימה חלקה של הרמוניה."
+        },
+        {
+          type: "interactive",
+          content: "triad-inversion-navigator"
+        },
+        {
+          type: "paragraph",
+          title: "פרק 5: החיבור לדף התווים (Timbre Positions)",
+          content: "בפרק קריאת התווים הבנו שהקושי הגדול בגיטרה הוא ריבוי האפשרויות. התו דו (Middle C) מופיע על הדף פעם אחת, אבל על הגיטרה אפשר לנגן אותו ב-5 מקומות שונים. כעת, כשאנחנו מבינים את הפרטבורד כמטריקס, החיסרון הזה הופך ליתרון הגדול ביותר שלנו. כשאנחנו קוראים תווים, אנחנו בוחרים את הפוזיציה (האזור על הצוואר) שבה ננגן לא רק לפי נוחות האצבעות, אלא לפי הצבע (Timbre). רוצה שהמלודיה תשמע חמה, עגולה וקרובה? נגן את התווים בסביבת סריג 9 על המיתרים העבים. רוצה שהמלודיה תחתוך את המיקס בבהירות? קח את אותם התווים בדיוק באותו הגובה, ונגן אותם בסביבת סריג 2 על המיתרים הדקים. הפרטבורד אינו מכונת כתיבה שבה לכל אות יש כפתור אחד. הוא פלטת צבעים."
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: להיות הבעלים של הגיטרה",
+          content: "המעבר משלב השינון לשלב ההבנה המרחבית הוא הרגע שבו הגיטרה הופכת ממכשיר שאתה מתפעל, לכלי שאתה שולט בו. הסולם המז'ורי, האינטרוולים, הטריאדות וקריאת התווים אינם נושאים נפרדים בתיאוריה. הם כולם שפות שונות המתארות את אותה האמת הגיאומטרית הפרוסה על ששת המיתרים שלך. כשאתה לומד לראות את הקשרים האלה, אין יותר שטחים מתים מעבר לסריג החמישי. יש רק רשת אינסופית של אפשרויות."
+        }
+      ]
+    },
+    en: {
+      title: "The Fretboard: The Matrix of Six Strings",
+      subtitle: "The Bridge Between Musical Theory and the Architecture of Wood",
+      tags: ["Basics", "Fretboard", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: The Fear of the Dark Beyond the Fifth Fret",
+          content: "Most guitarists begin their journey in the comfort zone of the first three frets. There, the open chords live, and everything feels familiar and reassuring. But the moment one needs to cross the fifth fret, the guitar neck becomes an unknown land, a black hole of metal dots and strings that repeat without visible logic. The traditional approach to learning the fretboard is dry memorization. Teachers tell us to memorize that this is C and that is F. The problem is that mechanical memorization collapses under pressure, and when it fails during improvisation or a performance, memory betrays us. But the guitar is not a random collection of sounds. It is a physical, two-dimensional representation of all the musical theory we have learned so far. In this chapter, we will not memorize note names. Instead, we will take the rules of the Major Scale, the geometry of Intervals, and the structure of Triads, and see how they pour onto the neck to create one complete, connected web."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Tuning Mystery (Why Does the B-String Always Ruin Everything?)",
+          content: "To understand the field we are playing on, we first need to crack the logic by which it was built. Standard guitar tuning is based on the geometry we learned in the Intervals chapter. Most of the guitar is tuned in intervals of a Perfect 4th. This simply means that the distance from any string to the string below it is exactly 5 frets (or 5 half-steps). String 6 (E) plus 5 frets brings us to A (string 5). String 5 (A) plus 5 frets brings us to D (string 4). String 4 (D) plus 5 frets brings us to G (string 3). But here, exactly between string 3 (G) and string 2 (B), the architecture breaks. The distance between them is only a Major 3rd (4 frets instead of 5). This deviation was done historically to allow us to play open chords easily, but it is the price we pay in navigation. The rule you must engrave in your memory: any geometric shape of an interval, scale, or chord that crosses the 3rd string on its way down to the 2nd string must receive a compensation of one fret forward toward the guitar body. Understanding this breaking point removes 80 percent of the confusion on the neck."
+        },
+        {
+          type: "interactive",
+          content: "tuning-anomaly-visualizer"
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 2: Projecting Theory onto Wood (Intervals in Action)",
+          content: "In the Intervals chapter, we learned that the brain recognizes distances, not specific notes. The neck allows us to see these distances with our eyes. If we choose a random point on the 6th string and decide it is our root, we can immediately create an entire solar system of theory around it. Finding the Fifth for stability: the Perfect 5th (the roof of the chord we learned in the Triads chapter) will always wait for you one string down and two frets forward. The emotion switch (The Third): the Major 3rd always resides one string down and one fret behind the root. If we want a sad chord, we slide this finger one more fret back to the Minor 3rd. Building the Major Scale without thinking: in the first chapter, we learned the scale formula (Whole, Whole, Half, Whole, Whole, Whole, Half). Instead of playing it on one string, geometry allows us to cut to the string below. The fourth note in the scale (the Fourth) will always be exactly below the root at the same fret. Once you see intervals as physical distances, you stop thinking about which note comes next in a pentatonic scale. You simply see a root and reach for the familiar distance of a minor third."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 3: The Octave Network (The Internal Radar System)",
+          content: "If intervals are the bricks, octaves are the scaffolding that holds the entire building. An octave is the exact same note at double the frequency. Instead of trying to find the note F everywhere on the neck from scratch, the professional guitarist finds it once and uses fixed geometric jumps to find all the rest. 1. Two-string jump: from a root on string 6 or 5, skip one string, and the octave will wait for you two frets forward. 2. Three-string jump: if the root is on string 6 and you are looking for the octave on string 3, you cross the breaking point of the B-string. Therefore, the jump will be 3 frets forward. 3. The gift of the edges: string 6 and string 1 are both E strings. Any note you find on string 6 is in exactly the same place on string 1. This system spreads a network of anchor stations across the entire neck."
+        },
+        {
+          type: "interactive",
+          content: "octave-constellation-map"
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 4: Triads in Motion (Moving Beyond Static Chords)",
+          content: "In the Triads chapter, we built houses (Root, Third, Fifth). But a chord does not always have to be played with the root as the lowest note. On the fretboard, we can take those same 3 notes and play with their order (Inversions). Instead of jumping frantically from one side of the neck to the other to change from C to G, a guitarist who sees the matrix will stay in the same area. They will find a C triad in root position on strings 1-2-3, and right next to it, just a finger move away, find an inversion of G. This is the art of Voice Leading. Theory stops being mathematics and becomes a smooth flow of harmony."
+        },
+        {
+          type: "interactive",
+          content: "triad-inversion-navigator"
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 5: Connection to Sight Reading (Timbre Positions)",
+          content: "In the Sight Reading chapter, we understood that the great difficulty of the guitar is the multitude of choices. The note Middle C appears on the page once, but on the guitar, it can be played in 5 different places. Now that we understand the fretboard as a matrix, this disadvantage becomes our greatest advantage. When we read music, we choose the position on the neck not just based on finger comfort, but based on color (Timbre). Want the melody to sound warm, round, and close? Play the notes around the 9th fret on the thick strings. Want the melody to cut through the mix with clarity? Take those exact same notes at the same pitch and play them around the 2nd fret on the thin strings. The fretboard is not a typewriter where every letter has one button. It is a color palette."
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: Owning the Guitar",
+          content: "The transition from memorization to spatial understanding is the moment the guitar transforms from a device you operate into an instrument you master. The Major Scale, Intervals, Triads, and Sight Reading are not separate subjects in theory. They are all different languages describing the same geometric truth spread across your six strings. When you learn to see these connections, there are no more blind spots beyond the fifth fret. There is only an infinite network of possibilities."
+        }
+      ]
+    }
+  },
+
   circle_of_fifths: {
     id: "circle_of_fifths",
     he: {
