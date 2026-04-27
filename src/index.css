@@ -8,6 +8,25 @@
 
 /* ── Custom fonts ─────────────────────────────────────────────────────────── */
 
+/* Reisinger Michal — display / headings / nav (bilingual He+En) */
+@font-face {
+  font-family: 'ReisingerMichal';
+  src: url('./assets/fonts/Reisinger-Michal-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Reisinger Yonatan — body / paragraph / questions / answers (bilingual He+En) */
+@font-face {
+  font-family: 'ReisingerYonatan';
+  src: url('./assets/fonts/Reisinger-Yonatan-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* TelAviv Brutalist — kept as fallback for icon/SVG text only */
 @font-face {
   font-family: 'TelAvivBrutalist';
   src: url('./assets/fonts/TelAviv-BrutalistBold.ttf') format('truetype');
@@ -29,20 +48,6 @@
   font-style: normal;
   font-display: swap;
 }
-@font-face {
-  font-family: 'TelAvivEclecticHe';
-  src: url('./assets/fonts/TelAviv-EclecticHebrewNo2.ttf') format('truetype');
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'TelAvivEclecticLat';
-  src: url('./assets/fonts/TelAviv-EclecticLatinNo2.ttf') format('truetype');
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* ── Reset ───────────────────────────────────────────────────────────────── */
 
@@ -57,26 +62,21 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-family: 'TelAvivBrutalist', sans-serif;
-}
-body:not([dir='rtl']), body[dir='ltr'] {
-  font-family: 'TelAvivBrutalist', sans-serif;
-}
-:lang(he), [dir='rtl'] {
-  font-family: 'TelAvivBrutalist', sans-serif;
-  --fm-font-display: 'TelAvivBrutalist', sans-serif;
-  --fm-font-body:    'TelAvivBrutalist', sans-serif;
+  font-family: 'ReisingerYonatan', sans-serif;
 }
 
-/* TelAvivBrutalist for display text */
+/* Reisinger is bilingual — same stack for Hebrew and Latin */
+:lang(he), [dir='rtl'] {
+  --fm-font-display: 'ReisingerMichal',  sans-serif;
+  --fm-font-body:    'ReisingerYonatan', sans-serif;
+}
+
 .fm-display {
-  font-family: 'TelAvivBrutalist', sans-serif;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-family: 'ReisingerMichal', sans-serif;
+  letter-spacing: 0.04em;
 }
 [dir='rtl'] .fm-display {
-  font-family: 'TelAvivBrutalist', sans-serif;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 button { border: none; background: none; cursor: pointer; font-family: inherit; }
@@ -89,8 +89,8 @@ input { font-family: inherit; }
 
 :root {
   /* ── Font stacks ─────────────────────────────────────────────────────── */
-  --fm-font-display: 'TelAvivBrutalist', sans-serif;
-  --fm-font-body:    'TelAvivBrutalist', sans-serif;
+  --fm-font-display: 'ReisingerMichal',  sans-serif;
+  --fm-font-body:    'ReisingerYonatan', sans-serif;
 
   /* ── BAUHAUS DARK surfaces ───────────────────────────────────────────── */
   --fm-bg-deep:           #070709;   /* near-void black, slight violet cast */
@@ -297,7 +297,7 @@ body.large-text .fm-choices button  { font-size: 21px; }
 .fm-page-header { margin-bottom: 36px; }
 
 .fm-page-eyebrow {
-  font-family: 'TelAvivBrutalist', sans-serif;
+  font-family: var(--fm-font-display);
   font-size: 11px; font-weight: 700;
   color: var(--fm-primary); text-transform: uppercase;
   letter-spacing: 0.28em; margin-bottom: 10px;
@@ -310,7 +310,7 @@ body.large-text .fm-choices button  { font-size: 21px; }
   background: var(--fm-primary);
 }
 [dir='rtl'] .fm-page-eyebrow {
-  font-family: 'TelAvivBrutalist', sans-serif;
+  font-family: var(--fm-font-display);
   letter-spacing: 0.04em;
 }
 [dir='rtl'] .fm-page-eyebrow::before { display: none; }
@@ -657,12 +657,12 @@ body.large-text .fm-choices button  { font-size: 21px; }
 .fm-xp-particle {
   position: fixed; pointer-events: none; font-weight: 900;
   color: var(--fm-secondary);
-  font-family: 'TelAvivBrutalist', sans-serif;
+  font-family: var(--fm-font-display);
   font-size: 20px; letter-spacing: 0.08em;
   z-index: 9999;
   animation: fm-xp-particle-up 1.0s cubic-bezier(0.25,0,0.75,1) forwards;
 }
-[dir='rtl'] .fm-xp-particle { font-family: 'TelAvivBrutalist', sans-serif; }
+[dir='rtl'] .fm-xp-particle { font-family: var(--fm-font-display); }
 
 @keyframes fm-xp-particle-up {
   0%   { transform: translateY(0) scaleX(0.4); opacity: 0; }
