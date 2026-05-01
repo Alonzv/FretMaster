@@ -14,6 +14,9 @@ import FirstScoreBuilder         from './FirstScoreBuilder'
 import TuningAnomalyVisualizer   from './TuningAnomalyVisualizer'
 import OctaveConstellationMap    from './OctaveConstellationMap'
 import TriadInversionNavigator   from './TriadInversionNavigator'
+import ChordExtensionBuilder     from './ChordExtensionBuilder'
+import VoicingDropVisualizer     from './VoicingDropVisualizer'
+import ShellVoicingLaboratory    from './ShellVoicingLaboratory'
 
 interface Props {
   articleId: string
@@ -409,6 +412,9 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'tuning-anomaly-visualizer' && <TuningAnomalyVisualizer   isHe={isHe} />}
                     {section.content === 'octave-constellation-map'  && <OctaveConstellationMap    isHe={isHe} />}
                     {section.content === 'triad-inversion-navigator' && <TriadInversionNavigator   isHe={isHe} />}
+                    {section.content === 'chord-extension-builder'   && <ChordExtensionBuilder     isHe={isHe} />}
+                    {section.content === 'voicing-drop-visualizer'   && <VoicingDropVisualizer     isHe={isHe} />}
+                    {section.content === 'shell-voicing-laboratory'  && <ShellVoicingLaboratory    isHe={isHe} />}
                   </div>
                 )
               default:

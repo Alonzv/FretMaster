@@ -507,6 +507,118 @@ export const theoryContent: Record<string, TheoryArticle> = {
     }
   },
 
+  chord_voicings_extensions: {
+    id: "chord_voicings_extensions",
+    he: {
+      title: "הארכיטקטורה של ההרמוניה: צבעים, מתחים ווייסינגז",
+      subtitle: "מטריאדות פשוטות להרמוניה קולנועית: הסודות של סידור תווים על הפרטבורד",
+      tags: ["הרמוניה_מתקדמת", "אקורדים", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: לעבור ממסך שחור-לבן למסך קולנוע",
+          content: "עד כה בנינו את העולם המוזיקלי שלנו סביב הטריאדה (אקורד משולש המורכב משורש, טרצה וקווינטה). הטריאדות הן צבעי היסוד של המוזיקה. הן יציבות, חזקות, ברורות, והן הלחם והחמאה של הפופ, הפולק והרוק הקלאסי. אך אם נישאר רק בעולם הטריאדות, הציור שלנו יהיה פונקציונלי אך שטוח. מלחינים גדולים של מוזיקה קולנועית (כמו הנס צימר), ג'אז או ניאו-סול, אינם מסתפקים בצבעי יסוד, הם מחפשים גוונים, צלליות ועומק תלת-ממדי.\n\nבפרק זה אנחנו הולכים לפרוץ את תקרת האקורד הבסיסי. אנחנו נלמד את התיאוריה מאחורי ערימת צלילים נוספים (מתחים) על האקורדים שלנו, נבין כיצד מנגנים את המפלצות ההרמוניות האלה על הגיטרה באמצעות טכניקות סידור מתקדמות (Drop Voicings), ונקבל את קיצורי הדרך הגיאומטריים שיאפשרו לכם למצוא כל מתח על הצוואר בשבריר שנייה."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: קסם השביעיות (שלד הארבעה קולות)",
+          content: "בפרק בניית האקורדים למדנו שאקורד נבנה על ידי קפיצות של טרצות (דילוג על אות אחת בסולם הרגיל). מה יקרה אם במקום לעצור בתו החמישי, נמשיך לדלג ולערום צליל נוסף?\nהשלב הראשון והקריטי ביותר בדרך להרמוניה מורכבת הוא הוספת התו השביעי של הסולם. האקורדים המרובעים האלה (ספטאקורדים) הם תעודת הזהות של ההרמוניה המודרנית, והם מחולקים לארבע משפחות אב:\n\n1. מז'ור 7 (Major 7): נוצר על ידי הוספת טרצה גדולה מעל הקווינטה. המרווח בין שורש האקורד לתו השביעי שלו (למשל C ו-B) הוא מרווח של חצי טון בלבד (סקונדה קטנה) אם הופכים אותו. ההתנגשות העדינה והמרומזת הזו מייצרת סאונד נוסטלגי, חולמני, רחב ומרחף.\n2. מינור 7 (Minor 7): נוצר על ידי הוספת טרצה קטנה מעל הקווינטה של אקורד מינורי. התוספת הזו מרככת את העצבות והנוקשות של המינור הרגיל (הטריאדה), ומחליפה אותן בסאונד רך, פתוח, מתוחכם ובוגר.\n3. דומיננט 7 (Dominant 7): אקורד פרדוקסלי. הבסיס שלו הוא משולש שמח ומז'ורי (שורש, טרצה גדולה, קווינטה), אך התו השביעי שהוספנו הוא מונמך (ספטימה קטנה). השילוב בין הטרצה הגדולה לספטימה הקטנה יוצר בתוך האקורד מרווח של טריטון. זהו מרווח צורם שמייצר מתח פסיכולוגי אגרסיבי שדורש מהמוח פתרון מיידי חזרה לטוניקה (אקורד הבית).\n4. חצי מוקטן (Minor 7 flat 5): אקורד שבו גם הטרצה, גם הקווינטה וגם הספטימה מונמכות. זהו אקורד קודר, דחוס, מסתורי וחסר מנוחה, שמשמש לרוב כגשר אפל המוביל אל אקורד דומיננטי במסגרת מהלך הרמוני של ii-V-I במינור."
+        },
+        {
+          type: "paragraph",
+          title: "פרק 2: מתחי צבע עליונים (9, 11, 13) והפסיכולוגיה של הצליל",
+          content: "האוקטבה שלנו מורכבת משבעה תווים בסיסיים. אך מתמטית, אין שום סיבה לעצור שם. אנחנו יכולים להמשיך אל תוך האוקטבה הבאה. אם נמשיך לערום טרצות מעל התו השביעי, נגיע למספרים גדולים יותר. המספרים הללו נקראים מתחים (Tensions) או צבעים (Extensions).\n\nכל מתח עליון כזה הוא בסך הכל תו בסיסי מתוך הסולם שניגנו אותו אוקטבה אחת גבוה יותר כדי לאפשר לו לרחף מעל האקורד מבלי להתנגש בבס:\n* התשיעית (9): היא בעצם התו השני של הסולם (למשל, התו D בסולם C). תוספת של תשיעית (כמו Minor 9) מוסיפה עומק יוקרתי ועושר בלתי רגיל. זהו הסאונד המובהק של גיטרות הניאו-סול וה-R&B המודרני.\n* האחת-עשרה (11): היא התו הרביעי של הסולם (למשל, התו F בסולם C). הוספת 11 לאקורד מינורי מייצרת סאונד מודרני, שקוף ופתוח. לעומת זאת, באקורדים מז'וריים נהוג להגביה את האחת-עשרה (Sharp 11). צליל ה-Sharp 11 (מודוס לידי) הוא כלי הנשק הסודי של מלחיני קולנוע. הוא מייצר תחושה של קסם, פליאה, מתח לא פתור וריחוף בחלל (חשבו על הפסקול של אי.טי או בין כוכבים).\n* השלוש-עשרה (13): היא בעצם התו השישי של הסולם (למשל, התו A בסולם C). אקורדים של 13 (במיוחד Dominant 13) מביאים איתם גרוב חריף, עשיר ומורכב ששולט במוזיקת הפאנק והביג-בנד ג'אז.\n\nהכלל האקדמי: כשאתה רואה אקורד עמוס כמו C13, המשמעות התיאורטית היא שכל הקומות שמתחתיו (השביעית, התשיעית והאחת-עשרה) כבר קיימות בתוכו. בפועל (כפי שנראה מיד), לעולם לא ננגן את כולם יחד על הגיטרה."
+        },
+        {
+          type: "interactive",
+          content: "chord-extension-builder"
+        },
+        {
+          type: "fretboard",
+          title: "פרק 3: הפיזיקה של הווייסינגז (Drop 2 & Drop 3)",
+          content: "פסנתרן יכול לנגן בקלות אקורד של חמישה או שישה צלילים ברצף (למשל 1-3-5-7-9) על ידי הנחת האצבעות על קלידים עוקבים (Closed Voicing). בגיטרה, הפיזיקה עובדת אחרת. האצבעות שלנו אינן יכולות להימתח על פני חמישה סריגים על מיתרים סמוכים מבלי לפרוק את המפרק. יתרה מכך, נגינת צלילים צפופים מדי על הגיטרה (במיוחד במיתרים הנמוכים) יוצרת תופעה אקוסטית של בוץ (Mud) בגלל התנגשות של תדרים נמוכים.\n\nהפתרון המבריק נקרא היפוכי הפלה (Drop Voicings). במקום לנגן את האקורד צפוף, אנחנו זורקים את אחד התווים הפנימיים שלו אוקטבה אחת למטה (אל מיתרי הבס), וכך מרווחים את האקורד על פני שטח רחב יותר:\n\n* דרופ 2 (Drop 2): לוקחים את האקורד בצורתו הסגורה (1-3-5-7), מחפשים את הצליל השני מלמעלה (במקרה זה, הקווינטה), ומפילים אותו באוקטבה אחת למטה לבס (מתקבל המבנה 5-1-3-7). הווייסינג הזה מנוגן בדרך כלל על ארבעת המיתרים העליונים (1-2-3-4). הוא נשמע צלול, מאוזן, חותך את המיקס בקלות, והוא הסטנדרט המוחלט לליווי בגיטרת ג'אז ופאנק.\n* דרופ 3 (Drop 3): מחפשים את התו השלישי מלמעלה (במקרה זה, הטרצה), ומפילים אותו לבס (מתקבל המבנה 3-1-5-7). הפעולה הזו יוצרת דילוג על מיתר שלם (String Skip) בין הבס לשאר האקורד. הריווח הזה משאיר המון מקום לתדרים האמצעיים לנשום, ומייצר סאונד עמוק, פסנתרי ושמנוני, שמתאים מאוד לנגינת קורד-מלודי (Chord-Melody) של גיטריסט סולו."
+        },
+        {
+          type: "interactive",
+          content: "voicing-drop-visualizer"
+        },
+        {
+          type: "example",
+          title: "פרק 4: קיצורי דרך וטריקים מרחביים לזיכרון שריר",
+          content: "כשמנגנים בזמן אמת, אי אפשר לעשות חישובים מתמטיים מסובכים. הנה הצ'יט קודס (Cheat Codes) של המקצוענים למציאת מתחים על הצוואר באופן גיאומטרי ויזואלי:\n\n1. שיטת חיפוש האוקטבה: כדי למצוא תוספות, חפש תמיד את שורש האקורד (הטוניקה) שנמצא בתוך הפוזיציה שלך באוקטבה הגבוהה (לרוב על מיתרים 1, 2 או 3).\n2. מציאת שביעיות: מרגע שמצאת את האוקטבה, רד סריג אחד אחורה (חצי טון) וקיבלת את התו של Major 7. רד שני סריגים אחורה (טון שלם) וקיבלת את התו של Minor 7 או Dominant 7.\n3. מציאת תשיעיות (9): מרגע שמצאת את האוקטבה, עולה שני סריגים קדימה (טון שלם). שם בדיוק מסתתרת התשיעית החלומית שלך.\n4. מציאת אחת-עשרה (11): מצא את הטרצה של האקורד, ועלה משם סריג אחד (חצי טון) לאקורד מז'ורי (כדי למצוא Sharp 11), או שני סריגים (טון שלם) לאקורד מינורי כדי למצוא את ה-11 הרגיל.\n\nהגיאומטריה הזו אומרת שאתה לא צריך לשנן בעל פה מאות צורות של אקורדים. אתה פשוט צריך לדעת איפה השורש נמצא, ומשם לנווט מרחבית."
+        },
+        {
+          type: "highlight",
+          title: "פרק 5: אמנות ההחסרה (Shell Voicings)",
+          content: "הסוד הגדול ביותר של נגני גיטרה מקצועיים שעובדים עם הרמוניה מורכבת הוא שאי אפשר, ולא צריך, לנגן את כל התווים. לאקורד C13 יש תיאורטית 7 תווים, ולנו יש רק 6 מיתרים ו-4 אצבעות פנויות. מה עושים?\nמשמיטים! תורת ההחסרה בגיטרה מתבססת על תעדוף חשיבות התווים:\n\n* התו שחובה להעיף (הקווינטה): הקווינטה (התו החמישי) היא אבן ראשה יציבה, אבל היא לא מספקת שום מידע קריטי על אופי האקורד (היא זהה גם במז'ור וגם במינור). לכן, כשרוצים להוסיף צבע, הדבר הראשון שעושים הוא להפסיק לנגן את הקווינטה.\n* תווי השלד (1, 3, 7): השורש נותן את הבס והשם. הטרצה אומרת לנו אם האקורד מז'ור או מינור (שמח או עצוב). התו השביעי אומר לנו אם הוא דומיננטי או מרווח. נגינה של שלושת התווים הללו בלבד נקראת Shell Voicing (אקורד שלד).\n\nברגע שלמדת לנגן אקורד שלד פשוט של שלושה תווים (1, 3, 7) והשמטת את הקווינטה, שחררת אצבע אחת לפחות ביד השמאלית שלך. את האצבע הפנויה הזו אתה יכול כעת להניח על התשיעית, האחת-עשרה או השלוש-עשרה כדי לייצר יצירות מופת עשירות שלא סותמות את התדרים של הלהקה."
+        },
+        {
+          type: "interactive",
+          content: "shell-voicing-laboratory"
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: הארכיטקט ההרמוני",
+          content: "שליטה באקורדים מתקדמים, ווייסינגז ומתחי צבע היא קו פרשת המים שבו הגיטריסט הופך מנגן מבצע, לארכיטקט ולמעבד מוזיקלי.\nכעת אתם מבינים ש-Minor 9 או Dominant 13 אינם לחשים קסומים או סודות נשגבים של הג'אז. אלו פשוט טריאדות בסיסיות, שעברו תהליך מדויק של בניית קומות נוספות מאוקטבות גבוהות, סינון אסטרטגי של תווים מיותרים (השמטת הקווינטה), וסידור גיאומטרי חכם על פני ששת המיתרים (Drop Voicings). זוהי המטמטיקה שהופכת צליל פשוט, לפסקול."
+        }
+      ]
+    },
+    en: {
+      title: "The Architecture of Harmony: Colors, Tensions, and Voicings",
+      subtitle: "From Simple Triads to Cinematic Harmony: The Secrets of Fretboard Arrangement",
+      tags: ["Advanced_Harmony", "Chords", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: Transitioning from Black-and-White to the Silver Screen",
+          content: "So far, we have built our musical world around the triad (a three-note chord consisting of root, third, and fifth). Triads are the primary colors of music. They are stable, strong, clear, and serve as the bread and butter of pop, folk, and classic rock. But if we stay exclusively in the realm of triads, our painting will be functional yet flat. Great cinematic composers (like Hans Zimmer), as well as jazz and neo-soul musicians, do not settle for primary colors; they seek shades, shadows, and three-dimensional depth.\n\nIn this chapter, we will shatter the ceiling of the basic chord. We will learn the theory behind stacking additional notes (tensions) onto our chords, understand how to physically play these harmonic monsters on the guitar using advanced arrangement techniques (Drop Voicings), and acquire the geometric shortcuts that will allow you to find any tension on the neck in a split second."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Magic of 7ths (The Four-Part Skeleton)",
+          content: "In the chord building chapter, we learned that a chord is built by jumping in thirds (skipping one letter in the scale). What happens if instead of stopping at the fifth note, we continue to skip and stack an additional note?\nThe first and most critical step towards complex harmony is adding the seventh note of the scale. These four-note chords (seventh chords) are the identity card of modern harmony, and they are divided into four main families:\n\n1. Major 7: Created by adding a major third above the fifth. The interval between the root and its seventh (e.g., C and B) is a mere half-step (a minor second) when inverted. This delicate and subtle clash produces a nostalgic, dreamy, wide, and floating sound.\n2. Minor 7: Created by adding a minor third above the fifth of a minor chord. This addition softens the sadness and rigidity of the standard minor triad, replacing it with a soft, open, sophisticated, and mature sound.\n3. Dominant 7: A paradoxical chord. Its foundation is a happy, major triad (root, major third, fifth), but the added seventh is lowered (minor seventh). The combination of the major third and the minor seventh creates a tritone interval within the chord. This is a highly dissonant interval that generates an aggressive psychological tension, demanding an immediate resolution from the brain back to the tonic.\n4. Half-Diminished (Minor 7 flat 5): A chord where the third, fifth, and seventh are all lowered. This is a gloomy, dense, mysterious, and restless chord, primarily used as a dark bridge leading to a dominant chord within a minor ii-V-I progression."
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 2: Upper Color Tensions (9, 11, 13) and the Psychology of Sound",
+          content: "Our octave consists of seven basic notes. But mathematically, there is no reason to stop there. We can continue straight into the next octave. If we keep stacking thirds above the seventh note, we reach larger numbers. These numbers are called Tensions or Extensions.\n\nEvery such upper tension is simply a fundamental note from the scale played one octave higher to allow it to float above the chord without clashing with the bass:\n* The Ninth (9): Is essentially the second note of the scale (e.g., the note D in the key of C). Adding a ninth (like a Minor 9) adds luxurious depth and extraordinary richness. It is the definitive sound of modern R&B and neo-soul guitars.\n* The Eleventh (11): Is the fourth note of the scale (e.g., the note F in the key of C). Adding an 11 to a minor chord creates a modern, transparent, and open sound. In major chords, however, it is customary to raise the eleventh (Sharp 11). The Sharp 11 sound (Lydian mode) is the secret weapon of cinematic composers. It creates a sense of magic, wonder, unresolved tension, and floating in space (think of the E.T. or Interstellar soundtracks).\n* The Thirteenth (13): Is essentially the sixth note of the scale (e.g., the note A in the key of C). Chords with a 13 (especially Dominant 13) bring a sharp, rich, and highly complex groove that dominates funk and big-band jazz.\n\nThe academic rule: When you see a heavily stacked chord like C13, the theoretical implication is that all the floors below it (the 7th, 9th, and 11th) already exist within it. In practice (as we will see shortly), we will never play all of them together on the guitar."
+        },
+        {
+          type: "interactive",
+          content: "chord-extension-builder"
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 3: The Physics of Voicings (Drop 2 & Drop 3)",
+          content: "A pianist can easily play a five- or six-note chord sequentially (e.g., 1-3-5-7-9) by placing their fingers on adjacent keys (Closed Voicing). On the guitar, physics works differently. Our fingers cannot stretch across five frets on adjacent strings without dislocating a joint. Furthermore, playing dense notes on the guitar (especially on the lower strings) creates an acoustic phenomenon known as Mud due to the collision of low frequencies.\n\nThe brilliant solution is called Drop Voicings. Instead of playing the chord densely, we throw one of its inner notes an octave down (to the bass strings), thus spreading the chord across a wider area:\n\n* Drop 2: We take the chord in its closed form (1-3-5-7), look for the second note from the top (in this case, the fifth), and drop it an octave down to the bass (resulting in the structure 5-1-3-7). This voicing is usually played on the top four strings (1-2-3-4). It sounds clear, balanced, cuts through the mix easily, and is the absolute standard for jazz and funk comping.\n* Drop 3: We look for the third note from the top (in this case, the third), and drop it to the bass (resulting in the structure 3-1-5-7). This action creates a complete string skip between the bass and the rest of the chord. This spacing leaves immense room for middle frequencies to breathe, producing a deep, piano-like, and fat sound, which is highly suitable for a solo guitarist playing chord-melody style."
+        },
+        {
+          type: "interactive",
+          content: "voicing-drop-visualizer"
+        },
+        {
+          type: "example",
+          title: "Chapter 4: Spatial Shortcuts and Tricks for Muscle Memory",
+          content: "When playing in real-time, you cannot perform complex mathematical calculations. Here are the Cheat Codes used by professionals to find tensions on the neck visually and geometrically:\n\n1. The Octave Search Method: To find extensions, always locate the chord's root (the tonic) that resides within your position in the higher octave (usually on strings 1, 2, or 3).\n2. Finding Sevenths: Once you found the octave, go down one fret (a half-step) back, and you get the Major 7 note. Go down two frets (a whole-step) back, and you get the Minor 7 or Dominant 7 note.\n3. Finding Ninths (9): Once you found the octave, go two frets forward (a whole-step). Right there hides your dreamy ninth.\n4. Finding Elevenths (11): Find the third of the chord, and go up one fret (a half-step) for a major chord (to find the Sharp 11), or two frets (a whole-step) for a minor chord to find the regular 11.\n\nThis geometry means you do not need to blindly memorize hundreds of chord shapes. You simply need to know where the root is, and navigate spatially from there."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 5: The Art of Omission (Shell Voicings)",
+          content: "The biggest secret of professional guitarists working with complex harmony is that it is impossible, and unnecessary, to play all the notes. A C13 chord theoretically has 7 notes, and we only have 6 strings and 4 available fingers. What do we do?\nWe omit! The theory of omission on the guitar is based on prioritizing note importance:\n\n* The Note You Must Evict (The Fifth): The fifth is a stable keystone, but it provides zero critical information about the chord's character (it is identical in both major and minor chords). Therefore, when you want to add color, the very first thing you do is stop playing the fifth.\n* The Skeleton Notes (1, 3, 7): The root provides the bass and the name. The third tells us if the chord is major or minor (happy or sad). The seventh tells us if it is dominant or spaced out. Playing only these three notes is called a Shell Voicing.\n\nOnce you learn to play a simple three-note Shell Voicing (1, 3, 7) and drop the fifth, you have freed up at least one finger on your left hand. You can now place this free finger on the ninth, eleventh, or thirteenth to produce rich masterpieces that won't clog up the band's frequencies."
+        },
+        {
+          type: "interactive",
+          content: "shell-voicing-laboratory"
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: The Harmonic Architect",
+          content: "Mastering advanced chords, voicings, and color tensions is the watershed line where a guitarist transforms from a performing player into an architect and musical arranger.\nYou now understand that a Minor 9 or Dominant 13 are not magical spells or exalted jazz secrets. They are simply basic triads that underwent a precise process of building additional floors from higher octaves, strategic filtering of redundant notes (dropping the fifth), and smart geometric arrangement across the six strings (Drop Voicings). This is the mathematics that turns a simple sound into a soundtrack."
+        }
+      ]
+    }
+  },
+
   circle_of_fifths: {
     id: "circle_of_fifths",
     he: {
