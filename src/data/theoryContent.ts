@@ -619,6 +619,102 @@ export const theoryContent: Record<string, TheoryArticle> = {
     }
   },
 
+  modes_filters_of_emotion: {
+    id: "modes_filters_of_emotion",
+    he: {
+      title: "מודוסים: שבעת הפילטרים של הרגש",
+      subtitle: "האנציקלופדיה המלאה לאלתור, הרמוניה מודאלית ושחרור הפרטבורד",
+      tags: ["מודוסים", "אלתור", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: מיוון העתיקה ועד מיילס דיוויס",
+          content: "מודוסים (Modes) הם כנראה הנושא המרתק, אך גם המפחיד ביותר, בחינוך המוזיקלי המודרני. כדי להבין אותם באמת, צריך להבין מאיפה הם באו. המודוסים נולדו ביוון העתיקה (ולכן שמותיהם הזרים כמו דורי או פריגי), אומצו על ידי הכנסייה הנוצרית בימי הביניים למזמורים גרגוריאניים, וכמעט נעלמו מהעולם כשהמוזיקה הקלאסית התקבעה על שני סולמות בלבד: מז'ור ומינור.\n\nאך בשנות החמישים של המאה העשרים, ענקי הג'אז ובראשם מיילס דיוויס וג'ון קולטריין הבינו שההרמוניה המסורתית (אקורדים שכל הזמן דוחפים קדימה ודורשים פתרון) כובלת אותם. הם רצו מוזיקה שמרחפת באוויר, שנשארת על אקורד אחד דקות ארוכות, ושמאפשרת לנגן לחקור כל צבע אפשרי. כך נולדה ההרמוניה המודאלית. בפרק זה לא רק נלמד מהם המודוסים, אלא נבין בדיוק איך הם נראים על צוואר הגיטרה, למה הם משמשים, וכיצד להטמיע כל אחד מהם בנגינה שלכם."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: הגישה המקבילה וסוד התו המאפיין",
+          content: "האקדמיה מלמדת מודוסים בגישה נגזרת. היא אומרת: נגנו את סולם C מז'ור, אך התחילו בתו D, וקיבלתם D דורי. ההסבר הזה נכון מתמטית, אך הוא הרסני פסיכולוגית ובלתי ניתן ליישום בזמן אמת של אלתור.\n\nהמקצוענים משתמשים בגישה המקבילה (Parallel Approach). בגישה זו, אנחנו עומדים על השורש (למשל A), ומשווים כל מודוס לסולם המז'ורי (השמח) או המינורי (העצוב) שאנחנו כבר מכירים בעל פה באותו מיקום גיאומטרי בדיוק.\nכל מודוס הוא בסך הכל הסולם הרגיל שלנו, שבו שינינו צליל אחד בלבד. הצליל הזה נקרא 'התו המאפיין' (Character Note). הוא זה שאחראי על הפילטר הרגשי. ברגע שתדעו איזה תו משתנה, תוכלו להפוך כל סולם פנטטוני או סולם רגיל שאתם מכירים ליקום מודאלי חדש לחלוטין."
+        },
+        {
+          type: "paragraph",
+          title: "פרק 2: משפחת המז'ור (מודוסים של אור וריחוף)",
+          content: "מודוסים אלה מבוססים על הסולם המז'ורי הרגיל. הם משמשים בדרך כלל לאלתור מעל אקורדים ממשפחת Major 7 או אקורדים דומיננטיים.\n\n1. יוני (Ionian): \nהסולם המז'ורי הסטנדרטי. המבנה שלו (1-2-3-4-5-6-7) מייצר יציבות מוחלטת ושמחה טהורה ולעיתים תמימה. משמש לרוב במוזיקת פופ מובהקת ובשירי ילדים. על הגיטרה, קל לראות אותו כסולם המז'ור הפנטטוני בתוספת התו הרביעי והשביעי.\n\n2. לידי (Lydian):\n* ההיסטוריה והאופי: המודוס החלומי ביותר. קחו את הסולם המז'ורי, ותגביהו את התו הרביעי בחצי טון (Sharp 4). התו המאפיין הזה (טריטון מהשורש) מונע מהסולם להישמע סגור ויציב, וזורק אותו לחלל. הוא הפסקול של פליאה, קסם, חלומות ומדע בדיוני.\n* שימוש שכיח: ג'ון ויליאמס (אי.טי), סטיב ואי, ג'ו סטריאני. מנגנים אותו בעיקר מעל אקורדים מסוג Major 7#11.\n* יישום על הפרטבורד: אל תחשבו על סולמות מסובכים. קחו את הצורה המוכרת של סולם מז'ור פנטטוני, והוסיפו לה את התו השביעי (חצי טון מתחת לשורש) ואת ה-Sharp 4 (הטריטון).\n\n3. מיקסולידי (Mixolydian):\n* ההיסטוריה והאופי: הסאונד של הרוקנרול. זהו סולם מז'ורי שבו התו השביעי הונמך (Flat 7). זה לוקח את השמחה התמימה של המז'ור ומזריק לה אטיטיוד, קשיחות וגרוב.\n* שימוש שכיח: AC/DC, לד זפלין, ג'אם בנדס. הוא מושלם לאלתור מעל אקורדים של Dominant 7 (כמו A7) מכיוון שאין בו את הצורך לפתור את המתח אל הטוניקה. המתח הוא המטרה.\n* יישום על הפרטבורד: נגנו את סולם המז'ור פנטטוני, אך במקום התו השביעי הרגיל, חפשו את ה-Flat 7 (שנמצא תמיד טון שלם מתחת לשורש האוקטבה) והישענו עליו חזק."
+        },
+        {
+          type: "highlight",
+          title: "פרק 3: משפחת המינור (מודוסים של צל ודרמה)",
+          content: "מודוסים אלה מבוססים על סולם המינור הטבעי (איאולי). משתמשים בהם לאלתור מעל אקורדים ממשפחת Minor 7 או אקורדים קודרים יותר.\n\n1. איאולי (Aeolian):\nהסולם המינורי הטבעי שלנו. המבנה שלו (1-2-b3-4-5-b6-b7) מכיל את התו השישי המונמך (b6) שהוא התו הטרגי ביותר במוזיקה. זהו הסאונד של בלדות רוק כבד, עצב עמוק ודרמה אנושית קלאסית.\n\n2. דורי (Dorian):\n* ההיסטוריה והאופי: המודוס המגניב והקולי ביותר במוזיקה. קחו את סולם המינור הרגיל, ותגביהו את התו השישי (Natural 6). הפעולה הזו מסלקת את העצבות הטרגית של ה-b6, ומכניסה במקומה אור מסתורי ומתוחכם. הסאונד הופך לזורם, פאנקי ולא מתאמץ.\n* שימוש שכיח: Pink Floyd (Shine On You Crazy Diamond), קרלוס סנטנה, מיילס דיוויס. מושלם לנגינה על אקורד Minor 7 סטאטי ארוך.\n* יישום על הפרטבורד: קחו את הצורה של המינור הפנטטוני הסטנדרטי שלכם (הקופסה הראשונה שכולם לומדים). כעת, הוסיפו לה את התו השני (טון אחד מעל השורש) ואת התו השישי הטבעי (חצי טון מתחת ל-b7 של הפנטטוני).\n\n3. פריגי (Phrygian):\n* ההיסטוריה והאופי: הסאונד של פלמנקו ורוק כבד. קחו את סולם המינור הרגיל, ותנמיכו את התו השני בחצי טון (Flat 2). המרווח של חצי הטון שנוצר ממש בתחילת הסולם מייצר תחושה מיידית של סכנה, לחץ, ואפלה אוריינטלית וספרדית.\n* שימוש שכיח: מטאליקה, מגאדת', ומוזיקה ים-תיכונית.\n* יישום על הפרטבורד: התחילו את האלתור שלכם במינור פנטטוני רגיל, אך מדי פעם תחליקו אצבע חצי טון למעלה משורש האקורד (למשל מ-E ל-F). הדגישו את ההתנגשות הזו ותקבלו את האופי הספרדי האפל."
+        },
+        {
+          type: "fretboard",
+          title: "פרק 4: האאוטסיידר (המודוס הלוקרי)",
+          content: "המודוס השביעי והאחרון הוא הלוקרי (Locrian). הוא עומד לבדו כיוון שהוא אינו מז'ורי או מינורי, אלא מוקטן.\n* האופי והמבנה: כדי ליצור אותו בגישה המקבילה, ניקח את סולם המינור הרגיל וננמיך בו גם את התו השני (Flat 2) וגם את הקווינטה (Flat 5).\n* שימוש פסיכולוגי: הנמכת הקווינטה (התו החמישי) שומטת את הקרקע והיסוד היציב ביותר של המוזיקה. התוצאה היא סולם קודר, דחוס, לחלוטין חסר שיווי משקל, שמעורר תחושת אי נוחות ודיסוננס.\n* מתי נשתמש בו? הוא כמעט לעולם אינו משמש כסולם מרכזי לכתיבת שיר (כי אי אפשר לנוח עליו). הגיטריסט המתקדם ישתמש בו ככלי מעבר קצר לאלתור מעל אקורד Minor 7 flat 5 במהלך ג'אזי, או כדי לייצר ריפים כבדים ומטרידים במיוחד במוזיקת דת' מטאל."
+        },
+        {
+          type: "example",
+          title: "פרק 5: טיפים וטריקים להטמעה (איך באמת מתאמנים על זה)",
+          content: "הבנה תיאורטית לא שווה כלום בלי זיכרון שריר ואוזן מוזיקלית. הנה הדרכים להטמיע את המודוסים באצבעות:\n\n1. שיטת פדל הבס (The Drone Method): הדרך הגרועה ביותר ללמוד מודוסים היא לרוץ מעלה ומטה בסולם עם מטרונום. הדרך הנכונה היא להשמיע ברקע צליל בס יחיד קבוע (למשל התו A מנוגן ברציפות). מעל הצליל הקבוע הזה, נגנו לאט A איאולי. לאחר מכן, שנו רק את התו השישי ונגנו A דורי. האוזן שלכם תשמע באופן פסיכולוגי כיצד הצבע משתנה מעצוב לקולי, בעוד הבס נשאר זהה.\n2. להתביית על התו המאפיין: כשאתם מאלתרים, אל תנגנו את כל תווי המודוס ללא אבחנה. תבנו את הסולו שלכם סביב הפנטטוני הבטוח, ורק בנקודות השיא של המשפט המוזיקלי שלכם תנחתו על התו המאפיין (למשל ה-Sharp 4 בלידי). התו המאפיין הוא התבלין. פיזור חכם שלו הופך אתכם למוזיקאים עדינים ומתוחכמים.\n3. תיאוריית ציר הצליל (Pitch Axis Theory): טריק מתקדם של ג'ו סטריאני. נגנו אקורד A מז'ור ונגנו מעליו A לידי (חלומי). מיד לאחר מכן עברו לאקורד A מינור ונגנו מעליו A דורי (גרובי ואפל). אתם נשארים באותו סריג, על אותו שורש, אבל משנים את התאורה של החדר לחלוטין."
+        },
+        {
+          type: "interactive",
+          content: "parallel-mode-comparator"
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: האקולייזר של הרגש",
+          content: "הגישה המקבילה משחררת אותך מהכלא של המתמטיקה התיאורטית המסורבלת ומחזירה את המוזיקה לאוזניים ולאצבעות שלך. מודוס דורי הוא לא חישוב מורכב של תזוזת סולמות. מודוס דורי הוא פשוט ההחלטה האומנותית שלך, כגיטריסט, לקחת את הסולו המינורי שאתה מנגן כרגע ולהגביה בו אצבע אחת בסריג אחד כדי לשנות את מצב הרוח של הקהל.\n\nברגע שאתה מבין את הפילטרים הללו וכיצד הם מלבישים צבע על הסולמות הבסיסיים, הפרטבורד כולו הופך לאקולייזר רגשי. אתה יכול להישאר באותו מיקום בדיוק, ועל ידי שינוי מודע של תו בודד (התו המאפיין), לשנות לחלוטין את התאורה, הצבע, והמשמעות העמוקה של הסיפור שאתה מספר מבעד למגבר."
+        }
+      ]
+    },
+    en: {
+      title: "Modes: The Seven Filters of Emotion",
+      subtitle: "The Complete Encyclopedia of Improvisation, Modal Harmony, and Freeing the Fretboard",
+      tags: ["Modes", "Improvisation", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: From Ancient Greece to Miles Davis",
+          content: "Modes are probably the most fascinating, yet intimidating topic in modern musical education. To truly understand them, one must understand where they came from. Modes were born in Ancient Greece (hence their foreign names like Dorian or Phrygian), adopted by the Christian Church in the Middle Ages for Gregorian chants, and almost vanished from the world when classical music settled on only two scales: major and minor.\n\nHowever, in the 1950s, jazz giants led by Miles Davis and John Coltrane realized that traditional harmony (chords constantly pushing forward and demanding resolution) was constraining them. They wanted music that hovers in the air, that lingers on a single chord for long minutes, allowing the player to explore every possible color. Thus, Modal Harmony was born. In this chapter, we will not only learn what modes are, but precisely how they map onto the guitar neck, what they are used for, and how to physically implement each one in your playing."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Parallel Approach and the Secret of the Character Note",
+          content: "The academy teaches modes using a derivative approach. It says: play the C Major scale, but start on the note D, and you get D Dorian. This explanation is mathematically correct, but psychologically destructive and impossible to apply in real-time improvisation.\n\nProfessionals use the Parallel Approach. In this approach, we stand on the root note (for example, A), and compare every mode to the major (happy) or minor (sad) scale we already know by heart in that exact geometric location.\nEvery mode is simply our standard scale, with only one note altered. This altered note is called the 'Character Note'. It is the note responsible for the emotional filter. Once you know which note changes, you can transform any pentatonic or standard scale you know into an entirely new modal universe."
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 2: The Major Family (Modes of Light and Levitation)",
+          content: "These modes are based on the standard Major scale. They are generally used for improvising over Major 7 family chords or dominant chords.\n\n1. Ionian: \nThe standard major scale. Its structure (1-2-3-4-5-6-7) produces absolute stability and pure, sometimes innocent, happiness. It is mostly used in definitive pop music and children's songs. On the guitar, it is easily visualized as the major pentatonic scale with the addition of the fourth and seventh notes.\n\n2. Lydian:\n* History and Vibe: The dreamiest mode. Take the major scale, and raise the fourth note by a half-step (Sharp 4). This character note (a tritone from the root) prevents the scale from sounding closed and stable, throwing it into space. It is the soundtrack of wonder, magic, dreams, and sci-fi.\n* Common Usage: John Williams (E.T.), Steve Vai, Joe Satriani. It is primarily played over Major 7#11 chords.\n* Fretboard Application: Do not overthink complex scales. Take the familiar shape of the major pentatonic scale, and add the seventh note (a half-step below the root) and the Sharp 4 (the tritone).\n\n3. Mixolydian:\n* History and Vibe: The sound of Rock and Roll. This is a major scale where the seventh note is lowered (Flat 7). It takes the innocent happiness of the major and injects it with attitude, grit, and groove.\n* Common Usage: AC/DC, Led Zeppelin, Jam bands. It is perfect for improvising over Dominant 7 chords (like A7) because it lacks the urge to resolve the tension to the tonic. The tension itself is the goal.\n* Fretboard Application: Play the major pentatonic scale, but instead of the regular seventh note, locate the Flat 7 (always a whole step below the octave root) and lean on it heavily."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 3: The Minor Family (Modes of Shadow and Drama)",
+          content: "These modes are based on the natural minor scale (Aeolian). They are used for improvising over Minor 7 family chords or darker progressions.\n\n1. Aeolian:\nOur natural minor scale. Its structure (1-2-b3-4-5-b6-b7) contains the lowered sixth note (b6), which is the most tragic note in music. This is the sound of heavy rock ballads, deep sadness, and classic human drama.\n\n2. Dorian:\n* History and Vibe: The coolest, most sophisticated mode in music. Take the regular minor scale, and raise the sixth note (Natural 6). This action removes the tragic sadness of the b6, replacing it with a mysterious, sophisticated light. The sound becomes fluid, funky, and effortless.\n* Common Usage: Pink Floyd (Shine On You Crazy Diamond), Carlos Santana, Miles Davis. Perfect for playing over a long, static Minor 7 chord.\n* Fretboard Application: Take the shape of your standard minor pentatonic (the first box everyone learns). Now, add the second note (a whole step above the root) and the natural sixth (a half-step below the b7 of the pentatonic).\n\n3. Phrygian:\n* History and Vibe: The sound of Flamenco and Heavy Metal. Take the regular minor scale, and lower the second note by a half-step (Flat 2). The half-step interval created right at the beginning of the scale generates an immediate sense of danger, pressure, and oriental, Spanish darkness.\n* Common Usage: Metallica, Megadeth, and Mediterranean music.\n* Fretboard Application: Start your improvisation in the regular minor pentatonic, but occasionally slide your finger a half-step up from the root of the chord (e.g., from E to F). Emphasize this clash and you will achieve that dark Spanish character."
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 4: The Outsider (The Locrian Mode)",
+          content: "The seventh and final mode is the Locrian. It stands alone because it is neither major nor minor, but diminished.\n* Vibe and Structure: To create it using the parallel approach, we take the standard minor scale and lower both the second note (Flat 2) and the fifth note (Flat 5).\n* Psychological Usage: Lowering the fifth note pulls out the most stable foundation in music. The result is a gloomy, dense, utterly unbalanced scale that evokes a feeling of discomfort and dissonance.\n* When to use it? It is almost never used as a central scale for songwriting (because you cannot rest on it). Advanced guitarists will use it as a brief passing tool for improvising over a Minor 7 flat 5 chord in a jazz progression, or to create extremely heavy and unsettling riffs in Death Metal music."
+        },
+        {
+          type: "example",
+          title: "Chapter 5: Tips and Tricks for Implementation (How to Actually Practice)",
+          content: "Theoretical understanding is worthless without muscle memory and a musical ear. Here are the ways to embed the modes into your fingers:\n\n1. The Drone Method: The worst way to learn modes is running up and down a scale with a metronome. The correct way is to play a continuous, single bass note in the background (e.g., the note A played continuously). Over this constant pitch, slowly play A Aeolian. Then, change only the sixth note and play A Dorian. Your ear will psychologically hear how the color shifts from sad to cool, while the bass remains identical.\n2. Target the Character Note: When improvising, do not play all the mode's notes indiscriminately. Build your solo around the safe pentatonic, and only at the climax of your musical phrase should you land on the character note (e.g., the Sharp 4 in Lydian). The character note is the spice. Scattering it wisely makes you a subtle and sophisticated musician.\n3. Pitch Axis Theory: An advanced trick popularized by Joe Satriani. Play an A Major chord and play A Lydian (dreamy) over it. Immediately after, switch to an A Minor chord and play A Dorian (groovy and dark) over it. You remain on the same fret, on the same root, but completely change the lighting of the room."
+        },
+        {
+          type: "interactive",
+          content: "parallel-mode-comparator"
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: The Emotional Equalizer",
+          content: "The parallel approach frees you from the prison of cumbersome theoretical mathematics and returns music to your ears and fingers. The Dorian mode is not a complex calculation of shifting scales. The Dorian mode is simply your artistic decision, as a guitarist, to take the minor solo you are currently playing and raise one finger by one fret to change the mood of the audience.\n\nOnce you understand these filters and how they dress color onto basic scales, the entire fretboard transforms into an emotional equalizer. You can stay in the exact same position, and by consciously altering a single note (the character note), completely change the lighting, the color, and the deep meaning of the story you are telling through your amplifier."
+        }
+      ]
+    }
+  },
+
   circle_of_fifths: {
     id: "circle_of_fifths",
     he: {

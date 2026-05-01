@@ -17,6 +17,7 @@ import TriadInversionNavigator   from './TriadInversionNavigator'
 import ChordExtensionBuilder     from './ChordExtensionBuilder'
 import VoicingDropVisualizer     from './VoicingDropVisualizer'
 import ShellVoicingLaboratory    from './ShellVoicingLaboratory'
+import ParallelModeComparator    from './ParallelModeComparator'
 
 interface Props {
   articleId: string
@@ -415,6 +416,7 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'chord-extension-builder'   && <ChordExtensionBuilder     isHe={isHe} />}
                     {section.content === 'voicing-drop-visualizer'   && <VoicingDropVisualizer     isHe={isHe} />}
                     {section.content === 'shell-voicing-laboratory'  && <ShellVoicingLaboratory    isHe={isHe} />}
+                    {section.content === 'parallel-mode-comparator'  && <ParallelModeComparator    isHe={isHe} />}
                   </div>
                 )
               default:
