@@ -18,6 +18,8 @@ import ChordExtensionBuilder     from './ChordExtensionBuilder'
 import VoicingDropVisualizer     from './VoicingDropVisualizer'
 import ShellVoicingLaboratory    from './ShellVoicingLaboratory'
 import ParallelModeComparator    from './ParallelModeComparator'
+import PentatonicBoxBreaker      from './PentatonicBoxBreaker'
+import PentatonicGenreExplorer   from './PentatonicGenreExplorer'
 
 interface Props {
   articleId: string
@@ -417,6 +419,8 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'voicing-drop-visualizer'   && <VoicingDropVisualizer     isHe={isHe} />}
                     {section.content === 'shell-voicing-laboratory'  && <ShellVoicingLaboratory    isHe={isHe} />}
                     {section.content === 'parallel-mode-comparator'  && <ParallelModeComparator    isHe={isHe} />}
+                    {section.content === 'pentatonic-box-breaker'    && <PentatonicBoxBreaker      isHe={isHe} />}
+                    {section.content === 'pentatonic-genre-explorer' && <PentatonicGenreExplorer   isHe={isHe} />}
                   </div>
                 )
               default:

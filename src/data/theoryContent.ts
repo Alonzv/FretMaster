@@ -715,6 +715,110 @@ export const theoryContent: Record<string, TheoryArticle> = {
     }
   },
 
+  pentatonic_masterclass: {
+    id: "pentatonic_masterclass",
+    he: {
+      title: "הסולם הפנטטוני: האנטומיה של חופש מוחלט",
+      subtitle: "לשבור את הקופסאות, להבין את ה-DNA של הז'אנרים ולשלוט בשפת הגיטרה",
+      tags: ["סולמות", "אלתור", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: השקר של סולם המתחילים",
+          content: "הסולם הפנטטוני הוא קו פרשת המים בחייו של כל גיטריסט. זהו לרוב הסולם הראשון שאנחנו לומדים, ולכן רבים נוטים לטעות ולחשוב עליו כעל 'סולם למתחילים' או כלי עזר זמני עד שלומדים סולמות מורכבים יותר. אך האמת הפוכה לחלוטין. הסולם הפנטטוני הוא השלד ההרמוני החזק ביותר במוזיקה. מבי.בי קינג ועד ג'ון קולטריין, מג'ימי הנדריקס ועד אריק ג'ונסון, גדולי המוזיקאים לא נטשו את הפנטטוני, אלא למדו כיצד למתוח אותו, לשלב בו תווים זרים, וליישם אותו בצורות מרחביות מתוחכמות.\n\nרוב הנגנים לומדים את תבנית האצבעות הבסיסית (קופסה 1) ונתקעים בתוכה למשך שנים. בפרק זה אנחנו הולכים לפרק את הסולם לגורמים, ללמוד כיצד הוא משנה צורה בין בלוז, קאנטרי, רוק וג'אז, ולקבל את הכלים הגיאומטריים והתיאורטיים לפרוץ את הקופסאות המרובעות ולנוע בחופשיות לאורך כל צוואר הגיטרה."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: ה-DNA הכפול (מז'ור לעומת מינור)",
+          content: "המילה פנטטוני מורכבת מהמילים 'פנטה' (חמש) ו'טון' (צליל). הסוד הגדול של הסולם הוא היותו גרסה מזוקקת, חסרת התנגשויות (נטולת חצאי טונים), של הסולמות המלאים. הוא מופיע בשתי תצורות עיקריות:\n\n1. מז'ור פנטטוני: סולם מז'ור רגיל מכיל 7 צלילים. כדי להפוך אותו לפנטטוני, אנחנו משמיטים את התו הרביעי והשביעי. נשארנו עם הנוסחה 1-2-3-5-6. התוצאה היא סולם הרמוני, פתוח, נטול מתחים, ומתוק להפליא. הוא הבסיס למלודיות של הביטלס, לפולק אקוסטי, ולסולואים שמחים ומוארים.\n2. מינור פנטטוני: סולם מינור טבעי מכיל גם הוא 7 צלילים. כאן, אנחנו משמיטים את התו השני ואת התו השישי. נשארנו עם הנוסחה 1-b3-4-5-b7. זוהי תמצית האפלוליות, הרוק והבלוז. צלילי הטרצה והספטימה המונמכות נותנים לו את האופי הבועט והקשוח שלו."
+        },
+        {
+          type: "paragraph",
+          title: "פרק 2: לשבור את הכלוב (תנועה אלכסונית וראייה מרחבית)",
+          content: "צוואר הגיטרה מחולק מסורתית לחמש קופסאות (Positions) אנכיות של הסולם. הבעיה היא שנגינה בתוך קופסה צרה גורמת לאלתור להישמע עצי, מכני, וכמו תרגיל טכני עולה ויורד. כדי להישמע כמו זמר ששר מלודיה, אנחנו חייבים ללמוד לפרוס את הסולם בצורה אופקית ואלכסונית (Extended Pentatonics).\n\nבמקום לנגן שני תווים על כל מיתר, המקצוענים משתמשים בטכניקות של החלקה (Slides) וחיבור קופסאות. מנגנים תו אחד, מחליקים לתו הבא על אותו מיתר (לתוך הקופסה הבאה), ואז עוברים למיתר הבא. התנועה הזו גורמת ליד לנוע באלכסון מהסריג השלישי ועד לסריג השנים עשר בתנועה חלקה אחת. הריווח הזה שובר את המקצבים הבנאליים ומייצר משפטים מוזיקליים נושמים, ווקאליים ומשוחררים."
+        },
+        {
+          type: "interactive",
+          content: "pentatonic-box-breaker"
+        },
+        {
+          type: "example",
+          title: "פרק 3: זיקית של ז'אנרים (איך הפנטטוני משנה פנים)",
+          content: "אותם חמישה תווים נשמעים שונה לחלוטין כאשר הגישה, הציוד והקונטקסט משתנים. כך הסולם הפנטטוני מתנהג בז'אנרים השונים:\n\n* בלוז ורוק קלאסי (ההתנגשות הקדושה): הסאונד האייקוני של הרוק מבוסס על שבירת חוקים. מנגנים את הסולם המינור פנטטוני על גבי אקורדים דומיננטיים (מז'וריים). ההתנגשות בין הטרצה הקטנה של הסולם (b3) לטרצה הגדולה של האקורד מייצרת זעקה. כשמחברים גיטרות כמו סטראטוקסטר או לס פול ישירות לתוך מגבר פנדר בייסמן 59 שנדחף לקצה, ההתנגשות הזו מקבלת חספוס, אוברטונים הרמוניים ואטיטיוד שלא ניתן לייצר בשום דרך אחרת.\n* קאנטרי (משחקי המז'ור): מוזיקת קאנטרי נשענת בכבדות על המז'ור פנטטוני. הסוד כאן הוא שילוב של טכניקת פריטה מעורבת (Hybrid Picking) ושימוש בצלילי גישה כרומטיים. לוקחים גיטרת טלקסטר עם הסאונד המצליף שלה (Twang), ומחליקים מהטרצה הקטנה אל הטרצה הגדולה (מ-b3 ל-3). זה מייצר את ה'קווץ'' המפורסם של הקאנטרי.\n* ג'אז (החלפת שורשים): נגני ג'אז משתמשים בפנטטוני כדי לייצר צבעים מורכבים (Extensions) מבלי לחשוב על סולמות ארוכים. אם האקורד מלווה הוא Fmaj7, נגן הג'אז ינגן סולם A מינור פנטטוני. למה? כי התווים של A מינור פנטטוני (A, C, D, E, G) מתפקדים מעל אקורד F כטרצה, קווינטה, ספטימה, תשיעית ושלוש-עשרה. זהו קיצור דרך גאוני לייצר סאונד מתוחכם בעזרת צורה פשוטה."
+        },
+        {
+          type: "highlight",
+          title: "פרק 4: הוספת תבלינים (בלו נוטס ותווים כרומטיים)",
+          content: "היופי של הפנטטוני הוא היותו מסגרת פתוחה. כיוון שיש בו רק חמישה צלילים, יש בו המון 'חורים' שניתן למלא בצבעים כרומטיים כדי לייצר מתח:\n\n* הבלו נוט (The Blue Note): התוספת המפורסמת ביותר. מדובר בקווינטה מונמכת (b5) המתווספת לסולם המינור פנטטוני. זהו צליל דיסוננטי וצורם מאין כמוהו. הוא לא נועד כדי לעצור עליו, אלא כדי לעבור דרכו כמדרגה כרומטית או כדי למתוח אותו (Bending). הבלו נוט הוא מה שלוקח תרגיל סולמות סטרילי והופך אותו לזעקה אנושית.\n* התשיעית (Add 9): תוספת של התו השני (התשיעית) לסולם המינור פנטטוני. התוספת הזו מרככת את הקשיחות של הבלוז ומייצרת סאונד פתוח, יוקרתי ועמוק שמאפיין גיטריסטים כמו דיוויד גילמור וג'ון מאייר.\n* מתיחות אל תוך האקורד: במקום לנגן סתם תווים מהסולם, הגיטריסט המתקדם רואה את האקורד שמתנגן ברקע, ולוקח תו מהסולם הפנטטוני ומותח אותו בדיוק עד שהוא פוגע בתו ספציפי של האקורד המלווה (Chord Tone Targeting)."
+        },
+        {
+          type: "fretboard",
+          title: "פרק 5: לנגן מחוץ לקווים (Outside Playing)",
+          content: "השלב המתקדם ביותר בשליטה פנטטונית הוא היכולת לצאת בכוונה מהסולם כדי לייצר מתח פסיכולוגי קיצוני, ואז לחזור אליו לפתרון. טכניקה זו נקראת Side-Slipping.\nבזמן אלתור, הנגן לוקח את תבנית הפנטטוני המוכרת, ופשוט מחליק אותה חצי טון (סריג אחד) למעלה או למטה. לדוגמה, אלתור ב-A מינור פנטטוני, וקפיצה פתאומית ל-Bb מינור פנטטוני למשך שתי שניות. כל התווים נשמעים שגויים, הקהל מרגיש מתח ואי נוחות פיזית, ואז הנגן מחליק חזרה פנימה ל-A מינור. היכולת להשתמש בפנטטוני לא רק כסולם מלודי, אלא ככלי לייצור מתח פסיכולוגי, היא מה שמפריד בין נגנים טובים למאסטרים."
+        },
+        {
+          type: "interactive",
+          content: "pentatonic-genre-explorer"
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: מסגרת, לא כלוב",
+          content: "הסולם הפנטטוני לעולם לא נועד להיות קופסה שמגבילה אתכם. הוא נועד להיות רשת ביטחון הרמונית, שלד חזק מספיק כדי לשאת עליו משקלים עצומים של מתח, דיסוננס ורגש.\nברגע שאתם מבינים כיצד הוא בנוי, כיצד הוא משנה את אופיו מקאנטרי בהיר ועד רוק מלוכלך, וכיצד למתוח את גבולותיו בעזרת תנועה אלכסונית ותווים כרומטיים, אתם מפסיקים להיות אסירים של חמישה צלילים. אתם משתמשים בהם כבסיס לחופש ביטוי מוחלט, ויכולים לדבר שוטף בכל שפה מוזיקלית שתבחרו."
+        }
+      ]
+    },
+    en: {
+      title: "The Pentatonic Scale: The Anatomy of Absolute Freedom",
+      subtitle: "Breaking the Boxes, Understanding Genre DNA, and Mastering Guitar Language",
+      tags: ["Scales", "Improvisation", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: The Lie of the Beginner's Scale",
+          content: "The pentatonic scale is the watershed line in every guitarist's life. It is usually the first scale we learn, which leads many to mistakenly think of it as a 'beginner scale' or a temporary crutch until more complex scales are learned. The truth is exactly the opposite. The pentatonic scale is the strongest harmonic skeleton in music. From B.B. King to John Coltrane, from Jimi Hendrix to Eric Johnson, musical greats never abandoned the pentatonic; rather, they learned how to stretch it, integrate foreign notes into it, and apply it in sophisticated spatial ways.\n\nMost players learn the basic finger pattern (Box 1) and get stuck inside it for years. In this chapter, we are going to deconstruct the scale, learn how it shapeshifts between blues, country, rock, and jazz, and acquire the geometric and theoretical tools to break out of the square boxes and move freely across the entire guitar neck."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Double DNA (Major vs. Minor)",
+          content: "The word pentatonic comes from 'penta' (five) and 'tonic' (tone). The great secret of the scale is that it is a distilled, clash-free (devoid of half-steps) version of the full scales. It appears in two primary configurations:\n\n1. Major Pentatonic: A standard major scale contains 7 notes. To make it pentatonic, we omit the fourth and seventh notes. We are left with the formula 1-2-3-5-6. The result is a harmonic, open, tension-free, and incredibly sweet scale. It is the foundation for Beatles melodies, acoustic folk, and bright, happy solos.\n2. Minor Pentatonic: A natural minor scale also contains 7 notes. Here, we omit the second and the sixth notes. We are left with the formula 1-b3-4-5-b7. This is the essence of darkness, rock, and blues. The lowered third and seventh notes give it its kicking, tough character."
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 2: Breaking the Cage (Diagonal Movement and Spatial Vision)",
+          content: "The guitar neck is traditionally divided into five vertical boxes (positions) of the scale. The problem is that playing inside a narrow box makes the improvisation sound wooden, mechanical, and like an ascending and descending technical exercise. To sound like a singer singing a melody, we must learn to spread the scale horizontally and diagonally (Extended Pentatonics).\n\nInstead of playing two notes per string, professionals use techniques of sliding and connecting boxes. You play one note, slide to the next note on the same string (into the next box), and then move to the next string. This movement causes the hand to travel diagonally from the third fret all the way to the twelfth fret in one fluid motion. This spacing breaks banal rhythms and creates breathing, vocal, and liberated musical phrases."
+        },
+        {
+          type: "interactive",
+          content: "pentatonic-box-breaker"
+        },
+        {
+          type: "example",
+          title: "Chapter 3: A Genre Chameleon (How the Pentatonic Changes Faces)",
+          content: "The exact same five notes sound completely different when the approach, gear, and context change. Here is how the pentatonic scale behaves across various genres:\n\n* Blues and Classic Rock (The Holy Clash): The iconic sound of rock is based on breaking rules. You play the minor pentatonic scale over dominant (major) chords. The clash between the minor third of the scale (b3) and the major third of the chord produces a cry. When you plug guitars like a Stratocaster or a Les Paul straight into a pushed Fender Bassman 59 amp, this clash gains grit, harmonic overtones, and an attitude that cannot be replicated any other way.\n* Country (Major Games): Country music leans heavily on the major pentatonic. The secret here is combining Hybrid Picking techniques with chromatic approach notes. You take a Telecaster with its snapping Twang, and slide from the minor third to the major third (from b3 to 3). This produces the famous country 'squawk'.\n* Jazz (Root Substitution): Jazz players use the pentatonic to generate complex colors (Extensions) without thinking about long scales. If the backing chord is Fmaj7, the jazz player will play an A minor pentatonic scale. Why? Because the notes of A minor pentatonic (A, C, D, E, G) function over an F chord as the third, fifth, seventh, ninth, and thirteenth. This is a brilliant shortcut to producing sophisticated sound using a simple shape."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 4: Adding Spices (Blue Notes and Chromatic Passing Tones)",
+          content: "The beauty of the pentatonic is that it is an open framework. Because it only has five notes, it has many 'holes' that can be filled with chromatic colors to generate tension:\n\n* The Blue Note: The most famous addition. It is a lowered fifth (b5) added to the minor pentatonic scale. This is an incredibly dissonant and clashing sound. It is not meant to be rested upon, but to be passed through as a chromatic step or to be bent. The blue note is what takes a sterile scale exercise and turns it into a human cry.\n* The Ninth (Add 9): Adding the second note (the ninth) to the minor pentatonic scale. This addition softens the toughness of the blues and produces an open, luxurious, and deep sound characteristic of guitarists like David Gilmour and John Mayer.\n* Bending into the Chord: Instead of just playing random notes from the scale, the advanced guitarist visualizes the background chord, and takes a note from the pentatonic scale and bends it exactly until it hits a specific target note of the backing chord (Chord Tone Targeting)."
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 5: Outside Playing",
+          content: "The most advanced stage of pentatonic mastery is the ability to intentionally step outside the scale to generate extreme psychological tension, and then return to it for a resolution. This technique is called Side-Slipping.\nDuring improvisation, the player takes the familiar pentatonic shape, and simply slides it a half-step (one fret) up or down. For example, improvising in A minor pentatonic, and suddenly jumping to Bb minor pentatonic for two seconds. All the notes sound wrong, the audience feels tension and physical discomfort, and then the player slides back into A minor. The ability to use the pentatonic not just as a melodic scale, but as a tool for generating psychological tension, is what separates good players from masters."
+        },
+        {
+          type: "interactive",
+          content: "pentatonic-genre-explorer"
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: A Framework, Not a Cage",
+          content: "The pentatonic scale was never meant to be a box that restricts you. It was meant to be a harmonic safety net, a skeleton strong enough to carry immense weights of tension, dissonance, and emotion.\nOnce you understand how it is built, how it shifts its character from bright country to dirty rock, and how to stretch its boundaries using diagonal movement and chromatic notes, you stop being a prisoner of five notes. You use them as a foundation for absolute freedom of expression, capable of speaking fluently in any musical language you choose."
+        }
+      ]
+    }
+  },
+
   circle_of_fifths: {
     id: "circle_of_fifths",
     he: {
