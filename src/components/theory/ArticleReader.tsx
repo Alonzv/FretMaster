@@ -20,6 +20,8 @@ import ShellVoicingLaboratory    from './ShellVoicingLaboratory'
 import ParallelModeComparator    from './ParallelModeComparator'
 import PentatonicBoxBreaker      from './PentatonicBoxBreaker'
 import PentatonicGenreExplorer   from './PentatonicGenreExplorer'
+import HarmonicsFretboard        from './HarmonicsFretboard'
+import IntonationSimulator       from './IntonationSimulator'
 
 interface Props {
   articleId: string
@@ -421,6 +423,8 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'parallel-mode-comparator'  && <ParallelModeComparator    isHe={isHe} />}
                     {section.content === 'pentatonic-box-breaker'    && <PentatonicBoxBreaker      isHe={isHe} />}
                     {section.content === 'pentatonic-genre-explorer' && <PentatonicGenreExplorer   isHe={isHe} />}
+                    {section.content === 'harmonics-fretboard'       && <HarmonicsFretboard        isHe={isHe} />}
+                    {section.content === 'intonation-simulator'      && <IntonationSimulator        isHe={isHe} />}
                   </div>
                 )
               default:

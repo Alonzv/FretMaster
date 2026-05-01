@@ -819,6 +819,100 @@ export const theoryContent: Record<string, TheoryArticle> = {
     }
   },
 
+  physics_of_the_string: {
+    id: "physics_of_the_string",
+    he: {
+      title: "הפיזיקה של המיתר: הרמוניקס, אינטונציה והפגם המושלם",
+      subtitle: "למה הגיטרה שלכם לעולם לא תהיה מכוונת, והמתמטיקה שמאחורי הצליל",
+      tags: ["פיזיקה", "כיוון", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: האשליה של צליל בודד",
+          content: "כאשר אתם פורטים על מיתר בגיטרה, האוזן שלכם תופסת את הצליל כתו בודד וברור. אך זוהי אשליה אקוסטית. במציאות, מיתר שרוטט אינו מפיק רק תדר אחד, אלא סדרה שלמה של תדרים מתמטיים שמתנגנים בו זמנית. התדר הנמוך והחזק ביותר נקרא תדר היסוד (Fundamental Frequency), והוא זה שנותן לתו את השם שלו. אך מעליו, רוטטים גלים קצרים ומהירים יותר הנקראים צלילים עיליים או אוברטונים (Overtones).\n\nבפרק זה אנחנו הולכים לצלול אל תוך הפיזיקה של הגיטרה. אנחנו נלמד כיצד להשתמש במתמטיקה של המיתר כדי להפיק צלילי פעמון מרחפים (הרמוניקס), נבין את בעיית האינטונציה, ונחשוף את האמת המטרידה: הגיטרה שלכם, ממש כמו פסנתר, בנויה מראש כך שלעולם לא תהיה מכוונת באופן מושלם."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: המתמטיקה של ההרמוניקס (פלאז'ולטים)",
+          content: "אם תניחו אצבע בעדינות רבה על המיתר (מבלי ללחוץ אותו אל העץ) בנקודות גיאומטריות מסוימות ותפרטו, תקבלו צליל גבוה, צלול וטהור שנשמע כמו פעמון. הצלילים הללו נקראים Natural Harmonics.\nהתופעה הזו אינה קסם, אלא חלוקה מתמטית של המיתר. כשאתם מניחים את האצבע בנקודות הללו, אתם חוסמים את תדר היסוד של המיתר, ומכריחים אותו לרטוט רק בחלקים היחסיים שלו:\n\n* החצי המדויק (סריג 12): אם תניחו אצבע בדיוק מעל ברזל הסריג השנים עשר, חילקתם את המיתר לשני חצאים שווים. התוצאה היא צליל שגבוה בדיוק באוקטבה אחת מהמיתר הפתוח.\n* השליש (סריג 7): אם תניחו אצבע מעל ברזל הסריג השביעי, חילקתם את המיתר לשלושה חלקים שווים. התוצאה היא צליל של קווינטה (התו החמישי) באוקטבה גבוהה יותר.\n* הרבע (סריג 5): חלוקת המיתר לארבעה חלקים מעל הסריג החמישי תפיק צליל שגבוה בשתי אוקטבות שלמות מתדר היסוד.\n\nנגנים מתקדמים משתמשים בהרמוניקס כדי לייצר מרקמים עדינים, צלילים שממשיכים להדהד גם כשעוזבים את הצוואר, ואפקטים מרחביים שאי אפשר להפיק בלחיצה רגילה."
+        },
+        {
+          type: "interactive",
+          content: "harmonics-fretboard"
+        },
+        {
+          type: "paragraph",
+          title: "פרק 2: הפשרה ההיסטורית (Equal Temperament)",
+          content: "כעת אנחנו מגיעים לסוד האפל של כיוון הכלים המערביים. בימי קדם, כלים כוונו לפי חוקים מתמטיים טהורים (Just Intonation), שבהם המרווחים בין התווים היו מושלמים מבחינה פיזיקלית. הבעיה הייתה שאם כיוונתם כלי בצורה מושלמת לסולם דו מז'ור, הוא נשמע זיוף נוראי כשניסיתם לנגן בסולם רחוק יותר כמו מי מז'ור.\n\nכדי לפתור זאת ולאפשר למוזיקאים לנגן בכל הסולמות מבלי לכוון מחדש את הכלי, הומצאה פשרה גאונית אך בעייתית בשם כיוון מושווה (Equal Temperament). בשיטה זו, האוקטבה חולקה לשתים עשרה חתיכות שוות לחלוטין. המשמעות היא שקלקלנו בכוונה את כל המרווחים. בגיטרה מודרנית, הקווינטות שלכם מעט קטנות מדי, והטרצות שלכם זורחות (מזייפות כלפי מעלה) בכמה סנטים. זו הסיבה שאקורד G פתוח תמיד נשמע מעט צורם באוזן רגישה. הגיטרה שלכם לא מזייפת בגלל שאתם לא יודעים לכוון, היא מזייפת כי זו הפשרה שמאפשרת לכם לנגן בכל הסולמות."
+        },
+        {
+          type: "highlight",
+          title: "פרק 3: למה אסור לכוון גיטרה בעזרת הרמוניקס",
+          content: "דורות של גיטריסטים למדו את 'טריק' הכיוון המפורסם: לנגן הרמוניק בסריג החמישי של מיתר אחד, ולהשוות אותו להרמוניק בסריג השביעי של המיתר שתחתיו. הטריק הזה עובד נפלא בתיאוריה, אך הוא שגוי לחלוטין מבחינה פיזיקלית.\n\nהסיבה לכך טמונה בפרק הקודם. ההרמוניקס הטבעיים של הגיטרה מבוססים על מתמטיקה טהורה (Just Intonation). אך ברזלי הסריגים של הגיטרה שלכם ממוקמים במרחקים שמבוססים על הפשרה המודרנית (Equal Temperament). אם תכוונו את הגיטרה בעזרת הרמוניקס, אתם למעשה מכוונים אותה למתמטיקה טהורה. ברגע שתלחצו על הסריגים כדי לנגן אקורד, הגיטרה שלכם תזייף קשות. הדרך הנכונה והמדויקת ביותר לכוון גיטרה היא בעזרת טיונר דיגיטלי איכותי, או על ידי השוואת תווים לחוצים (Unisons)."
+        },
+        {
+          type: "example",
+          title: "פרק 4: אינטונציה (לפצות על המתיחה)",
+          content: "בעיה פיזיקלית נוספת בגיטרה היא המרחק בין המיתר לצוואר. כאשר אתם לוחצים אצבע על מיתר בסריג השנים עשר, אתם למעשה מותחים את המיתר כלפי מטה אל העץ. המתיחה הזו מעלה את הלחץ על המיתר וגורמת לצליל להיות מעט גבוה (Sharp) מהרצוי.\n\nכדי לפצות על המתיחה הזו, מתכנני הגיטרה יצרו אוכפים מתכווננים בגשר הגיטרה (האזור שבו המיתרים מעוגנים לגוף). תהליך כיוון האוכפים נקרא אינטונציה (Intonation).\n* איך בודקים? מנגנים את ההרמוניק הטבעי בסריג השנים עשר (שהוא תמיד מדויק מתמטית). לאחר מכן, לוחצים עם האצבע על הסריג השנים עשר ומנגנים את התו הלחוץ.\n* התיקון: אם התו הלחוץ נשמע גבוה יותר מההרמוניק, יש להאריך את המיתר על ידי הזזת האוכף אחורה. אם התו הלחוץ נמוך יותר, יש לקצר את המיתר על ידי הזזת האוכף קדימה. גיטרה ללא אינטונציה מדויקת תישמע טוב באקורדים פתוחים, אך תזייף בצורה צורמת בסולואים באזורים הגבוהים של הצוואר."
+        },
+        {
+          type: "interactive",
+          content: "intonation-simulator"
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: להשלים עם הפגם המושלם",
+          content: "הבנת הפיזיקה של המיתר משחררת את הגיטריסט מהחיפוש האובססיבי והמתסכל אחר כיוון מושלם. ברגע שמבינים שהכלי מבוסס על פשרות היסטוריות עתיקות ועל אקוסטיקה מורכבת של אוברטונים ומתיחות, לומדים לקבל את החיספוס הזה כחלק מהאופי של הגיטרה.\nהפגמים הללו הם אלו שהופכים את הגיטרה לכלי כל כך אנושי. השילוב בין ההרמוניקס הטהורים, האינטונציה השברירית והמתמטיקה של הלחצים, הוא בדיוק מה שמעניק לכלי הזה את הקול החד פעמי והחי שלו."
+        }
+      ]
+    },
+    en: {
+      title: "The Physics of the String: Harmonics, Intonation, and the Perfect Flaw",
+      subtitle: "Why Your Guitar Will Never Be Perfectly in Tune, and the Mathematics of Sound",
+      tags: ["Physics", "Tuning", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: The Illusion of a Single Note",
+          content: "When you pluck a guitar string, your ear perceives the sound as a single, clear note. However, this is an acoustic illusion. In reality, a vibrating string does not produce just one frequency, but an entire series of mathematical frequencies playing simultaneously. The lowest and strongest frequency is called the Fundamental Frequency, and it is the one that gives the note its name. But above it, shorter and faster waves are vibrating, known as Overtones.\n\nIn this chapter, we are going to dive into the physics of the guitar. We will learn how to use the mathematics of the string to produce hovering bell like sounds (Harmonics), understand the problem of intonation, and reveal the unsettling truth: your guitar, much like a piano, is inherently built so that it will never be perfectly in tune."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Mathematics of Harmonics",
+          content: "If you place your finger very gently on the string (without pressing it against the wood) at specific geometric points and pluck, you will get a high, clear, and pure sound that rings like a bell. These sounds are called Natural Harmonics.\nThis phenomenon is not magic, but a mathematical division of the string. When you place your finger at these points, you block the fundamental frequency of the string, forcing it to vibrate only in its fractional parts:\n\n* The Exact Half (12th fret): If you place a finger exactly above the metal of the twelfth fret, you divide the string into two equal halves. The result is a sound that is exactly one octave higher than the open string.\n* The Third (7th fret): If you place a finger above the seventh fret, you divide the string into three equal parts. The result is the sound of a fifth an octave higher.\n* The Quarter (5th fret): Dividing the string into four parts above the fifth fret will produce a sound two full octaves higher than the fundamental frequency.\n\nAdvanced players use harmonics to create delicate textures, sounds that continue to resonate even when the hand leaves the neck, and spatial effects that cannot be produced by regular fretting."
+        },
+        {
+          type: "interactive",
+          content: "harmonics-fretboard"
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 2: The Historical Compromise (Equal Temperament)",
+          content: "We now arrive at the dark secret of Western instrument tuning. In ancient times, instruments were tuned according to pure mathematical laws (Just Intonation), where the intervals between notes were physically perfect. The problem was that if you tuned an instrument perfectly for the C Major scale, it sounded horribly out of tune when you tried to play in a more distant key like E Major.\n\nTo solve this and allow musicians to play in all keys without retuning the instrument, a brilliant but problematic compromise was invented, called Equal Temperament. In this system, the octave was divided into twelve exactly equal pieces. This means we intentionally ruined all the intervals. On a modern guitar, your fifths are slightly too small, and your major thirds are sharp (out of tune upwards) by several cents. This is why an open G chord always sounds slightly dissonant to a sensitive ear. Your guitar is not out of tune because you do not know how to tune it; it is out of tune because this is the compromise that allows you to play in every key."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 3: Why You Must Not Tune a Guitar Using Harmonics",
+          content: "Generations of guitarists learned the famous tuning trick: play a harmonic at the fifth fret of one string, and compare it to the harmonic at the seventh fret of the string below it. This trick works wonderfully in theory, but it is physically completely incorrect.\n\nThe reason lies in the previous chapter. The natural harmonics of the guitar are based on pure mathematics (Just Intonation). However, the metal frets of your guitar are placed at distances based on the modern compromise (Equal Temperament). If you tune your guitar using harmonics, you are essentially tuning it to pure mathematics. The moment you press the frets to play a chord, your guitar will be severely out of tune. The most correct and accurate way to tune a guitar is with a high quality digital tuner, or by comparing fretted notes (Unisons)."
+        },
+        {
+          type: "example",
+          title: "Chapter 4: Intonation (Compensating for the Stretch)",
+          content: "Another physical problem with the guitar is the distance between the string and the neck. When you press a finger on a string at the twelfth fret, you are actually stretching the string down to the wood. This stretch increases the tension on the string, causing the pitch to be slightly sharper than desired.\n\nTo compensate for this stretch, guitar designers created adjustable saddles at the guitar bridge (the area where the strings are anchored to the body). The process of tuning the saddles is called Intonation.\n* How to check? Play the natural harmonic at the twelfth fret (which is always mathematically precise). Then, press your finger on the twelfth fret and play the fretted note.\n* The correction: If the fretted note sounds higher than the harmonic, you must lengthen the string by moving the saddle backward. If the fretted note is lower, you must shorten the string by moving the saddle forward. A guitar without precise intonation will sound fine on open chords but will be jarringly out of tune during solos in the higher areas of the neck."
+        },
+        {
+          type: "interactive",
+          content: "intonation-simulator"
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: Accepting the Perfect Flaw",
+          content: "Understanding the physics of the string frees the guitarist from the obsessive and frustrating search for perfect tuning. Once you realize that the instrument is based on ancient historical compromises and complex acoustics of overtones and tension, you learn to accept this roughness as part of the guitar's character.\nThese flaws are what make the guitar such a human instrument. The combination of pure harmonics, fragile intonation, and the mathematics of tension is exactly what gives this instrument its unique, living voice."
+        }
+      ]
+    }
+  },
+
   circle_of_fifths: {
     id: "circle_of_fifths",
     he: {
