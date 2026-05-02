@@ -22,7 +22,7 @@ export const theoryCategories: TheoryCategory[] = [
       he: "מרווחים כיחידות יסוד, סולם המז'ור כשלד, והפנטטוני כמפתח לאלתור.",
       en: "Intervals as atomic units, the major scale as the skeleton, and the pentatonic as the key to improvisation.",
     },
-    articles: ["intervals", "major_scale", "pentatonic_masterclass"],
+    articles: ["intervals", "major_scale", "minor_scales_masterclass", "pentatonic_masterclass"],
   },
   {
     id: "harmony",

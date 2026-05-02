@@ -1009,6 +1009,92 @@ export const theoryContent: Record<string, TheoryArticle> = {
     }
   },
 
+  minor_scales_masterclass: {
+    id: "minor_scales_masterclass",
+    he: {
+      title: "סולמות מינוריים: האנטומיה של הדרמה והצל",
+      subtitle: "לפרק את המינור הטבעי, ההרמוני והמלודי: היסטוריה, נוסחאות ושליטה הרמונית",
+      tags: ["סולמות", "הרמוניה", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: הרבה יותר מ'סולם עצוב'",
+          content: "החלוקה הפשטנית שמלמדים בתחילת הדרך גורסת כי המז'ור הוא 'שמח' והמינור הוא 'עצוב'. אך מינור הוא הרבה מעבר לכך. הסולמות המינוריים הם השפה של הדרמה האנושית, של המסתורין, המתח, הנוסטלגיה והכאב. בניגוד לסולם המז'ורי, שהוא ישות אחת יציבה ושלמה ששולטת באור, היקום המינורי הוא אלסטי ומשתנה. במוזיקה המערבית, המילה 'מינור' מתייחסת למערכת משולשת: המינור הטבעי, המינור ההרמוני והמינור המלודי.\n\nהסולמות הללו לא נולדו במקביל. הם תוצר של מאות שנות אבולוציה אקוסטית והכרח קומפוזיטורי. מלחינים נתקלו בבעיות פונקציונליות בסולם המינור המקורי, ונאלצו להנדס אותו מחדש פעם אחר פעם כדי לייצר כוחות משיכה חזקים יותר. בפרק זה ננתח את האנטומיה של כל אחד מהם, נבין כיצד הם בונים אקורדים שונים (Voicings), וכיצד ניתן להשתמש בהם ככלים דינמיים על צוואר הגיטרה."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: המינור הטבעי (Aeolian) - הבסיס המלנכולי",
+          content: "הסולם המינורי הטבעי הוא נקודת המוצא שלנו. הוא נגזרת ישירה של הסולם המז'ורי (הוא מתחיל מהדרגה השישית שלו, ולכן נקרא המינור היחסי). \nהנוסחה שלו במרווחים היא: טון, חצי טון, טון, טון, חצי טון, טון, טון.\nהנוסחה שלו ביחס לשורש: 1, 2, b3, 4, 5, b6, b7.\n\nההבדל העצום בינו לבין המז'ור טמון בשלושה תווים שהונמכו בחצי טון: הטרצה (b3), הסקסטה (b6) והספטימה (b7). הטרצה הקטנה היא זו שקובעת את האופי האפל, אך הסקסטה המונמכת היא זו שמייצרת את תחושת הטרגדיה והכבדות. \nכאשר בונים אקורדים מתוך הסולם הזה, מקבלים מהלכים זורמים וטבעיים. לדוגמה, בסולם לה מינור (Am), האקורדים יהיו: Am, Bdim, C, Dm, Em, F, G.\nאך כאן בדיוק התגלה ה'באג' הגדול של המוזיקה: כוח המשיכה בקדנצה חסר. האקורד החמישי בסולם (הדומיננטה) הוא אקורד מינורי (Em במקרה של לה מינור). אקורד מינורי לא מייצר מתח, ולכן המעבר מ-Em ל-Am נשמע אנמי, פסיבי וחסר כיוון. המלחינים הקלאסיים דרשו דרמה, והמינור הטבעי פשוט לא סיפק אותה."
+        },
+        {
+          type: "paragraph",
+          title: "פרק 2: המינור ההרמוני - התיקון שהוליד את המתח",
+          content: "כדי לפתור את חולשת הקדנצה, המלחינים התערבו ב-DNA של הסולם. הם הבינו שבסולם מז'ורי, הקדנצה עובדת כי התו השביעי (Leading Tone) נמצא מרחק של חצי טון בלבד מתו השורש, והוא מושך אליו בעוצמה מגנטית. במינור הטבעי, התו השביעי רחוק טון שלם מהשורש.\nהפתרון ההנדסי: לקחת את סולם המינור הטבעי, ולהגביה בו את התו השביעי בחצי טון.\nהנוסחה החדשה שנוצרה היא: 1, 2, b3, 4, 5, b6, 7.\n\nהסולם הזה נקרא 'מינור הרמוני' כי הוא נועד לפתור בעיה בהרמוניה (באקורדים). וזה עבד בצורה מדהימה. הגבהת התו השביעי הפכה את האקורד החמישי ממשולש מינורי למשולש מז'ורי, ולאקורד ספטימה דומיננטית מלא במתח (V7). עכשיו, המעבר מ-E7 ל-Am מייצר דרמה עוצמתית.\nיתרה מכך, התיקון הזה הוליד אקורד חדש לחלוטין על הדרגה השביעית: אקורד מוקטן מלא (Fully Diminished 7th). זהו אחד האקורדים המתוחים והשימושיים ביותר במוזיקה.\nהמחיר של התיקון הזה היה מלודי. המרווח החדש שנוצר בין הדרגה השישית (b6) לשביעית (7) הוא מרווח עצום של טון וחצי (סקונדה מוגדלת). המרווח הדיסוננטי והלא טבעי הזה מעניק לסולם את האופי הספרדי, הערבי והאקזוטי שלו. הוא הסאונד המובהק של הפלמנקו ושל הניאו-קלאסיק מטאל."
+        },
+        {
+          type: "fretboard",
+          title: "פרק 3: המינור המלודי - הסוד השקוף של הג'אז",
+          content: "המינור ההרמוני פתר את בעיית האקורדים, אבל עורר בעיה חדשה: היה קשה מאוד לזמרים לשיר את הקפיצה של הטון וחצי במלודיה. המוזיקה הקלאסית חיפשה דרך להחליק את הקו המלודי אל עבר הטוניקה מבלי לוותר על אקורד הדומיננטה המז'ורי.\n\nהפתרון (התיקון על התיקון) היה להגביה גם את התו השישי. \nהנוסחה החדשה היא: 1, 2, b3, 4, 5, 6, 7.\nהסולם הזה נקרא 'מינור מלודי'. אם תבחנו אותו היטב, תראו שהוא כמעט זהה לחלוטין לסולם המז'ורי, כשההבדל היחיד הוא הטרצה הקטנה (b3) בתחילתו. החלק התחתון שלו מינורי, והחלק העליון שלו מז'ורי. באקדמיה הקלאסית, מלמדים לנגן אותו עם התווים המוגבהים בעלייה, אך בירידה לבטל אותם ולחזור למינור הטבעי (כי אין צורך בכוח המשיכה של התו השביעי כשסולם יורד).\n\nאולם, נגני הג'אז המודרניים אימצו את הסולם הזה בעלייה ובירידה כאחד, והפכו אותו למעצמת אלתור (Jazz Minor). בגלל שאין בו את המרווח הקופצני והדרמטי של המינור ההרמוני, הוא נשמע שקוף, זורם, אינטלקטואלי ומאוד מתוחכם. מבחינה הרמונית, הוא מייצר את אחד האקורדים המסתוריים ביותר: המינור-מז'ור 7 (mM7) שמשמש לרוב בסיומי שירים דרמטיים (כמו בסרטי ג'יימס בונד)."
+        },
+        {
+          type: "interactive",
+          content: "minor-scale-comparator"
+        },
+        {
+          type: "example",
+          title: "פרק 4: שליטה גיאומטרית על צוואר הגיטרה",
+          content: "במקום להתייחס לשלושת הסולמות הללו כאל שלוש צורות נפרדות שצריך לשנן, הגיטריסט המתקדם רואה אותם כלוח בקרה אחד עם מתגים. הכל מתחיל מהמינור הטבעי.\n\n1. הטמעת הבסיס: נגנו את צורת שלושה תווים למיתר (3NPS) או את תבניות ה-CAGED של המינור הטבעי. זוהי רשת הביטחון שלכם. \n2. הפעלת המתג ההרמוני: כשאתם מזהים שהשיר עובר לאקורד הדומיננטה (למשל E7 בסולם Am), המוח שלכם לא מחליף סולם, הוא פשוט מדליק 'מתג'. אתם מאתרים את כל מספרי 7 המונמכים (b7) בסביבה שלכם על הצוואר, ומחליקים אותם סריג אחד קדימה ל-7 טבעי. ברגע שהאקורד נפתר בחזרה ל-Am, אתם מכבים את המתג וחוזרים ל-b7.\n3. הפעלת המתג המלודי: כאשר אתם רוצים לייצר קו סולו מהיר, עשיר ומתוחכם ללא הצליל האוריינטלי הקופצני, אתם מפעילים גם את המתג של הדרגה השישית, ומחליקים את ה-b6 סריג אחד קדימה. תבנית האצבעות הופכת לקלה יותר לביצוע טכני (בגלל היעדר מתיחות קשות של האצבעות), והסאונד הופך לזורם ופתוח."
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: לנוע בין הצללים",
+          content: "היקום המינורי הוא ההוכחה לכך שמוזיקה היא חיה נושמת שמתפתחת לפי הצרכים האקוסטיים והפסיכולוגיים של המאזין והמלחין. המינור הטבעי מעניק לכם את הכלי המלנכולי והשבטי הבסיסי. המינור ההרמוני הוא התבלין החריף שלכם ליצירת מתח עצום ברגעי שיא ולחזרה דרמטית הביתה. המינור המלודי הוא המכחול העדין, האינטלקטואלי והחלק שלכם למעברים אלגנטיים.\nמוזיקאי אמיתי לא בוחר סולם אחד ונשאר בו לכל אורך השיר. הוא זגג. הוא נע ביניהם בזמן אמת, מחליף את התווים המשתנים לפי האקורדים שמתנגנים ברקע, ורוקם מלודיה מורכבת שמשחקת עם הרגשות של הקהל בצורה מדויקת ומחושבת."
+        }
+      ]
+    },
+    en: {
+      title: "Minor Scales: The Anatomy of Drama and Shadow",
+      subtitle: "Deconstructing Natural, Harmonic, and Melodic Minor: History, Formulas, and Harmonic Control",
+      tags: ["Scales", "Harmony", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: Much More Than a Sad Scale",
+          content: "The simplistic division taught early on suggests that major is happy and minor is sad. But minor is far more than that. Minor scales are the language of human drama, mystery, tension, nostalgia, and pain. Unlike the major scale, which is a single, stable, and complete entity that rules the light, the minor universe is elastic and shifting. In Western music, the word minor refers to a tripartite system: Natural Minor, Harmonic Minor, and Melodic Minor.\n\nThese scales were not born simultaneously. They are the product of centuries of acoustic evolution and compositional necessity. Composers encountered functional problems in the original minor scale and were forced to reverse engineer it time and again to generate stronger gravitational pulls. In this chapter, we will analyze the anatomy of each, understand how they build different chords (Voicings), and learn how to use them as dynamic tools on the guitar neck."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Natural Minor (Aeolian) - The Melancholic Foundation",
+          content: "The natural minor scale is our starting point. It is a direct derivative of the major scale (starting from its sixth degree, hence called the relative minor).\nIts intervallic formula is: Whole, Half, Whole, Whole, Half, Whole, Whole.\nIts formula relative to the root: 1, 2, b3, 4, 5, b6, b7.\n\nThe massive difference between it and the major scale lies in three lowered notes: the third (b3), the sixth (b6), and the seventh (b7). The minor third dictates the dark character, but the lowered sixth is what generates the sense of tragedy and weight.\nWhen building chords from this scale, you get flowing, natural progressions. For example, in A minor (Am), the chords are: Am, Bdim, C, Dm, Em, F, G.\nBut this is exactly where the great bug of music was discovered: the gravitational pull in the cadence is missing. The fifth chord in the scale (the dominant) is a minor chord (Em in the key of A minor). A minor chord does not generate tension, so the transition from Em to Am sounds anemic, passive, and directionless. Classical composers demanded drama, and the natural minor simply did not provide it."
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 2: The Harmonic Minor - The Fix That Birthed Tension",
+          content: "To solve the weakness of the cadence, composers intervened in the scale's DNA. They understood that in a major scale, the cadence works because the seventh note (Leading Tone) is only a half step away from the root note, pulling towards it with magnetic force. In the natural minor, the seventh note is a whole step away from the root.\nThe engineering solution: take the natural minor scale and raise its seventh note by a half step.\nThe newly created formula is: 1, 2, b3, 4, 5, b6, 7.\n\nThis scale is called Harmonic Minor because it was designed to solve a problem in harmony (the chords). And it worked astonishingly well. Raising the seventh note transformed the fifth chord from a minor triad into a major triad, and into a tension-filled dominant seventh chord (V7). Now, the transition from E7 to Am generates immense drama.\nFurthermore, this fix birthed an entirely new chord on the seventh degree: the Fully Diminished 7th chord. This is one of the most tense and useful chords in music.\nThe price of this fix was melodic. The new interval created between the sixth degree (b6) and the seventh (7) is a massive step and a half (an augmented second). This dissonant and unnatural interval gives the scale its Spanish, Arabic, and exotic character. It is the definitive sound of Flamenco and Neo-Classical metal."
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 3: The Melodic Minor - The Transparent Secret of Jazz",
+          content: "The harmonic minor solved the chord problem but created a new one: it was very difficult for singers to sing the step and a half leap in the melody. Classical music sought a way to smooth the melodic line toward the tonic without sacrificing the major dominant chord.\n\nThe solution (the fix on top of the fix) was to raise the sixth note as well.\nThe new formula is: 1, 2, b3, 4, 5, 6, 7.\nThis scale is called Melodic Minor. If you examine it closely, you will see it is almost entirely identical to the major scale, with the only difference being the minor third (b3) at its beginning. Its lower half is minor, and its upper half is major. In the classical academy, you are taught to play it with the raised notes ascending, but descending, to cancel them and revert to the natural minor (since the gravitational pull of the seventh note is unnecessary when the scale descends).\n\nHowever, modern jazz players adopted this scale ascending and descending alike, turning it into an improvisation powerhouse (the Jazz Minor). Because it lacks the jumpy, dramatic interval of the harmonic minor, it sounds transparent, flowing, intellectual, and highly sophisticated. Harmonically, it generates one of the most mysterious chords: the Minor-Major 7 (mM7), often used at the dramatic endings of songs (as in James Bond films)."
+        },
+        {
+          type: "interactive",
+          content: "minor-scale-comparator"
+        },
+        {
+          type: "example",
+          title: "Chapter 4: Geometric Control on the Guitar Neck",
+          content: "Instead of treating these three scales as three separate shapes that must be memorized, the advanced guitarist views them as a single control panel with switches. Everything starts from the natural minor.\n\n1. Embedding the Foundation: Play the three notes per string (3NPS) or CAGED patterns of the natural minor. This is your safety net.\n2. Activating the Harmonic Switch: When you recognize that the song moves to the dominant chord (e.g., E7 in the key of Am), your brain does not switch scales; it simply flips a switch. You locate all the lowered 7ths (b7) in your immediate vicinity on the neck, and slide them one fret forward to a natural 7. The moment the chord resolves back to Am, you turn off the switch and return to the b7.\n3. Activating the Melodic Switch: When you want to create a fast, rich, and sophisticated solo line without the jumpy oriental sound, you also activate the switch for the sixth degree, sliding the b6 one fret forward. The fingering pattern becomes technically easier to execute (due to the absence of difficult finger stretches), and the sound becomes flowing and open."
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: Moving Between the Shadows",
+          content: "The minor universe is proof that music is a breathing organism that evolves according to the acoustic and psychological needs of the listener and composer. The natural minor provides you with the basic melancholic and tribal tool. The harmonic minor is your sharp spice for creating immense tension at peak moments and for a dramatic return home. The melodic minor is your delicate, intellectual, and smooth brush for elegant transitions.\nA true musician does not choose one scale and stay in it for the entire song. They move between them in real time, altering the shifting notes according to the chords playing in the background, and weaving a complex melody that plays with the audience's emotions precisely and calculatedly."
+        }
+      ]
+    }
+  },
+
   circle_of_fifths: {
     id: "circle_of_fifths",
     he: {
