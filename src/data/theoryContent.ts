@@ -510,7 +510,7 @@ export const theoryContent: Record<string, TheoryArticle> = {
   chord_voicings_extensions: {
     id: "chord_voicings_extensions",
     he: {
-      title: "הארכיטקטורה של ההרמוניה: צבעים, מתחים ווייסינגז",
+      title: "הארכיטקטורה של ההרמוניה: צבעים, מתחים ו-Voicing",
       subtitle: "מטריאדות פשוטות להרמוניה קולנועית: הסודות של סידור תווים על הפרטבורד",
       tags: ["הרמוניה_מתקדמת", "אקורדים", "מאסטר-קלאס"],
       sections: [
@@ -908,6 +908,102 @@ export const theoryContent: Record<string, TheoryArticle> = {
           type: "paragraph",
           title: "Conclusion: Accepting the Perfect Flaw",
           content: "Understanding the physics of the string frees the guitarist from the obsessive and frustrating search for perfect tuning. Once you realize that the instrument is based on ancient historical compromises and complex acoustics of overtones and tension, you learn to accept this roughness as part of the guitar's character.\nThese flaws are what make the guitar such a human instrument. The combination of pure harmonics, fragile intonation, and the mathematics of tension is exactly what gives this instrument its unique, living voice."
+        }
+      ]
+    }
+  },
+
+  functional_harmony: {
+    id: "functional_harmony",
+    he: {
+      title: "הרמוניה פונקציונלית: המתמטיקה של הרגש",
+      subtitle: "איך אקורדים מדברים זה עם זה, וכיצד לבנות מהלכים הרמוניים מהפנטים",
+      tags: ["הרמוניה", "כתיבה", "מאסטר-קלאס"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "הקדמה: כוח המשיכה של המוזיקה",
+          content: "עד כה התמקדנו באקורדים בודדים והבנו איך הם בנויים. אך מוזיקה אינה אוסף מקרי של אקורדים שעומדים במקום, היא מסע בזמן. המסע הזה מונע על ידי כוחות פסיכולוגיים חזקים של משיכה, דחיפה, מתח והרפיה. הרמוניה פונקציונלית היא התורה האקדמית שחוקרת את הכוחות הללו.\n\nברגע שתבינו שהאקורדים אינם ישויות עצמאיות ומנותקות, אלא מתפקדים כמשפחה מלוכדת שבה לכל אחד יש תפקיד דרמטי ברור, הראייה שלכם תשתנה לחלוטין. במקום לשבת עם הגיטרה ולנחש איזה אקורד יגיע עכשיו או מה 'יישמע טוב', אתם תדעו להוביל את האוזן של הקהל בדיוק לאן שתרצו. זהו השלב שבו מתחילים לכתוב שירים מתוך כוונה חופשית, והצעד הראשון בדרך להפוך מנגנים מבצעים למלחינים של ממש."
+        },
+        {
+          type: "highlight",
+          title: "פרק 1: משפחת האקורדים הדיאטונית (שיטת הספרות הרומיות)",
+          content: "כל סולם בעולם מייצר סביבו משפחה שלמה של שבעה אקורדים שנגזרים ממנו. אקורדים אלו נקראים 'אקורדים דיאטוניים', והם בנויים אך ורק מתווי הסולם עצמו. כדי להבין את הקשרים ביניהם ללא קשר לסולם הספציפי שאנחנו מנגנים בו, מוזיקאים משתמשים בשיטת הספרות הרומיות האוניברסלית.\n\nאם ניקח סולם מז'ורי (למשל סולם C), ונבנה אקורד משולש על כל אחד מהתווים שלו, נקבל תמיד, ללא יוצא מן הכלל, את המבנה המשפחתי הבא:\n* דרגה I (מז'ור): הטוניקה. מרכז הכובד. בסולם דו מז'ור, זה יהיה אקורד C.\n* דרגה ii (מינור): האקורד השני. בסולם דו מז'ור, זה יהיה אקורד Dm.\n* דרגה iii (מינור): האקורד השלישי. אקורד Em.\n* דרגה IV (מז'ור): האקורד הרביעי. אקורד F.\n* דרגה V (מז'ור): האקורד החמישי. הדומיננטה. אקורד G.\n* דרגה vi (מינור): האקורד השישי. המינור היחסי. אקורד Am.\n* דרגה vii° (מוקטן): האקורד השביעי. אקורד מוקטן Bdim שמייצר מתח מסקרן.\n\nהשימוש בספרות רומיות (גדולות לאקורדים מז'וריים, קטנות לאקורדים מינוריים) מאפשר לנו לדבר על 'מהלכים' (Progressions) בצורה פונקציונלית. כשאומרים ששיר מבוסס על מהלך I-IV-V, זה נכון לכל סולם שנבחר לנגן בו, מ-G מז'ור ועד Eb מז'ור."
+        },
+        {
+          type: "paragraph",
+          title: "פרק 2: חלוקת התפקידים (שלושת כוחות העל)",
+          content: "בתוך המשפחה ההרמונית, לא לכל אקורד יש את אותו משקל פסיכולוגי. ההרמוניה הפונקציונלית מחלקת את כלל האקורדים לשלושה תפקידי יסוד שמרכיבים כל עלילה טובה:\n\n1. פונקציית הטוניקה (Tonic): אקורד הבית. זוהי התחנה הסופית של הרכבת, המקום שבו המאזין מרגיש רוגע, פתרון ושלווה מוחלטת. האקורד הראשי והחזק ביותר בתפקיד זה הוא הדרגה ה-I. אקורדים נוספים שיכולים לשמש כבית זמני וחליפי הם דרגות vi ו-iii, מכיוון שהם חולקים תווים משותפים רבים עם הטוניקה.\n2. פונקציית הסאב-דומיננטה (Subdominant): אקורד המסע וההכנה. הוא לוקח אותנו הרחק מהבית ומתחיל את הסיפור. הוא לא מייצר מתח אגרסיבי, אלא תחושה של תנועה פתוחה, ציפייה ויציאה להרפתקה. האקורד הראשי בתפקיד זה הוא הדרגה ה-IV, וקרוב משפחתו המחליף הוא דרגה ii.\n3. פונקציית הדומיננטה (Dominant): אקורד המתח. זהו המנוע הדרמטי בסיפור. הוא מלא בלחץ פסיכולוגי שמכריח את המוח האנושי לדרוש פתרון וחזרה מהירה אל הטוניקה. האקורד הראשי בתפקיד זה הוא הדרגה ה-V, והתחליף המתוח עוד יותר שלו הוא דרגה vii°."
+        },
+        {
+          type: "fretboard",
+          title: "פרק 3: קדנצות ומסלולי חזרה הביתה",
+          content: "הרגע שבו נוצר מתח שמיד נפתר חזרה אל נקודת איזון נקרא קדנצה (Cadence). קדנצות הן מעין סימני פיסוק במוזיקה (פסיקים ונקודות בסוף משפט). הנה הדרכים המרכזיות לנהל את סוף המשפט:\n\n* הקדנצה המושלמת (V אל I): מתח מלא שנפתר לחלוטין אל הבית. זהו הסיום הקלאסי והחזק ביותר במוזיקה. הסוד של המשיכה הזו נובע מכך שאקורד V (במיוחד כשהוא מנוגן כדומיננט 7) מכיל בתוכו את התו השביעי של הסולם (Leading Tone), שמושך כמו מגנט בחצי טון אל שורש הטוניקה.\n* הקדנצה הפלאגאלית (IV אל I): מעבר מהסאב-דומיננטה אל הטוניקה. המעבר הזה הרבה יותר רך, הרמוני ומלטף מקדנצה מושלמת. הוא זכה לכינוי 'קדנצת אמן' משום שהוא משמש היסטורית בסיומי התפילות בכנסייה. הוא משדר השלמה שלווה ללא דרמה מיותרת.\n* הקדנצה המדומה (V אל vi): צעד מפתיע, שובר ציפיות ויצירתי. במקום לפתור את מתח הדומיננטה אל הבית הצפוי והבטוח (I), אנחנו פותרים אותו אל המינור היחסי (vi). המאזין מקבל פתרון אקוסטי, אך מבחינה רגשית זוהי תפנית עלילתית שמעוררת סקרנות ומכריחה את השיר להמשיך הלאה.\n* חצי קדנצה (עצירה על V): עצירת המשפט המוזיקלי בדיוק על אקורד הדומיננטה המתוח. זה שווה ערך לפסיק או לשלוש נקודות בטקסט כתוב. זה משאיר את המאזין תלוי באוויר, בציפייה דרוכה לחלק הבא של השיר."
+        },
+        {
+          type: "example",
+          title: "פרק 4: דומיננטות שניוניות (לשבור את חוקי הסולם)",
+          content: "עד כה נשארנו בגבולות הבטוחים של האקורדים הדיאטוניים (אלו ששייכים לסולם). אך מלחינים גדולים יודעים שמתח אמיתי נוצר כשחורגים מהגבולות. הכלי העוצמתי ביותר לכך נקרא 'דומיננטה שניונית' (Secondary Dominant).\n\nהעיקרון הוא פשוט: כל אקורד יכול לקבל אקורד דומיננטי (V) משלו, גם אם האקורד הדומיננטי הזה אינו שייך לסולם המקורי.\nלדוגמה: אנחנו נמצאים בסולם C מז'ור. האקורד השני שלנו (ii) הוא Dm. אנחנו רוצים להגיע אליו בדרך דרמטית. במקום סתם לעבור מ-C ל-Dm, נשאל את עצמנו: מהו אקורד ה-V של D? התשובה היא אקורד A (או A7). אקורד A לא קיים בסולם C מז'ור (יש בו תו זר, C#), אך אם ננגן מהלך של C ואז A7 ואז Dm, יצרנו מתח עצום ומקומי שנפתר בצורה מושלמת. השתמשנו באקורד V כדי 'לדחוף' את האקורד ii. הטכניקה הזו, של השתלת אקורדים דומיננטיים רגעיים, היא ה-DNA של כתיבת ג'אז, ביטלס ומוזיקה תיאטרלית מתקדמת."
+        },
+        {
+          type: "highlight",
+          title: "פרק 5: נוסחאות הקסם של השירים הגדולים",
+          content: "ברגע שמבינים את הספרות הרומיות והתפקידים הפונקציונליים, מגלים שהמוזיקה המודרנית כולה מורכבת מלבני בניין בסיסיות שמסתדרות בתבניות גאוניות:\n\n1. מלך הרוק והבלוז (I - IV - V): המהלך הבסיסי והטהור ביותר. התחלה בבית (I), יציאה למסע (IV), עלייה לשיא המתח (V), וחזרה. אינספור שירים של צ'אק ברי, אריק קלפטון וג'ימי הנדריקס בנויים עליו.\n2. נוסחת הפופ האוניברסלית (I - V - vi - IV): הנוסחה שעליה מבוססים כנראה 70 אחוז מהלהיטים ברדיו בעשורים האחרונים. המסע עובר מהבית אל מתח הדומיננטה, הולך לאיבוד במעקף המינורי העצוב והאמוציונלי (vi), ועולה חזרה לאווירה הפתוחה והמזמינה של אקורד ה-IV.\n3. מנוע הג'אז (ii - V - I): המהלך שמרכיב כמעט כל סטנדרט ג'אז ובוסה-נובה. הוא אלגנטי וחלק מאוד לאוזן, משום ששורשי האקורדים נעים בקפיצות שוות של קוורטות. מתחילים בסאב-דומיננטה מתוחכמת (ii), מושכים לדומיננטה הדרמטית (V), ונוחתים ברכות בטוניקה (I)."
+        },
+        {
+          type: "interactive",
+          content: "roman-numeral-analyzer"
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: לנווט את הספינה ההרמונית",
+          content: "הבנת הרמוניה פונקציונלית היא קבלת ההגה של הספינה המוזיקלית. אתם כבר לא מניחים אקורדים אקראיים יחד ומקווים שהם יישמעו טוב. אתם מבינים מה האוזן האנושית מחפשת, ויודעים לשלוט במפלסי המתח של השיר.\nברגע שאתם שולטים בספרות הרומיות, בתפקידים הפסיכולוגיים של האקורדים ובטכניקות מתקדמות כמו דומיננטות שניוניות, היצירתיות שלכם חופשיה באמת. תוכלו לקחת שיר קיים ולשנות (Reharmonize) את האקורדים שלו כדי להעניק לו גוון חדש, לבנות מתח בלתי נסבל לפני הפזמון, וליצור מסעות הרמוניים שלוקחים את המאזין למחוזות רגשיים מרתקים."
+        }
+      ]
+    },
+    en: {
+      title: "Functional Harmony: The Mathematics of Emotion",
+      subtitle: "How Chords Communicate, and How to Build Mesmerizing Harmonic Progressions",
+      tags: ["Harmony", "Songwriting", "Masterclass"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: The Gravity of Music",
+          content: "So far, we have focused on individual chords and understood how they are built. But music is not a random collection of static chords; it is a journey through time. This journey is driven by powerful psychological forces of pull, push, tension, and release. Functional harmony is the academic doctrine that explores these forces.\n\nOnce you realize that chords are not independent, disconnected entities, but function as a cohesive family where each has a clear dramatic role, your perspective will completely change. Instead of sitting with the guitar and guessing which chord should come next or what 'sounds good', you will know how to guide the listener's ear exactly where you desire. This is the stage where you begin writing songs with free intention, and the first step in transforming from a performing player into a true composer."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 1: The Diatonic Chord Family (The Roman Numeral System)",
+          content: "Every scale in the world generates a complete family of seven chords derived from it. These are called 'Diatonic chords', and they are built using only the notes of the scale itself. To understand the relationships between them regardless of the specific key we are playing in, musicians use the universal Roman Numeral system.\n\nIf we take a major scale (for example, the C scale), and build a triad on each of its notes, we will always, without exception, get the following family structure:\n* Degree I (Major): The Tonic. The center of gravity. In C major, this is the C chord.\n* Degree ii (Minor): The second chord. In C major, this is the Dm chord.\n* Degree iii (Minor): The third chord. The Em chord.\n* Degree IV (Major): The fourth chord. The F chord.\n* Degree V (Major): The fifth chord. The Dominant. The G chord.\n* Degree vi (Minor): The sixth chord. The relative minor. The Am chord.\n* Degree vii° (Diminished): The seventh chord. The Bdim chord, which creates intriguing tension.\n\nUsing Roman numerals (uppercase for major chords, lowercase for minor chords) allows us to talk about 'Progressions' in a functional way. When we say a song is based on a I-IV-V progression, it applies to any key we choose to play in, from G major to Eb major."
+        },
+        {
+          type: "paragraph",
+          title: "Chapter 2: The Division of Roles (The Three Superpowers)",
+          content: "Within the harmonic family, not every chord carries the same psychological weight. Functional harmony divides all chords into three fundamental roles that make up any good storyline:\n\n1. The Tonic Function (Tonic): The home chord. This is the final destination of the train, the place where the listener feels calm, resolution, and absolute peace. The primary and strongest chord in this role is the I degree. Additional chords that can serve as a temporary and alternate home are the vi and iii degrees, as they share many common notes with the tonic.\n2. The Subdominant Function (Subdominant): The journey and preparation chord. It takes us away from home and starts the story. It does not generate aggressive tension, but rather a feeling of open movement, anticipation, and setting off on an adventure. The primary chord in this role is the IV degree, and its substitute relative is the ii degree.\n3. The Dominant Function (Dominant): The tension chord. This is the dramatic engine in the story. It is full of psychological pressure that forces the human brain to demand a resolution and a quick return to the tonic. The primary chord in this role is the V degree, and its even more tense substitute is the vii° degree."
+        },
+        {
+          type: "fretboard",
+          title: "Chapter 3: Cadences and Paths Back Home",
+          content: "The moment tension is created and immediately resolved back to a point of balance is called a Cadence. Cadences are the punctuation marks of music (commas and periods at the end of a sentence). Here are the primary ways to manage the end of a phrase:\n\n* The Perfect Cadence (V to I): Full tension completely resolved back home. This is the classic and strongest ending in music. The secret of this pull stems from the fact that the V chord (especially when played as a dominant 7) contains the seventh note of the scale (Leading Tone), which pulls like a magnet by a half-step into the tonic's root.\n* The Plagal Cadence (IV to I): A transition from the subdominant to the tonic. This transition is much softer, harmonic, and soothing than a perfect cadence. It earned the nickname 'Amen Cadence' because it is historically used at the end of church prayers. It projects peaceful acceptance without unnecessary drama.\n* The Deceptive Cadence (V to vi): A surprising, expectation-breaking, and creative move. Instead of resolving the dominant tension to the expected and safe home (I), we resolve it to the relative minor (vi). The listener receives an acoustic resolution, but emotionally it is a plot twist that sparks curiosity and forces the song to continue.\n* Half Cadence (Stopping on V): Stopping the musical phrase exactly on the tense dominant chord. This is equivalent to a comma or an ellipsis in a written text. It leaves the listener hanging in the air, in eager anticipation for the next part of the song."
+        },
+        {
+          type: "example",
+          title: "Chapter 4: Secondary Dominants (Breaking the Rules of the Scale)",
+          content: "So far, we have stayed within the safe boundaries of diatonic chords (those belonging to the scale). But great composers know that true tension is created when stepping outside the boundaries. The most powerful tool for this is called the 'Secondary Dominant'.\n\nThe principle is simple: every chord can have its own dominant (V) chord, even if that dominant chord does not belong to the original scale.\nFor example: we are in the key of C major. Our second chord (ii) is Dm. We want to reach it in a dramatic way. Instead of just moving from C to Dm, we ask ourselves: what is the V chord of D? The answer is the A (or A7) chord. The A chord does not exist in the C major scale (it has a foreign note, C#), but if we play a progression of C, then A7, then Dm, we have created immense, localized tension that resolves perfectly. We used a V chord to 'push' the ii chord. This technique, of implanting momentary dominant chords, is the DNA of jazz, Beatles songwriting, and advanced theatrical music."
+        },
+        {
+          type: "highlight",
+          title: "Chapter 5: The Magic Formulas of Great Songs",
+          content: "Once you understand Roman numerals and functional roles, you discover that all modern music is composed of basic building blocks arranged in brilliant patterns:\n\n1. The King of Rock and Blues (I - IV - V): The most basic and pure progression. Starting at home (I), venturing on a journey (IV), rising to peak tension (V), and returning. Countless songs by Chuck Berry, Eric Clapton, and Jimi Hendrix are built on it.\n2. The Universal Pop Formula (I - V - vi - IV): The formula upon which probably 70 percent of radio hits in recent decades are based. The journey moves from home to dominant tension, gets delightfully lost in the sad and emotional minor detour (vi), and rises back to the open, inviting atmosphere of the IV chord.\n3. The Jazz Engine (ii - V - I): The progression that makes up almost every jazz standard and Bossa Nova. It is highly elegant and smooth to the ear, as the chord roots move in equal leaps of fourths. We start on a sophisticated subdominant (ii), pull to the dramatic dominant (V), and land softly on the tonic (I)."
+        },
+        {
+          type: "interactive",
+          content: "roman-numeral-analyzer"
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: Navigating the Harmonic Ship",
+          content: "Understanding functional harmony is like taking the helm of the musical ship. You are no longer placing random chords together and hoping they sound good. You understand what the human ear is seeking, and you know how to control the tension levels of the song.\nOnce you master Roman numerals, the psychological roles of chords, and advanced techniques like secondary dominants, your creativity is truly free. You will be able to take an existing song and reharmonize its chords to give it a new shade, build unbearable tension before the chorus, and create harmonic journeys that take the listener to fascinating emotional realms."
         }
       ]
     }

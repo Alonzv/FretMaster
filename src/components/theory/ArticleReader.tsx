@@ -22,6 +22,7 @@ import PentatonicBoxBreaker      from './PentatonicBoxBreaker'
 import PentatonicGenreExplorer   from './PentatonicGenreExplorer'
 import HarmonicsFretboard        from './HarmonicsFretboard'
 import IntonationSimulator       from './IntonationSimulator'
+import RomanNumeralAnalyzer      from './RomanNumeralAnalyzer'
 
 interface Props {
   articleId: string
@@ -425,6 +426,7 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'pentatonic-genre-explorer' && <PentatonicGenreExplorer   isHe={isHe} />}
                     {section.content === 'harmonics-fretboard'       && <HarmonicsFretboard        isHe={isHe} />}
                     {section.content === 'intonation-simulator'      && <IntonationSimulator        isHe={isHe} />}
+                    {section.content === 'roman-numeral-analyzer'    && <RomanNumeralAnalyzer       isHe={isHe} />}
                   </div>
                 )
               default:
