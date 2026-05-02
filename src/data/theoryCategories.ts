@@ -31,7 +31,7 @@ export const theoryCategories: TheoryCategory[] = [
       he: "בניית אקורדים, מעגל הקווינטות, הרמוניה פונקציונלית וווייסינגז מתקדמים.",
       en: "Building chords, the circle of fifths, functional harmony, and advanced voicings.",
     },
-    articles: ["triads_chords", "circle_of_fifths", "functional_harmony", "chord_voicings_extensions"],
+    articles: ["triads_chords", "circle_of_fifths", "functional_harmony", "chord_voicings_extensions", "nashville_number_system"],
   },
   {
     id: "modes",

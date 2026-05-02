@@ -1205,5 +1205,91 @@ export const theoryContent: Record<string, TheoryArticle> = {
         }
       ]
     }
+  },
+
+  nashville_number_system: {
+    id: "nashville_number_system",
+    he: {
+      title: "שיטת נאשוויל: המדריך המעשי לקריאה וכתיבה",
+      subtitle: "איך לתרגם שירים למספרים, לכתוב צ'ארטים מקצועיים ולשנות סולמות בזמן אמת",
+      tags: ["הרמוניה", "קריאה", "מדריך מעשי"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "מבוא: למה בכלל צריך את זה?",
+          content: "תארו לעצמכם שאתם מגיעים לחדר חזרות. חילקו לכם דף עם אקורדים לשיר בסולם לה מז'ור. פתאום הזמר מבקש להוריד הכל למי מז'ור כי הסולם גבוה לו מדי. אם השיר כתוב באותיות (A, D, E), אתם צריכים למחוק הכל ולחשב מחדש כל אקורד בלחץ של זמן. זוהי בעיה שנגני אולפן התמודדו איתה ביומיום.\n\nכדי לפתור זאת, הומצאה בשנות החמישים שיטת המספרים של נאשוויל. זוהי לא סתם תיאוריה, אלא כלי עבודה יומיומי (Shorthand) שנועד לכתוב שירים בצורה עיוורת לסולם. השיר נכתב במספרים, וכשהזמר מבקש להחליף סולם, הדף נשאר זהה. הנגן פשוט מזיז את היד למיקום אחר על הגיטרה. במדריך זה נלמד צעד אחר צעד כיצד לכתוב ולקרוא את השפה הזו."
+        },
+        {
+          type: "highlight",
+          title: "שלב 1: תרגום אותיות למספרים",
+          content: "הבסיס של שיטת נאשוויל הוא החלפת שמות האקורדים במספרים של 1 עד 7, לפי המיקום שלהם בסולם. ברירת המחדל של השיטה כוללת בתוכה את חוקי ההרמוניה הפונקציונלית של סולם מז'ורי:\n* מספרים 1, 4, 5 הם תמיד אקורדים מז'וריים.\n* מספרים 2, 3, 6 הם תמיד אקורדים מינוריים.\n* מספר 7 הוא אקורד מוקטן.\n\nכדי להתחיל, בחרו את סולם השיר (למשל, C). תו C מקבל את המספר 1. תו D (שהוא מינורי בסולם זה) מקבל את המספר 2. אם תראו על הדף את הרצף 1 4 5 1, אל תנגנו תווים בודדים, אלא אקורדים מז'וריים שלמים. אין צורך לכתוב את המילה מינור ליד המספר 6, נגן נאשוויל יודע שהדרגה השישית היא מינורית מעצם טבעה."
+        },
+        {
+          type: "paragraph",
+          title: "שלב 2: סימני הכתיבה באולפן (איך כותבים צ'ארט)",
+          content: "מה קורה כשהשיר דורש קצב מיוחד או חורג מהסולם הרגיל? מוזיקאים פיתחו סימנים גרפיים ברורים ומהירים:\n\n1. סימן המינוס (Minus): אם המלחין רוצה להפוך את אקורד 1 (שהוא כזכור מז'ורי) למינורי, הוא יכתוב 1-. זה מהיר וברור הרבה יותר מאשר לכתוב באותיות קטנות או לכתוב את המילה המלאה.\n2. חלוקת תיבה (Split Bar): כל מספר על הדף מייצג תיבה שלמה (ארבע פעמות). אם יש שני אקורדים באותה תיבה, כותבים את שניהם ומותחים תחתיהם קו תחתון מודגש. זה מסמן לנגן לפצל את התיבה לחצי.\n3. היהלום (The Diamond): ציור של מעוין (יהלום) סביב המספר. פירושו: אל תפרטו קצב. פרטו על האקורד פעם אחת בלבד על הפעמה הראשונה, ותנו לו להדהד עד סוף התיבה.\n4. דחיפות (Pushes): משולש קטן מעל המספר מסמן סינקופה. על הנגן לנגן את האקורד שמינית אחת לפני הפעמה הראשונה של התיבה הבאה."
+        },
+        {
+          type: "fretboard",
+          title: "שלב 3: הגיאומטריה של נאשוויל על הגיטרה",
+          content: "עבור גיטריסטים, שיטת נאשוויל מתחברת באופן ישיר למערכת האינטרוולים ולמראה המרחבי של הצוואר. אתם לא צריכים לחשב תווים בראש, אתם צריכים לראות צורות.\n\nאם השיר הוא בסולם G. מצאו את תו G על מיתר 6. זוהי נקודת העוגן שלכם, המספר 1. \nעכשיו, איפה מספר 4? הוא תמיד נמצא בדיוק מיתר אחד מתחת לנקודה 1 (באותו סריג). איפה מספר 5? הוא תמיד נמצא שני סריגים מעל מספר 4. איפה מספר 6-? הוא תמיד שני סריגים מעל מספר 5. \nהצורה הגיאומטרית הזו (מערכת היחסים המרחבית בין 1, 4, 5 ו-6) זהה לחלוטין בכל מקום על הצוואר. אם הזמר יבקש לעבור לסולם A, אתם פשוט מזיזים את האצבע של מספר 1 לתו A, ומחילים את אותה צורה מרחבית בדיוק."
+        },
+        {
+          type: "example",
+          title: "שלב 4: תרגול מעשי: קריאת צ'ארט פופ",
+          content: "בואו נקרא יחד פזמון של שיר פופ אופייני שנכתב בשיטת נאשוויל:\n\n1    5    6-   4\n1    5    (4  5)   1(יהלום)\n\nאיך מבצעים את זה? \nשורה ראשונה: מנגנים תיבה שלמה (ארבע פעמות) של אקורד הבית. אחר כך תיבה של הדומיננטה (5). לאחר מכן תיבה של המינור היחסי (6-), ולבסוף תיבה של הסאב-דומיננטה (4). \nשורה שנייה: שוב תיבה של 1 ותיבה של 5. התיבה השלישית מתחלקת שווה בשווה: שתי פעמות לאקורד 4 ושתי פעמות לאקורד 5. מסיימים עם אקורד 1 שמנוגן בפעימה אחת ומהדהד באוויר עד לדעיכה מוחלטת."
+        },
+        {
+          type: "interactive",
+          content: "nashville-chart-translator"
+        },
+        {
+          type: "paragraph",
+          title: "סיכום: השפה שהופכת אתכם למקצוענים",
+          content: "שיטת נאשוויל אינה מיועדת רק לנגני קאנטרי. היא שפת האם של נגני סשן, מפיקים מוזיקליים ומנהלים מוזיקליים בכל הז'אנרים.\nברגע שאתם כותבים את השירים שלכם במספרים ולא באותיות, אתם מתחילים להבין את השלד האמיתי של השיר. אתם שומעים פונקציות ומתחים במקום תווים שרירותיים. מעבר לכך, אתם מקבלים את היכולת לעבוד עם זמרים ולהתאים את הסולם לקול שלהם תוך שניות, בלי צורך להדפיס דפי תווים חדשים. תתחילו לתרגם את השירים שאתם אוהבים למספרים, וצוואר הגיטרה ייפתח בפניכם מחדש."
+        }
+      ]
+    },
+    en: {
+      title: "The Nashville Number System: A Practical Guide",
+      subtitle: "How to Translate Songs to Numbers, Write Professional Charts, and Transpose Instantly",
+      tags: ["Harmony", "Reading", "Practical Guide"],
+      sections: [
+        {
+          type: "paragraph",
+          title: "Introduction: Why Do We Even Need This?",
+          content: "Imagine arriving at a rehearsal room. You are handed a chord chart for a song in the key of A Major. Suddenly, the singer asks to drop everything to E Major because the key is too high. If the song is written in letters (A, D, E), you have to erase everything and recalculate every chord under time pressure. This is a problem studio musicians dealt with daily.\n\nTo solve this, the Nashville Number System was invented in the 1950s. It is not just theory, but a daily shorthand tool designed to write songs blind to their key. The song is written in numbers, and when the singer asks to change the key, the chart remains identical. The player simply moves their hand to a different location on the guitar. In this guide, we will learn step by step how to write and read this language."
+        },
+        {
+          type: "highlight",
+          title: "Step 1: Translating Letters to Numbers",
+          content: "The foundation of the Nashville system is replacing chord names with numbers from 1 to 7, based on their position in the scale. The default of the system incorporates the rules of functional harmony for a major key:\n* Numbers 1, 4, and 5 are always major chords.\n* Numbers 2, 3, and 6 are always minor chords.\n* Number 7 is a diminished chord.\n\nTo begin, choose the key of the song (e.g., C). The note C gets the number 1. The note D (which is minor in this key) gets the number 2. If you see the sequence 1 4 5 1 on the page, do not play single notes, but rather full major chords. There is no need to write the word minor next to the number 6; a Nashville player knows the sixth degree is inherently minor."
+        },
+        {
+          type: "paragraph",
+          title: "Step 2: Studio Notation Symbols (How to Write a Chart)",
+          content: "What happens when the song requires a special rhythm or deviates from the standard key? Musicians developed clear and fast graphic symbols:\n\n1. The Minus Sign: If the composer wants to turn chord 1 (which is typically major) into a minor chord, they will write 1-. This is much faster and clearer than writing in lowercase letters or writing out the full word.\n2. Split Bar: Every number on the page represents a full measure (four beats). If there are two chords in the same measure, both are written and heavily underlined together. This signals the player to split the measure in half.\n3. The Diamond: A diamond shape drawn around the number. Its meaning: do not strum a rhythm. Strum the chord only once on the first beat, and let it ring until the end of the measure.\n4. Pushes: A small triangle over the number indicates syncopation. The player must play the chord one eighth note before the first beat of the next measure."
+        },
+        {
+          type: "fretboard",
+          title: "Step 3: The Geometry of Nashville on the Guitar",
+          content: "For guitarists, the Nashville system connects directly to the interval system and the spatial layout of the neck. You do not need to calculate notes in your head; you need to see shapes.\n\nIf the song is in the key of G. Find the G note on the 6th string. This is your anchor point, number 1.\nNow, where is number 4? It is always located exactly one string directly below point 1 (on the same fret). Where is number 5? It is always two frets above number 4. Where is number 6-? It is always two frets above number 5.\nThis geometric shape (the spatial relationship between 1, 4, 5, and 6) is completely identical everywhere on the neck. If the singer asks to switch to the key of A, you simply move your number 1 finger to the A note, and apply the exact same spatial shape."
+        },
+        {
+          type: "example",
+          title: "Step 4: Practical Exercise: Reading a Pop Chart",
+          content: "Let us read together a chorus of a typical pop song written in the Nashville system:\n\n1    5    6-   4\n1    5    (4  5)   1(Diamond)\n\nHow do we execute this?\nFirst line: Play a full measure (four beats) of the home chord. Then a measure of the dominant (5). Then a measure of the relative minor (6-), and finally a measure of the subdominant (4).\nSecond line: Again a measure of 1 and a measure of 5. The third measure is split evenly: two beats for chord 4 and two beats for chord 5. Finish with chord 1 played on a single beat and ringing in the air until it completely fades out."
+        },
+        {
+          type: "interactive",
+          content: "nashville-chart-translator"
+        },
+        {
+          type: "paragraph",
+          title: "Conclusion: The Language That Makes You a Professional",
+          content: "The Nashville system is not just for country players. It is the native language of session players, music producers, and musical directors across all genres.\nOnce you write your songs in numbers instead of letters, you begin to understand the true skeleton of the song. You hear functions and tensions instead of arbitrary notes. Furthermore, you gain the ability to work with singers and adapt the key to their voice in seconds, without needing to print new sheet music. Start translating the songs you love into numbers, and the guitar neck will open up to you in a whole new way."
+        }
+      ]
+    }
   }
 };

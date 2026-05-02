@@ -24,6 +24,7 @@ import HarmonicsFretboard        from './HarmonicsFretboard'
 import IntonationSimulator       from './IntonationSimulator'
 import RomanNumeralAnalyzer      from './RomanNumeralAnalyzer'
 import MinorScaleComparator      from './MinorScaleComparator'
+import NashvilleChartTranslator  from './NashvilleChartTranslator'
 
 interface Props {
   articleId: string
@@ -428,7 +429,8 @@ export default function ArticleReader({ articleId, onBack, onTagClick }: Props) 
                     {section.content === 'harmonics-fretboard'       && <HarmonicsFretboard        isHe={isHe} />}
                     {section.content === 'intonation-simulator'      && <IntonationSimulator        isHe={isHe} />}
                     {section.content === 'roman-numeral-analyzer'    && <RomanNumeralAnalyzer       isHe={isHe} />}
-                    {section.content === 'minor-scale-comparator'    && <MinorScaleComparator       isHe={isHe} />}
+                    {section.content === 'minor-scale-comparator'      && <MinorScaleComparator       isHe={isHe} />}
+                    {section.content === 'nashville-chart-translator'  && <NashvilleChartTranslator   isHe={isHe} />}
                   </div>
                 )
               default:
