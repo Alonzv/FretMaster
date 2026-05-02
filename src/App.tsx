@@ -88,7 +88,9 @@ export default function App() {
     const depth = backStack.current.length
     backStack.current = []
     if (depth > 0) {
-      skipPopCount.current += depth
+      // history.go(-N) always fires exactly ONE popstate event regardless of N,
+      // so we must absorb exactly 1, not `depth`.
+      skipPopCount.current += 1
       history.go(-depth)
     }
     history.replaceState({ fmDepth: 0 }, '')
