@@ -8,10 +8,10 @@ export interface TheoryCategory {
 export const theoryCategories: TheoryCategory[] = [
   {
     id: "foundations",
-    title: { he: "יסודות ופיזיקה", en: "Foundations & Physics" },
+    title: { he: "יסודות הגיטרה", en: "Guitar Foundations" },
     description: {
-      he: "המכניקה של הצליל, בניית הפרטבורד והבנת הגיטרה ברמה המדעית.",
-      en: "The mechanics of sound, fretboard construction, and understanding the guitar scientifically.",
+      he: "המכניקה של הצליל, בניית הפרטבורד וקריאת תווים — מהפיזיקה ועד לניווט על הסף.",
+      en: "The mechanics of sound, fretboard construction, and reading notation — from physics to navigation.",
     },
     articles: ["physics_of_the_string", "fretboard_matrix", "sight_reading"],
   },
@@ -19,19 +19,19 @@ export const theoryCategories: TheoryCategory[] = [
     id: "scales",
     title: { he: "סולמות ומרווחים", en: "Scales & Intervals" },
     description: {
-      he: "אבני הבניין של המוזיקה — מרווחים, סולם המז'ור ושורשי כל הידע.",
-      en: "The building blocks of music — intervals, the major scale, and the roots of all knowledge.",
+      he: "מרווחים כיחידות יסוד, סולם המז'ור כשלד, והפנטטוני כמפתח לאלתור.",
+      en: "Intervals as atomic units, the major scale as the skeleton, and the pentatonic as the key to improvisation.",
     },
-    articles: ["major_scale", "intervals", "pentatonic_masterclass"],
+    articles: ["intervals", "major_scale", "pentatonic_masterclass"],
   },
   {
     id: "harmony",
-    title: { he: "ארכיטקטורה הרמונית", en: "Harmonic Architecture" },
+    title: { he: "אקורדים והרמוניה", en: "Chords & Harmony" },
     description: {
-      he: "כוחות משיכה, קדנצות, ווייסינגז ומתחי צבע עליונים.",
-      en: "Gravitational forces, cadences, drop voicings, and upper extensions.",
+      he: "בניית אקורדים, מעגל הקווינטות, הרמוניה פונקציונלית וווייסינגז מתקדמים.",
+      en: "Building chords, the circle of fifths, functional harmony, and advanced voicings.",
     },
-    articles: ["triads_chords", "functional_harmony", "chord_voicings_extensions", "circle_of_fifths"],
+    articles: ["triads_chords", "circle_of_fifths", "functional_harmony", "chord_voicings_extensions"],
   },
   {
     id: "modes",
