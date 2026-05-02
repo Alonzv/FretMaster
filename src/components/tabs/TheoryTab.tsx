@@ -321,7 +321,7 @@ export default function TheoryTab({ pushBack, cleanupBack, onClose, resetSignal 
 
   // Track which accordion categories are open (multiple allowed simultaneously)
   const [openCategories, setOpenCategories] = useState<Set<string>>(
-    () => new Set(['improvisation'])  // default: open one category on first load
+    () => new Set()
   )
 
   // Push a back entry when the tab first mounts so browser back returns to home.
