@@ -1012,7 +1012,7 @@ export const theoryContent: Record<string, TheoryArticle> = {
   minor_scales_masterclass: {
     id: "minor_scales_masterclass",
     he: {
-      title: "סולמות מינוריים: האנטומיה של הדרמה והצל",
+      title: "הסולם המינורי: האנטומיה של הדרמה והצל",
       subtitle: "לפרק את המינור הטבעי, ההרמוני והמלודי: היסטוריה, נוסחאות ושליטה הרמונית",
       tags: ["סולמות", "הרמוניה", "מאסטר-קלאס"],
       sections: [
@@ -1053,7 +1053,7 @@ export const theoryContent: Record<string, TheoryArticle> = {
       ]
     },
     en: {
-      title: "Minor Scales: The Anatomy of Drama and Shadow",
+      title: "The Minor Scale: The Anatomy of Drama and Shadow",
       subtitle: "Deconstructing Natural, Harmonic, and Melodic Minor: History, Formulas, and Harmonic Control",
       tags: ["Scales", "Harmony", "Masterclass"],
       sections: [
