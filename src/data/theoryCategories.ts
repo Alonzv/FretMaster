@@ -22,16 +22,7 @@ export const theoryCategories: TheoryCategory[] = [
       he: "אבני הבניין של המוזיקה — מרווחים, סולם המז'ור ושורשי כל הידע.",
       en: "The building blocks of music — intervals, the major scale, and the roots of all knowledge.",
     },
-    articles: ["major_scale", "intervals"],
-  },
-  {
-    id: "improvisation",
-    title: { he: "שלד האלתור", en: "The Improvisation Core" },
-    description: {
-      he: "שבירת קופסאות, סולמות בסיסיים והשפה של הרוק והבלוז.",
-      en: "Breaking boxes, basic scales, and the language of rock and blues.",
-    },
-    articles: ["pentatonic_masterclass"],
+    articles: ["major_scale", "intervals", "pentatonic_masterclass"],
   },
   {
     id: "harmony",
