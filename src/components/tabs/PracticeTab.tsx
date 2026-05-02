@@ -352,7 +352,7 @@ export default function PracticeTab({ hearts: _hearts, onWrongAnswer }: Props) {
         }}>
           {isHe ? 'נושא — ניתן לבחור כמה' : 'Topic — pick one or many'}
         </div>
-        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: isHe ? 'flex-end' : 'flex-start', marginBottom: 20 }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', direction: 'ltr', justifyContent: isHe ? 'flex-end' : 'flex-start', marginBottom: 20 }}>
           <FilterChip active={selectedIds.size === 0} onClick={selectAll}>
             {isHe ? 'הכל' : 'All'}
           </FilterChip>
@@ -382,7 +382,7 @@ export default function PracticeTab({ hearts: _hearts, onWrongAnswer }: Props) {
           }}>
             {isHe ? 'תיאוריית ז׳אנרים' : 'Genre Theory'}
           </div>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', justifyContent: isHe ? 'flex-end' : 'flex-start' }}>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', direction: 'ltr', justifyContent: isHe ? 'flex-end' : 'flex-start' }}>
             {genreCats.map(c => (
               <FilterChip
                 key={c.id}
