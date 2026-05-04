@@ -19,6 +19,7 @@ const NAV_ITEMS: { id: ActiveTab; labelHe: string; labelEn: string; icon: string
   { id: 'daily',    labelHe: 'האתגר היומי',     labelEn: 'Daily Challenge', icon: 'M19 4h-1V2h-2v2H8V2H6v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h5v5H7z' },
   { id: 'practice', labelHe: 'תרגול חופשי',   labelEn: 'Free Practice',   icon: 'M8 5v14l11-7z' },
   { id: 'theory',   labelHe: 'ספריית תיאוריה', labelEn: 'Theory Library',  icon: 'M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zM21 18.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z' },
+  { id: 'scaleup',  labelHe: 'ScaleUp',        labelEn: 'ScaleUp',         icon: 'M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z' },
 ]
 
 export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, profileName, avatar, isRTL, mobileOpen, onMobileClose }: Props) {
@@ -65,36 +66,69 @@ export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, p
         </div>
 
         {/* Nav */}
-        <nav style={{ flex: 1, padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 2 }}>
-          {NAV_ITEMS.map(item => {
+        <nav style={{ flex: 1, padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 2, overflowY: 'auto' }}>
+          {NAV_ITEMS.map((item) => {
             const isActive = activeTab === item.id
+            const isScaleUp = item.id === 'scaleup'
+
             return (
-              <button
-                key={item.id}
-                onClick={() => onTabChange(item.id)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 12,
-                  padding: '11px 14px',
-                  borderRadius: 10,
-                  background: isActive ? 'var(--fm-primary-bg)' : 'transparent',
-                  color: isActive ? 'var(--fm-primary)' : 'var(--fm-text-muted)',
-                  fontWeight: isActive ? 700 : 500,
-                  fontSize: 14.5,
-                  textAlign: isRTL ? 'right' : 'left',
-                  width: '100%',
-                  cursor: 'pointer',
-                  transition: 'all 0.15s',
-                }}
-                onMouseEnter={e => { if (!isActive) { e.currentTarget.style.background = 'var(--fm-bg-card)'; e.currentTarget.style.color = 'var(--fm-text)' } }}
-                onMouseLeave={e => { if (!isActive) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--fm-text-muted)' } }}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
-                  <path d={item.icon} />
-                </svg>
-                {isRTL ? item.labelHe : item.labelEn}
-              </button>
+              <div key={item.id}>
+                {/* Divider before ScaleUp */}
+                {isScaleUp && (
+                  <div style={{ margin: '10px 2px 8px', display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <div style={{ flex: 1, height: 1, background: 'var(--fm-border)' }} />
+                    <span style={{
+                      fontSize: 9, fontWeight: 700, letterSpacing: '0.14em',
+                      textTransform: 'uppercase', color: 'var(--fm-text-muted)',
+                      flexShrink: 0,
+                    }}>
+                      {isRTL ? 'אפליקציות' : 'Apps'}
+                    </span>
+                    <div style={{ flex: 1, height: 1, background: 'var(--fm-border)' }} />
+                  </div>
+                )}
+
+                <button
+                  onClick={() => onTabChange(item.id)}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 12,
+                    padding: '11px 14px',
+                    borderRadius: 10,
+                    background: isActive
+                      ? (isScaleUp ? 'rgba(139,105,20,0.15)' : 'var(--fm-primary-bg)')
+                      : 'transparent',
+                    color: isActive
+                      ? (isScaleUp ? '#C8A830' : 'var(--fm-primary)')
+                      : 'var(--fm-text-muted)',
+                    fontWeight: isActive ? 700 : 500,
+                    fontSize: 14.5,
+                    textAlign: isRTL ? 'right' : 'left',
+                    width: '100%',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s',
+                    border: isScaleUp && isActive ? '1px solid rgba(200,168,48,0.3)' : '1px solid transparent',
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = 'var(--fm-bg-card)'
+                      e.currentTarget.style.color = 'var(--fm-text)'
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive) {
+                      e.currentTarget.style.background = 'transparent'
+                      e.currentTarget.style.color = 'var(--fm-text-muted)'
+                    }
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+                    <path d={item.icon} />
+                  </svg>
+                  {isRTL ? item.labelHe : item.labelEn}
+                </button>
+              </div>
             )
           })}
         </nav>

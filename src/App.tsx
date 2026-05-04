@@ -24,7 +24,7 @@ import type { HeartsState } from './lib/gamification/hearts'
 import { loadStreak, recordActivity } from './lib/gamification/streak'
 import type { StreakState } from './lib/gamification/streak'
 
-export type ActiveTab = 'home' | 'daily' | 'practice' | 'theory'
+export type ActiveTab = 'home' | 'daily' | 'practice' | 'theory' | 'scaleup'
 
 interface UserProfile {
   name: string
@@ -341,6 +341,14 @@ export default function App() {
         {activeTab === 'daily'    && <DailyTab    progress={progress} onSessionComplete={handleSessionComplete} hearts={hearts} onWrongAnswer={handleWrongAnswer} pushBack={pushBack} cleanupBack={cleanupBack} />}
         {activeTab === 'practice' && <PracticeTab hearts={hearts} onWrongAnswer={handleWrongAnswer} />}
         {activeTab === 'theory'   && <TheoryTab pushBack={pushBack} cleanupBack={cleanupBack} onClose={() => handleTabChange('home')} resetSignal={theoryResetSignal} />}
+        {activeTab === 'scaleup'  && (
+          <iframe
+            src="/scaleup/index.html"
+            title="ScaleUp"
+            style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+            allow="microphone"
+          />
+        )}
       </main>
 
       {showProfile && user && (
