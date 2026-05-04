@@ -79,7 +79,8 @@ export default function App() {
     if (count <= 0) return
     const removed = backStack.current.splice(backStack.current.length - count, count)
     if (removed.length === 0) return
-    skipPopCount.current += removed.length
+    // history.go(-N) fires exactly ONE popstate event regardless of N
+    skipPopCount.current += 1
     history.go(-removed.length)
   }, [])
 
