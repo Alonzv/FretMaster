@@ -179,7 +179,7 @@ export default function SkillTreeView({ hearts, streak, onSessionComplete, onWro
   const levelPct = getLevelProgress(xp.total)
 
   return (
-    <div style={{ minHeight: '100vh', paddingBottom: 80 }}>
+    <div style={{ minHeight: '100dvh', paddingBottom: 80 }}>
 
       {/* Sticky top bar */}
       <div style={{

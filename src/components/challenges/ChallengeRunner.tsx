@@ -175,7 +175,7 @@ export default function ChallengeRunner({
     <div
       dir={isHe ? 'rtl' : 'ltr'}
       style={{
-        display: 'flex', flexDirection: 'column', minHeight: '100vh',
+        display: 'flex', flexDirection: 'column', minHeight: '100dvh',
         background: 'var(--fm-bg-deep)',
         backgroundImage: [
           'linear-gradient(rgba(43,80,232,0.03) 1px, transparent 1px)',
