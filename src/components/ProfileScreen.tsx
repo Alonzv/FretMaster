@@ -19,7 +19,7 @@ interface UserProfile {
 }
 
 interface Props {
-  user: User
+  user: User | null
   profile: UserProfile | null
   progress: Record<CategoryId, CategoryProgress>
   settings: AppSettings
@@ -40,7 +40,7 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
   const [notifState, setNotifState] = useState<'idle' | 'denied'>('idle')
   const [cropSrc, setCropSrc] = useState<string | null>(null)
 
-  const displayName = profile?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'
+  const displayName = profile?.name || user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'FretMaster'
   const initials = displayName.slice(0, 2).toUpperCase()
   const levelInfo = LEVEL_LABELS[profile?.level || '']
 
@@ -187,9 +187,11 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
               <div style={{ fontWeight: 700, fontSize: 18, color: 'var(--fm-text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {displayName}
               </div>
-              <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user.email}
-              </div>
+              {user?.email && (
+                <div style={{ fontSize: 13, color: 'var(--fm-text-muted)', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {user.email}
+                </div>
+              )}
               {levelInfo && (
                 <div style={{
                   display: 'inline-block', marginTop: 6,
@@ -315,23 +317,25 @@ export default function ProfileScreen({ user, profile, progress, settings, onSet
             />
           </Section>
 
-          {/* ── Sign out ─────────────────────────────────────────────────── */}
-          <button
-            onClick={() => supabase.auth.signOut()}
-            style={{
-              width: '100%', padding: '12px',
-              borderRadius: 10,
-              border: '1.5px solid var(--fm-coral)',
-              background: 'transparent',
-              color: 'var(--fm-coral)',
-              fontSize: 14, fontWeight: 600, cursor: 'pointer',
-              transition: 'background 0.15s',
-            }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'var(--fm-coral-faint)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-          >
-            {isHe ? 'התנתקות' : 'Sign Out'}
-          </button>
+          {/* ── Sign out (only shown when logged in) ─────────────────────── */}
+          {user && (
+            <button
+              onClick={() => supabase.auth.signOut()}
+              style={{
+                width: '100%', padding: '12px',
+                borderRadius: 10,
+                border: '1.5px solid var(--fm-coral)',
+                background: 'transparent',
+                color: 'var(--fm-coral)',
+                fontSize: 14, fontWeight: 600, cursor: 'pointer',
+                transition: 'background 0.15s',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = 'var(--fm-coral-faint)')}
+              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+            >
+              {isHe ? 'התנתקות' : 'Sign Out'}
+            </button>
+          )}
 
         </div>
       </div>

@@ -6,7 +6,7 @@ interface Props {
   activeTab: ActiveTab
   onTabChange: (tab: ActiveTab) => void
   onOpenProfile: () => void
-  user: User
+  user: User | null
   profileName: string
   avatar: string
   isRTL: boolean
@@ -166,26 +166,30 @@ export default function Sidebar({ activeTab, onTabChange, onOpenProfile, user, p
               <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--fm-text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {profileName}
               </div>
-              <div style={{ fontSize: 11, color: 'var(--fm-text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {user.email}
-              </div>
+              {user?.email && (
+                <div style={{ fontSize: 11, color: 'var(--fm-text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {user.email}
+                </div>
+              )}
             </div>
           </button>
 
-          <button
-            onClick={() => supabase.auth.signOut()}
-            style={{
-              width: '100%', marginTop: 6,
-              padding: '7px 10px', borderRadius: 8,
-              background: 'transparent', color: 'var(--fm-text-muted)',
-              fontSize: 12, cursor: 'pointer',
-              transition: 'color 0.15s',
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--fm-coral)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--fm-text-muted)')}
-          >
-            {isRTL ? 'התנתק' : 'Sign out'}
-          </button>
+          {user && (
+            <button
+              onClick={() => supabase.auth.signOut()}
+              style={{
+                width: '100%', marginTop: 6,
+                padding: '7px 10px', borderRadius: 8,
+                background: 'transparent', color: 'var(--fm-text-muted)',
+                fontSize: 12, cursor: 'pointer',
+                transition: 'color 0.15s',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--fm-coral)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--fm-text-muted)')}
+            >
+              {isRTL ? 'התנתק' : 'Sign out'}
+            </button>
+          )}
         </div>
       </aside>
     </>

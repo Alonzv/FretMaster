@@ -2,8 +2,6 @@ import { useEffect, useState, useCallback, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import './i18n'
 import { supabase } from './lib/supabase'
-import OnboardingFlow from './components/onboarding/OnboardingFlow'
-import type { OnboardingData } from './store/onboarding'
 import DailyTab    from './components/tabs/DailyTab'
 import PracticeTab from './components/tabs/PracticeTab'
 import HomeTab     from './components/tabs/HomeTab'
@@ -47,7 +45,6 @@ export default function App() {
   const { i18n } = useTranslation()
   const [user, setUser]         = useState<User | null>(null)
   const [profile, setProfile]   = useState<UserProfile | null>(null)
-  const [checking, setChecking] = useState(true)
   const [activeTab, setActiveTab] = useState<ActiveTab>('home')
   const [theoryResetSignal, setTheoryResetSignal] = useState(0)
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null)
@@ -141,12 +138,12 @@ export default function App() {
     })
   }, [])
 
+  // Load profile in background if user is already signed in
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       const u = data.session?.user ?? null
       setUser(u)
       if (u) loadProfile(u.id)
-      else setChecking(false)
     })
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, session) => {
       const u = session?.user ?? null
@@ -162,12 +159,7 @@ export default function App() {
       setProfile(data)
       if (data.lang) i18n.changeLanguage(data.lang)
     }
-    setChecking(false)
     if (!hasSeenIntro()) setShowIntro(true)
-  }
-
-  const handleOnboardComplete = (data: OnboardingData) => {
-    i18n.changeLanguage(data.lang)
   }
 
   const handleSessionComplete = useCallback((result: SessionResult) => {
@@ -207,26 +199,7 @@ export default function App() {
     setSelectedTopic(null)
   }, [])
 
-  if (checking) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', background: 'var(--fm-bg-deep)' }}>
-        <div style={{ fontSize: 34, fontWeight: 900, color: 'var(--fm-primary)', fontFamily: 'var(--fm-font-display)', letterSpacing: '0.04em', display: 'flex', alignItems: 'center', gap: 10 }} className="fm-logo-glow">
-          <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
-            <rect y="0" width="22" height="3" fill="currentColor"/>
-            <rect y="6.5" width="22" height="3" fill="currentColor"/>
-            <rect y="13" width="22" height="3" fill="currentColor"/>
-          </svg>
-          FretMaster
-        </div>
-      </div>
-    )
-  }
-
-  if (!user) {
-    return <OnboardingFlow onComplete={handleOnboardComplete} />
-  }
-
-  const profileName = profile?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'
+  const profileName = profile?.name || user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'FretMaster'
 
   return (
     <div className="fm-layout" dir={isRTL ? 'rtl' : 'ltr'}>
@@ -352,7 +325,7 @@ export default function App() {
         )}
       </main>
 
-      {showProfile && user && (
+      {showProfile && (
         <ProfileScreen
           user={user}
           profile={profile}
